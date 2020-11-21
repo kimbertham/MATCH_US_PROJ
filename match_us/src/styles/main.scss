@@ -1,0 +1,75 @@
+*{
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.fw {
+  width: 100vw;
+}
+
+.fh {
+  height: 100vh;
+}
+
+.fp {
+  width: 100vw;
+  height: 100vh;
+}
+
+.display-none {
+  display: none;
+}
+
+.flex{
+  display:flex;
+}
+
+.flex-end {
+  display:flex;
+  justify-content: flex-end;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.italic {
+  font-style: italic ;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.bottom {
+bottom: 0;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+
+
+//-------
+
+.shake-text {
+  margin: 0.5vh;
+  font-size: 15px;
+  color: red;
+  text-align: center;
+  animation: .10s shake alternate
+}
+
+@keyframes shake{ 
+  0%{ transform: translateX(0)} 
+  25%{ transform: translateX(25px)} 
+  50%{ transform: translateX(-25px)} 
+  100%{ transform: translateX(0px)} 
+} 

@@ -1,0 +1,10 @@
+{
+  "python.pythonPath": "/Users/kimberleytham/.local/share/virtualenvs/banger-alert-django-ilxOqNKW/bin/python"
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorCustomizations": {
+    "statusBar.background":  "#f9b4b4",
+    "titleBar.activeBackground": "#f9b4b4",
+    "titleBar.inactiveBackground": "#f9b4b4",
+  },
+  "window.title": "Front-End"
+}
