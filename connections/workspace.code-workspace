@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+  "settings": {
+    "workbench.colorTheme": "Default Dark+",
+    "workbench.colorCustomizations": {
+      "statusBar.background": "#67e3ff",
+      "titleBar.activeBackground": "#67e3ff",
+      "titleBar.inactiveBackground": "#67e3ff"
+    },
+    "window.title": "Back-End"
+  }
+}

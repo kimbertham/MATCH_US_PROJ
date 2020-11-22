@@ -2,14 +2,15 @@ import React from 'react'
 import axios from 'axios'
 import { getUserId } from '../Lib/auth'
 import Menu from './Menu/Menu'
-import Calender from './Calender'
+import Events from './Events/Events'
 
 const user = getUserId()
 
 class Home extends React.Component {
   state = {
     user: {},
-    connection: ''
+    connection: '',
+    modal: true
   }
 
   async componentDidMount() {
@@ -31,14 +32,13 @@ class Home extends React.Component {
     return (
       <div className='flex'>
 
-
         <Menu 
           setCon={this.setCon}
           user={user}/>
 
         <div className='main'>
           <h1>{user.first_name}&apos;s Overview </h1>
-          <Calender/>
+          <Events/>
         </div>
 
       </div>
