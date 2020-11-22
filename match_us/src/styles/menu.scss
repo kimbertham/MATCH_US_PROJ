@@ -1,14 +1,19 @@
 .menu{
-  // *{border: 2px solid red;}
+  *{border: 2px solid red;}
   width: 25vw;
-  padding: 2vw;
-  // border: 2px solid red;
+  border: 2px solid red;
 
+.user-img{
+  width: 8vw;
+  }
   
 }
 
-.m-user {
-  .user-img{
-  width: 8vw;
-  }
+.m-connections{
+
+border: 2px solid red;
+.c-img {
+    width: 3vw;
+    }
+
 }

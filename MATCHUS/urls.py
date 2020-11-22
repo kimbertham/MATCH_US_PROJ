@@ -19,6 +19,8 @@ from .views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/events/', include('events.urls')),
+    path('api/', include('connections.urls')),
     path('api/', include('jwt_auth.urls')),
     re_path(r'^.*$', index)
 ]

@@ -13,7 +13,7 @@ const App = () => {
     <BrowserRouter >
 
       <Switch>
-        <Route path='/home/:id' component={Home}/>
+        <Route path='/home' component={Home}/>
         <Route path='/login' component={Auth}/>
       </Switch>
     </BrowserRouter>
