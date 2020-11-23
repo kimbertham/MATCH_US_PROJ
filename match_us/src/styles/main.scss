@@ -64,10 +64,15 @@ bottom: 0;
   background-color: rgba(0,0,0,0.5);
   width:100%;
   height:100%;
-}
-.m-pop {
+  z-index: 1;
+  @extend .center;
+
+  .m-pop {
+    background-color: white;
+    z-index: 3;
+    @extend .center;
+  }
   
-  background-color: white;
 }
 
 .shake-text {
@@ -84,3 +89,7 @@ bottom: 0;
   50%{ transform: translateX(-25px)} 
   100%{ transform: translateX(0px)} 
 } 
+
+.n-line {
+ border:none;
+}

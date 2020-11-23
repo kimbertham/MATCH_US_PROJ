@@ -34,7 +34,7 @@ class PopulatedRequestsSerializer(RequestsSerializer):
 
 class PopulatedEventsSerializer(EventsSerializer):
     participants = UserSerializer(many=True)
-    connections = ConnectionsSerializer()
+    # connection = ConnectionsSerializer()
 
     
 

@@ -9,20 +9,27 @@ from jwt_auth.models import User
 from connections.serializers import EventsSerializer, PopulatedEventsSerializer
 from connections.models import Connections
 from .models import Events
+from django.db.models import Q
+
 
 class EventsListView(APIView):
-
-    def post(self,request, pk):
-        if not request.POST._mutable:
-            request.POST._mutable = True
-        request.data['participants'] = pk, request.user.id
-        event = EventsSerializer(data=request.data)
-        if event.is_valid():
-            event.save()
-            return Response(event.data, status=HTTP_201_CREATED)
-        return Response(event.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
-
-    def get(self, request, pk):
+    def get(self, request):
         e=Events.objects.filter(participants=request.user.id)
         events=PopulatedEventsSerializer(e, many=True)
         return Response(events.data, HTTP_200_OK)
+
+class EventsDetailView(APIView):
+    def post(self,request, act, pk):
+        if not request.POST._mutable:
+            request.POST._mutable = True
+        if act == 'post':
+            request.data['participants'] = pk, request.user.id
+            event = EventsSerializer(data=request.data)
+            if event.is_valid():
+                event.save()
+                return Response(event.data, status=HTTP_201_CREATED)
+            return Response(event.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+        if act == 'get':
+            e=Events.objects.filter(Q(participants__in=[request.user.id, pk]) & Q(date__month=request.data['month']))
+            events=PopulatedEventsSerializer(e, many=True)
+            return Response(events.data, HTTP_200_OK)

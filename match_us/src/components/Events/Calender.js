@@ -2,23 +2,37 @@
 import React from 'react'
 import moment from 'moment'
 
-const Calender = ({ date, setDate, changeMonth }) => {
-
+const Calender = ({ date, handleModal, changeMonth, events }) => {
+  
   const weekdays = moment.weekdaysShort()
   const months =  moment.monthsShort()
-  const currentMonth = months[Number(moment(date).format('MM')) - 1]
-  const currentYear = Number(moment(date).format('YYYY'))
+  const cMonth = [Number(moment(date).format('MM')) ]
+  const cYear = [Number(moment(date).format('YYYY'))]
 
   const blank = []
+  const days = []
+
   for (let i = 0; i < moment(date).startOf('month').format('d') ; i++){
     blank.push( <td className='empty'> {''}</td>)
   }
 
-  const days = []
   for (let d = 1; d <= moment(date).daysInMonth(); d++) {
-    days.push( <td key={d} onClick={() => { 
-      setDate(d)
-    }} className='calender-day'> {d}</td>)
+    const date =  d.toString().length === 1 ? `${cYear}-${cMonth}-0${d}` : `${cYear}-${cMonth}-${d}`
+    const noEvent = <td onClick={handleModal} className='calender-day' key={d} id={date}> {d} </td>
+    if (events.length !== 0) {
+      for (let i = 0; i < events.length; i++) {
+        events[i].date === date ? 
+          days.push(
+
+            <td onClick={handleModal} className='calender-day'  key={d}  id={date}>
+              {d}<div>{events[i].date}</div>
+            </td>
+            
+          ) : days.push(noEvent)
+      }
+    } else {
+      days.push(noEvent)
+    }
   }
 
   const total = [...blank, ...days]
@@ -32,28 +46,31 @@ const Calender = ({ date, setDate, changeMonth }) => {
       rows.push(c)
       c = [] , c.push(row)
     }
-    i === total.length - 1 ? rows.push(c) : ''
+    i === total.length - 1 ? rows.push(c) : null
   })
 
   return (
     <>
       <div className=' date-header flex'>
+
         <button onClick={()=>{
           changeMonth('b')
         }}> Back</button>
-        <tr> {currentMonth}</tr>
-        <tr> {currentYear}</tr>
+        <p> {months[cMonth - 1 ]} </p>
+        <p> {cYear} </p>
         <button onClick={()=>{
           changeMonth('f')
         }}> Next</button>
       </div>
-            
-      <tr>{weekdays.map(day => <th key={day} className="week-day">{day}</th>)}</tr>
 
-      <tbody>
-        {rows.map((d, i) => 
-          <tr key={i}>{d}</tr>)}
-      </tbody>
+      <table>
+        <tbody>
+          <tr>{weekdays.map(day => <th key={day} className="week-day">{day}</th>)}</tr>
+          {rows.map((d, i) => 
+            <tr key={i}>{d}</tr>)}
+        </tbody>
+      </table>
+
         
     </>
   )
