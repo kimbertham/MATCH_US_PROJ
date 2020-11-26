@@ -25,9 +25,13 @@ const Calender = ({ date, handleModal, changeMonth, events }) => {
     if (events.length >= 0) {
       const e = events.find(x=> x.date === date)
       e ? days.push(
-        <td onClick={handleModal} className='calender-day'  key={d}  id={date}>
+        <td onClick={() => {
+          handleModal(e)
+        }} className='calender-day'  key={d}  id={date}>
+
           {d}
-          <p>{e.date}</p>
+          <p className={!e.request ? 'green' : null }> {e.date}</p>
+
         </td> ) : days.push(noEvent)
 
     } else {
@@ -62,7 +66,7 @@ const Calender = ({ date, handleModal, changeMonth, events }) => {
         }}> Next</button>
       </div>
 
-      <table>
+      <table className="calendar-day">
         <tbody>
           <tr>{weekdays.map(day => <th key={day} className="week-day">{day}</th>)}</tr>
           {rows.map((d, i) => 

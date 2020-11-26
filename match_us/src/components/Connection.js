@@ -1,7 +1,7 @@
 import React from 'react' 
-import Events from './Events/Events'
-
 import axios from 'axios'
+
+import Events from './Events/Events'
 
 import { getUserId } from '../Lib/auth'
 const userId = getUserId()
@@ -19,11 +19,14 @@ class Home extends React.Component {
   }
 
   getConnection = async ( ) => {
-    const connection = this.props.match.params.id
-    const partner = c.data.participants.find(x=>x.id !== userId )
-    const user = c.data.participants.find(x=>x.id === userId )
-    const c = await axios.get(`/api/connection-full/${connection}/`)
-    this.setState({ connection: c.data, partner, user  })
+    const id = this.props.match.params.id
+    const c = await axios.get(`/api/connection-full/${id}/`)
+
+    this.setState({ 
+      connection: c.data, 
+      partner: c.data.participants.find(u => u.id !== userId ),
+      user: c.data.participants.find(u => u.id === userId ) 
+    })
   }
 
   render(){

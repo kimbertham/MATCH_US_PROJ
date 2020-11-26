@@ -5,7 +5,7 @@ from django.db import models
 class Events(models.Model):
     title = models.CharField(max_length=50, blank=True, null=True)
     location =models.CharField(max_length=100, blank=True, null=True)
-    participants = models.ManyToManyField('jwt_auth.User')
+    request = models.BooleanField(default=True)
     date = models.DateField()
     notes = models.CharField(max_length=50, blank=True, null=True)
     connection = models.ForeignKey(

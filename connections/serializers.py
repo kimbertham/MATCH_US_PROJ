@@ -33,8 +33,7 @@ class PopulatedRequestsSerializer(RequestsSerializer):
     user_to = UserSerializer()
 
 class PopulatedEventsSerializer(EventsSerializer):
-    participants = UserSerializer(many=True)
-    connection = ConnectionsSerializer()
+    connection = PopulatedConnectionsSerializer()
 
     
 

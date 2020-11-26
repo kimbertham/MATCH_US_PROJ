@@ -5,8 +5,7 @@ import moment from 'moment'
 import { headers } from '../../Lib/auth'
 import Calender from './Calender'
 import NewEvent from './NewEvent'
-
-
+import EventModal from './EventModal'
 
 class Events extends React.Component{
 state= {
@@ -15,12 +14,9 @@ state= {
   modal: false,
   events: {}
 }
+
 componentDidMount() {
   this.getEvents()
-}
-
-handleModal = (e) => {
-  this.setState({ modal: !this.state.modal, selected: e.target.id })
 }
 
 changeMonth = (d) => {
@@ -54,32 +50,36 @@ getEvents = async() => {
 
   const res = await axios.post(`/api/events/get/${user.id}/`, data, headers())
   this.setState({ events: res.data })
+}
 
+handleModal = (e) => {
+  this.setState({ 
+    modal: !this.state.modal,
+    selected: e })
 }
 
 render(){
 
   const { date, modal ,selected, events } = this.state
   const { connection } =  this.props
-  const modalC = modal ? 'modal' : 'display-none'
 
   return (
 
     <div className='calender'>
 
-      {connection ? <div onClick={this.handleModal} className={modalC}>
-        <NewEvent
-          date={selected}
-          connection={connection}/> 
-      </div> : null}
 
-      <table className="calendar-day">
-        <Calender
-          date={date}
-          events={events}
-          handleModal={this.handleModal}
-          changeMonth={this.changeMonth}/>
-      </table>
+      <EventModal
+        modal={modal}
+        selected={selected}
+        connection={connection}
+        handleModal={this.handleModal}
+        getEvents={this.getEvents}/>
+
+      <Calender
+        date={date}
+        events={events}
+        handleModal={this.handleModal}
+        changeMonth={this.changeMonth}/>
 
     </div>
   )
