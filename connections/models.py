@@ -21,7 +21,7 @@ class Requests(models.Model):
 
 class Connections(models.Model):
 
-    participants = models.ManyToManyField(User)
+    participants = models.ManyToManyField(User, related_name='connections')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

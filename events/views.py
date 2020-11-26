@@ -20,6 +20,7 @@ class EventsListView(APIView):
 
 class EventsDetailView(APIView):
     def post(self,request, act, pk):
+        print(request)
         if not request.POST._mutable:
             request.POST._mutable = True
         if act == 'post':
@@ -30,6 +31,9 @@ class EventsDetailView(APIView):
                 return Response(event.data, status=HTTP_201_CREATED)
             return Response(event.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
         if act == 'get':
-            e=Events.objects.filter(Q(participants__in=[request.user.id, pk]) & Q(date__month=request.data['month']))
+            if request.data['section'] == 'r':
+                e=Events.objects.filter(Q(connection=request.data['connection']) & Q(date__month=request.data['month']))
+            if request.data['section'] == 'h':
+                e=Events.objects.filter(Q(participants=request.user.id) & Q(date__month=request.data['month']))
             events=PopulatedEventsSerializer(e, many=True)
             return Response(events.data, HTTP_200_OK)

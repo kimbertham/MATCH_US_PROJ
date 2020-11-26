@@ -1,45 +1,41 @@
 import React from 'react' 
 import axios from 'axios'
 import { getUserId } from '../Lib/auth'
-import Menu from './Menu/Menu'
 import Events from './Events/Events'
+import Menu from './Menu/Menu.js'
 
-const user = getUserId()
+const userId = getUserId()
 
 class Home extends React.Component {
   state = {
-    user: {},
-    connection: '',
-    modal: true
+    user: null
   }
 
   async componentDidMount() {
-    const res = await axios.get(`/api/profile/${user}/`)
+    this.getUser()
+  }
+
+  getUser = async () => {
+    const res = await axios.get(`/api/profile/${userId}/`)
     this.setState({ user: res.data })
   }
 
-  setCon = async (i ) => {
-    const c = await axios.get(`/api/connection-full/${i}/`)
-    this.setState({ connection: c.data  })
-
-  }
-
-  render(){
-
+  render() {
     const { user } = this.state
-  
-    if (!user.id) return null
+
+    if (!user) return null
     return (
+
       <div className='flex'>
 
-        <Menu 
-          setCon={this.setCon}
-          user={user}/>
+        <Menu user={user}/>
 
         <div className='main'>
           <h1>{user.first_name}&apos;s Overview </h1>
-          <Events/>
-        </div>
+          <Events 
+            user={user}
+            page='h'/>
+        </div> 
 
       </div>
     )
