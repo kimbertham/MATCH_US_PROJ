@@ -5,7 +5,8 @@ import moment from 'moment'
 import { headers } from '../../Lib/auth'
 import Calender from './Calender'
 import NewEvent from './NewEvent'
-import EventModal from './EventModal'
+import EventRequest from './EventRequest'
+
 
 class Events extends React.Component{
 state= {
@@ -54,26 +55,41 @@ getEvents = async() => {
 
 handleModal = (e) => {
   this.setState({ 
-    modal: !this.state.modal,
-    selected: e })
+    selected: e,
+    modal: !this.state.modal
+  })
 }
 
 render(){
 
   const { date, modal ,selected, events } = this.state
-  const { connection } =  this.props
+  const { connection, connections, user } =  this.props
 
   return (
 
     <div className='calender'>
 
-
-      <EventModal
-        modal={modal}
-        selected={selected}
-        connection={connection}
-        handleModal={this.handleModal}
-        getEvents={this.getEvents}/>
+      {selected ? <div onClick={this.handleModal} className={modal ? 'modal' : 'display-none'}>
+        <div  className='m-pop c-modal'
+          onClick={e => e.stopPropagation()}>
+            
+          {selected.id > 0 ?
+            <EventRequest 
+              user={user}
+              selected={selected}
+              handleModal={this.handleModal}
+              getEvents={this.getEvents}/>
+            :
+            <NewEvent
+              user={user}
+              selected={selected}
+              connection={connection}
+              connections={connections}
+              handleModal={this.handleModal}
+              getEvents={this.getEvents} />
+          }
+        </div>
+      </div> : null}
 
       <Calender
         date={date}

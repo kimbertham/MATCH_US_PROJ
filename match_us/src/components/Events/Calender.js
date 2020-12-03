@@ -3,7 +3,10 @@ import React from 'react'
 import moment from 'moment'
 
 const Calender = ({ date, handleModal, changeMonth, events }) => {
-  
+  const emoji = ['\ud83c[\udf00-\udfff]','\ud83d[\udc00-\ude4f]','\ud83d[\ude80-\udeff]']
+
+  const regex = new RegExp(emoji.join('|'), 'g')
+
   if (!events) return null  
 
   const weekdays = moment.weekdaysShort()
@@ -22,15 +25,16 @@ const Calender = ({ date, handleModal, changeMonth, events }) => {
     const date =  d.toString().length === 1 ? `${cYear}-${cMonth}-0${d}` : `${cYear}-${cMonth}-${d}`
     const noEvent = <td onClick={handleModal} className='calender-day' key={d} id={date}> {d} </td>
 
-    if (events.length >= 0) {
-      const e = events.find(x=> x.date === date)
-      e ? days.push(
-        <td onClick={() => {
-          handleModal(e)
-        }} className='calender-day'  key={d}  id={date}>
-
+    if (events.length > 0) {
+      const e = events.filter(x=> x.date === date)
+      e.length > 0 ? days.push(
+        <td  onClick={handleModal} className='calender-day'  key={d}  id={date}>
           {d}
-          <p className={!e.request ? 'green' : null }> {e.date}</p>
+          {e.map(x=> {
+            return <p  key={x.id}  className={`e-field ${x.request ? 'green' : null }`} onClick={ e =>{
+              e.stopPropagation(), handleModal(x)
+            }}> {x.date_type.match(regex)}{x.title}</p>
+          })}
 
         </td> ) : days.push(noEvent)
 

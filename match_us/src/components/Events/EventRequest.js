@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-const EventRequest = ({ selected, getEvents, handleModal }) => {
+const EventRequest = ({ selected, getEvents, handleModal, user }) => {
 
   const accept = async () => {
     const data = { ...selected, connection: selected.connection.id, request: 'False' }
@@ -15,26 +15,33 @@ const EventRequest = ({ selected, getEvents, handleModal }) => {
     getEvents()
     handleModal()
   }
-  
+
   const request = selected.request ? 'display-block' : 'display-none'
-  
   return (
     <>
-      <div className='e-request column'>
-        <h1>Date <span className={request}>request</span>!</h1> 
+      <div className='column'>
 
-        <p>{selected.title} </p>
-        <p>{selected.date} </p>
-        <p>{selected.location} </p>
-        <p>{selected.notes} </p>
+        <div className='e-request column' key={selected.id}>
+          <h1>Date <span className={request}>request</span>!</h1> 
 
-        <div onClick={decline} className={'e-delete'}> delete</div>
+          <p>{selected.title}</p>
+          <p>{selected.connection.participants.map(n=>`${n.first_name} `)}</p>
+          <p>{selected.date} {selected.time} </p>
+          <p>{selected.location} </p>
+          <p>{selected.notes} </p>
+          <p> {selected.date_type}</p>
 
-        <div className={request}>
-          <button onClick={accept} className='accept-b'>Accept</button>
-          <button  onClick={decline} className='decline-b'>decline</button>
+          <div className={request}>
+            {selected.creator === user.id ? <p>Waiting for response</p> :
+              <>
+                <button onClick={accept} className='accept-b'>Accept</button>
+                <button  onClick={decline} className='decline-b'>decline</button>
+              </>
+            }
+
+          </div>
         </div>
-
+        
       </div>
     </>
   )

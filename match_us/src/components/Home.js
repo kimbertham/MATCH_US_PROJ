@@ -17,22 +17,27 @@ class Home extends React.Component {
 
   getUser = async () => {
     const res = await axios.get(`/api/profile/${userId}/`)
-    this.setState({ user: res.data })
+    const c = await axios.get(`/api/connections/${res.data.id}/`)
+    c.data.map(c => c.participants = c.participants.find(u => u.id !== res.data.id))
+    this.setState({ user: res.data ,connections: c.data })
   }
 
   render() {
-    const { user } = this.state
+    const { user, connections } = this.state
 
     if (!user) return null
     return (
 
       <div className='flex'>
 
-        <Menu user={user}/>
+        <Menu 
+          user={user}
+          connections={connections}/>
 
         <div className='main'>
           <h1>{user.first_name}&apos;s Overview </h1>
           <Events 
+            connections={connections}
             user={user}
             page='h'/>
         </div> 

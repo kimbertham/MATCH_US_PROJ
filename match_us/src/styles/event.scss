@@ -10,8 +10,8 @@
   border: 2px solid red;
 }
 
-.c-modal {
-
+.calender-day {
+  z-index: -10000;
 }
 
 .event-form{
@@ -21,4 +21,8 @@
 
 .green {
   color :green;
+}
+.e-field{
+  border: 1px solid red;
+  z-index: 1000;
 }
