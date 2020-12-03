@@ -4,6 +4,7 @@ import axios from 'axios'
 // import moment from 'moment'
 import { withRouter } from 'react-router-dom'
 import { headers } from '../../Lib/auth'
+import EventLocations from './EventLocations'
 
 
 class NewEvent extends React.Component {
@@ -18,7 +19,8 @@ state= {
   }
 }
 
-handleChange= (e) =>{
+
+handleChange= async (e) =>{
   const data = { ...this.state.data, [e.target.name]: e.target.value }
   this.setState({ data })
 }
@@ -28,7 +30,6 @@ handleSubmit = async (e) => {
   const { connection, selected, getEvents, handleModal,user } = this.props
   const c = connection ? connection.id : this.state.data.connection 
   const data = { ...this.state.data, connection: c, date: selected.target.id, creator: user.id }
-  console.log(data)
   await axios.post(`/api/events/post/${c}/`, data, headers())
   this.setState({ data: 
     { title: '',
@@ -41,6 +42,10 @@ handleSubmit = async (e) => {
   getEvents(), handleModal()
 }
 
+handleLocation = (e) => {
+  const data = { ...this.state.data, location: e }
+  this.setState({ data })
+}
 
 render(){
 
@@ -95,14 +100,10 @@ render(){
             onChange={this.handleChange}/>
         </div>
 
-        <div className='form-field'> 
-          <label>Location:</label>     
-          <input
-            className='e-input'
-            name='location'
-            value={data.location}
-            onChange={this.handleChange}/>
-        </div>
+        <EventLocations
+          location= {data.location}
+          handleChange={this.handleChange}
+          handleLocation={this.handleLocation}/>
 
         <div className='form-field'> 
           <label>Notes:</label>     

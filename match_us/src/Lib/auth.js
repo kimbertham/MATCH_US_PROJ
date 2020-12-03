@@ -24,3 +24,4 @@ export const getPayload = () => {
 export const getUserId = () => {
   return getPayload().sub
 }
+
