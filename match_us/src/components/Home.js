@@ -31,6 +31,7 @@ class Home extends React.Component {
       <div className='flex'>
 
         <Menu 
+          page='home'
           user={user}
           connections={connections}/>
 

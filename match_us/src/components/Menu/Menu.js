@@ -1,22 +1,30 @@
 import React from 'react'
 
 import MenuUser from './MenuUser'
+import MenuCon from './MenuCon'
 
 class Menu extends React.Component {
 
 
   render(){
 
-    const { user, setCon, connections } = this.props
+    const { user, setCon, connections, connection } = this.props
 
-    if (!connections) return null
     return (
       <div className='menu fh'>
 
-        <MenuUser 
-          user={user}
-          connections={connections}
-          setCon={setCon}/>  
+        {connections ?
+
+          <MenuUser 
+            user={user}
+            connections={connections}
+            setCon={setCon}/> 
+          :
+
+          <MenuCon
+            connection={connection}/>
+        }
+
 
       </div>
     )
