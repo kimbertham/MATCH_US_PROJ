@@ -6,8 +6,10 @@ import Menu from '../Menu/Menu'
 import ConOverview from './ConOverview'
 import Events from '../Events/Events'
 import Movies from '../Movies/Movies'
+import MovieSwipe from '../Movies/MovieSwipe'
 
 import { getUserId } from '../../Lib/auth'
+
 const userId = getUserId()
 
 class Connection extends React.Component {
@@ -54,6 +56,10 @@ class Connection extends React.Component {
 
           <Route path='/connection/:id/movies' render={() => 
             <Movies connection={connection}/> }/>
+            
+          <Route path='/connection/:id/movieswipe' render={() => 
+            <MovieSwipe connection={connection}/> }/>
+              
               
 
         </Switch>
