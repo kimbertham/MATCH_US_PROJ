@@ -39,13 +39,10 @@ class Connection extends React.Component {
 
     if (!connection) return null
     return (
-
-      <div className='flex'>
-
+      <>
         <Menu connection={connection}/>
 
         <Switch>
-          
           <Route path='/connection/:id/overview' render={() => 
             <ConOverview connection={connection}/> }/>
           
@@ -59,14 +56,9 @@ class Connection extends React.Component {
             
           <Route path='/connection/:id/movieswipe' render={() => 
             <MovieSwipe connection={connection}/> }/>
-              
-              
-
         </Switch>
 
-    
-      
-      </div>
+      </>
     )
   }
 }

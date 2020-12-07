@@ -1,37 +1,48 @@
 import React from 'react'
 import axios from 'axios'
-import { poster, baseURL ,genreUrl }  from '../../Lib/common'
+import { poster, baseURL }  from '../../Lib/common'
 import { headers } from '../../Lib/auth'
+import MovieSwipeDetails from './MovieSwipeDetails'
 
 class MovieSwipe extends React.Component { 
   state= {
     movies: [],
-    genres: [],
+    // genres: [],
+    details: false,
     m: '',
     i: 0,
-    p: 8
+    p: 2
   }
 
   async componentDidMount(){
-    const g = await axios.get(genreUrl)
-    this.setState({ genres: g.data.genres })
+    // const g = await axios.get(genreUrl)
+    // this.setState({ genres: g.data.genres })
     this.getMovies()
   }
 
-  getMovies = async () => {
-    const r = await axios.get(`${baseURL}${this.state.page}`)
-    this.setState({ movies: r.data.results, m: r.data.results[this.state.i] })
-  }
+getMovies = async () => {
+  let m
+  do {
+    const r = await axios.get(`${baseURL}${this.state.p}`)
+    const list = await axios.get('/api/movies/', headers())
+    m = r.data.results.filter(m => !list.data.includes(m.id))
+    console.log(m)
+    m.length <= 0 ? this.setState({ p: this.state.p + 1 }) : null
+  } while (m.length <= 0)
+  this.setState({ movies: m, m: m[this.state.i] })
+}
 
-  swipeMovie = async (d) => {
-    const data = { m_id: this.state.m.id, title: this.state.m.title, genres: this.setGenre(), direction: d }
-    await  axios.post('/api/movies/', data, headers())
-    this.nextMovie()
-  }
+swipeMovie = async (d) => {
+  const data = { m_id: this.state.m.id, title: this.state.m.title, 
+    // genres: this.setGenre(), 
+    direction: d }
+  await  axios.post('/api/movies/', data, headers())
+  this.nextMovie()
+}
 
 nextMovie = () => {
   const { i, p, movies } = this.state
-  if (i >= 19) {
+  if (i <= 19) {
     this.setState({ p: p + 1, i: 0 })
     this.getMovies()
   } else {
@@ -39,42 +50,52 @@ nextMovie = () => {
   }
 }
 
-  setGenre = () => {
-    return this.state.m.genre_ids.map(id => {
-      return this.state.genres.find(x => x.id === id).name
-    })
-  }
+// setGenre = () => {
+//   return this.state.m.genre_ids.map(id => {
+//     return this.state.genres.find(x => x.id === id).name
+//   })
+// }
 
-  render(){
+toggleDetails = async () => {
+  this.setState({ details: !this.state.details })
+}
 
-    const { m } = this.state
+render(){
+  const { m, details } = this.state
+  if (!m) return null
+  return (
+    <>
+      <div className='flex'>
+        <div className='sw fh center column'>
+          <div className=' m-card-cont' onClick={this.toggleDetails}>
+            <img 
+              alt='poster' className='m-poster'
+              src={`${poster}${m.poster_path}`}/>
+            <h1> {m.title}, <span> {m.release_date.slice(0,4)}</span></h1>
+          </div>
 
-    if (!m) return null
-    return (
+          <div className='flex'>
+            <button className='accept' onClick={()=>{
+              this.swipeMovie('True')
+            }}> Yes </button>
+            <button className='decline' onClick={()=>{
+              this.swipeMovie('False')
+            }}> No </button>
+          </div>  
+        </div>  
 
-      <div className='sw column center'>
 
-        <div className='m-card-cont'>
-          <img 
-            alt='poster' className='m-poster'
-            src={`${poster}${m.poster_path}`}/>
-          <h1> {m.title}</h1>
-          <h2> {m.release_date.slice(0,4)}</h2>
+
+        <div className={details ? 'm-detail-cont' : 'display-none'}>
+          <MovieSwipeDetails 
+            toggleDetails={this.toggleDetails}
+            details={m}/>
         </div>
-
-        <div className='flex'>
-          <button className='accept' onClick={()=>{
-            this.swipeMovie('True')
-          }}> Yes </button>
-
-          <button className='decline' onClick={()=>{
-            this.swipeMovie('False')
-          }}> No </button>
-        </div>
-
       </div>
-    )
-  }
+
+    </>
+  )
+}
 }
 
 export default MovieSwipe

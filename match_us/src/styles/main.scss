@@ -16,6 +16,10 @@
   width: 100%;
 }
 
+.sh {
+  height: 100%;
+}
+
 .fp {
   width: 100vw;
   height: 100vh;
@@ -68,6 +72,9 @@ bottom: 0;
   display: inline;
 }
 
+.right {
+float: right;
+}
 //-------
 .modal{
   position: absolute;
@@ -101,5 +108,5 @@ bottom: 0;
 } 
 
 .n-line {
- border:none;
+border:none;
 }
