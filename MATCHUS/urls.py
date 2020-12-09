@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/events/', include('events.urls')),
     path('api/movies/', include('movies.urls')),
+    path('api/food/', include('food.urls')),
     path('api/', include('connections.urls')),
     path('api/', include('jwt_auth.urls')),
     re_path(r'^.*$', index)

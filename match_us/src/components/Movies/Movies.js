@@ -16,6 +16,7 @@ state = {
 async componentDidMount(){
   const genres = (await axios.get(genreUrl)).data.genres
   this.setState({ genres })
+  console.log(genres)
   this.getMovies()
 }
 
@@ -43,6 +44,10 @@ setDetails = (d) => {
   this.setState({ details: d })
 }
 
+setSort = (e) =>{
+  console.log(e.target.value)
+}
+
 render(){
   const { connection } = this.props
   const { m, details, genres } = this.state
@@ -53,15 +58,21 @@ render(){
         details={details}/>
 
       <h1> {connection.user.first_name} & {connection.partner.first_name} &apos;s Movies</h1>
-      <div className='genre-dial'>
 
-        <label> Genre:</label>
-        <select onChange={this.setGenre}> 
-          <option value={'all'} selected> All </option>  
+      <div className='flex'>
+        <select className='m-options' onChange={this.setGenre}>  
+          <option disabled selected hidden> Genre </option> 
+          <option value='all'> All </option>  
           {genres.map(g => <option key={g.id}value={g.id} >{g.name} </option> )}
         </select>
+        <select className='m-options' onChange={this.setSort}>  
+          <option disabled selected hidden> Sort by </option> 
+          <option value='date'> Date Added </option> 
+          <option value='rating'> Rating </option>  
+          <option value='ppopularity'> Popularity </option> 
+          <option value='name'> Name </option> 
+        </select>
       </div>
-
 
       <div className='flex'>
         {m.map(m => {
@@ -69,8 +80,7 @@ render(){
             this.setDetails(m) 
           }} key={m.id} className='match-cont'>
             <h1>{m.title}</h1>
-            <img 
-              alt='poster' className='m-poster'
+            <img alt='poster' className='m-poster'
               src={`${poster}${m.poster_path}`}/>
           </div>
         })}

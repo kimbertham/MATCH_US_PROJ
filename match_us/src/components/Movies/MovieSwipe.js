@@ -7,7 +7,6 @@ import MovieSwipeDetails from './MovieSwipeDetails'
 class MovieSwipe extends React.Component { 
   state= {
     movies: [],
-    // genres: [],
     details: false,
     m: '',
     i: 0,
@@ -15,8 +14,6 @@ class MovieSwipe extends React.Component {
   }
 
   async componentDidMount(){
-    // const g = await axios.get(genreUrl)
-    // this.setState({ genres: g.data.genres })
     this.getMovies()
   }
 
@@ -26,7 +23,6 @@ getMovies = async () => {
     const r = await axios.get(`${baseURL}${this.state.p}`)
     const list = await axios.get('/api/movies/', headers())
     m = r.data.results.filter(m => !list.data.includes(m.id))
-    console.log(m)
     m.length <= 0 ? this.setState({ p: this.state.p + 1 }) : null
   } while (m.length <= 0)
   this.setState({ movies: m, m: m[this.state.i] })
@@ -34,7 +30,6 @@ getMovies = async () => {
 
 swipeMovie = async (d) => {
   const data = { m_id: this.state.m.id, title: this.state.m.title, 
-    // genres: this.setGenre(), 
     direction: d }
   await  axios.post('/api/movies/', data, headers())
   this.nextMovie()
@@ -50,12 +45,6 @@ nextMovie = () => {
   }
 }
 
-// setGenre = () => {
-//   return this.state.m.genre_ids.map(id => {
-//     return this.state.genres.find(x => x.id === id).name
-//   })
-// }
-
 toggleDetails = async () => {
   this.setState({ details: !this.state.details })
 }
@@ -67,7 +56,7 @@ render(){
     <>
       <div className='flex'>
         <div className='sw fh center column'>
-          <div className=' m-card-cont' onClick={this.toggleDetails}>
+          <div className='m-card-cont' onClick={this.toggleDetails}>
             <img 
               alt='poster' className='m-poster'
               src={`${poster}${m.poster_path}`}/>
@@ -83,8 +72,6 @@ render(){
             }}> No </button>
           </div>  
         </div>  
-
-
 
         <div className={details ? 'm-detail-cont' : 'display-none'}>
           <MovieSwipeDetails 

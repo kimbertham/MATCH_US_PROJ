@@ -1,7 +1,6 @@
 .calender {
   margin: 0 3vh;
   border: 2px solid black;
-  position: relative;
 }
 
 .calender-day {
@@ -25,4 +24,8 @@
 .e-field{
   border: 1px solid red;
   z-index: 1000;
+}
+
+.test {
+ display: table-cell;
 }

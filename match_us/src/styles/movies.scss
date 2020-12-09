@@ -11,16 +11,17 @@
 .m-poster {
   height: 60vh;
 }
+
 .swipe-cont {
   width: 79.5%;
   border: 2px solid red;
 }
+
 .m-detail-cont {
   border: 2px solid red;
   max-width: 20vw;
   padding: 0 1vw;
   animation: 0.5s slide-in forwards;
-  // float: right;
   @keyframes slide-in {
     0%{transform: translate(10vw, 0);}
     100%{ translate: translate(-10,0);}
@@ -38,10 +39,13 @@
     height:35vh;
   }
 }
-
-// #root {
-//   position: relative;
-// }
+.slide-in {
+animation: 0.5s slide-in forwards;
+@keyframes slide-in {
+  0%{transform: translate(10vw, 0);}
+  100%{ translate: translate(-10,0);}
+  }
+}
 
 .border{
   border:2px solid red;

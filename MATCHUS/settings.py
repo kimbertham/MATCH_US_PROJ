@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'jwt_auth',
     'events',
     'connections',
-    'movies'
-
+    'movies',
+    'food'
 ]
 
 

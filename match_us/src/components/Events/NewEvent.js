@@ -51,6 +51,7 @@ render(){
 
   const { data } = this.state
   const { connection,connections } = this.props
+
   return (
     <>
       <form className='event-form center' onSubmit= {this.handleSubmit}>
@@ -70,7 +71,7 @@ render(){
             <input
               readOnly
               className='e-input n-line'
-              value={connection.participants.map(p=> p.first_name )}/>
+              value={`${connection.partner.first_name}, ${connection.user.first_name}`}/>
             :
             <select 
               onChange={this.handleChange}

@@ -67,8 +67,8 @@ render(){
 
   return (
 
-    <div className='calender'>
 
+    <div className='test relative'>
       {selected ? <div onClick={this.handleModal} className={modal ? 'modal' : 'display-none'}>
         <div  className='m-pop c-modal'
           onClick={e => e.stopPropagation()}>

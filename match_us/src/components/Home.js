@@ -37,10 +37,12 @@ class Home extends React.Component {
 
         <div className='main'>
           <h1>{user.first_name}&apos;s Overview </h1>
+
           <Events 
             connections={connections}
             user={user}
             page='h'/>
+            
         </div> 
 
       </div>

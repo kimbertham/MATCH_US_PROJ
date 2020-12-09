@@ -17,6 +17,8 @@ const Calender = ({ date, handleModal, changeMonth, events }) => {
   const blank = []
   const days = []
 
+  console.log(months)
+
   for (let i = 0; i < moment(date).startOf('month').format('d') ; i++){
     blank.push( <td className='empty'> {''}</td>)
   }
@@ -59,7 +61,7 @@ const Calender = ({ date, handleModal, changeMonth, events }) => {
 
   return (
     <>
-      <div className=' date-header flex'>
+      <div className='date-header flex'>
         <button onClick={()=>{
           changeMonth('b')
         }}> Back</button>
@@ -70,13 +72,15 @@ const Calender = ({ date, handleModal, changeMonth, events }) => {
         }}> Next</button>
       </div>
 
-      <table className="calendar-day">
+ 
+      <table className='calender'>
         <tbody>
           <tr>{weekdays.map(day => <th key={day} className="week-day">{day}</th>)}</tr>
           {rows.map((d, i) => 
             <tr key={i}>{d}</tr>)}
         </tbody>
       </table>
+    
     </>
   )
 }
