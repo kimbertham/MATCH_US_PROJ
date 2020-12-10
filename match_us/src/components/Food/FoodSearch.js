@@ -8,7 +8,7 @@ state = {
   data: {
     location: '',
     radius: 1500,
-    keyword: 'Restaurant',
+    keyword: '',
     address: ''
   }
 }
@@ -28,6 +28,10 @@ setLocation = async (e) => {
   }) 
 }
 
+// clearSwipes = () => {
+//   axios.
+// }
+
 render() {
   const { data } = this.state
   return (
@@ -42,7 +46,7 @@ render() {
               name='keyword' 
               value={data.keyword}
               className='form-input' 
-              placeholder='Location'/>
+              placeholder='Search...'/>
           </div>
 
           <div className='address-field'>
@@ -74,7 +78,7 @@ render() {
           </div>
         </div>  
       </form>
-      <button onClick={this.clearSwipes}> Clear Swipes </button>
+      {/* <button onClick={this.clearSwipes}> Clear Swipes </button> */}
     </section>
   )
 }

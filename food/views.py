@@ -25,10 +25,9 @@ class FoodListView(APIView):
     # def delete(self, request):
     #     f = Food.objects.filter(user=request.user.id)
 
-
-
 class FoodDetailList(APIView):
     def get(self,request,pk):
         user = Food.objects.filter(user=request.user.id).values_list('f_id', flat = True)
         matches = Food.objects.filter(Q(user=pk) & Q(direction=True) & Q(f_id__in=user)).values_list('f_id', flat = True)
+        print(matches)
         return Response (matches, HTTP_200_OK)

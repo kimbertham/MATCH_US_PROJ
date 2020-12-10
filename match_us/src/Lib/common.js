@@ -10,3 +10,6 @@ export const GKey = 'AIzaSyAn3WW4SI3RHmQ7I_6HFcrUTdNalXkoJ4A'
 export const GImages = `https://maps.googleapis.com/maps/api/place/photo?key=${GKey}&maxwidth=400&photoreference=`
 export const fURL = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=restaurant&key=${GKey}&type=food`
 export const geoURL = `https://maps.googleapis.com/maps/api/geocode/json?key=${GKey}&address=`
+export const sDetails = `https://maps.googleapis.com/maps/api/place/details/json?key=${GKey}&fields=place_id,photo,name&place_id=`
+
+export const fDefault = 'https://bit.ly/3qF0nSa'

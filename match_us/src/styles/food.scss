@@ -1,0 +1,19 @@
+
+
+.f-match-cont {
+  margin: 10px 1vw;
+
+  .f-match-icon {
+    border-radius: 50%;
+    width: 3vw;
+    height: 3vw;
+    background-size: contain;
+    border: 2px solid red;
+  }
+  .f-match-name {
+    max-width: 6vw;
+    font-size: 10px;
+  }
+}
+
+

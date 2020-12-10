@@ -2,6 +2,7 @@
 import React from 'react'
 import axios from 'axios'
 import FoodSearch from './FoodSearch'
+import FoodMatches from './FoodMatches'
 import { proxyurl, GImages,fURL } from '../../Lib/common'
 import { headers } from '../../Lib/auth'
 
@@ -53,12 +54,15 @@ nextSwipe = () => {
 
 render(){
   const { f } = this.state
+  const { connection } = this.props
   return (
     <div className='fp f-cont'>
-      <h1> Food</h1>
 
       <FoodSearch
         submit={this.submitGoogle}/>
+
+      <FoodMatches 
+        connection={connection}/>
 
       {f ? <div className='flex'>
         <div className='sw fh center column'>
@@ -81,11 +85,8 @@ render(){
         </div>  
       </div> : null }
 
-      <div className='results'>
-        <h1> Results here </h1>
-      </div>
+    
     </div>
-
   )
 }
 }

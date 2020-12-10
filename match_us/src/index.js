@@ -5,6 +5,7 @@ import './styles/menu.scss'
 import './styles/event.scss'
 import './styles/auth.scss'
 import './styles/movies.scss'
+import './styles/food.scss'
 import App from './App'
 
 ReactDOM.render(<App />, document.getElementById('root'))
