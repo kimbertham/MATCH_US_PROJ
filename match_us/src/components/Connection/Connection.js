@@ -40,28 +40,33 @@ class Connection extends React.Component {
     if (!connection) return null
     return (
       <>
-        <Menu connection={connection}/>
+        <div className='flex'>
+
+
+          <Menu connection={connection}/>
   
-        <Switch>
-          <Route path='/connection/:id/overview' render={() => 
-            <ConOverview connection={connection}/> }/>
+          <div className='sh sw pink main' >
+            <Switch>
+              <Route path='/connection/:id/overview' render={() => 
+                <ConOverview connection={connection}/> }/>
           
-          <Route path='/connection/:id/events' render={() => 
-            <Events 
-              user={connection.user}
-              connection={connection}/> }/>
+              <Route path='/connection/:id/events' render={() => 
+                <Events 
+                  user={connection.user}
+                  connection={connection}/> }/>
 
 
-          <Route path='/connection/:id/movies' render={() => 
-            <Movies connection={connection}/> }/>
+              <Route path='/connection/:id/movies' render={() => 
+                <Movies connection={connection}/> }/>
             
-          <Route path='/connection/:id/movieswipe' render={() => 
-            <MovieSwipe connection={connection}/> }/>
+              <Route path='/connection/:id/movieswipe' render={() => 
+                <MovieSwipe connection={connection}/> }/>
 
-          <Route path='/connection/:id/food' render={() => 
-            <Food connection={connection}/> }/>
-        </Switch>
-
+              <Route path='/connection/:id/food' render={() => 
+                <Food connection={connection}/> }/>
+            </Switch>
+          </div>
+        </div>
       </>
     )
   }

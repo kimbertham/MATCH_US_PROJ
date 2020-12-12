@@ -1,44 +1,47 @@
 import React from 'react'
 import axios from 'axios'
 
+
 import { headers } from '../../Lib/auth'
 import { sDetails, proxyurl, GImages, fDefault } from '../../Lib/common'
 
 class FoodMatches extends React.Component {
   state ={
-    matches: []
+    matches: [],
+    selected: null
   }
 
   async componentDidMount(){
     this.getMatches()
   }
 
-  getDetails = async () => {
-
-  }
-
   getMatches = async () => {
+    const { connection } = this.props
     const matches = []
-    const id = this.props.connection.partner.id
-    const r  = (await axios.get(`/api/food/${id}/`, headers())).data
-    console.log(r)
+    const r  = (await axios.get(`/api/food/${connection.id}/${connection.partner.id}/`, headers())).data
     r.map(async m => matches.push((await axios.get(`${proxyurl}${sDetails}${m}`)).data.result))
     this.setState({ matches })
   }
 
+  deleteMatches = async () => {
+    await axios.delete(`/api/food/${this.props.connection.id}/${0}/`, headers())
+    this.getMatches()
+  }
 
   render(){
     const { matches } = this.state
-    console.log(matches)
+    const { selectMatch } = this.props
     return (
       <>
-        <div className='flex'>
+        <div onClick={this.deleteMatches}>Delete</div>
+        <div className='f-match'>
           {matches.map(m => {
-            return <div key={m.f_id} className='center column f-match-cont'> 
-              <div className='f-match-icon' 
+            return <div key={m.place_id} className='relative center column f-match-cont'> 
+              <div className='cover' id={m.place_id} onClick={selectMatch}/>
+              <div className='f-match-icon' value={m.place_id}
                 style={{ backgroundImage: m.photos ? `url(${GImages}${m.photos[0].photo_reference})` :
                   fDefault }}/>
-              <p className='f-match-name'> {m.name}</p>
+              <p> {m.name}</p>
             </div>
           })}
         </div>

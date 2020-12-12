@@ -11,21 +11,21 @@ class Menu extends React.Component {
     const { user, setCon, connections, connection } = this.props
 
     return (
-      <div className='menu fh'>
+      <div className='fh menu-cont'>
+        <div className='menu'>
 
-        {connections ?
+          {connections ?
 
-          <MenuUser 
-            user={user}
-            connections={connections}
-            setCon={setCon}/> 
-          :
+            <MenuUser 
+              user={user}
+              connections={connections}
+              setCon={setCon}/> 
+            :
 
-          <MenuCon
-            connection={connection}/>
-        }
-
-
+            <MenuCon
+              connection={connection}/>
+          }
+        </div>
       </div>
     )
   }

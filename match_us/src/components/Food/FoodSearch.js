@@ -10,7 +10,8 @@ state = {
     radius: 1500,
     keyword: '',
     address: ''
-  }
+  },
+  show: null
 }
 
 handleChange = (e) => {
@@ -28,58 +29,64 @@ setLocation = async (e) => {
   }) 
 }
 
-// clearSwipes = () => {
-//   axios.
-// }
+showSearch = () => {
+  this.setState({ show: !this.state.show })
+}
 
 render() {
-  const { data } = this.state
+  const { data, show } = this.state
   return (
 
-    <section className='f-search'>
-      <form  onSubmit={this.setLocation} className='f-form'>
-        <div className='flex'>
+    <div className='flex'>
+      <div onClick={this.showSearch}> Filter</div>
+      <div className={show ? 'inline' : 'display-none'}>
+        <section className='f-search'>
+          <form  onSubmit={this.setLocation} className='f-form'>
+            <div className='flex'>
 
-          <div className='keyword-field'>
-            <input 
-              onChange={this.handleChange}
-              name='keyword' 
-              value={data.keyword}
-              className='form-input' 
-              placeholder='Search...'/>
-          </div>
+              <div className='keyword-field'>
+                <input 
+                  onChange={this.handleChange}
+                  name='keyword' 
+                  value={data.keyword}
+                  className='form-input' 
+                  placeholder='Search...'/>
+              </div>
 
-          <div className='address-field'>
-            <input 
-              onChange={this.handleChange}
-              name='address' 
-              value={data.address}
-              className='form-input' 
-              placeholder='Location'/>
-          </div>
+              <div className='address-field'>
+                <input 
+                  onChange={this.handleChange}
+                  name='address' 
+                  value={data.address}
+                  className='form-input' 
+                  placeholder='Location'/>
+              </div>
           
-          <div className='radius-field'>
-            <select 
-              onChange={this.handleChange}
-              name='radius'
-              value={data.radius}>
-              <option defaultValue value='10'> Distance </option>  
-              <option value='1' >1m</option>
-              <option value='5' >5m</option>
-              <option value='10' >10m</option>
-              <option value='20' >15m</option>
-              <option value='25' >25m</option>
-              <option value='30' >30m</option>
-            </select>
-          </div>
+              <div className='radius-field'>
+                <select 
+                  onChange={this.handleChange}
+                  name='radius'
+                  value={data.radius}>
+                  <option defaultValue value='10'> Distance </option>  
+                  <option value='1' >1m</option>
+                  <option value='5' >5m</option>
+                  <option value='10' >10m</option>
+                  <option value='20' >15m</option>
+                  <option value='25' >25m</option>
+                  <option value='30' >30m</option>
+                </select>
+              </div>
 
-          <div className='search-button'>
-            <button type='submit'>Search</button>
-          </div>
-        </div>  
-      </form>
-      {/* <button onClick={this.clearSwipes}> Clear Swipes </button> */}
-    </section>
+              <div className='search-button'>
+                <button type='submit'>Search</button>
+              </div>
+            </div>  
+          </form>
+        </section>
+      </div>
+    </div>
+      
+
   )
 }
 }

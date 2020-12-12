@@ -1,12 +1,12 @@
+.menu-cont {
+  width: 30vw;
+  // border: 2px solid red;
+}
 .menu{
-  // *{border: 2px solid red;}
-  width: 20vw;
-  border: 2px solid red;
-  float: left;
-  height: 100vh;
+
   top: 0px;
-  position: sticky;
-  margin-right: 1vw;
+  position: fixed;
+
 .user-img{
   width: 8vw;
   }
