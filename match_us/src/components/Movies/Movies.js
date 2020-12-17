@@ -56,35 +56,37 @@ render(){
     <>
       <MovieDetails 
         details={details}/>
+        
+      <div className='m-match-cont sw fh'>
+        <h1> {connection.user.first_name} & {connection.partner.first_name} &apos;s Movies</h1>
+        <div className='flex'>
+          <select className='m-options' onChange={this.setGenre}>  
+            <option disabled selected hidden> Genre </option> 
+            <option value='all'> All </option>  
+            {genres.map(g => <option key={g.id}value={g.id} >{g.name} </option> )}
+          </select>
+          <select className='m-options' onChange={this.setSort}>  
+            <option disabled selected hidden> Sort by </option> 
+            <option value='date'> Date Added </option> 
+            <option value='rating'> Rating </option>  
+            <option value='ppopularity'> Popularity </option> 
+            <option value='name'> Name </option> 
+          </select>
+        </div>
 
-      <h1> {connection.user.first_name} & {connection.partner.first_name} &apos;s Movies</h1>
-
-      <div className='flex'>
-        <select className='m-options' onChange={this.setGenre}>  
-          <option disabled selected hidden> Genre </option> 
-          <option value='all'> All </option>  
-          {genres.map(g => <option key={g.id}value={g.id} >{g.name} </option> )}
-        </select>
-        <select className='m-options' onChange={this.setSort}>  
-          <option disabled selected hidden> Sort by </option> 
-          <option value='date'> Date Added </option> 
-          <option value='rating'> Rating </option>  
-          <option value='ppopularity'> Popularity </option> 
-          <option value='name'> Name </option> 
-        </select>
+        <div className='flex'>
+          {m.map(m => {
+            return <div onClick={() => {
+              this.setDetails(m) 
+            }} key={m.id} className='match-cont'>
+              <h1>{m.title}</h1>
+              <img alt='poster' className='m-poster'
+                src={`${poster}${m.poster_path}`}/>
+            </div>
+          })}
+        </div>
       </div>
 
-      <div className='flex'>
-        {m.map(m => {
-          return <div onClick={() => {
-            this.setDetails(m) 
-          }} key={m.id} className='match-cont'>
-            <h1>{m.title}</h1>
-            <img alt='poster' className='m-poster'
-              src={`${poster}${m.poster_path}`}/>
-          </div>
-        })}
-      </div>
     </>
   )
 }

@@ -42,10 +42,9 @@ class Connection extends React.Component {
       <>
         <div className='flex'>
 
-
           <Menu connection={connection}/>
   
-          <div className='sh sw pink main' >
+          <div className='sh sw main'>
             <Switch>
               <Route path='/connection/:id/overview' render={() => 
                 <ConOverview connection={connection}/> }/>

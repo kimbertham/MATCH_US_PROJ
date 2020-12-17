@@ -20,10 +20,11 @@ getFullDetails = async () => {
 
 render() {
   const { f } = this.state
+  const { selectMatch } = this.props
   if (!f) return null
   return (
 
-    <div className='modal f-details column'>
+    <div onClick={selectMatch} className='modal f-details column'>
       <h1>{f.name}</h1>
       <p> {f.website}</p>
       <p> {f.formatted_address}</p>

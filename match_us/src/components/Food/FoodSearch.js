@@ -7,11 +7,12 @@ class  FoodSearch extends React.Component {
 state = {
   data: {
     location: '',
-    radius: 1500,
+    rankby: '',
     keyword: '',
     address: ''
   },
-  show: null
+  show: null,
+  errors: false
 }
 
 handleChange = (e) => {
@@ -22,11 +23,16 @@ handleChange = (e) => {
 setLocation = async (e) => {
   e.preventDefault()
   const { data } = this.state
-  const coOrd = (await axios.get(`${geoURL}${data.address}`)).data.results[0].geometry.location
-  const location = { ...data, location: `${coOrd.lat},${coOrd.lng.toString().slice(1)}` }
-  this.setState({ data: location }, () => {
-    this.props.submit(data)
-  }) 
+  
+  if (Object.values(data).some(o => o === '')) {
+    this.setState({ errors: true })
+  } else {
+    const coOrd = (await axios.get(`${geoURL}${data.address}`)).data.results[0].geometry.location
+    const location = { ...data, location: `${coOrd.lat},${coOrd.lng}` }
+    this.setState({ data: location }, () => {
+      this.props.submit(this.state.data)
+    }) 
+  }
 }
 
 showSearch = () => {
@@ -34,7 +40,9 @@ showSearch = () => {
 }
 
 render() {
-  const { data, show } = this.state
+  const { data, show, errors } = this.state
+  const errorC = errors ?  'red' : '' 
+  
   return (
 
     <div className='flex'>
@@ -49,7 +57,7 @@ render() {
                   onChange={this.handleChange}
                   name='keyword' 
                   value={data.keyword}
-                  className='form-input' 
+                  className={`${errorC} form-input`}
                   placeholder='Search...'/>
               </div>
 
@@ -58,22 +66,19 @@ render() {
                   onChange={this.handleChange}
                   name='address' 
                   value={data.address}
-                  className='form-input' 
+                  className={`${errorC} form-input`}
                   placeholder='Location'/>
               </div>
           
               <div className='radius-field'>
                 <select 
                   onChange={this.handleChange}
-                  name='radius'
+                  name='rankby'
+                  className={`${errorC} form-input`}
                   value={data.radius}>
-                  <option defaultValue value='10'> Distance </option>  
-                  <option value='1' >1m</option>
-                  <option value='5' >5m</option>
-                  <option value='10' >10m</option>
-                  <option value='20' >15m</option>
-                  <option value='25' >25m</option>
-                  <option value='30' >30m</option>
+                  <option defaultValue value='10'> Sort by </option>  
+                  <option value='distance' >Distance</option>
+                  <option value='prominence' >Popularity</option>
                 </select>
               </div>
 

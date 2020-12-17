@@ -30,18 +30,16 @@ class Home extends React.Component {
 
       <div className='flex'>
 
-        <Menu 
-          page='home'
+        <Menu page='home'
           user={user}
           connections={connections}/>
 
-        <div className='main'>
+        <div>
           <h1>{user.first_name}&apos;s Overview </h1>
 
-          <Events 
+          <Events page='h'
             connections={connections}
-            user={user}
-            page='h'/>
+            user={user}/>
             
         </div> 
 

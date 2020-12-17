@@ -4,31 +4,39 @@ import MenuUser from './MenuUser'
 import MenuCon from './MenuCon'
 
 class Menu extends React.Component {
+state = { colour: '#FF0000' }
 
+setColour = (colour) => {
+  this.setState({ colour })
+}
 
-  render(){
+render(){
+  const { user, setCon, connections, connection } = this.props
+  const { colour } = this.state
+  return (
 
-    const { user, setCon, connections, connection } = this.props
+    <div className='menu-cont fh'>
+      <div className='menu fh' style={{ background: colour }}>
+      
 
-    return (
-      <div className='fh menu-cont'>
-        <div className='menu'>
+        {connections ?
 
-          {connections ?
+          <MenuUser 
+            user={user}
+            setCon={setCon}
+            connections={connections}
+            setColour={this.setColour}/> 
+          :
 
-            <MenuUser 
-              user={user}
-              connections={connections}
-              setCon={setCon}/> 
-            :
+          <MenuCon
+            connection={connection}
+            setColour={this.setColour}/>
+        }
 
-            <MenuCon
-              connection={connection}/>
-          }
-        </div>
       </div>
-    )
-  }
+    </div>
+  )
+}
 }
 
 export default Menu

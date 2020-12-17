@@ -11,7 +11,7 @@ export const detailUrl = 'https://api.themoviedb.org/3/movie/'
 //Food Links
 export const GKey = 'AIzaSyAn3WW4SI3RHmQ7I_6HFcrUTdNalXkoJ4A'
 export const GImages = `https://maps.googleapis.com/maps/api/place/photo?key=${GKey}&maxwidth=400&photoreference=`
-export const fURL = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=restaurant&key=${GKey}&type=food`
+export const fURL = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${GKey}&type=food`
 export const geoURL = `https://maps.googleapis.com/maps/api/geocode/json?key=${GKey}&address=`
-export const sDetails = `https://maps.googleapis.com/maps/api/place/details/json?key=${GKey}&fields=place_id,photo,name&place_id=`
 export const fDetails = `https://maps.googleapis.com/maps/api/place/details/json?key=${GKey}&place_id=`
+export const noPlaces = { img: 'https://bit.ly/3mtHLRI', name: 'No More Restaurants', vicinity: 'Try adjusting location or keywords for more...', f_id: 'n' }

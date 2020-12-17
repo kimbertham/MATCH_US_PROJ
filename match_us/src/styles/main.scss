@@ -15,11 +15,6 @@
 .sw {
   width: 100%;
 }
-.pink{
-  border: 3px solid pink;
-}
-
-
 
 .sh {
   height: 100%;
@@ -41,6 +36,10 @@
 .flex-end {
   display:flex;
   justify-content: flex-end;
+}
+
+.flex-end {
+  justify-content: space-between;
 }
 
 .column {
@@ -95,6 +94,10 @@ float: right;
     @extend .center;
   }
   
+}
+
+.red{
+  border: 2px solid red;
 }
 
 .shake-text {

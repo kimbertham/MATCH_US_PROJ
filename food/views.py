@@ -22,12 +22,19 @@ class FoodListView(APIView):
         f_list = Food.objects.filter(user=request.user.id).values_list('f_id', flat = True)
         return Response(f_list, HTTP_200_OK)
 
-    # def delete(self, request):
-    #     f = Food.objects.filter(user=request.user.id)
 
 class FoodDetailList(APIView):
-    def get(self,request,pk):
-        user = Food.objects.filter(user=request.user.id).values_list('f_id', flat = True)
-        matches = Food.objects.filter(Q(user=pk) & Q(direction=True) & Q(f_id__in=user)).values_list('f_id', flat = True)
-        print(matches)
-        return Response (matches, HTTP_200_OK)
+    def get(self,request,connection, partner):
+        user = Food.objects.filter(Q(user=request.user.id) & Q(connection=connection)).values_list('f_id', flat = True)
+        matches = Food.objects.filter(Q(user=partner) & Q(direction=True) & Q(connection=connection) & Q(f_id__in=user)) [:8]
+        s_matches = FoodSerializer(matches, many=True)
+        return Response (s_matches.data, HTTP_200_OK)
+
+    def delete(self, request,connection, partner):
+        f = Food.objects.filter(Q(connection=connection) & Q(user=request.user.id))
+        f.delete()
+        return Response(status=HTTP_204_NO_CONTENT)
+
+    def post(self,request, connection, partner):
+        food = Food.objects.filter(Q(user=partner) & Q(connection=connection) & Q(f_id=request.data['id'])).exists()
+        return Response (food, HTTP_200_OK)
