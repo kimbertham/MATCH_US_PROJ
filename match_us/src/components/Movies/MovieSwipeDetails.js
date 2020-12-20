@@ -10,7 +10,7 @@ const MovieSwipeDetails = ({ details, toggleDetails }) => {
       <br/>
       <h1> {details.title}</h1>
       <h2>{details.tagline}</h2>
-      <img src={`${poster}${details.poster_path}`} className='m-poster' alt='poster'/>
+      <img src={`${poster}${details.poster_path}`} alt='poster'/>
       <h1> {details.vote_average}</h1>
       <h2>{details.release_date}</h2>
     

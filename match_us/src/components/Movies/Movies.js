@@ -16,7 +16,6 @@ state = {
 async componentDidMount(){
   const genres = (await axios.get(genreUrl)).data.genres
   this.setState({ genres })
-  console.log(genres)
   this.getMovies()
 }
 
@@ -57,7 +56,7 @@ render(){
       <MovieDetails 
         details={details}/>
         
-      <div className='m-match-cont sw fh'>
+      <div className='m-match-cont'>
         <h1> {connection.user.first_name} & {connection.partner.first_name} &apos;s Movies</h1>
         <div className='flex'>
           <select className='m-options' onChange={this.setGenre}>  

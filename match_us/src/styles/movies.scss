@@ -1,10 +1,10 @@
 
 .m-match-cont {
-background-image: url('https://bit.ly/2WmYMCC');
-padding: 20px;
-background-size: cover;
-opacity: 0.9;
-color: white;
+  padding: 20px;
+  background-image: url('https://bit.ly/2WmYMCC');
+  background-size: cover;
+  opacity: 0.9;
+  color: white;
 }
 
 .m-card-cont {
@@ -12,6 +12,7 @@ color: white;
   padding: 10px;
   max-height: 70vh;
   max-width: 25vw;
+  border: 2px solid red;
 
   h1{
     max-width: 25vw;
@@ -30,12 +31,16 @@ color: white;
 
 .m-detail-cont {
   border: 2px solid red;
-  max-width: 20vw;
+  max-height: 100vh;
+  width: 30vw;
   padding: 0 1vw;
   animation: 0.5s slide-in forwards;
   @keyframes slide-in {
     0%{transform: translate(10vw, 0);}
     100%{ translate: translate(-10,0);}
+  }
+  img{
+    height:20vh;
   }
 }
 

@@ -16,6 +16,6 @@ class Food(models.Model):
         on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     class Meta:
-        unique_together = ('user', 'f_id',)
+        unique_together = ('user', 'f_id', 'connection',)
         ordering = ('-created_at',)
 

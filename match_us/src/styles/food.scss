@@ -1,25 +1,20 @@
-
+@import 'main.scss';
 
 .f-card-cont {
   border: 2px solid red;
-
 }
 
-.f-match{
-  width: 6vw;
-}
 .f-match-cont {
   margin: 10px 1vw;
   border: 2px solid pink;
-  width: 6vw;
   font-size: 10px;
+  width: 5vw;
 
   .f-match-icon {
     border-radius: 50%;
     width: 3vw;
     height: 3vw;
     background-size: contain;
-    border: 2px solid red;
   }
 
   .cover {

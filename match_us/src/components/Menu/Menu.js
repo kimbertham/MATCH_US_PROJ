@@ -15,7 +15,7 @@ render(){
   const { colour } = this.state
   return (
 
-    <div className='menu-cont fh'>
+    <div className='menu-cont'>
       <div className='menu fh' style={{ background: colour }}>
       
 

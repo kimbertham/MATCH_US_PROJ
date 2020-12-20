@@ -1,13 +1,18 @@
 import React from 'react'
 import axios from 'axios'
+
 import { poster, baseURL }  from '../../Lib/common'
 import { headers } from '../../Lib/auth'
+
 import MovieSwipeDetails from './MovieSwipeDetails'
+import Match from '../Common/Match'
+import MovieSwipeCard from './MovieSwipeCard'
 
 class MovieSwipe extends React.Component { 
   state= {
     movies: [],
     details: false,
+    match: false,
     m: '',
     i: 0,
     p: 2
@@ -29,58 +34,64 @@ getMovies = async () => {
 }
 
 swipeMovie = async (d) => {
-  const data = { m_id: this.state.m.id, title: this.state.m.title, 
+  const data = { m_id: this.state.m.id, name: this.state.m.title, 
     direction: d }
   await  axios.post('/api/movies/', data, headers())
-  this.nextMovie()
+  d === 'True' ? this.checkMatch() : this.nextMovie()
+}
+
+checkMatch = async () => {
+  const { connection } = this.props
+  const data = { m_id: this.state.m.id }
+  const r = await axios.post(`/api/movies/${connection.partner.id}/`, data )
+  r ? this.setState({ match: { name: this.state.m.title } }) : this.nextMovie()
 }
 
 nextMovie = () => {
   const { i, p, movies } = this.state
-  if (i <= 19) {
-    this.setState({ p: p + 1, i: 0 })
+  i <= 19 ? this.setState({ p: p + 1, i: 0 }, () => {
     this.getMovies()
-  } else {
-    this.setState({ m: movies[i + 1],i: i + 1 })
-  }
+  }) : this.setState({ m: movies[i + 1],i: i + 1 })
 }
 
 toggleDetails = async () => {
   this.setState({ details: !this.state.details })
 }
 
+clearMatch = () => {
+  this.setState({ match: false })
+  this.nextMovie()
+}
+
 render(){
-  const { m, details } = this.state
+  const { m, details, match } = this.state
+  const { connection } = this.props
+
   if (!m) return null
   return (
-    <>
-      <div className='flex'>
-        <div className='sw fh center column'>
-          <div className='m-card-cont' onClick={this.toggleDetails}>
-            <img 
-              alt='poster' className='m-poster'
-              src={`${poster}${m.poster_path}`}/>
-            <h1> {m.title}, <span> {m.release_date.slice(0,4)}</span></h1>
-          </div>
 
-          <div className='flex'>
-            <button className='accept' onClick={()=>{
-              this.swipeMovie('True')
-            }}> Yes </button>
-            <button className='decline' onClick={()=>{
-              this.swipeMovie('False')
-            }}> No </button>
-          </div>  
-        </div>  
+    <div className='flex'>
+      <div className='sw fh relative center column'>
+        
+        <Match match={match}
+          connection={connection}
+          clear={this.clearMatch}
+          getDetail={this.toggleDetails}
+          img={`${poster}${m.poster_path}`}/>
 
-        <div className={details ? 'm-detail-cont' : 'display-none'}>
-          <MovieSwipeDetails 
-            toggleDetails={this.toggleDetails}
-            details={m}/>
-        </div>
+  
+        <MovieSwipeCard m={m}
+          toggleDetails={this.toggleDetails}
+          swipeMovie={this.swipeMovie}/>
+      </div>  
+
+      <div className={details ? 'm-detail-cont' : 'display-none'}>
+        <MovieSwipeDetails 
+          toggleDetails={this.toggleDetails}
+          details={m}/>
       </div>
+    </div>
 
-    </>
   )
 }
 }

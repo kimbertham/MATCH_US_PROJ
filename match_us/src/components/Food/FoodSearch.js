@@ -6,12 +6,10 @@ import { geoURL } from '../../Lib/common'
 class  FoodSearch extends React.Component {
 state = {
   data: {
-    location: '',
     rankby: '',
     keyword: '',
     address: ''
   },
-  show: null,
   errors: false
 }
 
@@ -25,6 +23,7 @@ setLocation = async (e) => {
   const { data } = this.state
   
   if (Object.values(data).some(o => o === '')) {
+    console.log(data)
     this.setState({ errors: true })
   } else {
     const coOrd = (await axios.get(`${geoURL}${data.address}`)).data.results[0].geometry.location
@@ -35,19 +34,15 @@ setLocation = async (e) => {
   }
 }
 
-showSearch = () => {
-  this.setState({ show: !this.state.show })
-}
-
 render() {
-  const { data, show, errors } = this.state
+  const { data, errors } = this.state
   const errorC = errors ?  'red' : '' 
   
   return (
 
     <div className='flex'>
       <div onClick={this.showSearch}> Filter</div>
-      <div className={show ? 'inline' : 'display-none'}>
+      <div className= 'inline'>
         <section className='f-search'>
           <form  onSubmit={this.setLocation} className='f-form'>
             <div className='flex'>

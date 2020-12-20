@@ -29,3 +29,8 @@ class MoviesDetailList(APIView):
         user = Movies.objects.filter(user=request.user.id).values_list('m_id', flat = True)
         p = Movies.objects.filter(Q(user=pk) & Q(direction=True) & Q(m_id__in=user)).values_list('m_id', flat = True)
         return Response (p, HTTP_200_OK)
+
+    def post(self,request, pk):
+        print(request.data)
+        movie = Movies.objects.filter(user=pk, m_id=request.data['m_id']).exists()
+        return Response( movie, HTTP_200_OK)
