@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Register from './Register'
 import Login from './Login'
-// import { getUserId } from '../Lib/auth'
+
 
 class Auth extends React.Component {
   state = {
@@ -47,34 +47,35 @@ register = async (e) => {
 
     return (
       <div className='a-cont center fp'>
-
-        <div className='a-logo-wrap relative center'>
-          <img 
-            className='a-logo' alt='logo'
-            src='https://i.imgur.com/VfFxGMN.jpg'/>
-          <p>Match Us</p>
-          <p className='a-logo-sub absolute bottom'>
+        <div className='flex'>
+          <div className='a-logo-wrap relative center'>
+            <img 
+              className='a-logo' alt='logo'
+              src='https://i.imgur.com/VfFxGMN.jpg'/>
+            <p>Match Us</p>
+            <p className='a-logo-sub absolute bottom'>
             Make every date the best date
-          </p>
-        </div>
+            </p>
+          </div>
       
-        <div className='a-form-cont center'>
-          {form ?
-            <Login
-              change={this.handleChange}
-              submit={this.login}
-              form={this.handleForm}
-              data={data}/>
-            :
-            <Register
-              change={this.handleChange}
-              submit={this.register}
-              form={this.handleForm}
-              data={data}/>
-          }
-          <p className={invalid ? 'shake-text' : 'display-none' }> 
+          <div className='a-form-cont center'>
+            {form ?
+              <Login
+                change={this.handleChange}
+                submit={this.login}
+                form={this.handleForm}
+                data={data}/>
+              :
+              <Register
+                change={this.handleChange}
+                submit={this.register}
+                form={this.handleForm}
+                data={data}/>
+            }
+            <p className={invalid ? 'shake-text' : 'display-none' }> 
           Invalid! Please try again!
-          </p>
+            </p>
+          </div>
         </div>
       </div>
     )

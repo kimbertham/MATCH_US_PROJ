@@ -4,7 +4,6 @@ from django.db import models
 class Food(models.Model):
     f_id = models.CharField(max_length=300)
     name = models.CharField(max_length=300)
-    img = models.CharField(max_length=3000, blank=True)
     direction= models.BooleanField()
     user =  models.ForeignKey(
         'jwt_auth.User',

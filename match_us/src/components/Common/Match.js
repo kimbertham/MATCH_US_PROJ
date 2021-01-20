@@ -1,8 +1,15 @@
 import React from 'react'
+import { GImages, poster } from '../../Lib/common'
 
-const Match = ({ buttons, connection, match, clear,img }) => {
+const Match = ({ buttons, connection, r, clear , section }) => {
+  
+  let img
+  section === 'movies' ? 
+    img = `${poster}${r.poster_path}` : 
+    img = `${GImages}${r.photos[0].photo_reference}` 
+  
 
-  if (!match) return null
+  if (!r) return null
   return (
     <div onClick={clear} className='sw absolute'>
       <div className='fh match-modal'>
@@ -16,7 +23,7 @@ const Match = ({ buttons, connection, match, clear,img }) => {
               style={{ backgroundImage: `url(${connection.user.profile_image})` }}/>
           </div>
 
-          <p>{connection.partner.first_name} swiped yes to {match.name} too!</p>
+          <p>{connection.partner.first_name} swiped yes to {r.name || r.title} too!</p>
           <div className='match-img' 
             style={{ backgroundImage: `url(${img})` }}/>
 

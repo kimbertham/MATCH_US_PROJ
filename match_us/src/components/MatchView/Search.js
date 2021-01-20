@@ -20,16 +20,14 @@ handleChange = (e) => {
 
 setLocation = async (e) => {
   e.preventDefault()
-  const { data } = this.state
   
-  if (Object.values(data).some(o => o === '')) {
-    console.log(data)
+  if (Object.values(this.state.data).some(o => o === '')) {
     this.setState({ errors: true })
   } else {
-    const coOrd = (await axios.get(`${geoURL}${data.address}`)).data.results[0].geometry.location
-    const location = { ...data, location: `${coOrd.lat},${coOrd.lng}` }
+    const coOrd = (await axios.get(`${geoURL}${this.state.data.address}`)).data.results[0].geometry.location
+    const location = { ...this.state.data, location: `${coOrd.lat},${coOrd.lng}` }
     this.setState({ data: location }, () => {
-      this.props.submit(this.state.data)
+      this.props.getResults(this.state.data)
     }) 
   }
 }

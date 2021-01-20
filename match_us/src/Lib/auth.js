@@ -6,6 +6,7 @@
 export const headers = () => {
   return {
     headers: { Authorization: `Bearer ${getToken()}` }
+    
   }
 }
 

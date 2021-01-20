@@ -1,10 +1,39 @@
 
+@import 'main.scss';
+
 .m-match-cont {
-  padding: 20px;
-  background-image: url('https://bit.ly/2WmYMCC');
-  background-size: cover;
-  opacity: 0.9;
-  color: white;
+  @extend .relative;
+  // background-image: url('./assets/night-bg.jpg');
+  background-size:cover;
+  // color: white;
+  border: 1px solid rgb(67, 38, 155);
+.m-movies {
+  @extend .fh;
+  @extend .wrap;
+  overflow-y: scroll;
+  height: 90vh;
+
+  .match-cont{
+  @extend .wrap;
+  @extend .flex-apart;
+    border: 1px solid rgb(107, 175, 187);
+    background-color: rgba(0,0,0,0.5);
+    margin: 1vw;
+    width: 12vw;
+    padding:1vh;
+    font-size: 8px;
+    img {
+      height:35vh;
+    }
+  }
+  
+}
+
+}
+
+.m-wrapper {
+z-index: 200000;
+  border: 1px solid green;
 }
 
 .m-card-cont {
@@ -44,26 +73,11 @@
   }
 }
 
-.match-cont{
-  border: 2px solid red;
-  margin: 1vw;
-  width: 12vw;
-  height: 40vh;
-  padding:1vh;
-  font-size: 10px;
-  img {
-    height:35vh;
-  }
-}
+
 .slide-in {
 animation: 0.5s slide-in forwards;
 @keyframes slide-in {
   0%{transform: translate(10vw, 0);}
   100%{ translate: translate(-10,0);}
   }
-}
-
-.border{
-  border:2px solid red;
-width: 100%;
 }
