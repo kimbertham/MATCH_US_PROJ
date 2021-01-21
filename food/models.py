@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Food(models.Model):
+class food(models.Model):
     f_id = models.CharField(max_length=300)
     name = models.CharField(max_length=300)
     direction= models.BooleanField()

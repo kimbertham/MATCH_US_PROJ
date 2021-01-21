@@ -5,13 +5,15 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY, HTTP_200_OK,HTTP_204_NO_CONTENT
 from rest_framework.exceptions import NotFound,PermissionDenied
 
-from jwt_auth.models import User
-from connections.serializers import EventsSerializer, PopulatedEventsSerializer
-from connections.models import Connections
-from .models import Events
 from django.db.models import Q
 from django.db.models import Prefetch
 from django.db.models import prefetch_related_objects
+
+# from jwt_auth.models import User
+from connections.serializers import EventsSerializer, PopulatedEventsSerializer
+from connections.models import Connections
+from .models import Events
+
 
 
 class EventsListView(APIView):
@@ -21,7 +23,6 @@ class EventsListView(APIView):
         return Response(status=HTTP_204_NO_CONTENT)
 
     def put(self, request, pk):
-        print(request.data)
         e= Events.objects.get(pk=pk)
         event = EventsSerializer(e, data=request.data)
         if event.is_valid():

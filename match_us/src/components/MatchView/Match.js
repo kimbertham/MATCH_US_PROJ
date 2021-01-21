@@ -23,7 +23,7 @@ async componentDidMount() {
 
 getMatches = async () => {
   const { connection, section } = this.props
-  const r  = await axios.get(`/api/${section}/${connection.id}/${connection.partner.id}/`,headers())
+  const r  = await axios.get(`/api/match/${section}/${connection.id}/${connection.partner.id}/`,headers())
   this.setState({ matches: r.data })
 } 
 
@@ -35,7 +35,8 @@ swipe = async (d) => {
 
 checkMatch = async (i) => {
   const { connection, section } = this.props
-  const r = (await axios.post(`/api/${section}/${connection.id}/${connection.partner.id}/`, { id: i })).data
+  const r = (await axios.post(`/api/match/${section}/${connection.id}/${connection.partner.id}/`, { id: i })).data
+  console.log(r)
   if (r) {
     this.setState({ match: true })
     this.getMatches()
@@ -46,7 +47,7 @@ checkMatch = async (i) => {
 
 deleteMatches = async () => {
   const { connection,section } = this.props
-  await axios.delete(`/api/${section}/${connection.id}/`, headers())
+  await axios.delete(`/api/match/${section}/${connection.id}/`, headers())
   this.getMatches()
   this.props.getResults()
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 import { baseURL }  from '../../Lib/common'
-import { headers } from '../../Lib/auth'
+// import { headers } from '../../Lib/auth'
 
 import Match from '../MatchView/Match'
 
@@ -14,14 +14,7 @@ class Movies extends React.Component {
   }
 
   async componentDidMount(){
-    this.getMySwipes()
-  }
-
-  getMySwipes = async () => {
-    const mySwipes = (await axios.get('/api/movies/', headers())).data // matches ?
-    this.setState({ mySwipes }, () => {
-      this.getResults()
-    })
+    this.getResults()
   }
 
   getResults = async () => {

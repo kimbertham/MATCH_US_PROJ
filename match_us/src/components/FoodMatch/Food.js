@@ -7,7 +7,7 @@ import { headers } from '../../Lib/auth'
 import Match from '../MatchView/Match'
 
 class getMovies extends React.Component {
-  state ={
+  state = {
     results: [],
     mySwipes: []
   }
@@ -16,15 +16,14 @@ class getMovies extends React.Component {
     this.currentLocation()
   }
 
-getResults = async (data) => {
-  if (data) {
-    const r = ( await axios.post(`/api/food/${this.props.connection.id}/`, data  ,headers())).data
+getResults = async (d) => {
+  if (d) {
+    const r = ( await axios.post(`/api/food/${this.props.connection.id}/`, d  ,headers())).data
     r.length <= 1 ?  r.push(noPlaces)  : null
     this.setState({ results: r })
   } else {
     this.currentLocation()
   }
-
 }
 
   currentLocation = () => {
@@ -47,12 +46,11 @@ getResults = async (data) => {
       this.setState({ results: this.state.results.slice(1) })
   }
 
-
   render() {
     const { connection } = this.props
+
     return (
       <>
-        <h1> HELLOO</h1>
         <Match 
           section='food'
           connection={connection}

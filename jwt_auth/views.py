@@ -13,8 +13,6 @@ import jwt
 from .serializers import UserSerializer
 from jwt_auth.models import User
 
-
-
 class RegisterView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)

@@ -18,9 +18,7 @@ getFullDetails = async () => {
     const r = (await axios.get(`${detailUrl}${selected}?api_key=${tmdbKey}`)).data
     this.setState({ r })
   } else {
-    console.log(selected)
-    const r = (await axios.get(`${proxyurl}${fDetails}${selected.id}`))
-    // console.log(`${fDetails}${selected.id}`)
+    const r = (await axios.get(`/api/food/${this.props.selected}/`)).data.result
     this.setState({ r })
   }
 }
@@ -28,8 +26,6 @@ getFullDetails = async () => {
 render() {
   const { r } = this.state
   if (!r) return null
-
-  console.log(r)
 
   const foodDetails = () => {
     return (

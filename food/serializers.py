@@ -3,11 +3,11 @@ from django.shortcuts import render
 from rest_framework import serializers
 from jwt_auth.serializers import UserSerializer
 
-from .models import Food
+from  .models import food
 
 class FoodSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Food
+        model = food
         fields = '__all__'
 
 class PopulatedFoodSerializer(FoodSerializer):
