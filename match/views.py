@@ -26,14 +26,11 @@ class MatchConnectionsView(APIView): # gets the Matches
         results = []
         for id in matches:
             if section == 'food':
-                r = requests.get(place_id, params={'place_id': id}).json()['result']
-                if  len(r['photos']) > 1:
-                    r['image'] = str(GImages) + str(r['photos'][1]['photo_reference'])
-                    del r['photos']
-                    results.append(r)
+                req = requests.get(place_id, params={'place_id': id}).json()['result']
+                r = { 'name' : req['name'], 'image':  str(GImages) + str(req['photos'][1]['photo_reference']), 'id': req['place_id']}
             if section == 'movies':
                 req = requests.get(f'{tmdb_details}{id}', params={ 'api_key' : tmdb_key}).json()
-                r = { 'name' : req['title'], 'image': str(tmdb_poster) + str(req['poster_path'])}
+                r = { 'name' : req['title'], 'image': str(tmdb_poster) + str(req['poster_path']), 'id': req['id']}
             results.append(r)
         return Response (results, HTTP_200_OK)
 

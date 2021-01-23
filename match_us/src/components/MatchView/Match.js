@@ -12,7 +12,7 @@ import Swipe from './Swipe'
 class MatchView extends React.Component {
 state = {
   matches: null,
-  selected: null,
+  detail: null,
   match: false,
   search: false
 }
@@ -36,7 +36,6 @@ swipe = async (d) => {
 checkMatch = async (i) => {
   const { connection, section } = this.props
   const r = (await axios.post(`/api/match/${section}/${connection.id}/${connection.partner.id}/`, { id: i })).data
-  console.log(r)
   if (r) {
     this.setState({ match: true })
     this.getMatches()
@@ -45,15 +44,20 @@ checkMatch = async (i) => {
   }
 } 
 
+getDetail = async (e) => {
+  if (this.state.detail) {
+    this.setState({ detail: null })
+  } else {
+    const r = (await axios.get(`/api/${this.props.section}/${e.target.id}/`)).data
+    this.setState({ detail: r })
+  }
+}
+
 deleteMatches = async () => {
   const { connection,section } = this.props
   await axios.delete(`/api/match/${section}/${connection.id}/`, headers())
   this.getMatches()
   this.props.getResults()
-}
-
-getDetail = (e) => {
-  this.setState({ selected: this.state.seleted ? null : e.target.id })
 }
 
 showSearch = () => {
@@ -67,41 +71,34 @@ clearMatch = () => {
 }
 
 render(){
-  const { selected, matches, search, match } = this.state
+  const { detail, matches, search, match } = this.state
   const { connection, results, getResults, section } = this.props
   const r = results[0]
 
   return (
     <>
 
-      {search ?
-        <Search
-          showSearch={this.showSearch}
-          getResults={getResults}/>
-        : null}
+      {search ? <Search 
+        section={section}
+        getResults={getResults}/> : null}
 
       <div className='sw fh flex'>
         
         <Matches 
-          matches = {matches}
+          matches={matches}
           deleteMatches= {this.deleteMatches}
           getDetail={this.getDetail}/>
 
         <div className='flex-grow relative center'>
           
-          {selected ?
-            <Details
-              section={section} 
-              selected={selected}
-              getDetail={this.getDetail}/> 
-            : null}
+          {detail ? <Details r={detail}
+            section={section}
+            getDetail={this.getDetail}/> : null}
 
-          {match ? 
-            <Match r={r}
-              section={section} 
-              connection={connection}
-              clear={this.clearMatch}/> 
-            : null}
+          {match ? <Match r={r}
+            section={section} 
+            connection={connection}
+            clear={this.clearMatch}/> : null}
 
           <Swipe r={r}
             swipe={this.swipe}

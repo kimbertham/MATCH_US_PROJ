@@ -25,7 +25,7 @@ class FoodListView(APIView):
 
     def get(self, request, place_id):
         r = requests.get(gDetails, params={'place_id' : place_id}).json() 
-        return Response(r, HTTP_200_OK)
+        return Response(r['result'], HTTP_200_OK)
 
 class FoodDetailsView(APIView):
 

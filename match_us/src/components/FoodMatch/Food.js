@@ -26,12 +26,12 @@ getResults = async (d) => {
   }
 }
 
-  currentLocation = () => {
-    navigator.geolocation.getCurrentPosition(p => {
-      const l = `${p.coords.latitude}, ${p.coords.longitude}`
-      this.getResults({ location: l , rankby: 'distance', keyword: 'food' })
-    })
-  } 
+currentLocation = () => {
+  navigator.geolocation.getCurrentPosition(p => {
+    const l = `${p.coords.latitude}, ${p.coords.longitude}`
+    this.getResults({ location: l , rankby: 'distance', keyword: 'food' })
+  }) 
+}
 
   swipeData = (d) => {
     return { 
@@ -48,7 +48,6 @@ getResults = async (d) => {
 
   render() {
     const { connection } = this.props
-
     return (
       <>
         <Match 
@@ -58,7 +57,6 @@ getResults = async (d) => {
           results={this.state.results}
           getMySwipes={this.getMySwipes}
           getResults={this.getResults}
-          currentLocation={this.currentLocation}
           nextSwipe={this.nextSwipe}/>
       </>
     )

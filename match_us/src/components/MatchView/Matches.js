@@ -8,8 +8,8 @@ const Matches = ({ getDetail, matches }) =>  {
       <div className='f-match'>
         {matches.map((m, i ) => {
           return <div key={i} className='relative center column f-match-cont'> 
-            <div className='cover' id={m.f_id} onClick={getDetail}/>
-            <div className='f-match-icon' value={m.f_id} style={{ backgroundImage: `url(${m.image})` }}/>
+            <div className='cover' id={m.id} onClick={getDetail}/>
+            <div className='f-match-icon' value={m.id} style={{ backgroundImage: `url(${m.image})` }}/>
 
             <p> {m.name}</p>
           </div>

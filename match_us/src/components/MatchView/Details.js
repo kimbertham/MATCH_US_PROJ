@@ -3,28 +3,8 @@ import React from 'react'
 import axios from 'axios'
 import { proxyurl, fDetails, GImages, detailUrl, tmdbKey, poster } from '../../Lib/common'
 
-class FoodDetails extends React.Component {
-  state ={
-    r: null
-  }
+const FoodDetails = ({ r, getDetail, section }) => {
 
-  componentDidMount() {
-    this.getFullDetails()
-  }
-
-getFullDetails = async () => {
-  const { section, selected } = this.props
-  if (section === 'movies') {
-    const r = (await axios.get(`${detailUrl}${selected}?api_key=${tmdbKey}`)).data
-    this.setState({ r })
-  } else {
-    const r = (await axios.get(`/api/food/${this.props.selected}/`)).data.result
-    this.setState({ r })
-  }
-}
-
-render() {
-  const { r } = this.state
   if (!r) return null
 
   const foodDetails = () => {
@@ -67,15 +47,10 @@ render() {
     )
   }
   
-  if (!r) return null
   return (
-
-    <div onClick={this.props.getDetail} className='modal f-details column'>
-      {this.props.section === 'movies' ? movieDetails() : foodDetails()}
+    <div onClick={getDetail} className='modal f-details column'>
+      {section === 'movies' ? movieDetails() : foodDetails()}
     </div>
-      
-
   )
-}
 }
 export default FoodDetails

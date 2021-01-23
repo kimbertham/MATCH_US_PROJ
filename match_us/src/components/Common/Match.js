@@ -2,7 +2,7 @@ import React from 'react'
 import { GImages, poster } from '../../Lib/common'
 
 const Match = ({ buttons, connection, r, clear , section }) => {
-  
+
   let img
   section === 'movies' ? 
     img = `${poster}${r.poster_path}` : 

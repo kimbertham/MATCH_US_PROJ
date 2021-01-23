@@ -52,4 +52,3 @@ class EventsDetailView(APIView):
             events=PopulatedEventsSerializer(e, many=True)
             return Response(events.data, HTTP_200_OK)
 
- 

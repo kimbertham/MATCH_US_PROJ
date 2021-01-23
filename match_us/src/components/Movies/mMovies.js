@@ -15,10 +15,10 @@ state = {
 }
 
 async componentDidMount(){
-  // const genres = (await axios.get(genreUrl)).data.genres
-  // this.setState({ genres })
-  // console.log(genres)
-  // this.getMovies()
+  const genres = (await axios.get(genreUrl)).data.genres
+  this.setState({ genres })
+  console.log(genres)
+  this.getMovies()
 }
 
 getMovies = async() => {
