@@ -24,14 +24,16 @@ class MatchConnectionsView(APIView): # gets the Matches
         user = Model.objects.filter(Q(user=request.user.id) & Q(connection=connection)).values_list('f_id', flat = True)
         matches = Model.objects.filter(Q(user=partner) & Q(direction=True) & Q(connection=connection) & Q(f_id__in=user)).values_list('f_id', flat = True) [:8]
         results = []
+        print(section)
         for id in matches:
-            if section == 'food':
-                req = requests.get(place_id, params={'place_id': id}).json()['result']
-                r = { 'name' : req['name'], 'image':  str(GImages) + str(req['photos'][1]['photo_reference']), 'id': req['place_id']}
             if section == 'movies':
                 req = requests.get(f'{tmdb_details}{id}', params={ 'api_key' : tmdb_key}).json()
                 r = { 'name' : req['title'], 'image': str(tmdb_poster) + str(req['poster_path']), 'id': req['id']}
-            results.append(r)
+                results.append(r)
+            else :
+                req = requests.get(place_id, params={'place_id': id}).json()['result']
+                r = { 'name' : req['name'], 'image':  str(GImages) + str(req['photos'][0]['photo_reference']), 'id': req['place_id']}
+                results.append(r)
         return Response (results, HTTP_200_OK)
 
     def post(self,request, section, connection, partner):   

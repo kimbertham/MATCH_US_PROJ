@@ -74,7 +74,7 @@ class Connection extends React.Component {
 
               <Route path='/connection/:id/activities' render={() => 
                 <ActivitiesList connection={connection}/> }/>
-              <Route path='/connection/:id/:activity' render={() => 
+              <Route path='/connection/:id/activity/:activity' render={() => 
                 <Activities connection={connection}/> }/>
                 
 

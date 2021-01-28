@@ -7,7 +7,7 @@ const FoodSearch = ({ section, getResults }) => {
 
   return (
     <div className='flex'>
-      <div> Filter</div>
+      <div> Filter </div>
       <div className= 'inline'>
         <section className='f-search'>
 
@@ -18,7 +18,6 @@ const FoodSearch = ({ section, getResults }) => {
             <FoodFilter 
               getResults={getResults}/>
           }
-
         </section>
       </div>
     </div>

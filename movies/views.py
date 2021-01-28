@@ -24,7 +24,6 @@ class MovieView(APIView):
 class MovieDetailsView(APIView):
 
     def post(self, request, pk ): 
-        print(request.data)
         id_list= movies.objects.filter(Q(user=request.user.id) & Q(connection=pk)).values_list('f_id', flat = True)
         r = requests.get(tmdb_base, params=request.data).json()
         e = [d for d in r['results'] if d['id'] not in id_list]

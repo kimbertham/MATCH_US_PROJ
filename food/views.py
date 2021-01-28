@@ -31,6 +31,6 @@ class FoodDetailsView(APIView):
 
     def post(self, request, pk ): # get results for food  
         id_list= food.objects.filter(Q(user=request.user.id) & Q(connection=pk)).values_list('f_id', flat = True)
-        r = requests.get(nearby, params={'location': request.data['location'], 'rankby' : request.data['rankby'], 'keyword': request.data['keyword']}).json()
+        r = requests.get(nearby, params={'location': request.data['location'], 'rankby' : request.data['rankby'], 'keyword': request.data['keyword'], 'type': 'food'}).json()
         e = [d for d in r['results'] if d['place_id'] not in id_list]
         return Response(e, HTTP_200_OK)

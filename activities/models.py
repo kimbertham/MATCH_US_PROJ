@@ -1,6 +1,6 @@
 from django.db import models
 
-class active(models.Model):
+class activities(models.Model):
     f_id = models.CharField(max_length=300)
     name = models.CharField(max_length=300)
     direction= models.BooleanField()

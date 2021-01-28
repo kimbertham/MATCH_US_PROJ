@@ -32,7 +32,7 @@ const MatchSwipe = ({ r,  deleteMatches, showSearch ,swipe, getDetail, section }
 
   return (
     <>   
-      {section === 'food' ?  foodSwipe() : movieSwipe()}
+      {section === 'movies' ? movieSwipe() : foodSwipe()}
 
       <button onClick={()=>{
         deleteMatches()

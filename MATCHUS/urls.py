@@ -22,6 +22,7 @@ urlpatterns = [
     path('api/events/', include('events.urls')),
     path('api/movies/', include('movies.urls')),
     path('api/match/', include('match.urls')),
+    path('api/activities/', include('activities.urls')),
     path('api/food/', include('food.urls')),
     path('api/', include('connections.urls')),
     path('api/', include('jwt_auth.urls')),

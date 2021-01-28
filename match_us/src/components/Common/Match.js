@@ -6,7 +6,7 @@ const Match = ({ buttons, connection, r, clear , section }) => {
   let img
   section === 'movies' ? 
     img = `${poster}${r.poster_path}` : 
-    img = `${GImages}${r.photos[0].photo_reference}` 
+    img = r.photos ? `${GImages}${r.photos[0].photo_reference}` : null
   
 
   if (!r) return null

@@ -21,11 +21,10 @@ getResults = async (g) => {
     r = ( await axios.post(`/api/movies/${this.props.connection.id}/`, 
       g ? { page: this.state.page, with_genres: g } : { page: this.state.page },
       headers()))
-    this.setState({ p: this.state.p + 1 })
-  } while (r.length <= 0 ) 
+    this.setState({ page: this.state.page + 1 })
+  } while (r.data.length <= 0 ) 
   this.setState({ results: r.data })
 }
-
 
 nextSwipe = () => {
   this.state.results.length <= 1 ? this.setState({ p: this.state.p + 1 }, () => {
@@ -44,6 +43,7 @@ swipeData = (d) => {
 render() {
   const { results } = this.state
   if (!results) return null
+
   return (
     <Match section='movies'
       results={results}

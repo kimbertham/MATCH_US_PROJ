@@ -14,6 +14,7 @@ const Matches = ({ getDetail, matches }) =>  {
             <p> {m.name}</p>
           </div>
         })}
+        <p>All &gt;&gt; </p>
       </div>
     </>
   )

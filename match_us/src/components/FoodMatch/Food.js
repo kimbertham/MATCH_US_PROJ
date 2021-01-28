@@ -5,11 +5,13 @@ import { noPlaces } from '../../Lib/common'
 import { headers } from '../../Lib/auth'
 
 import Match from '../MatchView/Match'
+import ToggleView from '../Common/ToggleView'
+import List from '../ListView/List'
 
 class getMovies extends React.Component {
   state = {
     results: [],
-    mySwipes: []
+    MatchView: true
   }
 
   async componentDidMount() {
@@ -18,7 +20,7 @@ class getMovies extends React.Component {
 
 getResults = async (d) => {
   if (d) {
-    const r = ( await axios.post(`/api/food/${this.props.connection.id}/`, d  ,headers())).data
+    const r = ( await axios.post(`/api/food/${this.props.connection.id}/`, d , headers())).data
     r.length <= 1 ?  r.push(noPlaces)  : null
     this.setState({ results: r })
   } else {
@@ -33,10 +35,10 @@ currentLocation = () => {
   }) 
 }
 
-  swipeData = (d) => {
+  swipeData = (d, i) => {
     return { 
-      f_id: this.state.results[0].place_id, 
-      name: this.state.results[0].name, 
+      f_id: this.state.results[i].place_id, 
+      name: this.state.results[i].name, 
       direction: d, 
       connection: this.props.connection.id }
   }
@@ -46,18 +48,33 @@ currentLocation = () => {
       this.setState({ results: this.state.results.slice(1) })
   }
 
+  changeView = () => {
+    this.setState({ MatchView: !this.state.MatchView })
+  }
+
   render() {
     const { connection } = this.props
+    const { MatchView, results } = this.state
     return (
       <>
-        <Match 
-          section='food'
-          connection={connection}
-          swipeData={this.swipeData}
-          results={this.state.results}
-          getMySwipes={this.getMySwipes}
-          getResults={this.getResults}
-          nextSwipe={this.nextSwipe}/>
+
+        <ToggleView 
+          changeView={this.changeView}/>
+
+        {MatchView ? 
+      
+          <Match section='food'
+            connection={connection}
+            swipeData={this.swipeData}
+            results={results}
+            getResults={this.getResults}
+            nextSwipe={this.nextSwipe}/>
+          : 
+          <List section='food'
+            results={results}
+            swipeData={this.swipeData}/>
+
+        }
       </>
     )
   }
