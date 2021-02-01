@@ -24,7 +24,6 @@ class MatchConnectionsView(APIView): # gets the Matches
         user = Model.objects.filter(Q(user=request.user.id) & Q(connection=connection)).values_list('f_id', flat = True)
         matches = Model.objects.filter(Q(user=partner) & Q(direction=True) & Q(connection=connection) & Q(f_id__in=user)).values_list('f_id', flat = True) [:8]
         results = []
-        print(section)
         for id in matches:
             if section == 'movies':
                 req = requests.get(f'{tmdb_details}{id}', params={ 'api_key' : tmdb_key}).json()

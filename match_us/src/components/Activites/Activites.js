@@ -6,10 +6,13 @@ import { headers } from '../../Lib/auth'
 import { noPlaces } from '../../Lib/common'
 
 import Match from '../MatchView/Match'
+import ToggleView from '../Common/ToggleView'
+import List from '../ListView/List'
 
 class Activities extends React.Component{
 state = {
-  results: []
+  results: [],
+  MatchView: true
 }
 
 async componentDidMount() {
@@ -48,17 +51,29 @@ currentLocation = () => {
   }
 
 
+  changeView = () => {
+    this.setState({ MatchView: !this.state.MatchView })
+  }
+
+
   render() {
-    const { results } = this.state
+    const { results,MatchView } = this.state
     return (
       <>
-        <Match section='activities'
-          results={results}
-          swipeData={this.swipeData}
-          connection={this.props.connection}
-          nextSwipe={this.nextSwipe}
-          getResults={this.getResults}/>
-
+        <ToggleView 
+          changeView={this.changeView}/>
+        {MatchView ? 
+          <Match section='activities'
+            results={results}
+            swipeData={this.swipeData}
+            connection={this.props.connection}
+            nextSwipe={this.nextSwipe}
+            getResults={this.getResults}/>
+          :
+          <List section='activities'
+            results={results}
+            swipeData={this.swipeData}/>
+        }
       </>
     )
   }

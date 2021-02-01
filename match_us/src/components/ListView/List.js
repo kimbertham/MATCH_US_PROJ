@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import GoogleCard from './GoogleCard'
+import ListCard from './ListCard'
 import MatchModal from './MatchModal'
 import { headers } from '../../Lib/auth'
 
@@ -39,6 +39,7 @@ class List extends React.Component {
 
   render() {
     const { results, section } = this.props
+    console.log(results)
     return (
       <>
         {this.state.modal ? 
@@ -53,7 +54,7 @@ class List extends React.Component {
             <div className='list-cont flex pointer' key={i} onClick={()=>{
               this.like('True', i) 
             }}>
-              <GoogleCard r={r}
+              <ListCard r={r}
                 section={section}
                 like={this.like}/> 
             </div>

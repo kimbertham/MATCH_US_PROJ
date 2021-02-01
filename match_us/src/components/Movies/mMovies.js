@@ -45,7 +45,6 @@ setDetails = (d) => {
   this.setState({ details: d })
 }
 
-
 render(){
   const { connection } = this.props
   const { m, details, genres } = this.state

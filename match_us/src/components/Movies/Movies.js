@@ -3,12 +3,16 @@ import axios from 'axios'
 import { headers } from '../../Lib/auth'
 
 import Match from '../MatchView/Match'
+import List from '../ListView/List'
+import ToggleView from '../Common/ToggleView'
+
 
 class Movies extends React.Component {
   state = {
     results: [],
     mySwipes: [],
-    page: 1
+    page: 1,
+    MatchView: true
   }
 
   async componentDidMount(){
@@ -40,17 +44,33 @@ swipeData = (d) => {
     direction: d }
 }
 
+
+changeView = () => {
+  this.setState({ MatchView: !this.state.MatchView })
+}
+
 render() {
-  const { results } = this.state
+  const { results, MatchView } = this.state
   if (!results) return null
 
   return (
-    <Match section='movies'
-      results={results}
-      swipeData={this.swipeData}
-      connection={this.props.connection}
-      nextSwipe={this.nextSwipe}
-      getResults={this.getResults}/>
+    <>
+      <ToggleView 
+        changeView={this.changeView}/>
+
+      {MatchView ? 
+        <Match section='movies'
+          results={results}
+          swipeData={this.swipeData}
+          connection={this.props.connection}
+          nextSwipe={this.nextSwipe}
+          getResults={this.getResults}/>
+        :
+        <List section='movies'
+          results={results}
+          swipeData={this.swipeData}/>
+      }
+    </>
   )
 }
 }

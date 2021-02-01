@@ -1,7 +1,7 @@
 import React from 'react'
-import { GImages } from '../../Lib/common'
+import { GImages, poster } from '../../Lib/common'
 
-const ActivityCard = ({ r }) => {
+const ActivityCard = ({ r, section }) => {
 
   if (!r) return null
 
@@ -19,13 +19,20 @@ const ActivityCard = ({ r }) => {
     )
   }
 
+  const movies = () => {
+    return (
+      <>
+        <div  style={{ backgroundImage: `url(${ `${poster}${r.poster_path}` })` }} className='activity-img'/>
+        <h1> {r.title}</h1>
+        <p>{r.release_date}</p>
+      </>
+    )
+  }
+
   return (
     <>
-
-
-      {google()}
+      {section === 'movies' ? movies() : google()}
     </>
-
   )
 }
 export default ActivityCard

@@ -10,6 +10,7 @@ import Movies from '../Movies/Movies'
 import ActivitiesList from '../Activites/ActivitesList'
 import Activities from '../Activites/Activites'
 import Food from '../FoodMatch/Food'
+import Results from '../Common/Results'
 
 
 const userId = getUserId()
@@ -43,39 +44,32 @@ class Connection extends React.Component {
       <>
         <div className='fp flex'>
           <Menu connection={connection}/>
-          
-
           <div className='main'>
+
             <Switch>
 
+              <Route path='/connection/:id/overview' render={() => 
+                <ConOverview connection={connection}/> }/>
+
+              <Route path='/connection/:id/:section/results' render={() => 
+                <Results connection={connection}/> }/>
               <Route path='/connection/:id/food/' render={() => 
                 <Food 
                   connection={connection}/> }/>
+              <Route path='/connection/:id/movies' render={() => 
+                <Movies connection={connection}/> }/>
+              <Route path='/connection/:id/activities' render={() => 
+                <ActivitiesList connection={connection}/> }/>
+              <Route path='/connection/:id/activity/:activity' render={() => 
+                <Activities connection={connection}/> }/>
+        
+              
 
-              <Route path='/connection/:id/movies/' render={() => 
-                <Movies 
-                  connection={connection}
-                  section='movies'/> }/>
-                
-              <Route path='/connection/:id/overview' render={() => 
-                <ConOverview connection={connection}/> }/>
           
               <Route path='/connection/:id/events' render={() => 
                 <Events 
                   user={connection.user}
                   connection={connection}/> }/>
-
-              <Route path='/connection/:id/movies' render={() => 
-                <Movies connection={connection}/> }/>
-
-              <Route path='/connection/:id/food' render={() => 
-                <Food connection={connection}/> }/>
-                
-
-              <Route path='/connection/:id/activities' render={() => 
-                <ActivitiesList connection={connection}/> }/>
-              <Route path='/connection/:id/activity/:activity' render={() => 
-                <Activities connection={connection}/> }/>
                 
 
             </Switch>
