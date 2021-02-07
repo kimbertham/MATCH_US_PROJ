@@ -15,6 +15,16 @@ from connections.models import Connections
 from .models import Events
 
 
+class EventsView(APIView):
+    def post(self,request):
+        if not request.POST._mutable:
+            request.POST._mutable = True
+            request.data['creator'] = request.user.id
+            event = EventsSerializer(data=request.data)
+            if event.is_valid():
+                event.save()
+                return Response(event.data, status=HTTP_201_CREATED)
+            return Response(event.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 class EventsListView(APIView):
     def delete(self, request, pk):
@@ -30,7 +40,17 @@ class EventsListView(APIView):
             return Response(event.data, status=HTTP_200_OK)
         return Response(event.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
         
-
+    def post(self,request, pk):
+        if not request.POST._mutable:
+            request.POST._mutable = True
+        if act == 'post':
+            request.data['connection'] = pk
+            request.data['creator'] = request.user.id
+            event = EventsSerializer(data=request.data)
+            if event.is_valid():
+                event.save()
+                return Response(event.data, status=HTTP_201_CREATED)
+            return Response(event.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 class EventsDetailView(APIView):
     def post(self,request, act, pk):
@@ -38,6 +58,7 @@ class EventsDetailView(APIView):
             request.POST._mutable = True
         if act == 'post':
             request.data['connection'] = pk
+            request.data['creator'] = request.user.id
             event = EventsSerializer(data=request.data)
             if event.is_valid():
                 event.save()
@@ -51,4 +72,5 @@ class EventsDetailView(APIView):
                 e = queryset.filter(date__month=request.data['month'])
             events=PopulatedEventsSerializer(e, many=True)
             return Response(events.data, HTTP_200_OK)
+
 

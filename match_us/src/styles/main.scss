@@ -3,6 +3,10 @@
   font-family: 'Space Grotesk', sans-serif;
 }
 
+#root {
+  background-color: #b0dfdd;
+}
+
 a {
   text-decoration: none;
 }
@@ -48,11 +52,8 @@ flex-grow: 1;
   display:flex;
 }
 
-.wrap {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
+
+
 
 .flex-end {
   display:flex;
@@ -63,6 +64,10 @@ flex-grow: 1;
   align-content: space-between;
 }
 
+.main {
+background-image: url('./assets/bg-1.jpg');
+background-position: left;
+}
 
 
 .center {
@@ -70,6 +75,12 @@ flex-grow: 1;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .italic {
@@ -149,30 +160,11 @@ float: right;
   100%{ transform: translateX(0px)} 
 } 
 
+.loader-text{
+  font-style: italic;
+  color: #f20cd7cc;
+  font-size: 20px;
+}
 
 //match
-
-.match-modal {
-  @extend .center;
-  @extend .flex-grow;
-  background-color: rgba(0,0,0,0.7);
-  overflow: hidden;
-}
-
-.match{
-  @extend .center;
-  color: white;
-
-  .match-img {
-    width: 10vw;
-    height: 10vw;
-  border-radius: 50%;
-  background-size: contain;
-  }
-.match-p-img{
-  @extend .match-img;
-  width: 5vw;
-  height: 5vw;
-}
-}
 

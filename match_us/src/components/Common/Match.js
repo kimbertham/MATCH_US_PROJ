@@ -12,14 +12,14 @@ const Match = ({ buttons, connection, r, clear , section }) => {
   if (!r) return null
   return (
     <div onClick={clear} className='sw absolute'>
-      <div className='fh match-modal'>
-        <div className='sw fh match'>
+      <div className='fh center flex-grow match-modal'>
+        <div className='sw fh center'>
 
           <h1> It&apos;s a match!</h1>
           <div className='flex'>
-            <div className='match-p-img' 
+            <div className='match-img match-p-img' 
               style={{ backgroundImage: `url(${connection.partner.profile_image})` }}/>
-            <div className='match-p-img' 
+            <div className='match-img match-p-img' 
               style={{ backgroundImage: `url(${connection.user.profile_image})` }}/>
           </div>
 

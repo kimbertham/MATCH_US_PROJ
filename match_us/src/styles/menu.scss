@@ -1,26 +1,61 @@
-//menu.js
+@import 'main.scss';
+
 .menu-cont {
-  width: 20vw;
+  *{
+    color: #ffffff;
+  }
   z-index: 1000;
+  color: #b0dfdd;
+  width: 16vw;
+  background-color: rgb(34, 34, 34);
+  border-radius: 0 3% 0 0 ;
+  
 
 h1{
-  font-size: 1.5em;
-  }
-
-.menu{
-  width: 20vw;
+  font-size: 0.8em;
+  color: #ffffff;
   }
 }
 
-// menuProfile.js
 .m-profile {
-  padding: 2vh 0 ;
+  margin-bottom: 1vw;
+  padding: 20px;
 
-img{
-  width: 5vw;
-  border-radius: 50%;
-  padding:0 10px;
+  h1{
+    font-size: 1.5em;
+  }
+  .m-img{
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+  }
+  
+  .m-img-con{
+    width: 4vw;
+    height: 4vw;
+    margin-left: -10px;
+    border: 3px solid black;
+  }
+  
 }
+
+.m-open {
+  // margin: 10px;
+  background-color: rgba(0,0,0,0.8);
+  padding: 0 4vw;
+  font-size: 1.5vh;
+}
+.sub-option {
+  padding: 7px 0 ;
+  width: 11vw;
+  color: rgb(176, 176, 176);
+}
+
+
+.m-arrow{
+  width: 2vw;
+  float: right;
+  mix-blend-mode: color-dodge;
 }
 
 // menuUser.js
@@ -30,10 +65,31 @@ img{
   }
 }
 
-
 // menuUser.js
-.m-con {
-  
+.m-option {
+  display: flex;
+  align-items:center;
+  padding:0 10px ;
 }
 
+.menu-icon {
+  width: 3vw;
+  margin:  0 10px 0 5px;
+  display: inline;
+  mix-blend-mode: color-dodge;
+  }
 
+
+
+.m-footer {
+
+  .m-logo{
+    padding: 10px;
+    width:3vw;
+    float: left;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+}

@@ -11,6 +11,7 @@ import ActivitiesList from '../Activites/ActivitesList'
 import Activities from '../Activites/Activites'
 import Food from '../FoodMatch/Food'
 import Results from '../Common/Results'
+import Randomiser from '../Randomiser/Randomiser'
 
 
 const userId = getUserId()
@@ -36,14 +37,13 @@ class Connection extends React.Component {
   }
 
   render(){
-
     const { connection } = this.state
-
     if (!connection) return null
     return (
       <>
         <div className='fp flex'>
           <Menu connection={connection}/>
+
           <div className='main'>
 
             <Switch>
@@ -62,7 +62,9 @@ class Connection extends React.Component {
                 <ActivitiesList connection={connection}/> }/>
               <Route path='/connection/:id/activity/:activity' render={() => 
                 <Activities connection={connection}/> }/>
-        
+
+              <Route path='/connection/:id/randomiser' render={() => 
+                <Randomiser connection={connection}/> }/>
               
 
           

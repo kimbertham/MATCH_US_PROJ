@@ -6,7 +6,7 @@ import FoodFilter from '../FoodMatch/FoodFilter'
 const FoodSearch = ({ section, getResults }) => {
 
   return (
-    <div className='flex'>
+    <div className=' match-search flex'>
       <div> Filter </div>
       <div className= 'inline'>
         <section className='f-search'>

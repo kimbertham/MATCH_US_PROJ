@@ -1,6 +1,16 @@
 import React from 'react'
-import MenuProfile from './MenuProfile'
 import { Link } from 'react-router-dom'
+import movies from '../../styles/assets/menu-icons/movies.jpg'
+import food from '../../styles/assets/menu-icons/food.jpg'
+import activities from '../../styles/assets/menu-icons/activities.jpg'
+import location from '../../styles/assets/menu-icons/location.jpg'
+import random from '../../styles/assets/menu-icons/random.jpg'
+import notes from '../../styles/assets/menu-icons/notes.jpg'
+import wishlist from '../../styles/assets/menu-icons/wishlist.jpg'
+import calender from '../../styles/assets/menu-icons/calender.jpg'
+import overview from '../../styles/assets/menu-icons/overview.jpg'
+// import arrow from '../../styles/assets/menu-icons/arrow.jpg'
+
 
 class MenuCon extends  React.Component  {
   state = {
@@ -14,42 +24,94 @@ toggleSection =(e) => {
 
 render(){
   const { section } = this.state
-  const { id } = this.props.connection
-
+  const { connection } = this.props
+  const { id } = connection
   return (
-    <>
+    <div className='m-con'>
 
-      <MenuProfile
-        user ={this.props.connection.partner}/>    
-
-      <Link to={`/connection/${id}/overview`}><h1>Overview</h1></Link>
-
-      <div>
-        <Link to={`/connection/${id}/food/`}><h1 id='food' onClick={this.toggleSection}> Food </h1></Link>
-        <div className={section === 'food' ? null : 'display-none'}>
-          <Link to={`/connection/${id}/food`}><h3>Swipe Food</h3></Link>
-          <Link to={`/connection/${id}/food/results`}><h3>Matched Food</h3></Link>
+      <div className='m-profile center'>   
+        <div className='center wrap'>
+          <img src={connection.partner.profile_image} className='m-img' alt='profile-img'/>
+          <img src={connection.partner.profile_image} className='m-img m-img-con' alt='profile-img'/>
         </div>
-        <Link to={`/connection/${id}/movies`}><h1 id='movies' onClick={this.toggleSection}> Movies </h1></Link>
-        <div className={section === 'movies' ? null : 'display-none'}>
-          <Link to={`/connection/${id}/movies`}><h3>Swipe Movies</h3></Link>
-          <Link to={`/connection/${id}/movies/results`}><h3>Matched Movies</h3></Link>
+        <h1>{connection.partner.first_name} {connection.partner.last_name}</h1>
+        <small>Connected since {connection.created_at.slice(0,4)}</small>
+      </div>
+
+      <div className='m-list'>
+        <div className='m-option'>
+          <img src={overview} alt='food' className='menu-icon'/>
+          <Link to={`/connection/${id}/overview`}>
+            <h1 id='overview' onClick={this.toggleSection}>Overview</h1>
+          </Link>
         </div>
-        <Link to={`/connection/${id}/activities`}> <h1 id='activities' onClick={this.toggleSection}> Activities</h1></Link>
-        <div className={section === 'activities' ? null : 'display-none'}>
-          <Link to={`/connection/${id}/activities`}><h3>Swipe Activities</h3></Link>
-          <Link to={`/connection/${id}/activities/results`}><h3>Matched Activities</h3></Link>
+
+        <div>
+          <Link to={`/connection/${id}/food/`}>
+            <div className='m-option'>
+              <img src={food} alt='food' className='menu-icon'/>
+              <h1 id='food' onClick={this.toggleSection}> Food </h1>
+            </div>
+          </Link>
+          <div className={section === 'food' ? 'm-open' : 'display-none'}>
+            <Link to={`/connection/${id}/food`} ><h3 className='sub-option'>Swipe Food</h3></Link>
+            <Link to={`/connection/${id}/food/results`} ><h3 className='sub-option' >Matched Food</h3></Link>
+          </div>
+
+          <Link to={`/connection/${id}/movies`}>
+            <div className='m-option'>
+              <img src={movies} alt='movies' className='menu-icon'/>
+              <h1 id='movies' onClick={this.toggleSection}> Movies </h1>
+            </div>
+          </Link>
+          <div className={section === 'movies' ? 'm-open' : 'display-none'} >
+            <Link to={`/connection/${id}/movies`} ><h3 className='sub-option' >Swipe Movies</h3></Link>
+            <Link to={`/connection/${id}/movies/results`} ><h3 className='sub-option' >Matched Movies</h3></Link>
+          </div>
+        
+          <Link to={`/connection/${id}/activities`}> 
+            <div className='m-option'>
+              <img src={activities} alt='movies' className='menu-icon'/>
+              <h1 id='activities' onClick={this.toggleSection}> Activities</h1>
+            </div>
+          </Link>
+          <div className={section === 'activities' ? 'm-open' : 'display-none'}>
+            <Link to={`/connection/${id}/activities`} ><h3 className='sub-option' >Swipe Activities</h3></Link>
+            <Link to={`/connection/${id}/activities/results`} ><h3 className='sub-option' >Matched Activities</h3></Link>
+          </div>
+        </div>
+
+        <div className='m-option'>
+          <img src={location} alt='movies' className='menu-icon'/>
+          <h1 id='activities' onClick={this.toggleSection}> Locations </h1>
+        </div>
+
+        <Link to={`/connection/${id}/randomiser`}>
+          <div className='m-option'>
+            <img src={random} alt='movies' className='menu-icon'/>
+            <h1 id='activities' onClick={this.toggleSection}> Randomiser </h1>
+          </div>
+        </Link>
+
+        <div className='m-option'>
+          <img src={notes} alt='movies' className='menu-icon'/>
+          <h1 id='activities' onClick={this.toggleSection}> Notes </h1>
+        </div>
+
+        <div className='m-option'>
+          <img src={wishlist} alt='movies' className='menu-icon'/>
+          <h1 id='activities' onClick={this.toggleSection}> Wishlist </h1>
+        </div>
+
+
+        <div className='m-option'>
+          <img src={calender} alt='movies' className='menu-icon'/>
+          <Link to={`/connection/${id}/events`}><h1>Calender</h1></Link>
         </div>
       </div>
 
-      <h1>Locations</h1>
-      <h1>Randomiser</h1>
-      <h1>Notes</h1>
-      <h1>Wishlist</h1>
-      <Link to={`/connection/${id}/events`}><h1>Calender</h1></Link>
 
-
-    </>
+    </div>
   )
 }
 }

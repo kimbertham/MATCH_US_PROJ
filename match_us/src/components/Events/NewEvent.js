@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import axios from 'axios'
-// import moment from 'moment'
 import { withRouter } from 'react-router-dom'
 import { headers } from '../../Lib/auth'
 import EventLocations from './EventLocations'
@@ -19,6 +18,14 @@ state= {
   }
 }
 
+componentDidMount() {
+  console.log(this.props.data)
+  this.setState({ data: 
+    { ...this.state.data, 
+      ...this.props.data, 
+      connection: this.props.connection 
+        ? this.props.connection.id : null } })
+}
 
 handleChange= async (e) =>{
   const data = { ...this.state.data, [e.target.name]: e.target.value }
@@ -27,19 +34,9 @@ handleChange= async (e) =>{
 
 handleSubmit = async (e) => {
   e.preventDefault()
-  const { connection, selected, getEvents, handleModal,user } = this.props
-  const c = connection ? connection.id : this.state.data.connection 
-  const data = { ...this.state.data, connection: c, date: selected.target.id, creator: user.id }
-  await axios.post(`/api/events/post/${c}/`, data, headers())
-  this.setState({ data: 
-    { title: '',
-      location: '',
-      notes: '',
-      type: '', 
-      time: '',
-      connection: '' }
-  })
-  getEvents(), handleModal()
+  await axios.post('/api/events/', this.state.data, headers())
+  this.props.getEvents ? this.props.getEvents() : null
+  this.props.closeModal()
 }
 
 handleLocation = (e) => {
@@ -51,7 +48,7 @@ render(){
 
   const { data } = this.state
   const { connection,connections } = this.props
-
+  if (!connection) return null
   return (
     <>
       <form className='event-form center' onSubmit= {this.handleSubmit}>
@@ -85,9 +82,11 @@ render(){
         
         <div className='form-field'> 
           <label>Date:</label>     
-          <input readOnly
+          <input 
+            type='date'
+            name="date"
             className='e-input n-line'
-            value={this.props.selected.target.id}
+            value={data.date}
             onChange={this.handleChange}/>
         </div>
 
@@ -117,19 +116,19 @@ render(){
 
         <div className='flex'>
           <label>🍩</label>
-          <input onChange={this.handleChange} type="radio"  name="date_type" value='🍩 Food'/>
+          <input onChange={this.handleChange} type="radio" checked={data.type === 'food'} value='🍩 Food'/>
           <label>🏓</label>
-          <input onChange={this.handleChange} type="radio"  name="date_type" value='🏓 Sports'/>
+          <input onChange={this.handleChange} type="radio" checked={data.type === 'sports'}  value='🏓 Sports'/>
           <label>💃</label>
-          <input onChange={this.handleChange} type="radio"  name="date_type" value='💃 Music'/>
+          <input onChange={this.handleChange} type="radio" checked={data.type === 'music'} value='💃 Music'/>
           <label>🍿</label>
-          <input onChange={this.handleChange} type="radio"  name="date_type" value='🍿 Film'/>
+          <input onChange={this.handleChange} type="radio" checked={data.type === 'film'} value='🍿 Film'/>
           <label>♟️</label>
-          <input onChange={this.handleChange} type="radio"  name="date_type" value='♟️ Indoor'/>
+          <input onChange={this.handleChange} type="radio" hecked={data.type === 'indoor'} value='♟️ Indoor'/>
           <label>🎡</label>
-          <input onChange={this.handleChange} type="radio"  name="date_type" value='🎡 Outdoor'/>
+          <input onChange={this.handleChange} type="radio" hecked={data.type === 'outdoor'} value='🎡 Outdoor'/>
           <label>🏕️</label>
-          <input onChange={this.handleChange} type="radio"  name="date_type" value='🏕️ Travel'/>
+          <input onChange={this.handleChange} type="radio" hecked={data.type === 'travel'} value='🏕️ Travel'/>
         </div>
 
 

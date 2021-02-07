@@ -1,41 +1,34 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import { headers } from '../../Lib/auth'
 import { noPlaces } from '../../Lib/common'
+import { getCoordinates } from '../../Lib/com'
 
 import Match from '../MatchView/Match'
-import ToggleView from '../Common/ToggleView'
-import List from '../ListView/List'
 
 class Activities extends React.Component{
 state = {
-  results: [],
-  MatchView: true
+  results: []
 }
 
 async componentDidMount() {
-  this.currentLocation()
+  this.getResults()
 }
 
-currentLocation = () => {
-  navigator.geolocation.getCurrentPosition(p => {
-    const location = `${p.coords.latitude}, ${p.coords.longitude}`
-    const activity = this.props.match.params.activity.toLowerCase().replace('_', ' ')
-    this.getResults({ location: location, rankby: 'distance', keyword: activity })
-  })
-}
-
-  getResults = async (d) => {
-    if (d) {
-      let r = await axios.post(`/api/activities/${this.props.connection.id}/`, d, headers())
-      r.data.length <= 0 ? r = [noPlaces] : null
-      this.setState({ results: r.data })
-    } else {
-      this.currentLocation()
-    }
+getResults = async () => {
+  let data
+  const activity = this.props.match.params.activity.toLowerCase().replace('_', ' ')
+  try {
+    const p = await getCoordinates() 
+    data = { location: `${p.coords.latitude}, ${p.coords.longitude}`, rankby: 'distance', keyword: activity }
+  } catch (err) {
+    data = { location: '51.509865, -0.118092', rankby: 'distance', keyword: activity }
   }
+  let r = await axios.post(`/api/activities/${this.props.connection.id}/`, data, headers())
+  r.data.length <= 0 ? r = [noPlaces] : null
+  this.setState({ results: r.data })
+}
 
   swipeData = (d) => {
     return { 
@@ -50,30 +43,16 @@ currentLocation = () => {
       this.setState({ results: this.state.results.slice(1) })
   }
 
-
-  changeView = () => {
-    this.setState({ MatchView: !this.state.MatchView })
-  }
-
-
   render() {
-    const { results,MatchView } = this.state
+    const { results } = this.state
     return (
       <>
-        <ToggleView 
-          changeView={this.changeView}/>
-        {MatchView ? 
-          <Match section='activities'
-            results={results}
-            swipeData={this.swipeData}
-            connection={this.props.connection}
-            nextSwipe={this.nextSwipe}
-            getResults={this.getResults}/>
-          :
-          <List section='activities'
-            results={results}
-            swipeData={this.swipeData}/>
-        }
+        <Match section='activities'
+          results={results}
+          swipeData={this.swipeData}
+          connection={this.props.connection}
+          nextSwipe={this.nextSwipe}
+          getResults={this.getResults}/>
       </>
     )
   }

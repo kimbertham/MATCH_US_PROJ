@@ -8,6 +8,7 @@ import requests
 from .serializers import PopulatedFoodSerializer, FoodSerializer
 from lib.links import nearby, gDetails
 from .models import food
+import random
 
 class FoodView(APIView):
 
@@ -21,6 +22,21 @@ class FoodView(APIView):
             return Response( f.data, HTTP_200_OK)
         return Response(f.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
+class FoodRandomView(APIView):
+    def post(self,request):
+        if not request.data['random']:
+            id_list= food.objects.filter(Q(user=request.user.id) & Q(direction=True) & Q(connection=request.data['connection'])).values_list('f_id', flat = True)
+            matches = food.objects.filter(Q(user=request.data['partner']) & Q(direction=True) & Q(connection=request.data['connection']) & Q(f_id__in=id_list)).values_list('f_id', flat = True)
+            if len(matches) == 0:
+                return Response({ 'message': 'No matches, swipe to add more!'})
+            choice = matches[random.randint(0,len(matches))]
+            req = requests.get(gDetails, params={'place_id': choice}).json()
+        else :
+            r = requests.get(nearby,params=request.data).json()
+            choice = r['results'][random.randint(0,len(r['results']))]
+            req = requests.get(gDetails, params={'place_id': choice['place_id']}).json()
+        return Response(req['result'], HTTP_200_OK)
+
 class FoodListView(APIView):
 
     def get(self, request, place_id):
@@ -29,7 +45,7 @@ class FoodListView(APIView):
 
 class FoodDetailsView(APIView):
 
-    def post(self, request, pk ): # get results for food  
+    def post(self, request, pk ): # get results for food 
         id_list= food.objects.filter(Q(user=request.user.id) & Q(connection=pk)).values_list('f_id', flat = True)
         r = requests.get(nearby, params={'location': request.data['location'], 'rankby' : request.data['rankby'], 'keyword': request.data['keyword'], 'type': 'food'}).json()
         e = [d for d in r['results'] if d['place_id'] not in id_list]

@@ -39,7 +39,6 @@ class List extends React.Component {
 
   render() {
     const { results, section } = this.props
-    console.log(results)
     return (
       <>
         {this.state.modal ? 

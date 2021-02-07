@@ -20,7 +20,6 @@ class MatchConnectionsView(APIView): # gets the Matches
 
     def get(self,request, section, connection, partner):
         Model = apps.get_model(section, section)
-        id_list= Model.objects.filter(Q(user=request.user.id) & Q(connection=connection)).values_list('f_id', flat = True)
         user = Model.objects.filter(Q(user=request.user.id) & Q(connection=connection)).values_list('f_id', flat = True)
         matches = Model.objects.filter(Q(user=partner) & Q(direction=True) & Q(connection=connection) & Q(f_id__in=user)).values_list('f_id', flat = True) [:8]
         results = []
@@ -31,7 +30,8 @@ class MatchConnectionsView(APIView): # gets the Matches
                 results.append(r)
             else :
                 req = requests.get(place_id, params={'place_id': id}).json()['result']
-                r = { 'name' : req['name'], 'image':  str(GImages) + str(req['photos'][0]['photo_reference']), 'id': req['place_id']}
+                image = str(GImages) +  str(req['photos'][0]['photo_reference']) if 'photos' in req else None
+                r = { 'name' : req['name'], 'image': image , 'id': req['place_id']}
                 results.append(r)
         return Response (results, HTTP_200_OK)
 

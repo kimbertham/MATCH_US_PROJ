@@ -1,8 +1,12 @@
 import React from 'react'
 
-const ToggleView = ({ changeView }) => {
+const ToggleView = ({ changeView, view }) => {
+  console.log(view)
   return (
-    <h1 onClick={changeView}> Toggle View</h1>
+    <>
+      <div onClick={changeView} className='list-icon'> view
+      </div>
+    </>
   )
 } 
 export default ToggleView

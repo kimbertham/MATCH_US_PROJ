@@ -7,6 +7,7 @@ import requests
 from .serializers import PopulatedActivitiesSerializer, ActivitiesSerializer
 from .models import activities
 from lib.links import nearby, gDetails
+import random
 
 class ActivitiesView(APIView):
 
@@ -20,6 +21,20 @@ class ActivitiesView(APIView):
             return Response( f.data, HTTP_200_OK)
         return Response(f.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
+class ActivitiesRandomView(APIView):
+    def post(self,request):
+        if not request.data['random']:
+            id_list= activities.objects.filter(Q(user=request.user.id) & Q(direction=True) & Q(connection=request.data['connection'])).values_list('f_id', flat = True)
+            matches = activities.objects.filter(Q(user=request.data['partner']) & Q(direction=True) & Q(connection=request.data['connection']) & Q(f_id__in=id_list)).values_list('f_id', flat = True)
+            if len(matches) == 0:
+                return Response({ 'message': 'No matches, swipe to add more!'})
+            choice = matches[random.randint(0,len(matches))]
+            req = requests.get(gDetails, params={'place_id': choice}).json()
+        else :
+            r = requests.get(nearby,params=request.data).json()
+            choice = r['results'][random.randint(0,len(r['results']))]
+            req = requests.get(gDetails, params={'place_id': choice['place_id']}).json()
+        return Response(req['result'], HTTP_200_OK)
 
 class ActivitiesListView(APIView):
 

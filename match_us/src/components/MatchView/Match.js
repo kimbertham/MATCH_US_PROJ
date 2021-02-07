@@ -8,13 +8,16 @@ import Matches from './Matches'
 import Match from '../Common/Match'
 import Details from './Details'
 import Swipe from './Swipe'
+import List from '../ListView/List'
+import Loader from '../Common/Loader'
 
 class MatchView extends React.Component {
 state = {
   matches: null,
   detail: null,
   match: false,
-  search: false
+  search: false, 
+  view: true
 }
 
 async componentDidMount() {
@@ -70,46 +73,57 @@ clearMatch = () => {
   })
 }
 
+changeView = () => {
+  this.setState({ view: !this.state.view })
+}
+
 render(){
-  const { detail, matches, search, match } = this.state
-  const { connection, results, getResults, section } = this.props
+  const { detail, matches, search, match, view } = this.state
+  const { connection, results, getResults, section, swipeData } = this.props
   const r = results[0]
 
+  if (!view) return <List section={section} results={results} swipeData={swipeData}/>
   return (
-    <>
+    <div className='sw fh flex'>
 
+      <div className='swipe-matches'>
+        <p>Matches</p>
+        <Matches matches={matches}
+          connection={connection}
+          section={section}
+          changeView={this.changeView}
+          deleteMatches= {this.deleteMatches}
+          getDetail={this.getDetail}/>
+      </div>
+  
       {search ? <Search 
         section={section}
         getResults={getResults}/> : null}
 
-      <div className='sw fh flex'>
-        
-        <Matches 
-          matches={matches}
-          deleteMatches= {this.deleteMatches}
-          getDetail={this.getDetail}/>
+      <div className='swipeview'>
+        {r ? 
+          <>
+            {detail ? <Details r={detail}
+              section={section}
+              getDetail={this.getDetail}/> : null}
 
-        <div className='flex-grow relative center'>
-          
-          {detail ? <Details r={detail}
-            section={section}
-            getDetail={this.getDetail}/> : null}
+            {match ? <Match r={r}
+              section={section} 
+              connection={connection}
+              clear={this.clearMatch}/> : null}
 
-          {match ? <Match r={r}
-            section={section} 
-            connection={connection}
-            clear={this.clearMatch}/> : null}
-
-          <Swipe r={r}
-            swipe={this.swipe}
-            section={section}
-            showSearch={this.showSearch}
-            getDetail={this.getDetail}
-            deleteMatches={this.deleteMatches}/>
-        </div>
-
+            <Swipe r={r}
+              swipe={this.swipe}
+              section={section}
+              showSearch={this.showSearch}
+              getDetail={this.getDetail}
+              deleteMatches={this.deleteMatches}/> 
+          </>
+          : 
+          <Loader/> }
       </div>
-    </>
+
+    </div>
   )
 }
 } export default withRouter(MatchView)

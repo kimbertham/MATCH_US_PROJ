@@ -11,9 +11,9 @@ import EventRequest from './EventRequest'
 class Events extends React.Component{
 state= {
   date: moment().format('YYYY-MM-DD'),
-  selected: '',
   modal: false,
-  events: {}
+  events: {},
+  req: false
 }
 
 componentDidMount() {
@@ -37,7 +37,7 @@ changeMonth = (d) => {
 
 getEvents = async() => {
   let data
-  const { page,connection,user } = this.props
+  const { page, connection, user } = this.props
 
   page === 'h' ? 
     data = {
@@ -53,48 +53,53 @@ getEvents = async() => {
   this.setState({ events: res.data })
 }
 
-handleModal = (e) => {
-  this.setState({ 
-    selected: e,
-    modal: !this.state.modal
-  })
+closeModal = () => {
+  this.setState({ data: null, req: null })
+}
+
+setData = (e) => {
+  this.setState({ data: { date: e.target.id } })
+}
+
+setReq = (r) => {
+  this.setState({ req: r })
 }
 
 render(){
 
-  const { date, modal ,selected, events } = this.state
+  const { date, events, data , req } = this.state
   const { connection, connections, user } =  this.props
-
   return (
 
 
     <div className='test relative'>
-      {selected ? <div onClick={this.handleModal} className={modal ? 'modal' : 'display-none'}>
-        <div  className='m-pop c-modal'
-          onClick={e => e.stopPropagation()}>
+
+      {data || req ? 
+        <div onClick={this.closeModal} className='modal'>
+          <div  className='m-pop c-modal'
+            onClick={e => e.stopPropagation()}>
             
-          {selected.id > 0 ?
-            <EventRequest 
-              user={user}
-              selected={selected}
-              handleModal={this.handleModal}
-              getEvents={this.getEvents}/>
-            :
-            <NewEvent
-              user={user}
-              selected={selected}
-              connection={connection}
-              connections={connections}
-              handleModal={this.handleModal}
-              getEvents={this.getEvents} />
-          }
-        </div>
-      </div> : null}
+            {req ? 
+              <EventRequest 
+                user={user}
+                req={req}
+                getEvents={this.getEvents}/>
+              :
+              <NewEvent
+                data={data}
+                connection={connection}
+                connections={connections}
+                closeModal={this.closeModal}
+                getEvents={this.getEvents} />
+            }
+          </div>
+        </div> : null}
 
       <Calender
         date={date}
         events={events}
-        handleModal={this.handleModal}
+        setData={this.setData}
+        setReq={this.setReq}
         changeMonth={this.changeMonth}/>
 
     </div>

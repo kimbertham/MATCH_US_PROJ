@@ -5,7 +5,7 @@ import Events from '../Events/Events'
 const ConOverview = ({ connection }) => {
 
   return (
-    <div className='main'>
+    <div className='overview fh'>
       <h1>{connection.user.first_name} & {connection.partner.first_name}&apos;s Overview </h1>
       <Events 
         page='c'

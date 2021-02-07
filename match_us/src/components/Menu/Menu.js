@@ -1,26 +1,23 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 import MenuUser from './MenuUser'
 import MenuCon from './MenuCon'
+import { withRouter } from 'react-router-dom'
 
 class Menu extends React.Component {
-state = { colour: '#FF0000' }
 
-setColour = (colour) => {
-  this.setState({ colour })
-}
+  render(){
+    const { user, setCon, connections, connection } = this.props
 
-render(){
-  const { user, setCon, connections, connection } = this.props
-  const { colour } = this.state
-  return (
+    let colour 
+    const pathname = this.props.location.pathname
 
-    <div className='menu-cont'>
-      <div className='menu fh' style={{ background: colour }}>
-      
+    return (
 
+      <div className='menu-cont'>
+    
         {connections ?
-
           <MenuUser 
             user={user}
             setCon={setCon}
@@ -32,11 +29,9 @@ render(){
             connection={connection}
             setColour={this.setColour}/>
         }
-
       </div>
-    </div>
-  )
-}
+    )
+  }
 }
 
-export default Menu
+export default withRouter(Menu)
