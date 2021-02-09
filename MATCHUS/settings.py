@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'connections',
     'movies',
     'food',
-    'activities'
+    'activities',
+    'notes',
+    'wishlist',
+    'locations'
 ]
 
 

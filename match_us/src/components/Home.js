@@ -1,8 +1,10 @@
 import React from 'react' 
 import axios from 'axios'
 import { getUserId } from '../Lib/auth'
-import Events from './Events/Events'
 import Menu from './Menu/Menu.js'
+import Overview from './Overview'
+import { Switch, Route } from 'react-router-dom'
+import Wishlist from './Wishlist/Wishlist'
 
 const userId = getUserId()
 
@@ -24,25 +26,25 @@ class Home extends React.Component {
 
   render() {
     const { user, connections } = this.state
-
     if (!user) return null
     return (
 
-      <div className='flex'>
+      <div className='fh flex'>
 
         <Menu page='home'
           user={user}
           connections={connections}/>
 
-        <div>
-          <h1>{user.first_name}&apos;s Overview </h1>
+        <Switch>
 
-          <Events page='h'
-            connections={connections}
-            user={user}/>
+          <Route path='/home/wishlist' render={() => 
+            <Wishlist  name={user.first_name} id={user.id}/> }/>
             
-        </div> 
+          <Route path='/home' render={() => 
+            <Overview  connections={connections} user={user}/> }/>
 
+        
+        </Switch>
       </div>
     )
   }

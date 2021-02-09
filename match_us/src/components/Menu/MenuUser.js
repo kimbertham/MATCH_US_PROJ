@@ -26,6 +26,7 @@ const MenuUser = ({ user, connections }) => {
           </Link>
         })}
       </div>
+
     </div>
   )
 }

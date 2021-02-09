@@ -1,15 +1,13 @@
 import React from 'react'
 import axios from 'axios'
 
-const proxyurl = 'https://cors-anywhere.herokuapp.com/'
-const key = '&key=AIzaSyAn3WW4SI3RHmQ7I_6HFcrUTdNalXkoJ4A'
-const baseURL = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='
+// const proxyurl = 'https://cors-anywhere.herokuapp.com/'
+// const key = '&key=AIzaSyAn3WW4SI3RHmQ7I_6HFcrUTdNalXkoJ4A'
+// const baseURL = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='
 
 class EventLocations extends React.Component {
   state ={
-    data: {
-      input: ''
-    },
+    location: '',
     locations: []
   }
 
@@ -29,8 +27,8 @@ class EventLocations extends React.Component {
 
   handlePlaces = async (e) => {
     await this.props.handleChange(e)
-    const res = await axios.get(`${proxyurl}${baseURL}${this.props.location}${key}`)
-    this.setState({ locations: res.data.predictions })
+    const res = await axios.post('/api/locations/', { location: this.props.location })
+    this.setState({ locations: res.data })
   }
 
   render(){
@@ -39,7 +37,7 @@ class EventLocations extends React.Component {
     return (
       <>
         <div className='form-field'> 
-          <label>Location:</label>     
+          <label>Location:</label> 
           <input
             className='e-input'
             name='location'

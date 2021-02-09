@@ -11,3 +11,15 @@ nearby = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaS
 place_id = 'https://maps.googleapis.com/maps/api/place/details/json?fields=name,photos,place_id&key=AIzaSyAn3WW4SI3RHmQ7I_6HFcrUTdNalXkoJ4A'
 GImages = 'https://maps.googleapis.com/maps/api/place/photo?key=AIzaSyAn3WW4SI3RHmQ7I_6HFcrUTdNalXkoJ4A&maxwidth=400&photoreference='
 gDetails = 'https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyAn3WW4SI3RHmQ7I_6HFcrUTdNalXkoJ4A'
+coOrds = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='
+geoCo = 'https://maps.googleapis.com/maps/api/geocode/json?address='
+
+#AMAZON LINKS
+amazonURL = 'https://amazon23.p.rapidapi.com/product-search'
+
+amazon_details = 'https://amazon23.p.rapidapi.com/product-details'
+
+amazon_headers = {
+    'x-rapidapi-key': "5789c571cbmsh6847871835030fcp18787bjsncd9c94134328",
+    'x-rapidapi-host': "amazon23.p.rapidapi.com"
+    }

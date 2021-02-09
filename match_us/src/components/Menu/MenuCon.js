@@ -29,6 +29,7 @@ render(){
   return (
     <div className='m-con'>
 
+
       <div className='m-profile center'>   
         <div className='center wrap'>
           <img src={connection.partner.profile_image} className='m-img' alt='profile-img'/>
@@ -39,6 +40,7 @@ render(){
       </div>
 
       <div className='m-list'>
+
         <div className='m-option'>
           <img src={overview} alt='food' className='menu-icon'/>
           <Link to={`/connection/${id}/overview`}>
@@ -81,36 +83,44 @@ render(){
           </div>
         </div>
 
-        <div className='m-option'>
-          <img src={location} alt='movies' className='menu-icon'/>
-          <h1 id='activities' onClick={this.toggleSection}> Locations </h1>
-        </div>
-
+        <Link to={`/connection/${id}/locations`}>
+          <div className='m-option'>
+            <img src={location} alt='movies' className='menu-icon'/>
+            <h1 id='locations' onClick={this.toggleSection}> Locations </h1>
+          </div>
+        </Link>
+        
         <Link to={`/connection/${id}/randomiser`}>
           <div className='m-option'>
             <img src={random} alt='movies' className='menu-icon'/>
-            <h1 id='activities' onClick={this.toggleSection}> Randomiser </h1>
+            <h1 id='random' onClick={this.toggleSection}> Randomiser </h1>
           </div>
         </Link>
 
-        <div className='m-option'>
-          <img src={notes} alt='movies' className='menu-icon'/>
-          <h1 id='activities' onClick={this.toggleSection}> Notes </h1>
+        <Link to={`/connection/${id}/notes/inbox`}>
+          <div className='m-option'>
+            <img src={notes} alt='notes' className='menu-icon'/>
+            <h1 id='notes' onClick={this.toggleSection}> Notes </h1>
+          </div>
+        </Link>
+        <div className={section === 'notes' ? 'm-open' : 'display-none'}>
+          <Link to={`/connection/${id}/notes/inbox`}><h3 className='sub-option' >Inbox</h3></Link>
+          <Link to={`/connection/${id}/notes/outbox`}><h3 className='sub-option' >Outbox</h3></Link>
         </div>
-
-        <div className='m-option'>
-          <img src={wishlist} alt='movies' className='menu-icon'/>
-          <h1 id='activities' onClick={this.toggleSection}> Wishlist </h1>
-        </div>
-
+      
+        <Link to={`/connection/${id}/wishlist`}>
+          <div className='m-option'>
+            <img src={wishlist} alt='movies' className='menu-icon'/>
+            <h1 id='wishlist' onClick={this.toggleSection}> Wishlist </h1>
+          </div>
+        </Link>
 
         <div className='m-option'>
           <img src={calender} alt='movies' className='menu-icon'/>
           <Link to={`/connection/${id}/events`}><h1>Calender</h1></Link>
         </div>
+
       </div>
-
-
     </div>
   )
 }

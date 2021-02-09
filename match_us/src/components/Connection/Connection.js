@@ -12,7 +12,9 @@ import Activities from '../Activites/Activites'
 import Food from '../FoodMatch/Food'
 import Results from '../Common/Results'
 import Randomiser from '../Randomiser/Randomiser'
-
+import Notes from '../Notes/Notes'
+import Wishlist from '../Wishlist/Wishlist'
+import Locations from '../Locations/Locations'
 
 const userId = getUserId()
 
@@ -40,45 +42,47 @@ class Connection extends React.Component {
     const { connection } = this.state
     if (!connection) return null
     return (
-      <>
-        <div className='fp flex'>
-          <Menu connection={connection}/>
 
-          <div className='main'>
+      <div className='fp flex'>
+        <Menu connection={connection}/>
 
-            <Switch>
+        <div className='main'>
+          <Switch>
 
-              <Route path='/connection/:id/overview' render={() => 
-                <ConOverview connection={connection}/> }/>
+            <Route path='/connection/:id/overview' render={() => 
+              <ConOverview connection={connection}/> }/>
 
-              <Route path='/connection/:id/:section/results' render={() => 
-                <Results connection={connection}/> }/>
-              <Route path='/connection/:id/food/' render={() => 
-                <Food 
-                  connection={connection}/> }/>
-              <Route path='/connection/:id/movies' render={() => 
-                <Movies connection={connection}/> }/>
-              <Route path='/connection/:id/activities' render={() => 
-                <ActivitiesList connection={connection}/> }/>
-              <Route path='/connection/:id/activity/:activity' render={() => 
-                <Activities connection={connection}/> }/>
+            <Route path='/connection/:id/:section/results' render={() => 
+              <Results connection={connection}/> }/>
+            <Route path='/connection/:id/food/' render={() => 
+              <Food 
+                connection={connection}/> }/>
+            <Route path='/connection/:id/movies' render={() => 
+              <Movies connection={connection}/> }/>
+            <Route path='/connection/:id/activities' render={() => 
+              <ActivitiesList connection={connection}/> }/>
+            <Route path='/connection/:id/activity/:activity' render={() => 
+              <Activities connection={connection}/> }/>
 
-              <Route path='/connection/:id/randomiser' render={() => 
-                <Randomiser connection={connection}/> }/>
+            <Route path='/connection/:id/randomiser' render={() => 
+              <Randomiser connection={connection}/> }/>
               
-
-          
-              <Route path='/connection/:id/events' render={() => 
-                <Events 
-                  user={connection.user}
-                  connection={connection}/> }/>
+            <Route path='/connection/:id/notes/:box' render={() => 
+              <Notes connection={connection}/> }/>
                 
+            <Route path='/connection/:id/events' render={() => 
+              <Events user={connection.user} connection={connection}/> }/>
 
-            </Switch>
-          </div>
+            <Route path='/connection/:id/wishlist' render={() => 
+              <Wishlist name={connection.partner.first_name} id={connection.partner.id}/> }/>
+
+
+            <Route path='/connection/:id/locations' render={() => 
+              <Locations connection={connection}/> }/>
+                
+          </Switch>
         </div>
-  
-      </>
+      </div>
     )
   }
 }
