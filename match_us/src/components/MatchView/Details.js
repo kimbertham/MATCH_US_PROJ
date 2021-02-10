@@ -16,18 +16,17 @@ setData = (e) => {
 render(){
   const { data } = this.state
   const { getDetail, section, r, connection } = this.props
+
   return (
-
     <>
-      {data ? <NewEvent data={data} connection={connection}/> : null}
-
-      <div onClick={getDetail} className='details modal column'>
-        {section === 'movies' ?
-          <MovieDetails r={r} setData={this.setData}/>
-          : 
-          <FoodDetails r={r} setData={this.setData}/>}
-
-      </div>
+      {data ?  <NewEvent data={data} connection={connection}/> 
+        : 
+        <div onClick={getDetail} className='details modal column'>
+          {section === 'movies' ?
+            <MovieDetails r={r} setData={this.setData}/>
+            : 
+            <FoodDetails r={r} setData={this.setData}/>}
+        </div>}
     </>
   )
 }

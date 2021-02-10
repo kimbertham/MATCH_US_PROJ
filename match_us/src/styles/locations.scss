@@ -1,0 +1,50 @@
+
+
+
+.l-list{
+  width: 25vw;
+  height: 97vh;
+  padding: 10px;
+  background-color: rgba(28, 145, 141, 0.5);
+  position: absolute;
+  top:0;
+  overflow: scroll;
+
+    h3 {
+      right: 0;
+      position:absolute;
+      margin: -10px 20px;
+    }
+
+  .l-list-item{
+    *{margin: 1px;}
+    border-bottom: 1px solid rgb(41, 41, 41);
+    padding: 30px 10px;
+
+    .l-list-icon {
+      width: 3vw;
+    }
+  }
+
+  .l-select{
+    color: rgb(26, 22, 22);
+    background: rgba(254, 113, 113, 0.6);
+    margin: 0 -10px;
+    padding:4vh 15px;
+  }
+}
+
+.map {
+  max-width: 57vw;
+  max-height: 100vh;
+  right: 0;
+}
+
+.l-arrow{
+  width: 1vw;
+  height: 1vw;
+  position: absolute;
+  right:0;
+  padding: 5vh 1.5vh;
+
+}

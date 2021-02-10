@@ -21,7 +21,7 @@ const FoodDetails = ({ r, setData }) => {
 
       <p>{r.price_level}</p>
       <p>{r.rating}</p>
-      {r.photos ? r.photos.slice(0,3).map(p => <div key={p.photo_reference} className='f-detail-img'
+      {r.photos ? r.photos.slice(0,3).map(p => <div key={p.photo_reference} className='d-img'
         style={{ backgroundImage: `url(${GImages}${p.photo_reference})` }}/>) : null}
       {r.reviews ? <p>{r.reviews[0].author_name} {r.reviews[0].rating} {r.reviews[0].text} </p> : null}
 
