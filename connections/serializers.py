@@ -5,6 +5,7 @@ from jwt_auth.models import User
 from jwt_auth.serializers import UserSerializer
 from .models import Connections, Requests
 from events.models import Events
+from notes.serializers import NotesSerializer
 
 class RequestsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,7 +27,6 @@ class BasicConnectionsSeralizer(ConnectionsSerializer):
 
 class PopulatedConnectionsSerializer(ConnectionsSerializer):
     participants = UserSerializer(many=True)
-    events = EventsSerializer(many=True)
 
 class PopulatedRequestsSerializer(RequestsSerializer):
     user_from = UserSerializer()

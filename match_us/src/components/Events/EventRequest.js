@@ -1,19 +1,19 @@
 import React from 'react'
 import axios from 'axios'
 
-const EventRequest = ({ req, getEvents, handleModal, user }) => {
+const EventRequest = ({ req, getEvents, closeModal, user }) => {
 
   const accept = async () => {
     const data = { ...req, connection: req.connection.id, request: 'False' }
     await axios.put(`/api/events/${req.id}/`, data)
     getEvents()
-    handleModal()
+    closeModal()
   }
 
   const decline = async () => {
     await axios.delete(`/api/events/${req.id}/`)
     getEvents()
-    handleModal()
+    closeModal()
   }
 
   const request = req.request ? 'display-block' : 'display-none'

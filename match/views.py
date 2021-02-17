@@ -20,7 +20,7 @@ class MatchConnectionsView(APIView): # gets the Matches
 
     def get(self,request, section, connection, partner):
         Model = apps.get_model(section, section)
-        user = Model.objects.filter(Q(user=request.user.id) & Q(connection=connection)).values_list('f_id', flat = True)
+        user = Model.objects.filter(Q(user=request.user.id) & Q(direction=True) & Q(connection=connection)).values_list('f_id', flat = True)
         matches = Model.objects.filter(Q(user=partner) & Q(direction=True) & Q(connection=connection) & Q(f_id__in=user)).values_list('f_id', flat = True) [:8]
         results = []
         for id in matches:

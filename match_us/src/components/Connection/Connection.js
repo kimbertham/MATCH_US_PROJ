@@ -34,11 +34,11 @@ class Connection extends React.Component {
     c.data['user'] = c.data.participants.find(u => u.id === userId )
     c.data['partner'] =  c.data.participants.find(u => u.id !== userId )
     delete c.data['participants']
-
     this.setState({ connection: c.data })
   }
 
   render(){
+  
     const { connection } = this.state
     if (!connection) return null
     return (

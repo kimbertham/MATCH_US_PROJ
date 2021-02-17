@@ -69,9 +69,9 @@ const Calender = ({ date, changeMonth, events, setData, setReq }) => {
           }}> Next</button>
         </div>
         <tbody>
-          <tr>{weekdays.map(day => <th key={day}>{day}</th>)}</tr>
+          <tr>{weekdays.map((day,i) => <th key={i}>{day}</th>)}</tr>
           {rows.map((d, i) => 
-            <tr className='date' key={i}>{d}</tr>)}
+            <tr className='date' key={i} >{d}</tr>)}
         </tbody>
       </table>
     </>

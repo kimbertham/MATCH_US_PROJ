@@ -1,21 +1,26 @@
 @import 'main.scss';
-
+.event-cont{
+  margin: 1vw;
+}
 .calender {
+  border-radius: 10px;
   border: 1px solid  rgba(52, 52, 52,0.5);
   background:rgba(250,250,250,0.7);
   display: table-cell;
 }
 
 .calender-day {
-  width: 8vw;
-  height: 5vw;
+  width: 5.5vw;
+  height: 11vh;
   background:rgba(250,250,250,0.7);
   border-radius: 5%;
+  border: 1px solid  rgba(52, 128, 117, 0.2);
+
 }
 
 .calender-header{
   height: 3vh;
-  background-color: #0e575c;
+  background-color: rgba(14, 87, 92,0.9);
   justify-content: space-between;
   margin-bottom: 10px;
   color: white;

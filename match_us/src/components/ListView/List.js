@@ -40,27 +40,24 @@ class List extends React.Component {
   render() {
     const { results, section } = this.props
     return (
-      <>
+
+      <div className=' relative swipeview'>
         {this.state.modal ? 
           <MatchModal
             error={this.state.error}
             modal={this.modal} /> : null}
 
-        <div className='activity-cont'>
+        <div className='list-cont scroll'>
 
           {results.map((r,i) => ( 
-            
-            <div className='list-cont flex pointer' key={i} onClick={()=>{
-              this.like('True', i) 
-            }}>
-              <ListCard r={r}
-                section={section}
-                like={this.like}/> 
-            </div>
+            <ListCard r={r} i={i}
+              key={i}
+              section={section}
+              like={this.like}/> 
               
           ))}
         </div>
-      </>
+      </div>
     )
   }
 }

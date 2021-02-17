@@ -3,6 +3,7 @@ import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import { headers } from '../../Lib/auth'
 import SendNote from './SendNote'
+import NoteCard from './NoteCard'
 
 class Notes extends React.Component {
   state = { 
@@ -30,7 +31,7 @@ class Notes extends React.Component {
     this.setState({ send: !this.state.send })
   }
 
-  delete = async (id) => {
+  deleteNote = async (id) => {
     await axios.delete(`/api/notes/${id}/none/`)
     this.getNotes
   }
@@ -51,13 +52,7 @@ class Notes extends React.Component {
 
         <div className='flex wrap center'>
           {notes.map(n=>{
-            return <div key={n.id} className=' center note' style={{ backgroundColor: n.color }}>
-              <p>{n.created_at.slice(0,10)}</p>
-              <h2>{n.notes}</h2>
-              {n.sender === connection.user.id ? <button onClick={()=>{
-                this.delete(n.id)
-              }}>Delete</button> : null}
-            </div> 
+            return <NoteCard key={n.id} connection={connection} n={n} deleteNote={this.deleteNote} />
           })}
         </div>
       </>

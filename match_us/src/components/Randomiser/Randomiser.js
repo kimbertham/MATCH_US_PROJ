@@ -6,6 +6,7 @@ import { headers } from '../../Lib/auth'
 import Loader from '../Common/Loader'
 import NewEvent from '../Events/NewEvent'
 
+
 class Randomiser extends React.Component {
   state= {
     activity: '',
@@ -98,13 +99,14 @@ class Randomiser extends React.Component {
           closeModal={this.handleEvent}/> : null}
 
         {!food ? <div className={loader ? 'display-none' : 'random-buttons'}>
-          <button onClick={()=>{
+          <button className='random-button' onClick={()=>{
             this.getRandom(true)
-          }}> Click to generate a completely random date</button>
-          <button onClick={()=>{
+          }}><b> Generate a completely random date</b> </button>
+          <button  className='random-button' onClick={()=>{
             this.getRandom(false)
-          }}> Click to generate a random date from your matches!</button>
+          }}> <b> Generate a random date from your matches</b></button>
         </div>
+      
           :
 
           <div className='random-results'>

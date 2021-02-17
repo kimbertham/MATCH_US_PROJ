@@ -87,18 +87,34 @@
 }
 
 // results
+.match-cont {
+  overflow: scroll;
+  top:0;
+  height: 89vh;
+  align-content: flex-start;
+  
 .match-item {
-  max-width: 14vw;
-  margin: 2px;
-  background-color: rgba(222, 222, 222,0.7);
+  margin: 5px;
+  padding: 10px 5px;
+  background-color: rgba(3, 47, 57, 0.4);
+  color:white;
+
   h1{
     font-size: 1vw;
   }
-  .match-item-img{
-    width: 12vw;
-    max-height: 12vw;
-    background-position: center;
+  .match-img{
+    max-width:100%;
+    max-height:100%;
   }
+}
+}
+
+.food-match-item {
+  width: 14vw;
+  height: 25vh;
+}
+.movies-match-item {
+  width: 14vw;
 }
 
 //details 
@@ -150,17 +166,43 @@
 
 //matchSearch 
 .match-search {
-  position: absolute;
+position: absolute;
 right:0;
 margin:10px;
 z-index: 1000;
-
-  // border: 2px solid red;
 }
 
-//! backgrounds
-.food-matchview {
-  // background-image: url('./assets/match-bg.jpg');
-  // background-position:left;
-  // background-color: rgb(232, 232, 232);
+//listView 
+.list-cont{
+  width: 83vw;
+  height: 100vh
+}
+
+.list-text{
+  width: 70vw;
+  margin: 1vw;
+}
+
+.list-field{
+margin: 1vw;
+border-bottom: 1px solid rgb(240, 101, 189);
+}
+
+.list-button {
+background: transparent;
+border: 1px solid rgb(0, 105, 128);
+height: 2vh;
+}
+
+.m-list-img{
+width: 8vw;
+}
+
+.list-img-cont{
+  width: 10vw;
+  height: 10vw;
+.list-img {
+  max-width:100%;
+  max-height:100%;
+}
 }

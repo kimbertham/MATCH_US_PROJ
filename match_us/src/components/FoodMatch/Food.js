@@ -16,16 +16,18 @@ async componentDidMount() {
   this.getResults()
 }
 
-getResults = async () => {
+getResults = async (d) => {
   let data
   try {
     const p = await getCoordinates() 
-    data = { location: `${p.coords.latitude}, ${p.coords.longitude}` , rankby: 'distance', keyword: 'food' }
+    console.log(p)
+    data = d ? d : { location: `${p.coords.latitude}, ${p.coords.longitude}` , rankby: 'distance', keyword: 'food' }
   } catch (err) {
     data = { location: '51.509865, -0.118092', rankby: 'distance', keyword: 'food' }
   }
   const r = ( await axios.post(`/api/food/${this.props.connection.id}/`, data , headers())).data
   r.length <= 1 ?  r.push(noPlaces)  : null
+
   this.setState({ results: r })
 }
 

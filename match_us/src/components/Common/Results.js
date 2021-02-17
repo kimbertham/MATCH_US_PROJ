@@ -30,10 +30,12 @@ class MatchHome extends React.Component {
     const { connection } = this.props
     const { matches, detail } = this.state
     const section = this.props.match.params.section
+
     if (!matches) return null
     return (
 
-      <>
+      <div className='section'>
+
         {detail ? 
           <div className='fh swipeview' >
             <Details r={detail}
@@ -43,18 +45,18 @@ class MatchHome extends React.Component {
           </div>
           : 
           <>
-            <h1>{connection.partner.first_name} and {connection.user.first_name}&apos;s {section} matches</h1> 
-            <div className='flex'>
+            <h1 className='title'>{connection.partner.first_name} and {connection.user.first_name}&apos;s {section} matches</h1> 
+            <div className='wrap center match-cont'>
               {matches.map(m => {
-                return <div className='match-item center' key={m.id} onClick={this.getDetail} id={m.id} >
-                  <img className='match-item-img' src={m.image} />
-                  <h1 >{m.name}</h1>
+                return <div className={`${section}-match-item match-item center`} key={m.id} onClick={this.getDetail} id={m.id}>
+                  <img className={'match-img'} src={m.image} />
+                  <h1 >{m.name.slice(0,28)}</h1>
                 </div>
               })}
             </div>
           </>
         }
-      </>
+      </div>
     )
   }
 }

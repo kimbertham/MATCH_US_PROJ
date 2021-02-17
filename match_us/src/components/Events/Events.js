@@ -83,6 +83,7 @@ render(){
               <EventRequest 
                 user={user}
                 req={req}
+                closeModal={this.closeModal}
                 getEvents={this.getEvents}/>
               :
               <NewEvent
