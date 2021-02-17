@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { headers } from '../../Lib/auth'
-
 import Events from '../Events/Events'
 import NoteCard from '../Notes/NoteCard'
 import food from '../../styles/assets/menu-icons/food.jpg'
@@ -40,7 +39,6 @@ class ConOverview extends React.Component{
               user={connection.user}
               connection={connection}/>
           </div>
-
 
           <div className='column'>
             <div className='upcoming-dates o-border'>

@@ -39,6 +39,7 @@ swipeData = (d, i) => {
     connection: this.props.connection.id }
 }
 
+
 nextSwipe = () => {
   this.state.results.length < 1 ? this.setState({ f: noPlaces })  :
     this.setState({ results: this.state.results.slice(1) })

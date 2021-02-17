@@ -13,13 +13,22 @@ setData = (e) => {
   this.setState({ data: e })
 }
 
+closeModal = () => {
+  this.setState({ data: false })
+}
 render(){
   const { data } = this.state
   const { getDetail, section, r, connection } = this.props
 
   return (
     <>
-      {data ?  <NewEvent data={data} connection={connection}/> 
+      {data ?  
+        <div className='modal' onClick={this.closeModal}>
+          <div className='m-pop' onClick={e=>{
+            e.stopPropagation()
+          }}> <NewEvent data={data} connection={connection}/> 
+          </div>
+        </div>
         : 
         <div onClick={getDetail} className='details modal column'>
           {section === 'movies' ?

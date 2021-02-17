@@ -6,13 +6,12 @@ const ActivitiesList = ({ connection }) =>{
 
 
   return (
-    <>
+    <div className='a-list center section'>
       <div className='a-type'>
-        <p>All activities</p>
+        <p>Activities</p>
       </div>
 
       <div className='flex wrap'>
-
         <p>Suggestions:</p>
         {typeList.map(t => {
           return <Link key={t} to={`/connection/${connection.id}/activity/${t}`}>
@@ -22,7 +21,7 @@ const ActivitiesList = ({ connection }) =>{
           </Link>
         })}
       </div>
-    </>
+    </div>
   )
 }
 export default ActivitiesList

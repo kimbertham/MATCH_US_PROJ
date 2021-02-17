@@ -34,8 +34,7 @@ class MatchHome extends React.Component {
     if (!matches) return null
     return (
 
-      <div className='section'>
-
+      <>
         {detail ? 
           <div className='fh swipeview' >
             <Details r={detail}
@@ -56,7 +55,7 @@ class MatchHome extends React.Component {
             </div>
           </>
         }
-      </div>
+      </>
     )
   }
 }

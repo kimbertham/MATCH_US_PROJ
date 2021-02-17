@@ -30,10 +30,10 @@ getResults = async () => {
   this.setState({ results: r.data })
 }
 
-  swipeData = (d) => {
+  swipeData = (d, i) => {
     return { 
-      f_id: this.state.results[0].place_id, 
-      name: this.state.results[0].name, 
+      f_id: this.state.results[i].place_id, 
+      name: this.state.results[i].name, 
       direction: d, 
       connection: this.props.connection.id }
   }

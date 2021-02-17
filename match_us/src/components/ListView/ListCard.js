@@ -2,7 +2,6 @@ import React from 'react'
 import { GImages, poster } from '../../Lib/common'
 
 const ActivityCard = ({ r, section,like, i }) => {
-  console.log(r)
   if (!r) return null
 
   const google = () => {
@@ -38,11 +37,10 @@ const ActivityCard = ({ r, section,like, i }) => {
   return (
     <div className='list-field flex'>
       {section === 'movies' ? movies() : google()}
-      
-      <button className='list-button' onClick={()=>{
-        like('True', i) 
-      }}> Like </button>
 
+      <p className='list-button' onClick={()=>{
+        like('True', i) 
+      }}>{!r.like ? '♡' : '♥'}</p>
     </div>
   )
 }

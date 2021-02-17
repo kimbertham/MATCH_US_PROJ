@@ -22,6 +22,7 @@ class List extends React.Component {
 
   like = async (d, i) => {
     try {
+      this.props.results[i].like = true
       const data  = this.props.swipeData(d,i)
       await  axios.post(`/api/${this.props.section}/`, data, headers())
       this.setState({ modal: true, error: 'Added to Matches!' })
@@ -41,7 +42,7 @@ class List extends React.Component {
     const { results, section } = this.props
     return (
 
-      <div className=' relative swipeview'>
+      <div className='relative swipeview'>
         {this.state.modal ? 
           <MatchModal
             error={this.state.error}

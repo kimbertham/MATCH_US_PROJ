@@ -1,34 +1,31 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import movies from '../../styles/assets/menu-icons/movies.jpg'
 import food from '../../styles/assets/menu-icons/food.jpg'
 import activities from '../../styles/assets/menu-icons/activities.jpg'
-import location from '../../styles/assets/menu-icons/location.jpg'
+import locations from '../../styles/assets/menu-icons/location.jpg'
 import random from '../../styles/assets/menu-icons/random.jpg'
 import notes from '../../styles/assets/menu-icons/notes.jpg'
 import wishlist from '../../styles/assets/menu-icons/wishlist.jpg'
 import calender from '../../styles/assets/menu-icons/calender.jpg'
 import overview from '../../styles/assets/menu-icons/overview.jpg'
-// import arrow from '../../styles/assets/menu-icons/arrow.jpg'
 
 
-class MenuCon extends  React.Component  {
-  state = {
-    section: ''
+const MenuCon = ({ connection, location }) =>  {
+
+  const selected = (s) => {
+  
+    return location.pathname.includes(s) ? 'm-option selected' : 'm-option'
   }
 
-toggleSection =(e) => {
-  this.setState({ section: e.target.id })
-}
+  const open = (s) => {
+    return location.pathname.includes(s) ? 'm-open' : 'display-none'
+  }
 
-
-render(){
-  const { section } = this.state
-  const { connection } = this.props
   const { id } = connection
+
   return (
     <div className='m-con'>
-
 
       <div className='m-profile center'>   
         <div className='center wrap'>
@@ -41,89 +38,94 @@ render(){
 
       <div className='m-list'>
 
-        <div className='m-option'>
+        <div className={selected('overview')}>
           <img src={overview} alt='food' className='menu-icon'/>
           <Link to={`/connection/${id}/overview`}>
-            <h1 id='overview' onClick={this.toggleSection}>Overview</h1>
+            <h1 id='overview'>Overview</h1>
           </Link>
         </div>
 
         <div>
+    
           <Link to={`/connection/${id}/food/`}>
-            <div className='m-option'>
+            <div className={selected('food')}> 
               <img src={food} alt='food' className='menu-icon'/>
-              <h1 id='food' onClick={this.toggleSection}> Food </h1>
+              <h1 id='food'> Food </h1></div>
+            <div className={open('food')}>
+              <Link to={`/connection/${id}/food`}><h3 className='sub-option'>Swipe Food</h3></Link>
+              <Link to={`/connection/${id}/food/results`}> <h3 className='sub-option' >Matched Food</h3></Link>
             </div>
           </Link>
-          <div className={section === 'food' ? 'm-open' : 'display-none'}>
-            <Link to={`/connection/${id}/food`} ><h3 className='sub-option'>Swipe Food</h3></Link>
-            <Link to={`/connection/${id}/food/results`} ><h3 className='sub-option' >Matched Food</h3></Link>
-          </div>
 
           <Link to={`/connection/${id}/movies`}>
-            <div className='m-option'>
+            <div className={selected('movies')} >
               <img src={movies} alt='movies' className='menu-icon'/>
-              <h1 id='movies' onClick={this.toggleSection}> Movies </h1>
+              <h1 id='movies'> Movies </h1>
+            </div>
+            <div className={open('movies')} >
+              <Link to={`/connection/${id}/movies`}><h3 className='sub-option' >Swipe Movies</h3></Link>
+              <Link to={`/connection/${id}/movies/results`} ><h3 className='sub-option' >Matched Movies</h3></Link>
             </div>
           </Link>
-          <div className={section === 'movies' ? 'm-open' : 'display-none'} >
-            <Link to={`/connection/${id}/movies`} ><h3 className='sub-option' >Swipe Movies</h3></Link>
-            <Link to={`/connection/${id}/movies/results`} ><h3 className='sub-option' >Matched Movies</h3></Link>
-          </div>
-        
-          <Link to={`/connection/${id}/activities`}> 
-            <div className='m-option'>
+          
+          <Link to={`/connection/${id}/activities`}>
+            <div className={selected('activities')}>
               <img src={activities} alt='movies' className='menu-icon'/>
-              <h1 id='activities' onClick={this.toggleSection}> Activities</h1>
+              <h1 id='activities'> Activities</h1>
+            </div>
+            <div className={open('activities')}>
+              <Link to={`/connection/${id}/activities`}> <h3 className='sub-option'> Swipe Activities</h3></Link>
+              <Link to={`/connection/${id}/activities/results`}><h3 className='sub-option' >Matched Activities</h3></Link>
             </div>
           </Link>
-          <div className={section === 'activities' ? 'm-open' : 'display-none'}>
-            <Link to={`/connection/${id}/activities`} ><h3 className='sub-option' >Swipe Activities</h3></Link>
-            <Link to={`/connection/${id}/activities/results`} ><h3 className='sub-option' >Matched Activities</h3></Link>
-          </div>
-        </div>
-
-        <Link to={`/connection/${id}/locations`}>
-          <div className='m-option'>
-            <img src={location} alt='movies' className='menu-icon'/>
-            <h1 id='locations' onClick={this.toggleSection}> Locations </h1>
-          </div>
-        </Link>
-        
-        <Link to={`/connection/${id}/randomiser`}>
-          <div className='m-option'>
-            <img src={random} alt='movies' className='menu-icon'/>
-            <h1 id='random' onClick={this.toggleSection}> Randomiser </h1>
-          </div>
-        </Link>
-
-        <Link to={`/connection/${id}/notes/inbox`}>
-          <div className='m-option'>
-            <img src={notes} alt='notes' className='menu-icon'/>
-            <h1 id='notes' onClick={this.toggleSection}> Notes </h1>
-          </div>
-        </Link>
-        <div className={section === 'notes' ? 'm-open' : 'display-none'}>
-          <Link to={`/connection/${id}/notes/inbox`}><h3 className='sub-option' >Inbox</h3></Link>
-          <Link to={`/connection/${id}/notes/outbox`}><h3 className='sub-option' >Outbox</h3></Link>
         </div>
       
-        <Link to={`/connection/${id}/wishlist`}>
-          <div className='m-option'>
-            <img src={wishlist} alt='movies' className='menu-icon'/>
-            <h1 id='wishlist' onClick={this.toggleSection}> Wishlist </h1>
+
+
+        <Link to={`/connection/${id}/locations`}>
+          <div className={selected('locations')}>
+            <img src={locations} alt='movies' className='menu-icon'/>
+            <h1 id='locations'> Locations </h1>
+          </div>
+        </Link>
+        
+
+        <Link to={`/connection/${id}/randomiser`}>
+          <div className={selected('random')}>
+            <img src={random} alt='movies' className='menu-icon'/>
+            <h1 id='random'> Randomiser </h1>
           </div>
         </Link>
 
-        <div className='m-option'>
-          <img src={calender} alt='movies' className='menu-icon'/>
-          <Link to={`/connection/${id}/events`}><h1>Calender</h1></Link>
-        </div>
+  
+        <Link to={`/connection/${id}/notes/inbox`}>
+          <div className={selected('notes')}>
+            <img src={notes} alt='notes' className='menu-icon'/>
+            <h1 id='notes'> Notes </h1>
+          </div>
+          <div className={open('notes')}>
+            <Link to={`/connection/${id}/notes/inbox`}><h3 className='sub-option'>Inbox</h3></Link>
+            <Link to={`/connection/${id}/notes/outbox`}><h3 className='sub-option'>Outbox</h3></Link>
+          </div>
+        </Link>
+      
+        <Link to={`/connection/${id}/wishlist`}>
+          <div className={selected('wishlist')}>
+            <img src={wishlist} alt='movies' className='menu-icon'/>
+            <h1 id='wishlist'> Wishlist </h1>
+          </div>
+        </Link>
+
+        <Link to={`/connection/${id}/events`}>
+          <div className={selected('calendar')}>
+            <img src={calender} alt='movies' className='menu-icon'/>
+            <h1 id='calendar'> Calendar </h1>
+          </div>
+        </Link>
 
       </div>
     </div>
   )
 }
-}
 
-export default MenuCon
+export default withRouter(MenuCon)

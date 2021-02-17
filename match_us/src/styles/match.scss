@@ -1,12 +1,5 @@
 @import 'main.scss';
 
-.a-type{
-  border: 2px solid black;
-  padding: 10px;
-  margin: 10px;
-  font-size: 2vw;
-}
-
 //matches 
 .swipe-matches {
   @extend .center;
@@ -122,9 +115,9 @@
 .details {
   background-color: rgba(255, 255, 255, 0.9);
 
+
   .details-bg{
     height: 15vw;
-    position: absolute;
     opacity: 0.5;
     background-position: center;
   }
@@ -135,13 +128,19 @@
   margin:3vw;
   }
   .d-m-text{
+    height: 60vh;
     width: 30vw;
     z-index: 1;
   }
 }
-.invite-button {
-  float: right;
 
+.detail-buttons {
+  margin: 5vh 0 ;
+  * { 
+    margin:  0 2px;
+    background: rgb(40, 40, 40);
+    color: white;
+  }
 }
 
 //swipeMatch
@@ -185,13 +184,14 @@ z-index: 1000;
 
 .list-field{
 margin: 1vw;
+padding: 1vh;
 border-bottom: 1px solid rgb(240, 101, 189);
 }
 
 .list-button {
-background: transparent;
-border: 1px solid rgb(0, 105, 128);
-height: 2vh;
+font-size: 2em;
+color: red;
+margin-right: 10px;
 }
 
 .m-list-img{
@@ -206,3 +206,17 @@ width: 8vw;
   max-height:100%;
 }
 }
+
+//activities {
+  .a-list {
+  width: 80vw;
+  }
+
+  .a-type{
+    @extend .o-border;
+    font-size: 4vh;
+    color: rgb(4, 4, 4);
+    & :hover{
+      text-decoration: underline;
+    }
+  }

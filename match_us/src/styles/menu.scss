@@ -17,6 +17,10 @@ h1{
   }
 }
 
+.selected {
+  background-color: rgb(56, 55, 55);
+}
+
 .m-profile {
   margin-bottom: 1vw;
   padding: 20px;
@@ -67,6 +71,7 @@ h1{
 
 // menuUser.js
 .m-option {
+  @extend .pointer;
   display: flex;
   align-items:center;
   padding:0 10px ;
