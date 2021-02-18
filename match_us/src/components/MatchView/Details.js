@@ -11,21 +11,19 @@ state= {
   data: false
 }
 
-delMatch = async (e, id) =>{
-  e.stopPropagation()
+delMatch = async (id) =>{
   await axios.post(`/api/match/${this.props.section}/${this.props.connection.id}/`, { id: id }, headers())
   this.props.getDetail()
   this.props.getMatches()
 }
-
-setData = (e, i) => {
-  e.stopPropagation()
+setData = (i) => {
   this.setState({ data: i })
 }
 
 closeModal = () => {
   this.setState({ data: false })
 }
+
 render(){
   const { data } = this.state
   const { getDetail, section, r, connection } = this.props

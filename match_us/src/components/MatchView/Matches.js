@@ -24,7 +24,7 @@ const Matches = ({ getDetail, matches,connection, section, changeView }) =>  {
         <Link to={`/connection/${connection.id}/${section}/results`}> 
           <img src={all} className='all-icon' alt='all'/>
         </Link>
- 
+
       </div>
     </>
   )

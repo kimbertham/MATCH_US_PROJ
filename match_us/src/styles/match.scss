@@ -83,7 +83,8 @@
 .match-cont {
   overflow: scroll;
   top:0;
-  height: 89vh;
+  margin-top:3vh;
+  height: 82vh;
   align-content: flex-start;
   
 .match-item {
@@ -100,6 +101,10 @@
     max-height:100%;
   }
 }
+}
+
+.m-filter{
+  margin:2vh;
 }
 
 .food-match-item {

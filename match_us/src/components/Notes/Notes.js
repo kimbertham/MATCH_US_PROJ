@@ -27,13 +27,18 @@ class Notes extends React.Component {
     this.setState({ notes: r.data })
   }
 
-  sendNote= () => {
+  sendNote = () => {
     this.setState({ send: !this.state.send })
   }
 
   deleteNote = async (id) => {
     await axios.delete(`/api/notes/${id}/none/`)
-    this.getNotes
+    this.getNotes()
+  }
+
+  readNote = async (e) => {
+    await axios.patch(`/api/notes/${e.currentTarget.id}/none/`,null, headers())
+    this.getNotes()
   }
 
   render(){
@@ -41,21 +46,30 @@ class Notes extends React.Component {
     const { connection, match } = this.props
     if (!notes) return null
     return (
-      <>
+      <div className='fh center'>
 
-        {send ? <SendNote connection={connection} sendNote={this.sendNote} /> : null}
+        {send ? 
+          <SendNote 
+            connection={connection} 
+            sendNote={this.sendNote} /> 
+          : null}
+
+        {match.params.box === 'inbox' ? 
+          <h1 className='title'>{connection.partner.first_name}&apos;s Love Notes to {connection.user.first_name}</h1> :
+          <h1 className='title'> {connection.user.first_name}&apos;s Love Notes to {connection.partner.first_name} </h1>}
 
         <button onClick={this.sendNote}>New Love Note</button>
-        {match.params.box === 'inbox' ? 
-          <h1>{connection.partner.first_name}&apos;s Love Notes to {connection.user.first_name}</h1> :
-          <h1> {connection.user.first_name}&apos;s Love Notes to {connection.partner.first_name} </h1>}
 
-        <div className='flex wrap center'>
+        <div className='notes-cont scroll relative wrap center'>
           {notes.map(n=>{
-            return <NoteCard key={n.id} connection={connection} n={n} deleteNote={this.deleteNote} />
+            return <NoteCard n={n}  key={n.id} 
+              connection={connection} 
+              readNote={this.readNote} 
+              deleteNote={this.deleteNote} />
           })}
         </div>
-      </>
+      </div>
+
     )
   }
 }

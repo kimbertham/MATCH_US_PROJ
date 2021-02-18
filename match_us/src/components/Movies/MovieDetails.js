@@ -11,7 +11,7 @@ const MovieDetails = ({ r, setData, delMatch, match }) => {
         style={{ backgroundImage: `url(${poster}${r.poster_path})` }}/>
       
       <div className='fh row center'>
-        
+
         <img alt='poster' className='d-m-img' src={`${poster}${r.poster_path}`}/>
         <div className='d-m-text flex-end column'>
           <h1>{r.title}</h1> <h3>{r.release_date}</h3> 
@@ -36,7 +36,6 @@ const MovieDetails = ({ r, setData, delMatch, match }) => {
                 <button onClick={e=> {
                   delMatch(e, r.id)
                 }}> Delete</button>
-                <button> Mark As Complete</button>
               </> : null}
         
           </div>

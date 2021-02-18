@@ -13,7 +13,6 @@ class movies(models.Model):
         'connections.ConnectionS',
         related_name='movies_list',
         on_delete=models.CASCADE)
-        
     created_at = models.DateTimeField(auto_now_add=True)
     class Meta:
         unique_together = ('user', 'f_id', 'connection',)

@@ -11,10 +11,10 @@ class Notes(models.Model):
         'connections.ConnectionS',
         related_name='notes',
         on_delete=models.CASCADE)
-
+    
     notes = models.CharField(max_length=5000)
     color = models.CharField(max_length=10)
-
+    read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

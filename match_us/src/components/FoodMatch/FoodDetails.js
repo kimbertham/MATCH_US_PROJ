@@ -40,16 +40,18 @@ const FoodDetails = ({ r, setData, match, delMatch }) => {
             </>
             : null}
     
-          <div className='flex-end detail-buttons'>
+          <div className='flex-end detail-buttons' onClick={e=>{
+            e.stopPropagation()
+          }}>
+
             {match.path.includes('results') ? 
               <>
-                <button onClick={e=>{
-                  setData( e, { location: r.formatted_address })
+                <button onClick={()=>{
+                  setData( { location: r.formatted_address })
                 }}> + Create Date</button> 
-                <button onClick={e=> {
-                  delMatch(e, r.place_id)
+                <button onClick={()=> {
+                  delMatch(r.place_id)
                 }}> Delete</button>
-                <button> Mark As Complete</button>
               </> : null}
           </div>
 

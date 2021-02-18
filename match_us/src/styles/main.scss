@@ -87,12 +87,16 @@ background-size: cover;
 
 .column {
   display: flex;
- flex-direction: column;
+flex-direction: column;
 }
 
 .row {
   display: flex;
- flex-direction: row;
+flex-direction: row;
+}
+
+.title{
+padding: 2vw;
 }
 
 .italic {

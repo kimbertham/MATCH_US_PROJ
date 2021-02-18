@@ -19,9 +19,7 @@ class NotesListView(APIView):
             return Response( m.data, HTTP_200_OK)
         return Response(m.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
-
-
-class NotesDetailsView(APIView):
+class NotesDetailsView(APIView): 
     def get(self, request, pk, box):
         if box == 'inbox':
             n = Notes.objects.filter(connection=pk).exclude(sender=request.user.id)
@@ -34,3 +32,15 @@ class NotesDetailsView(APIView):
         n = Notes.objects.get(id=pk)
         n.delete()
         return Response(status=HTTP_204_NO_CONTENT)
+
+    def patch(self, request, pk, box):
+        n = Notes.objects.get(id=pk)
+        print(n.sender.id)
+        print(request.user.id)
+        if request.user.id != n.sender.id:
+            n.read = True
+            n.save()
+            return Response(status=HTTP_200_OK)
+        else:
+            return Response(status=HTTP_204_NO_CONTENT)
+

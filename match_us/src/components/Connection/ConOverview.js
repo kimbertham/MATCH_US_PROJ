@@ -68,7 +68,7 @@ class ConOverview extends React.Component{
             </div>
           </div>
           
-          <div className='o-border center column'>
+          <div className='center column'>
             <h2> Notes</h2>
             {data.note.map(n => <NoteCard key={n.id} n={n} connection={connection}/>)}
           </div>
