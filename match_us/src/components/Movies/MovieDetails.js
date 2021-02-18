@@ -1,15 +1,17 @@
 import React from 'react'
 import { poster } from '../../Lib/common'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
-const MovieDetails = ({ r, setData, match }) => {
+const MovieDetails = ({ r, setData, delMatch, match }) => {
 
   return (
     <div className='details sw fh'>
-      <div className='details-bg absolute sw'  style={{ backgroundImage: `url(${poster}${r.poster_path})` }}/>
+
+      <div className='details-bg absolute sw'  
+        style={{ backgroundImage: `url(${poster}${r.poster_path})` }}/>
       
       <div className='fh row center'>
-
+        
         <img alt='poster' className='d-m-img' src={`${poster}${r.poster_path}`}/>
         <div className='d-m-text flex-end column'>
           <h1>{r.title}</h1> <h3>{r.release_date}</h3> 
@@ -22,20 +24,21 @@ const MovieDetails = ({ r, setData, match }) => {
           <p>{r.vote_average}/10</p>
           <p>{r.runtime} Mins </p>
           <p> {r.genres ? r.genres.map(g=> `${g.name} | `) : null }</p>
-          <a href={r.homepage}> {r.homepage}</a>
+          <Link to={r.homepage}>{r.homepage}</Link>
 
           <div className='flex-end detail-buttons'>
             {match.path.includes('results') ? 
               <>
                 <button onClick={e=> {
-                  e.stopPropagation(),
+                  e,
                   setData( { notes: `${r.title}, ${r.release_date}`, type: 'film' })
                 }}> + Create Date</button> 
-                <button> Delete</button>
+                <button onClick={e=> {
+                  delMatch(e, r.id)
+                }}> Delete</button>
                 <button> Mark As Complete</button>
-              </> 
-              : null}
-              
+              </> : null}
+        
           </div>
         </div>
       </div> 

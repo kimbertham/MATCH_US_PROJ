@@ -7,12 +7,21 @@ from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY
 from django.db.models import Q
 from lib.links import tmdb_key, tmdb_details, tmdb_poster, place_id, GImages
 
+
+
+
 class MatchListView(APIView):
 
-    def delete(self, request, pk, section):  
+    def delete(self, request, pk, section): 
         Model = apps.get_model(section, section)
         id_list= Model.objects.filter(Q(user=request.user.id) & Q(connection=pk)).values_list('f_id', flat = True)
         f = Model.objects.filter(Q(connection=pk) & Q(user=request.user.id))
+        f.delete()
+        return Response(status=HTTP_204_NO_CONTENT)
+
+    def post(self, request, pk, section): 
+        Model = apps.get_model(section, section)
+        f = Model.objects.filter(Q(connection=pk) & Q(user=request.user.id) & Q(f_id=request.data['id']))
         f.delete()
         return Response(status=HTTP_204_NO_CONTENT)
 

@@ -20,7 +20,6 @@ getResults = async (d) => {
   let data
   try {
     const p = await getCoordinates() 
-    console.log(p)
     data = d ? d : { location: `${p.coords.latitude}, ${p.coords.longitude}` , rankby: 'distance', keyword: 'food' }
   } catch (err) {
     data = { location: '51.509865, -0.118092', rankby: 'distance', keyword: 'food' }

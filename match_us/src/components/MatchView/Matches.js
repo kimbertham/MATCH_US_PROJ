@@ -9,14 +9,12 @@ const Matches = ({ getDetail, matches,connection, section, changeView }) =>  {
   if (!matches) return null
   return (
     <>
-      {/* <div className='swipe-matches'> */}
-      {/* <p>Matches</p> */}
-      {matches.map((m, i ) => {
-        return <div key={i} className='relative center swipe-match-cont'> 
-          <div className='flex' id={m.id} onClick={getDetail}/>
-          <div className='swipe-match-icon' value={m.id} style={{ backgroundImage: `url(${m.image})` }}/>
 
-          <p> {m.name.length > 20 ? `${m.name.slice(0,20)}...` : m.name }</p>
+      {matches.map((m, i ) => {
+        return <div onClick={getDetail} key={i} className='relative center pointer swipe-match-cont'> 
+          <div className='flex' />
+          <div className='swipe-match-icon' id={m.id} style={{ backgroundImage: `url(${m.image})` }}/>
+          <p id={m.id}> {m.name.length > 20 ? `${m.name.slice(0,20)}...` : m.name }</p>
         </div>
       })}
 
@@ -27,7 +25,6 @@ const Matches = ({ getDetail, matches,connection, section, changeView }) =>  {
           <img src={all} className='all-icon' alt='all'/>
         </Link>
  
-        {/* </div> */}
       </div>
     </>
   )

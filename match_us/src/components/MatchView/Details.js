@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import axios from 'axios'
+import { headers } from '../../Lib/auth'
 import MovieDetails from '../Movies/MovieDetails'
 import FoodDetails from '../FoodMatch/FoodDetails'
 import NewEvent from '../Events/NewEvent'
@@ -9,8 +11,16 @@ state= {
   data: false
 }
 
-setData = (e) => {
-  this.setState({ data: e })
+delMatch = async (e, id) =>{
+  e.stopPropagation()
+  await axios.post(`/api/match/${this.props.section}/${this.props.connection.id}/`, { id: id }, headers())
+  this.props.getDetail()
+  this.props.getMatches()
+}
+
+setData = (e, i) => {
+  e.stopPropagation()
+  this.setState({ data: i })
 }
 
 closeModal = () => {
@@ -32,9 +42,9 @@ render(){
         : 
         <div onClick={getDetail} className='details modal column'>
           {section === 'movies' ?
-            <MovieDetails r={r} setData={this.setData}/>
+            <MovieDetails r={r} setData={this.setData} delMatch={this.delMatch}/>
             : 
-            <FoodDetails r={r} setData={this.setData}/>}
+            <FoodDetails r={r} setData={this.setData} delMatch={this.delMatch}/>}
         </div>}
     </>
   )

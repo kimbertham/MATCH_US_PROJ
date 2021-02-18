@@ -11,26 +11,30 @@ class MatchHome extends React.Component {
   } 
 
   async componentDidMount() {
-    const { connection } = this.props
-    const r  = await axios.get(`/api/match/${this.props.match.params.section}/${connection.id}/${connection.partner.id}/`, headers())
-    this.setState({ matches: r.data })
+    this.getMatches()
   }
 
   getDetail = async (e) => {
     if (this.state.detail) {
       this.setState({ detail: null })
     } else {
-      const r = (await axios.get(`/api/${this.props.match.params.section}/${e.currentTarget.id}/`)).data
-      this.setState({ detail: r })
+      const id = e.currentTarget.id
+      const r = (await axios.get(`/api/${this.props.match.params.section}/${id}/`)).data
+      this.setState({ detail: r, m: id })
     }
   }
 
-  
+  getMatches = async () => {
+    const { connection, match } = this.props
+    const r  = await axios.get(`/api/match/${match.params.section}/${connection.id}/${connection.partner.id}/`,headers())
+    this.setState({ matches: r.data })
+  }
+ 
   render() {
     const { connection } = this.props
     const { matches, detail } = this.state
     const section = this.props.match.params.section
-
+    
     if (!matches) return null
     return (
 
@@ -40,14 +44,18 @@ class MatchHome extends React.Component {
             <Details r={detail}
               section={section}
               connection={connection}
+              getMatches={this.getMatches}
               getDetail={this.getDetail}/> 
           </div>
           : 
           <>
-            <h1 className='title'>{connection.partner.first_name} and {connection.user.first_name}&apos;s {section} matches</h1> 
+            <h1 className='title'>
+              {connection.partner.first_name} and {connection.user.first_name}&apos;s {section} matches
+            </h1> 
             <div className='wrap center match-cont'>
               {matches.map(m => {
-                return <div className={`${section}-match-item match-item center`} key={m.id} onClick={this.getDetail} id={m.id}>
+                return <div  key={m.id} id={m.id} onClick={this.getDetail}
+                  className={`${section}-match-item match-item center`}>
                   <img className={'match-img'} src={m.image} />
                   <h1 >{m.name.slice(0,28)}</h1>
                 </div>

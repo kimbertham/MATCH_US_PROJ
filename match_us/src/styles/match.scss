@@ -106,6 +106,11 @@
   width: 14vw;
   height: 25vh;
 }
+.activities-match-item {
+  width: 14vw;
+  height: 25vh;
+}
+
 .movies-match-item {
   width: 14vw;
 }
@@ -114,25 +119,37 @@
 
 .details {
   background-color: rgba(255, 255, 255, 0.9);
+}
 
-
-  .details-bg{
-    height: 15vw;
-    opacity: 0.5;
-    background-position: center;
-  }
+.details-bg{
+  height: 15vw;
+  opacity: 0.5;
+  background-position: center;
+}
 
   .d-m-img{ 
   height: 70vh;
   z-index: 1;
   margin:3vw;
   }
-  .d-m-text{
-    height: 60vh;
-    width: 30vw;
-    z-index: 1;
-  }
+
+.d-m-text{
+  height: 60vh;
+  width: 30vw;
+  z-index: 1;
 }
+
+
+.d-g-text{
+  width: 40vw;
+  margin: 2vw;
+}
+
+.d-g-img{
+  width: 70vh;
+  margin: 2vw ;
+}
+
 
 .detail-buttons {
   margin: 5vh 0 ;
