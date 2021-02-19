@@ -29,11 +29,11 @@ const MovieDetails = ({ r, setData, delMatch, match }) => {
           <div className='flex-end detail-buttons'>
             {match.path.includes('results') ? 
               <>
-                <button onClick={e=> {
+                <button className='button' onClick={e=> {
                   e,
                   setData( { notes: `${r.title}, ${r.release_date}`, type: 'film' })
                 }}> + Create Date</button> 
-                <button onClick={e=> {
+                <button className='button' onClick={e=> {
                   delMatch(e, r.id)
                 }}> Delete</button>
               </> : null}

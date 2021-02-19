@@ -5,10 +5,11 @@ import axios from 'axios'
 import { headers } from '../../Lib/auth'
 import { withRouter } from 'react-router-dom'
 import Details from '../MatchView/Details'
+import Loader from './Loader'
 
 class MatchHome extends React.Component { 
   state = {
-    matches: [],
+    matches: '',
     detail: '',
     filter: false
   } 
@@ -29,7 +30,7 @@ class MatchHome extends React.Component {
 
   getMatches = async () => {
     const { connection, match } = this.props
-    const r  = await axios.get(`/api/match/${match.params.section}/${connection.id}/${connection.partner.id}/`,headers())
+    const r  = await axios.get(`/api/match/${match.params.section}/${connection.id}/${connection.partner.id}/all/`,headers())
     this.setState({ matches: r.data })
   }
 
@@ -39,7 +40,7 @@ class MatchHome extends React.Component {
     const { matches, detail } = this.state
     const section = this.props.match.params.section
 
-    if (!matches) return null
+    if (!matches) return <Loader/>
     return (
 
       <>

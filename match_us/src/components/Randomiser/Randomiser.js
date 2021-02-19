@@ -1,163 +1,172 @@
 import React from 'react'
 import axios from 'axios'
 import { getCoordinates, typeList } from '../../Lib/com'
-import { GImages, noPlaces, poster } from '../../Lib/common'
 import { headers } from '../../Lib/auth'
 import Loader from '../Common/Loader'
 import NewEvent from '../Events/NewEvent'
 
+import foodIcon from '../../styles/assets/menu-icons/food.jpg'
+import activityIcon from '../../styles/assets/menu-icons/activities.jpg'
+import moviesIcon from '../../styles/assets/menu-icons/movies.jpg'
 
 class Randomiser extends React.Component {
-  state= {
-    activity: '',
-    movie: '',
-    food: '',
-    payer: '',
-    loader: false,
-    event: false
-  }
+state= {
+  activity: '',
+  movie: '',
+  food: '',
+  payer: '',
+  loader: false,
+  event: false
+}
 
-  getFood = async (data) => {
-    const r = await axios.post('/api/food/random/', data, headers())
-    this.setState({ food: r.data, loader: false })
-  }
+connection = this.props.connection
 
-  getActivity = async (d) => {
-    const activity = typeList[ Math.floor(Math.random() * 41) + 1] 
-    const { connection } = this.props
-    const data = { 
-      'partner': connection.partner.id, 
-      'connection': connection.id ,
+getFood = async (data) => {
+  const r = await axios.post('/api/food/random/', data, headers())
+  this.setState({ food: r.data, loader: false })
+}
+
+getActivity = async (d) => {
+  const activity = typeList[ Math.floor(Math.random() * 41) + 1] 
+  const data = { 
+    'partner': this.connection.partner.id, 
+    'connection': this.connection.id ,
+    'random': d,
+    'location': await this.getLocation(), 
+    'rankby': 'distance', 
+    'keyword': activity 
+  }
+  const r = (await axios.post('/api/activities/random/', data, headers())).data
+  this.setState({ activity: r },() => {
+    this.getFood({
       'random': d,
-      'location': await this.getLocation(), 
-      'rankby': 'distance', 
-      'keyword': activity 
-    }
-    const r = (await axios.post('/api/activities/random/', data, headers())).data
-    this.setState({ activity: r },() => {
-      this.getFood({
-        'random': d,
-        'partner': connection.partner.id, 
-        'connection': connection.id ,
-        'location': r.geometry ? 
-          `${r.geometry.location.lat}, ${r.geometry.location.lng}` : null, 
-        'rankby': 'distance',
-        'keyword': ['restaurant', 'food'] 
-      })
-    })
-  }
-
-  getMovie = async (d) => {
-    const { connection } = this.props
-    const data = { 
-      'random': d, 
-      'partner': connection.partner.id, 
-      'connection': connection.id }
-    const r = await axios.post('/api/movies/random/', data, headers()) 
-    this.setState({ movie: r.data })
-    this.getFood({ 
-      'random': d,
-      'partner': connection.partner.id, 
-      'connection': connection.id,
-      'location': await this.getLocation(), 
+      'partner': this.connection.partner.id, 
+      'connection': this.connection.id ,
+      'location': `${r.geometry.location.lat}, ${r.geometry.location.lng}`, 
       'rankby': 'distance',
-      'keyword': ['meal_takeaway', 'meal_delivery'] 
+      'keyword': ['restaurant', 'food'] 
     })
-  }
+  })
+}
 
-  getLocation = async () => {
-    const p = await getCoordinates()
-    return `${p.coords.latitude}, ${p.coords.longitude}`
-  }
+getMovie = async (d) => {
+  const data = { 
+    'random': d, 
+    'partner': this.connection.partner.id, 
+    'connection': this.connection.id }
+  const r = await axios.post('/api/movies/random/', data, headers()) 
+  this.setState({ movie: r.data })
+  this.getFood({ 
+    'random': d,
+    'partner': this.connection.partner.id, 
+    'connection': this.connection.id,
+    'location': await this.getLocation(), 
+    'rankby': 'distance',
+    'keyword': ['meal_takeaway', 'meal_delivery'] 
+  })
+}
 
-  getRandom = (d) => {
-    const action = Math.floor(Math.random() * 2) + 1 
-    action === '1' ? this.getMovie(d) : this.getActivity(d)
-    this.setState({ loader: true, food: false, payer: false })
-  }
+getLocation = async () => {
+  const p = await getCoordinates()
+  return `${p.coords.latitude}, ${p.coords.longitude}`
+}
 
-  whoPays =() => {
-    const action = Math.floor(Math.random() * 2) + 1 
-    const payer = action === '1' ? this.props.connection.partner.first_name : this.props.connection.user.first_name
-    this.setState({ payer })
-  }
+getRandom = (d) => {
+  const action = Math.floor(Math.random() * 2)  
+  action === 1 ? this.getMovie(d) : this.getActivity(d)
+  this.setState({ loader: true, food: false, payer: false })
+}
 
-  handleEvent = () => {
-    this.setState({ event: !this.state.event })
-  }
-  render() {
-    const {  food, activity, movie,payer, loader, event } = this.state
-    const { connection } = this.props
-    return (
-      <div className='fh center'>
+whoPays = () => {
+  const action = Math.floor(Math.random() * 2) + 1 
+  const payer = action === 1 ? 
+    this.connection.partner.first_name : this.connection.user.first_name
+  this.setState({ payer })
+}
 
-        {loader ? <Loader/> : null}
+handleEvent = () => {
+  this.setState({ event: !this.state.event })
+}
+render() {
+  const {  food, activity, movie, payer, loader, event } = this.state
+  const { connection } = this
 
-        {event ? <NewEvent 
-          connection={connection} 
-          data={{ location: food.formatted_address }} 
-          closeModal={this.handleEvent}/> : null}
+  if (loader) return  <Loader/>
 
-        {!food ? <div className={loader ? 'display-none' : 'random-buttons'}>
-          <button className='random-button' onClick={()=>{
-            this.getRandom(true)
-          }}><b> Generate a completely random date</b> </button>
-          <button  className='random-button' onClick={()=>{
-            this.getRandom(false)
-          }}> <b> Generate a random date from your matches</b></button>
-        </div>
-      
-          :
+  if (event) return <div className='fh center'>
+    <NewEvent 
+      connection={connection} 
+      data={{ location: food.formatted_address }} 
+      closeModal={this.handleEvent}/> 
+  </div>
 
-          <div className='random-results'>
+  return (
+    <div className='fh center'>
 
-            <div className='random-food'>
+      {!food ?  <div className={loader ? 'display-none' : 'column'}>
+
+        <button className='random-button' onClick={()=>{
+          this.getRandom(true)
+        }}><b> Generate a completely random date</b> </button>
+        <button  className='random-button' onClick={()=>{
+          this.getRandom(false)
+        }}> <b> Generate a random date from your matches!</b></button>
+      </div>
+        :
+        <div className='random-results'>
+          <div className='random'>
+            <div className='flex'>
+              <img src={foodIcon} alt='food' className='random-icon'/>
               <h1>Date Meal</h1>
-              <p>{food.message || food.name}</p>
-              <p>{food.website}</p>
-              <p>{food.formatted_phone_number}</p>
-              <p>{food.formatted_address}</p>
-              <div className='r-food-img' style={{ backgroundImage: `url(${GImages}${food.photos ?
-                food.photos[0].photo_reference : noPlaces })` }}/>
             </div>
+            <h2>{food.message || food.name}</h2>
+            <a href={food.website}>{food.website}</a>
+            <p>{food.formatted_phone_number}</p>
+            <p>{food.formatted_address}</p>
+          </div>
 
-            {activity ?
-              <div className='random-activity'>
+          {activity ?
+            <div className='random'>
+              <div className='flex'>
+                <img src={activityIcon} alt='activity' className='random-icon'/>
                 <h1>Date Activity</h1>
-                <p>{activity.message || activity.name}</p>
-                <p>{activity.website}</p>
-                <p>{activity.formatted_phone_number}</p>
-                <p>{activity.formatted_address}</p>
-                <div className='r-activity-img' style={{ backgroundImage: `url(${GImages}${activity.photos ?
-                  activity.photos[0].photo_reference : noPlaces })` }}/>
-                {activity.types ? activity.types.map(t => <p key={t}>{t}</p>) : null}
               </div>
-              :
-              <div className='random-movie'>
+              <h2>{activity.message || activity.name}</h2>
+              <a href={activity.website}> {activity.website}</a>
+              <p>{activity.formatted_phone_number}</p>
+              <p>{activity.formatted_address}</p>
+              {activity.types ? activity.types.map(t => <p key={t}> ‣ {t.replace(/_/g, ' ')}</p>) : null}
+            </div>
+            :
+            <div className='random '> 
+              <div className='flex'>
+                <img src={moviesIcon} alt='movies' className='random-icon'/>
                 <h1>Date Movie</h1>
-                {movie.message || movie.title}
-                {movie.release_date}
-                {movie.overview}
-                <div className='r-activity-img' style={{ backgroundImage: `url(${poster}${movie.poster_path})` }}/>
-              </div>
-            }
-
-            {payer ? <h1>Payer: {payer} </h1> : <button onClick={this.whoPays}>Who pays?</button>}
-            <button onClick={this.handleEvent}>Create Event</button>
-            <button onClick={()=>{
+              </div>      
+              <h2>{movie.message || movie.title}</h2>
+              <p>{movie.release_date}</p>
+              <p>{movie.overview}</p>
+            </div>
+          }
+        
+          {payer ? <div className='random'> <h1>Payer: {payer} </h1></div> : null}
+            
+          <div className='right'>
+            <button className='button' onClick={this.whoPays}>Who pays?</button>
+            <button className='button' onClick={this.handleEvent}>Create Event</button>
+            <br/>
+            <button className='button' onClick={()=>{
               this.getRandom(true)
             }}>New Random date</button>
-            <button onClick={()=>{
+            <button className='button' onClick={()=>{
               this.getRandom(false)
             }}>New Match Date</button>
-        
           </div>
-        }
-      </div>
-
-
-    )
-  }
+        </div>
+      }
+    </div>
+  )
+}
 }
 
 export default Randomiser

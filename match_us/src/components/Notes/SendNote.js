@@ -24,44 +24,47 @@ class SendNote extends React.Component {
 
   render(){
     const { data } = this.state
-    const { connection } = this.props
+    const { connection, sendNote } = this.props
     return (
-      <>
-        <form className='event-form center' onSubmit= {this.handleSubmit}>
+    
+      <div className='modal' id='notes-modal' onClick={sendNote}>
+        <div className='m-pop' id='notes-pop' onClick={e=> e.stopPropagation()}>
 
-          <div className='auth-head'>New Love Note</div>
+          <form className='event-form center' onSubmit= {this.handleSubmit}>
+            <div className='auth-head'>New Love Note</div>
 
-          <div className='form-field'>    
-            <label>To:</label>          
-            <input readOnly  className='e-input'
-              value={connection.partner.first_name}/>
-          </div>
+            <div className='form-field'>    
+              <label>To:</label>          
+              <input readOnly  className='e-input'
+                value={connection.partner.first_name}/>
+            </div>
 
-          <div className='form-field'> 
-            <label>From:</label>            
-            <input readOnly className='e-input'
-              value={connection.user.first_name}/>
-          </div>
+            <div className='form-field'> 
+              <label>From:</label>            
+              <input readOnly className='e-input'
+                value={connection.user.first_name}/>
+            </div>
 
-          <div className='form-field'>            
-            <label>Note:</label>   
-            <textarea className='e-input'
-              name="notes"
-              value={data.notes}
-              onChange={this.handleChange}/>
-          </div>
+            <div className='form-field'>            
+              <label>Note:</label>   
+              <textarea className='e-input'
+                name="notes"
+                value={data.notes}
+                onChange={this.handleChange}/>
+            </div>
 
-          <div className='form-field'>            
-            <input cclassName='e-input'
-              name="color" 
-              value={data.color}
-              type="color"
-              onChange={this.handleChange}/>
-          </div>
+            <div className='form-field'>            
+              <input cclassName='e-input'
+                name="color" 
+                value={data.color}
+                type="color"
+                onChange={this.handleChange}/>
+            </div>
 
-          <button className='e-input auth-button'> Send!</button>   
-        </form>
-      </>
+            <button className='e-input auth-button'> Send!</button>   
+          </form>
+        </div>
+      </div>
     )
   }
 }

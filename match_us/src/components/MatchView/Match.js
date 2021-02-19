@@ -26,7 +26,7 @@ async componentDidMount() {
 
 getMatches = async () => {
   const { connection, section } = this.props
-  const r  = await axios.get(`/api/match/${section}/${connection.id}/${connection.partner.id}/`,headers())
+  const r  = await axios.get(`/api/match/${section}/${connection.id}/${connection.partner.id}/short/`,headers())
   this.setState({ matches: r.data })
 } 
 
@@ -38,7 +38,7 @@ swipe = async (d) => {
 
 checkMatch = async (i) => {
   const { connection, section } = this.props
-  const r = (await axios.post(`/api/match/${section}/${connection.id}/${connection.partner.id}/`, { id: i })).data
+  const r = (await axios.post(`/api/match/${section}/${connection.id}/${connection.partner.id}/all/`, { id: i })).data
   if (r) {
     this.setState({ match: true })
     this.getMatches()
@@ -82,7 +82,8 @@ render(){
   const { connection, results, getResults, section, swipeData } = this.props
   const r = results[0]
 
-  if (!view) return <List section={section} results={results} swipeData={swipeData}/>
+  if (!view) return <List section={section} results={results} changeView={this.changeView} swipeData={swipeData}/>
+
   return (
     <div className='sw fh flex'>
 

@@ -3,12 +3,14 @@ import axios from 'axios'
 import ListCard from './ListCard'
 import MatchModal from './MatchModal'
 import { headers } from '../../Lib/auth'
+import view from '../../styles/assets/swipe-buttons/view-icon.jpg'
 
 class List extends React.Component {
 
   state = {
     modal: false,
-    error: ''
+    error: '',
+    view: false
   }
 
   getDetail = async (e) => {
@@ -38,27 +40,35 @@ class List extends React.Component {
     this.setState({ modal: false })
   }
 
+
+
   render() {
-    const { results, section } = this.props
+    const { results, section, changeView } = this.props
     return (
 
-      <div className='relative swipeview'>
-        {this.state.modal ? 
-          <MatchModal
-            error={this.state.error}
-            modal={this.modal} /> : null}
+      <>
+        <img src={view} className='list-icon right' alt='list-view' onClick={changeView}/>
+  
+        <div className='swipeview'>
+          {this.state.modal ? 
+            <MatchModal
+              error={this.state.error}
+              modal={this.modal} /> : null}
 
-        <div className='list-cont scroll'>
+          <div className='list-cont scroll'>
+  
+            <h1 className='title'> Results</h1>
 
-          {results.map((r,i) => ( 
-            <ListCard r={r} i={i}
-              key={i}
-              section={section}
-              like={this.like}/> 
+            {results.map((r,i) => ( 
+              <ListCard r={r} i={i}
+                key={i}
+                section={section}
+                like={this.like}/> 
               
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 }

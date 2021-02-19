@@ -28,11 +28,11 @@ class ActivitiesRandomView(APIView):
             matches = activities.objects.filter(Q(user=request.data['partner']) & Q(direction=True) & Q(connection=request.data['connection']) & Q(f_id__in=id_list)).values_list('f_id', flat = True)
             if len(matches) == 0:
                 return Response({ 'message': 'No matches, swipe to add more!'})
-            choice = matches[random.randint(0,len(matches))]
+            choice = matches[random.randint(0,len(matches) - 1)]
             req = requests.get(gDetails, params={'place_id': choice}).json()
         else :
             r = requests.get(nearby,params=request.data).json()
-            choice = r['results'][random.randint(0,len(r['results']))]
+            choice = r['results'][random.randint(0,len(r['results']) - 1)]
             req = requests.get(gDetails, params={'place_id': choice['place_id']}).json()
         return Response(req['result'], HTTP_200_OK)
 

@@ -9,7 +9,7 @@ const Matches = ({ getDetail, matches,connection, section, changeView }) =>  {
   if (!matches) return null
   return (
     <>
-
+  
       {matches.map((m, i ) => {
         return <div onClick={getDetail} key={i} className='relative center pointer swipe-match-cont'> 
           <div className='flex' />
@@ -24,7 +24,7 @@ const Matches = ({ getDetail, matches,connection, section, changeView }) =>  {
         <Link to={`/connection/${connection.id}/${section}/results`}> 
           <img src={all} className='all-icon' alt='all'/>
         </Link>
-
+ 
       </div>
     </>
   )

@@ -46,10 +46,10 @@ const FoodDetails = ({ r, setData, match, delMatch }) => {
 
             {match.path.includes('results') ? 
               <>
-                <button onClick={()=>{
+                <button  className='button' onClick={()=>{
                   setData( { location: r.formatted_address })
                 }}> + Create Date</button> 
-                <button onClick={()=> {
+                <button  className='button' onClick={()=> {
                   delMatch(r.place_id)
                 }}> Delete</button>
               </> : null}

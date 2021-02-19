@@ -128,6 +128,10 @@ bottom: 0;
   display: inline;
 }
 
+.n-line {
+  border:none;
+  }
+  
 .right {
 float: right;
 }
@@ -149,22 +153,10 @@ float: right;
   }
 }
 
-.n-line {
-  border:none;
-  }
-  
-  .s-cont {
-    padding: 10px;
-  }
-  
-  .bt{
-    border:2px solid purple;
-  }
-  
-
-  
-.red{
-  border: 2px solid red;
+.button { 
+  margin: 2px;
+  background: rgb(40, 40, 40);
+  color: white;
 }
 
 .cover {
@@ -220,23 +212,40 @@ padding:2vh;
 }
 
 //Randomiser
-.random-buttons{
-  @extend .column;
-  .random-img{
-    height: 10vw;
-    mix-blend-mode: color-dodge;
+
+.random-img{
+  height: 10vw;
+  mix-blend-mode: color-dodge;
   }
+
 .random-button {
   width: 30vw;
   margin: 2vw;
   padding: 3vw;
-  color: rgb(255, 255, 255);
   font-size: 2.5vh;
-  font-style: bold;
+  color: rgb(255, 255, 255);
   border: 3px solid rgb(254, 254, 254);
   background-color: rgba(6, 53, 53, 0.4);
-  outline: none;
 }
+
+.random {
+  width: 50vw;
+  padding: 2vh;
+  
+  h1{
+    margin:20px 10px;
+    text-decoration: underline;
+  }
+  a {
+    word-wrap: break-word;
+    white-space: normal;
+  }
+}
+
+.random-icon{
+  margin: 0 15px;
+  width:5vw;
+  mix-blend-mode: screen;
 }
 
 

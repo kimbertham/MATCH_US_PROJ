@@ -29,7 +29,7 @@ class MovieRandomView(APIView):
             matches = movies.objects.filter(Q(user=request.data['partner']) & Q(direction=True) & Q(connection=request.data['connection']) & Q(f_id__in=id_list)).values_list('f_id', flat = True)
             if len(matches) == 0:
                 return Response({ 'message': 'No matches, swipe to add more!'})
-            choice= matches[random.randint(0, len(matches))]
+            choice= matches[random.randint(0, len(matches) - 1)]
             r = requests.get(f'{tmdb_details}{choice}' , params={'api_key': tmdb_key}).json()
             return Response(r, HTTP_200_OK)
         else:

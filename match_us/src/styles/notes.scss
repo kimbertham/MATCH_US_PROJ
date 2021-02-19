@@ -25,6 +25,16 @@ right: 0;
 margin:10px;
 }
 
+
+#notes-modal {
+  z-index: 5;
+}
+
+#notes-pop {
+  width: 40vw;
+  height: 40vw;
+}
+
 //triangles
 
 .triangle-up {
