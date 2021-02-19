@@ -93,11 +93,18 @@ render() {
 
   if (loader) return  <Loader/>
 
-  if (event) return <div className='fh center'>
-    <NewEvent 
-      connection={connection} 
-      data={{ location: food.formatted_address }} 
-      closeModal={this.handleEvent}/> 
+  if (event) return <div className='swipeview sw fh'>
+    <div className='modal' onClick={this.handleEvent}>
+      <div className='m-pop' onClick={e=>{
+        e.stopPropagation()
+      }}>
+        <NewEvent 
+          connection={connection} 
+          data={{ location: food.formatted_address, 
+            notes: ` ${food.name} & ${movie ? movie.title : activity.name}` }} 
+          closeModal={this.handleEvent}/> 
+      </div>
+    </div>
   </div>
 
   return (

@@ -19,7 +19,6 @@ state= {
 }
 
 componentDidMount() {
-  console.log(this.props.data)
   this.setState({ data: 
     { ...this.state.data, 
       ...this.props.data, 

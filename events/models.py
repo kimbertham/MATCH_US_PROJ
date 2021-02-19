@@ -3,12 +3,12 @@ from django.db import models
 
 # Create your models here.
 class Events(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=100)
     time = models.TimeField()
     location =models.CharField(max_length=100, blank=True, null=True)
     request = models.BooleanField(default=True)
     date = models.DateField()
-    notes = models.CharField(max_length=50, blank=True, null=True)
+    notes = models.CharField(max_length=5000, blank=True, null=True)
     creator =  models.ForeignKey(
         'jwt_auth.User',
         related_name='created_events',

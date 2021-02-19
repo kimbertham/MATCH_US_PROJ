@@ -17,6 +17,7 @@ from .models import Events
 
 class EventsView(APIView):
     def post(self,request):
+        print(request.data)
         if not request.POST._mutable:
             request.POST._mutable = True
             request.data['creator'] = request.user.id
