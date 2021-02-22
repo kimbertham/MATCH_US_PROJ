@@ -3,18 +3,25 @@ import React from 'react'
 import axios from 'axios'
 import moment from 'moment'
 import { headers } from '../../Lib/auth'
+import { withRouter } from 'react-router-dom'
 import Calender from './Calender'
 import NewEvent from './NewEvent'
 import EventRequest from './EventRequest'
+import EventList from './EventsList'
 
 
 class Events extends React.Component{
 state= {
   date: moment().format('YYYY-MM-DD'),
   modal: false,
-  events: {},
+  events: false,
   req: false
 }
+
+year = Number(moment(this.state.date).format('YYYY'))
+month =  Number(moment(this.state.date).format('MM'))
+homepage = location.pathname.includes('home') ? 'home' : 'con'
+eventsClass = location.pathname.includes('events') ? 'events' : 'overview'
 
 componentDidMount() {
   this.getEvents()
@@ -36,18 +43,11 @@ changeMonth = (d) => {
 }
 
 getEvents = async() => {
-  let data
-  const { page, connection, user } = this.props
+  const { connection, user } = this.props
 
-  page === 'h' ? 
-    data = {
-      month: Number(moment(this.state.date).format('MM')) ,
-      section: 'h' }
-    : 
-    data = { 
-      month: Number(moment(this.state.date).format('MM')) ,
-      section: 'r', 
-      connection: connection.id }
+  const data = this.homepage === 'home' ?
+    { month: this.month ,section: 'home' } :
+    { month: this.month , section: 'con', connection: connection.id }
 
   const res = await axios.post(`/api/events/get/${user.id}/`, data, headers())
   this.setState({ events: res.data })
@@ -66,13 +66,12 @@ setReq = (r) => {
 }
 
 render(){
-
   const { date, events, data , req } = this.state
   const { connection, connections, user } =  this.props
   return (
 
 
-    <div className='test relative'>
+    <div className='relative'>
 
       {data || req ? 
         <div onClick={this.closeModal} className='modal'>
@@ -80,14 +79,12 @@ render(){
             onClick={e => e.stopPropagation()}>
             
             {req ? 
-              <EventRequest 
-                user={user}
+              <EventRequest user={user}
                 req={req}
                 closeModal={this.closeModal}
                 getEvents={this.getEvents}/>
               :
-              <NewEvent
-                data={data}
+              <NewEvent data={data}
                 connection={connection}
                 connections={connections}
                 closeModal={this.closeModal}
@@ -96,16 +93,25 @@ render(){
           </div>
         </div> : null}
 
-      <Calender
-        date={date}
-        events={events}
-        setData={this.setData}
-        setReq={this.setReq}
-        changeMonth={this.changeMonth}/>
+      <div className='flex'>
 
+        <Calender events={events}
+          date={date}
+          user={user}
+          page={this.eventsClass}
+          setData={this.setData}
+          setReq={this.setReq}
+          changeMonth={this.changeMonth}/>
+
+        {this.eventsClass === 'events' ?
+          <EventList events={events}
+            setReq={this.setReq}/> 
+          : null}
+          
+      </div>
     </div>
   )
 }
 }
 
-export default Events
+export default withRouter(Events)

@@ -12,7 +12,7 @@ state= {
     title: '',
     location: '',
     notes: '',
-    type: '', 
+    date_type: '', 
     time: '',
     connection: ''
   }
@@ -43,11 +43,11 @@ handleLocation = (e) => {
   this.setState({ data })
 }
 
-render(){
 
+render(){
+  console.log(this.state)
   const { data } = this.state
   const { connection,connections } = this.props
-  if (!connection) return null
   return (
     <>
       <form className='event-form center' onSubmit= {this.handleSubmit}>
@@ -104,6 +104,7 @@ render(){
           handleChange={this.handleChange}
           handleLocation={this.handleLocation}/>
 
+
         <div className='form-field'> 
           <label>Notes:</label>     
           <textarea
@@ -115,19 +116,19 @@ render(){
 
         <div className='flex'>
           <label>🍩</label>
-          <input onChange={this.handleChange} type="radio" checked={data.type === 'food'} value='🍩 Food'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='🍩 Food'/>
           <label>🏓</label>
-          <input onChange={this.handleChange} type="radio" checked={data.type === 'sports'}  value='🏓 Sports'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='🏓 Sports'/>
           <label>💃</label>
-          <input onChange={this.handleChange} type="radio" checked={data.type === 'music'} value='💃 Music'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='💃 Music'/>
           <label>🍿</label>
-          <input onChange={this.handleChange} type="radio" checked={data.type === 'film'} value='🍿 Film'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='🍿 Film'/>
           <label>♟️</label>
-          <input onChange={this.handleChange} type="radio" hecked={data.type === 'indoor'} value='♟️ Indoor'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='♟️ Indoor'/>
           <label>🎡</label>
-          <input onChange={this.handleChange} type="radio" hecked={data.type === 'outdoor'} value='🎡 Outdoor'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='🎡 Outdoor'/>
           <label>🏕️</label>
-          <input onChange={this.handleChange} type="radio" hecked={data.type === 'travel'} value='🏕️ Travel'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='🏕️ Travel'/>
         </div>
 
 

@@ -108,7 +108,7 @@ render() {
   </div>
 
   return (
-    <div className='fh center'>
+    <div className='fh scroll center'>
 
       {!food ?  <div className={loader ? 'display-none' : 'column'}>
 
@@ -124,7 +124,7 @@ render() {
           <div className='random'>
             <div className='flex'>
               <img src={foodIcon} alt='food' className='random-icon'/>
-              <h1>Date Meal</h1>
+              <h2 className='r-title'>Date Meal</h2>
             </div>
             <h2>{food.message || food.name}</h2>
             <a href={food.website}>{food.website}</a>
@@ -136,7 +136,7 @@ render() {
             <div className='random'>
               <div className='flex'>
                 <img src={activityIcon} alt='activity' className='random-icon'/>
-                <h1>Date Activity</h1>
+                <h2 className='r-title'>Date Activity</h2>
               </div>
               <h2>{activity.message || activity.name}</h2>
               <a href={activity.website}> {activity.website}</a>
@@ -145,10 +145,10 @@ render() {
               {activity.types ? activity.types.map(t => <p key={t}> ‣ {t.replace(/_/g, ' ')}</p>) : null}
             </div>
             :
-            <div className='random '> 
+            <div className='random'> 
               <div className='flex'>
                 <img src={moviesIcon} alt='movies' className='random-icon'/>
-                <h1>Date Movie</h1>
+                <h2 className='r-title'>Date Movie</h2>
               </div>      
               <h2>{movie.message || movie.title}</h2>
               <p>{movie.release_date}</p>

@@ -1,28 +1,62 @@
 @import 'main.scss';
+
 .event-cont{
   margin: 1vw;
 }
+
+.events-list {
+  width: 20vw;
+  background-color: rgba(28, 145, 141, 0.3);
+  .e-l-card{
+    padding: 1vh;
+    margin: 15px;
+    border-radius: 20px ;
+    background:rgba(13, 150, 130, 0.3);
+  }
+}
+
+.events-calender-cont{
+  height: 95vh;
+  .events-calender-day {
+    width: (61vw / 7);
+    height: (95vh / 5.5);
+  }
+}
+
+.overview-calender-cont{
+  height: 60vh;
+  .overview-calender-day{
+    width: 5.5vw;
+    height: 11vh;
+  }
+}
+
+.c-modal{
+  max-width: 70%;
+}
+
 .calender {
-  border-radius: 10px;
+  padding-top: 5vh;
+  border-bottom-left-radius:10px;
+  border-bottom-right-radius:10px;
   border: 1px solid  rgba(52, 52, 52,0.5);
   background:rgba(250,250,250,0.7);
   display: table-cell;
 }
 
 .calender-day {
-  width: 5.5vw;
-  height: 11vh;
   background:rgba(250,250,250,0.7);
   border-radius: 5%;
   border: 1px solid  rgba(52, 128, 117, 0.2);
-
 }
 
 .calender-header{
-  height: 3vh;
+  height: 5vh;
+  border-top-left-radius:10px;
+  border-top-right-radius:10px;
   background-color: rgba(14, 87, 92,0.9);
   justify-content: space-between;
-  margin-bottom: 10px;
+  align-items: center;
   color: white;
 }
 
@@ -38,16 +72,31 @@
 }
 
 .request {
+@extend .pointer;
 font-size: 0.9vw;
-background-color: rgba(206, 206, 206, 0.2);
+background-color: rgba(157, 225, 228, 0.2);
+border-radius: 2px;
 margin:2px;
-padding: 0 2px;
+padding: 5px 2px;
 }
+
+.events-location {
+background: white;
+max-height: 10vh;
+max-width: 20vw;
+padding:0 10px;
+overflow: scroll;
+}
+
 
 .green {
-  color :green;
+  color :rgb(218, 146, 24);
 }
 
-.test {
-display: table-cell;
+.purple {
+  color: rgb(172, 19, 19);
+}
+
+.date {
+  color: green;
 }

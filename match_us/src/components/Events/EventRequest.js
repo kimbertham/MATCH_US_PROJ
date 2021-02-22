@@ -17,31 +17,30 @@ const EventRequest = ({ req, getEvents, closeModal, user }) => {
   }
 
   const request = req.request ? 'display-block' : 'display-none'
+
   return (
     <>
-      <div className='column'>
+      <div className='e-request column' key={req.id}>
+        <h1>Date <span className={request}>request</span>!</h1> 
 
-        <div className='e-request column' key={req.id}>
-          <h1>Date <span className={request}>request</span>!</h1> 
+        <p>{req.title}</p>
+        <p>{req.connection.participants.map(n=>`${n.first_name} `)}</p>
+        <p>{req.date} {req.time} </p>
+        <p>{req.location} </p>
+        <p>{req.notes} </p>
+        <p> {req.date_type}</p>
 
-          <p>{req.title}</p>
-          <p>{req.connection.participants.map(n=>`${n.first_name} `)}</p>
-          <p>{req.date} {req.time} </p>
-          <p>{req.location} </p>
-          <p>{req.notes} </p>
-          <p> {req.date_type}</p>
-
-          <div className={request}>
-            {req.creator === user.id ? <p>Waiting for response</p> :
-              <>
-                <button onClick={accept} className='accept-b'>Accept</button>
-                <button  onClick={decline} className='decline-b'>decline</button>
-              </>
-            }
-
-          </div>
+        <div className={request}>
+          {req.creator === user.id ? <p>Waiting for response</p> :
+            <>
+              <button onClick={accept} className='button'>Accept</button>
+              <button  onClick={decline} className='button'>decline</button>
+            </>
+          }
         </div>
-        
+        <div className={req.request ? 'display-none' : null}>
+          <button onClick={decline} className='button'>Cancel</button>
+        </div>
       </div>
     </>
   )

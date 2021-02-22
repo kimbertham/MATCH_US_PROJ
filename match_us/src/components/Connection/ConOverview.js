@@ -7,6 +7,7 @@ import NoteCard from '../Notes/NoteCard'
 import food from '../../styles/assets/menu-icons/food.jpg'
 import activities from '../../styles/assets/menu-icons/activities.jpg'
 import movies from '../../styles/assets/menu-icons/movies.jpg'
+import EventsCard from '../Events/EventsCard'
 
 class ConOverview extends React.Component{
   state = {
@@ -34,44 +35,37 @@ class ConOverview extends React.Component{
             <h1 className='o-border'>
               {connection.user.first_name} & {connection.partner.first_name}&apos;s Overview
             </h1>
-            <Events 
-              page='c'
+            <Events
               user={connection.user}
               connection={connection}/>
           </div>
 
           <div className='column'>
-            <div className='upcoming-dates o-border'>
-              <h2> Upcoming Date</h2>
-              {data.events.map(e => {
-                return <div key={e.id} className='o-date'>
-                  <h3> {e.type} {e.title}</h3>
-                  <p> {e.date} {e.time.slice(0,5)}</p>
-                  <small> {e.location.split(',')[0]}</small>
-                  <br/>
-                  <small> - {e.notes}</small>
-                </div>
-              })}
-            </div>
+            <Link to={`/connection/${connection.id}/events`}>
+              <div className='upcoming-dates o-border'>
+                <h2> Upcoming Date</h2>
+                {data.events.map(e => {
+                  return <EventsCard  key={e.id} e={e}/>
+                })}
+              </div>
+            </Link>
+            <Link to={`/connection/${connection.id}/events`}>
 
-            <div className='upcoming-dates o-border'>
-              <h2> Date Requests</h2>
-              {data.req.map(e => {
-                return <div key={e.id} className='o-req o-date'>
-                  <h3> {e.type} {e.title}</h3>
-                  <p> {e.date} {e.time.slice(0,5)}</p>
-                  <small> {e.location.split(',')[0]}</small>
-                  <br/>
-                  <small> - {e.notes}</small>
-                </div>
-              })}
-            </div>
+              <div className='upcoming-dates o-border'>
+                <h2> Date Requests</h2>
+                {data.req.map(e => {
+                  return <EventsCard  key={e.id} e={e}/>
+                })}
+              </div>
+            </Link>
           </div>
           
-          <div className='center column'>
-            <h2> Notes</h2>
-            {data.note.map(n => <NoteCard key={n.id} n={n} connection={connection}/>)}
-          </div>
+          <Link to={`/connection/${connection.id}/notes/inbox`}>
+            <div className='center column'>
+              <h2> Notes</h2>
+              {data.note.map(n => <NoteCard key={n.id} n={n} connection={connection}/>)}
+            </div>
+          </Link>
         </div>
     
         <div className='latest-matches o-border flex'>

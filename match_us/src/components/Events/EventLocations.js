@@ -1,10 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 
-// const proxyurl = 'https://cors-anywhere.herokuapp.com/'
-// const key = '&key=AIzaSyAn3WW4SI3RHmQ7I_6HFcrUTdNalXkoJ4A'
-// const baseURL = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='
-
 class EventLocations extends React.Component {
   state ={
     location: '',
@@ -45,16 +41,17 @@ class EventLocations extends React.Component {
             onChange={ this.handlePlaces}/>
         </div>
 
-        <div ref={r => this.l = r} className='aboslute'>
-          {locations.map(l => {
-            return <div 
-              key={l.id} ref={r => this.l = r} className='pointer' onClick={()=>{
-                handleLocation(l.description), this.setState({ locations: [] })
-              }}>
-              <p > {l.description} </p>
-            </div>
-        
-          })}
+        < div className='events-location'>
+          <div ref={r => this.l = r}>
+            {locations.map(l => {
+              return <div 
+                key={l.id} ref={r => this.l = r} className='pointer' onClick={()=>{
+                  handleLocation(l.description), this.setState({ locations: [] })
+                }}>
+                <p > {l.description} </p>
+              </div>
+            })}
+          </div>
         </div>
       </>
     )

@@ -39,32 +39,28 @@ class Notes extends React.Component {
   }
 
   readNote = async (e) => {
-    console.log(e)
     await axios.patch(`/api/notes/${e.currentTarget.id}/none/`,null, headers())
     this.getNotes()
   }
 
   enlarge = (n) => {
-    console.log('called')
     this.setState({ enlarge: n  })
   }
 
   render(){
     const { notes, send, enlarge } = this.state
     const { connection, match } = this.props
+    
     if (!notes) return null
-
     return (
       <div className='fh center'>
 
         {enlarge ? <NotesModal note={enlarge} enlarge={this.enlarge}/>  : null }
         
 
-        {send ? 
-          <SendNote 
-            connection={connection} 
-            sendNote={this.sendNote} /> 
-          : null}
+        {send ?  <SendNote 
+          connection={connection} 
+          sendNote={this.sendNote} /> : null}
 
         {match.params.box === 'inbox' ? 
           <h1 className='title'>{connection.partner.first_name}&apos;s Love Notes to {connection.user.first_name}</h1> :
@@ -74,11 +70,15 @@ class Notes extends React.Component {
 
         <div className='notes-cont scroll relative wrap center'>
           {notes.map(n=>{
-            return <NoteCard n={n}  key={n.id} 
-              connection={connection} 
-              enlarge={this.enlarge}
-              readNote={this.readNote} 
-              deleteNote={this.deleteNote} />
+            return (
+              <div className='note-cont' key={n.id}  id={n.id} onClick={e=>{
+                n.read ? this.enlarge(n) : this.readNote(e)
+              }}>
+                <NoteCard n={n}  
+                  connection={connection} 
+                  deleteNote={this.deleteNote} />
+              </div>
+            )
           })}
         </div>
       </div>

@@ -7,7 +7,7 @@ const Overview = ({ user, connections }) => {
   return (
     <div>
       <h1>{user.first_name}&apos;s Overview </h1>
-      <Events page='h'
+      <Events
         connections={connections}
         user={user}/>
       

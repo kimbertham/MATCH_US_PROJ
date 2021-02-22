@@ -61,7 +61,7 @@ class ConnectionsDetailView(APIView):
 
 # get overview 
     def post(self,request,pk):
-        n = Notes.objects.filter(connection=pk).exclude(sender=request.user.id)[:2]
+        n = Notes.objects.filter(Q(connection=pk) & Q(read=True)).exclude(sender=request.user.id)[:2]
         f = food.objects.filter(Q(connection=pk) & Q(direction=True)).last()
         m = movies.objects.filter(Q(connection=pk) & Q(direction=True)).last()
         a = activities.objects.filter(Q(connection=pk) & Q(direction=True)).last()

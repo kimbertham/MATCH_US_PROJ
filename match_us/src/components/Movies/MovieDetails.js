@@ -26,15 +26,17 @@ const MovieDetails = ({ r, setData, delMatch, match }) => {
           <p> {r.genres ? r.genres.map(g=> `${g.name} | `) : null }</p>
           <Link to={r.homepage}>{r.homepage}</Link>
 
-          <div className='flex-end detail-buttons'>
+          <div className='flex-end detail-buttons' onClick={e=>{
+            e.stopPropagation()
+          }}>
+            
             {match.path.includes('results') ? 
               <>
-                <button className='button' onClick={e=> {
-                  e,
-                  setData( { notes: `${r.title}, ${r.release_date}`, type: 'film' })
+                <button className='button' onClick={()=> {
+                  setData( { notes: `${r.title}, ${r.release_date}`, date_type: '🍿 Film' })
                 }}> + Create Date</button> 
-                <button className='button' onClick={e=> {
-                  delMatch(e, r.id)
+                <button className='button' onClick={()=> {
+                  delMatch( r.id)
                 }}> Delete</button>
               </> : null}
         

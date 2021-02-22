@@ -28,7 +28,7 @@ class SendNote extends React.Component {
     return (
     
       <div className='modal' id='notes-modal' onClick={sendNote}>
-        <div className='m-pop' id='notes-pop' onClick={e=> e.stopPropagation()}>
+        <div className='m-pop' id='notes-pop'  style={{ backgroundColor: data.color }}  onClick={e=> e.stopPropagation()}>
 
           <form className='event-form center' onSubmit= {this.handleSubmit}>
             <div className='auth-head'>New Love Note</div>
