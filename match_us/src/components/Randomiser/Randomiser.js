@@ -91,7 +91,7 @@ render() {
   const {  food, activity, movie, payer, loader, event } = this.state
   const { connection } = this
 
-  if (loader) return  <Loader/>
+  if (loader) return  <Loader type='Bars'/>
 
   if (event) return <div className='swipeview sw fh'>
     <div className='modal' onClick={this.handleEvent}>
@@ -108,7 +108,7 @@ render() {
   </div>
 
   return (
-    <div className='fh scroll center'>
+    <div className='container scroll '>
 
       {!food ?  <div className={loader ? 'display-none' : 'column'}>
 

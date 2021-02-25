@@ -12,7 +12,6 @@ class NotesListView(APIView):
     def post(self, request):
         if not request.POST._mutable:
             request.POST._mutable = True
-        request.data['sender'] = request.user.id
         m = NotesSerializer(data=request.data)
         if m.is_valid():
             m.save()
@@ -21,10 +20,10 @@ class NotesListView(APIView):
 
 class NotesDetailsView(APIView): 
     def get(self, request, pk, box):
-        if box == 'inbox':
-            n = Notes.objects.filter(connection=pk).exclude(sender=request.user.id)
+        if box == 'outbox':
+            n = Notes.objects.filter(connection=pk).exclude(reciever=request.user.id)
         else:
-            n = Notes.objects.filter(Q(connection=pk) & Q(sender=request.user.id))
+            n = Notes.objects.filter(Q(connection=pk) & Q(reciever=request.user.id))
         notes = NotesSerializer(n, many=True)
         return Response(notes.data, HTTP_200_OK)
 
@@ -35,9 +34,7 @@ class NotesDetailsView(APIView):
 
     def patch(self, request, pk, box):
         n = Notes.objects.get(id=pk)
-        print(n.sender.id)
-        print(request.user.id)
-        if request.user.id != n.sender.id:
+        if request.user.id == n.reciever.id:
             n.read = True
             n.save()
             return Response(status=HTTP_200_OK)

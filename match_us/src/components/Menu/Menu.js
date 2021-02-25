@@ -15,20 +15,25 @@ class Menu extends React.Component {
 
     return (
 
-      <div className='menu-cont'>
+      <div className='menu-cont relative'>
     
-        {connections ?
-          <MenuUser 
-            user={user}
-            setCon={setCon}
-            connections={connections}
-            setColour={this.setColour}/> 
-          :
+        <div>
+          {connections ? 
+            <MenuUser 
+              user={user}
+              setCon={setCon}
+              connections={connections}
+              setColour={this.setColour}/> 
+            
+            :
 
-          <MenuCon
-            connection={connection}
-            setColour={this.setColour}/>
-        }
+            <MenuCon
+              connection={connection}
+              setColour={this.setColour}/>
+          }
+        </div>
+
+
       </div>
     )
   }

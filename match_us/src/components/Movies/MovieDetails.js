@@ -13,7 +13,7 @@ const MovieDetails = ({ r, setData, delMatch, match }) => {
       <div className='fh row center'>
 
         <img alt='poster' className='d-m-img' src={`${poster}${r.poster_path}`}/>
-        <div className='d-m-text flex-end column'>
+        <div className='d-m-text'>
           <h1>{r.title}</h1> <h3>{r.release_date}</h3> 
           <br/>
           <h2>{r.tagline} </h2>

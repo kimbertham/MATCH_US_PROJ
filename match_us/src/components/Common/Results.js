@@ -40,7 +40,8 @@ class MatchHome extends React.Component {
     const { matches, detail } = this.state
     const section = this.props.match.params.section
 
-    if (!matches) return <Loader/>
+    if (!matches) return <Loader type='Circles'/>
+
     return (
 
       <>
@@ -59,10 +60,10 @@ class MatchHome extends React.Component {
               {connection.partner.first_name} and {connection.user.first_name}&apos;s {section} matches
             </h1> 
             
-            <div className='wrap center match-cont'>
+            <div className='match-cont'>
               {matches.map(m => {
                 return <div  key={m.id} id={m.id} onClick={this.getDetail}
-                  className={`${section}-match-item match-item center`}>
+                  className={`${section}-match-item match-item`}>
                   <img className={'match-img'} src={m.image} />
                   <h1 >{m.name.slice(0,28)}</h1>
                 </div>

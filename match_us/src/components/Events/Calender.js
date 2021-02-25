@@ -17,23 +17,22 @@ const Calender = ({ date, changeMonth, events, setData, setReq, page, user }) =>
 
   if (!events) return null  
 
-  console.log(events)
   for (let i = 0; i < moment(date).startOf('month').format('d') ; i++){
     blank.push( <td className='empty'> {''}</td>)
   }
 
   for (let d = 1; d <= moment(date).daysInMonth(); d++) {
     const date =  d.toString().length === 1 ? `${cYear}-${cMonth}-0${d}` : `${cYear}-${cMonth}-${d}`
-    const noEvent = <td onClick={setData} className={`calender-day ${page}-calender-day`} key={d} id={date}> {d} </td>
+    const noEvent = <td onClick={setData} className='calender-day'  key={d} id={date}> {d} </td>
 
     if (events.length > 0) {
       const e = events.filter(x=> x.date === date)
       e.length > 0 ? days.push(
-        <td  onClick={setData} className={`calender-day ${page}-calender-day`}  key={d}  id={date}>
+        <td  onClick={setData} className='calender-day'  key={d}  id={date}>
           {d}
-          {e.map(x=> {
+          {e.map((x,i)=> {
             return <p className={`request ${x.request && x.creator === user.id ? 'green' : x.request ? 'purple' : 'date' }`}
-              key={x.id}   onClick={ e =>{
+              key={i}   onClick={ e =>{
                 e.stopPropagation(), setReq(x)
               }}> {x.date_type.match(regex)} {x.title}</p>
           })}

@@ -33,7 +33,7 @@ const  Login = ({ change, submit, form, data }) => {
 
       <div 
         onClick={form}
-        className='flex-end italic pointer'>
+        className='auth-link'>
             Not a member?
       </div>   
 

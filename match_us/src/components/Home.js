@@ -28,23 +28,23 @@ class Home extends React.Component {
     const { user, connections } = this.state
     if (!user) return null
     return (
+      <div className='flex'>
 
-      <div className='fh flex'>
+        <div>
+          <Menu page='home'
+            user={user}
+            connections={connections}/>
+        </div>
 
-        <Menu page='home'
-          user={user}
-          connections={connections}/>
-
-        <Switch>
-
-          <Route path='/home/wishlist' render={() => 
-            <Wishlist  name={user.first_name} id={user.id}/> }/>
+        <div className='main center' >
+          <Switch>
+            <Route path='/home/wishlist' render={() => 
+              <Wishlist  name={user.first_name} id={user.id}/> }/>
             
-          <Route path='/home' render={() => 
-            <Overview  connections={connections} user={user}/> }/>
-
-        
-        </Switch>
+            <Route path='/home' render={() => 
+              <Overview  connections={connections} user={user}/> }/>
+          </Switch>
+        </div>
       </div>
     )
   }

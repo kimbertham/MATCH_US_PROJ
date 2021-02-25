@@ -55,7 +55,6 @@ render(){
         <div className='form-field'>            
           <label>Title:</label>   
           <input
-            className='e-input'
             name="title"
             value={data.title}
             onChange={this.handleChange}/>
@@ -66,7 +65,7 @@ render(){
           {connection ?
             <input
               readOnly
-              className='e-input n-line'
+              className='n-line'
               value={`${connection.partner.first_name}, ${connection.user.first_name}`}/>
             :
             <select 
@@ -84,7 +83,7 @@ render(){
           <input 
             type='date'
             name="date"
-            className='e-input n-line'
+            className='n-line'
             value={data.date}
             onChange={this.handleChange}/>
         </div>
@@ -92,7 +91,6 @@ render(){
         <div className='form-field'> 
           <label>Time:</label>     
           <input
-            className='e-input'
             name="time"
             type='time'
             value={data.time}
@@ -108,7 +106,6 @@ render(){
         <div className='form-field'> 
           <label>Notes:</label>     
           <textarea
-            className='e-input'
             name='notes'
             value={data.notes}
             onChange={this.handleChange}/>
@@ -116,19 +113,19 @@ render(){
 
         <div className='flex'>
           <label>🍩</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='🍩 Food'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='🍩'/>
           <label>🏓</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='🏓 Sports'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='🏓'/>
           <label>💃</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='💃 Music'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='💃'/>
           <label>🍿</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='🍿 Film'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='🍿'/>
           <label>♟️</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='♟️ Indoor'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='♟️'/>
           <label>🎡</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='🎡 Outdoor'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='🎡'/>
           <label>🏕️</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='🏕️ Travel'/>
+          <input onChange={this.handleChange} type="radio" name='date_type' value='🏕️'/>
         </div>
 
 

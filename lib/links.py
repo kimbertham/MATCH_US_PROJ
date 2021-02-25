@@ -15,11 +15,14 @@ coOrds = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='
 geoCo = 'https://maps.googleapis.com/maps/api/geocode/json?address='
 
 #AMAZON LINKS
-amazonURL = 'https://amazon23.p.rapidapi.com/product-search'
 
-amazon_details = 'https://amazon23.p.rapidapi.com/product-details'
+
+amazonURL = 'https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-search-by-keyword-asin'
+
+amazon_details = 'https://axesso-axesso-amazon-data-service-v1.p.rapidapi.com/amz/amazon-lookup-product'
 
 amazon_headers = {
     'x-rapidapi-key': "5789c571cbmsh6847871835030fcp18787bjsncd9c94134328",
-    'x-rapidapi-host': "amazon23.p.rapidapi.com"
+    'x-rapidapi-host': "axesso-axesso-amazon-data-service-v1.p.rapidapi.com"
     }
+

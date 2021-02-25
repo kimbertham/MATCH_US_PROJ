@@ -25,10 +25,11 @@ const FoodDetails = ({ r, setData, match, delMatch }) => {
 
           <h3>Average Rating: {r.rating}/5 </h3>
           <p>Customer Reviews:</p>
-          {r.reviews ? r.reviews.slice(0,3).map(r => {
-            return <>
-              <p key={r.time}> <b>{r.author_name}</b>:  {r.rating}/5</p>
-              <p>{r.text}</p> </>
+          {r.reviews ? r.reviews.slice(0,3).map((r,i) =>  {
+            <>
+              <p key={i}> <b>{r.author_name}</b>:  {r.rating}/5</p>
+              <p>{r.text}</p> 
+            </>
           }) : null}
           <br/>
 
@@ -40,7 +41,7 @@ const FoodDetails = ({ r, setData, match, delMatch }) => {
             </>
             : null}
     
-          <div className='flex-end detail-buttons' onClick={e=>{
+          <div className='detail-buttons' onClick={e=>{
             e.stopPropagation()
           }}>
 

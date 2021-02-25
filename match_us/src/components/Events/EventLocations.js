@@ -35,7 +35,6 @@ class EventLocations extends React.Component {
         <div className='form-field'> 
           <label>Location:</label> 
           <input
-            className='e-input'
             name='location'
             value={location}
             onChange={ this.handlePlaces}/>

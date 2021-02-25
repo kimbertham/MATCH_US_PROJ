@@ -3,23 +3,14 @@ from rest_framework import serializers
 
 from jwt_auth.models import User
 from jwt_auth.serializers import UserSerializer
-from .models import Connections, Requests
+from .models import Connections
 from events.models import Events
 from notes.serializers import NotesSerializer
 
-class RequestsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Requests
-        fields = '__all__'
 
 class ConnectionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Connections
-        fields = '__all__'
-
-class EventsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Events
         fields = '__all__'
 
 class BasicConnectionsSeralizer(ConnectionsSerializer):
@@ -28,9 +19,13 @@ class BasicConnectionsSeralizer(ConnectionsSerializer):
 class PopulatedConnectionsSerializer(ConnectionsSerializer):
     participants = UserSerializer(many=True)
 
-class PopulatedRequestsSerializer(RequestsSerializer):
-    user_from = UserSerializer()
-    user_to = UserSerializer()
+
+
+
+class EventsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Events
+        fields = '__all__'
 
 class PopulatedEventsSerializer(EventsSerializer):
     connection = PopulatedConnectionsSerializer()

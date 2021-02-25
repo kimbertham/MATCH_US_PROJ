@@ -16,8 +16,9 @@ class SendNote extends React.Component {
   }
 
   handleSubmit = async (e) => {
+    const { connection } = this.props
     e.preventDefault()
-    const data = { ...this.state.data, connection: this.props.connection.id }
+    const data = { ...this.state.data, connection: connection.id, reciever: connection.partner.id }
     await axios.post('/api/notes/', data, headers())
     this.props.sendNote()
   }
@@ -27,7 +28,7 @@ class SendNote extends React.Component {
     const { connection, sendNote } = this.props
     return (
     
-      <div className='modal' id='notes-modal' onClick={sendNote}>
+      <div className='modal' onClick={sendNote}>
         <div className='m-pop' id='notes-pop'  style={{ backgroundColor: data.color }}  onClick={e=> e.stopPropagation()}>
 
           <form className='event-form center' onSubmit= {this.handleSubmit}>
@@ -35,33 +36,33 @@ class SendNote extends React.Component {
 
             <div className='form-field'>    
               <label>To:</label>          
-              <input readOnly  className='e-input'
+              <input readOnly
                 value={connection.partner.first_name}/>
             </div>
 
             <div className='form-field'> 
               <label>From:</label>            
-              <input readOnly className='e-input'
+              <input readOnly
                 value={connection.user.first_name}/>
             </div>
 
             <div className='form-field'>            
               <label>Note:</label>   
-              <textarea className='e-input'
+              <textarea
                 name="notes"
                 value={data.notes}
                 onChange={this.handleChange}/>
             </div>
 
             <div className='form-field'>            
-              <input cclassName='e-input'
+              <input
                 name="color" 
                 value={data.color}
                 type="color"
                 onChange={this.handleChange}/>
             </div>
 
-            <button className='e-input auth-button'> Send!</button>   
+            <button className='auth-button'> Send!</button>   
           </form>
         </div>
       </div>

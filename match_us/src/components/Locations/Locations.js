@@ -42,7 +42,7 @@ render() {
   const {  connection, google } = this.props
   const { locations,center,selected, detail } = this.state
   return (
-    <div className='flex sw fh locations'>
+    <div className='flex'>
 
       {detail ? 
         <div className='swipeview'>
@@ -51,6 +51,7 @@ render() {
         : null}
 
       <div className='l-list' ref={l => this.list = l}>
+        
         <LocationList 
           connection={connection}
           locations={locations}

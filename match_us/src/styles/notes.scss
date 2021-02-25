@@ -1,3 +1,5 @@
+@import 'main.scss';
+
 .note{
   margin: 10px;
   width: 16vw;
@@ -19,8 +21,7 @@ align-items: flex-end;
 }
 
 .note-date{
-position:absolute;
-bottom: 0;
+@extend .bottom;
 right: 0;
 margin:10px;
 }
@@ -38,10 +39,9 @@ margin:10px;
 //triangles
 
 .triangle-up {
-  position: absolute;
+@extend .bottom;
   width: 0;
   height: 0;
-  bottom:0;
   border-left: 10vw solid transparent;
   border-right: 10vw solid transparent;
   border-bottom: 14.62vh solid red;
@@ -70,12 +70,11 @@ margin:10px;
 }
 
 .triangle-left {
-  position: absolute;
+@extend .bottom;
   width: 0;
   height: 3vh;
   right:0;
-  bottom:0;
-    z-index: 1;
+  z-index: 1;
   border-top: 6.648vh solid transparent;
   border-right: 13.29vh solid rgb(210, 52, 52);
   border-bottom: 6.648vh solid transparent;
@@ -83,10 +82,9 @@ margin:10px;
 }
 
 .triangle-right {
-  position: absolute;
+  @extend .bottom;
   width: 0;
   height: 3vh;
-  bottom:0;
   border-top: 6.648vh solid transparent;
   border-left: 13.29vh solid rgb(210, 52, 52);
   z-index: 1;

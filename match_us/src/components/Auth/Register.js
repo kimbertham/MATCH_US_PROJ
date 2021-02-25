@@ -73,7 +73,7 @@ const  Register = ({ change, submit, form, data })=> {
       </div>  
       <div 
         onClick={form}
-        className='flex-end italic pointer'>
+        className='auth-text'>
             Already a member?
       </div>   
 

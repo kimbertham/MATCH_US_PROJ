@@ -9,6 +9,8 @@ import notes from '../../styles/assets/menu-icons/notes.jpg'
 import wishlist from '../../styles/assets/menu-icons/wishlist.jpg'
 import calender from '../../styles/assets/menu-icons/calender.jpg'
 import overview from '../../styles/assets/menu-icons/overview.jpg'
+import arrow from '../../styles/assets/menu-icons/arrow.jpg'
+
 
 
 const MenuCon = ({ connection, location }) =>  {
@@ -23,14 +25,19 @@ const MenuCon = ({ connection, location }) =>  {
   }
 
   const { id } = connection
-
   return (
     <div className='m-con'>
 
-      <div className='m-profile center'>   
+      <Link to={'/home'}>
+        <div className='relative'>
+          <img src={arrow} className='m-arrow'/>
+        </div>
+      </Link>
+
+      <div className='m-profile center'> 
         <div className='center wrap'>
           <img src={connection.partner.profile_image} className='m-img' alt='profile-img'/>
-          <img src={connection.partner.profile_image} className='m-img m-img-con' alt='profile-img'/>
+          <img src={connection.partner.profile_image} className='m-img-large' alt='profile-img'/>
         </div>
         <h1>{connection.partner.first_name} {connection.partner.last_name}</h1>
         <small>Connected since {connection.created_at.slice(0,4)}</small>

@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { headers } from '../../Lib/auth'
+import WishlistCard from './WishlistCard'
 
 class WishlistSearch extends React.Component{
   state = {
@@ -18,34 +19,36 @@ class WishlistSearch extends React.Component{
     this.setState({ results: r.data })
   }
 
-  addWishlist = async (id) => {
-    await axios.post('/api/wishlist/', { a_id: id } , headers())
+  addWishlist = async (id, i) => {
+    await axios.post('/api/wishlist/', { a_id: id } , headers()) 
+    const results = [...this.state.results, Object.assign(this.state.results[i], { ...this.state.results[i], added: true } )]
+    this.setState({ results })
   }
 
   render(){
-    const { keyword, results } = this.state
+    const { keyword, results  } = this.state
     return (
       <>
+
         <form onSubmit={this.handleSubmit}>
-          <label>Add Items:</label>            
-          <input className='e-input'
+          <label>Add Items: </label>            
+          <input
             name='keyword'
             value={keyword}
             onChange={this.handleChange}/>
           <button>Search</button>
         </form>
 
-        <div className='flex-wrap'>
-          {results.map(r=>{
-            return <div  className='wishlist-item' key={r.product_id}>
-              <p>{r.title}</p>
-              <p>{r.price.current_price}</p>
-              <p>{r.reviews.rating}</p>
-              <img src={r.thumbnail}/>
+        <div className='wishlist-cont center flex wrap'>
+          {results.map((r,i)=>{
+            return <div  className='wishlist-item center' key={i}>
+              <WishlistCard r={r}/>
 
-              <button onClick={ () => {
-                this.addWishlist(r.asin)
-              }}> +Add </button>
+              {!r.added ? 
+                <button onClick={() => {
+                  this.addWishlist(r.asin, i)
+                }} className='button'> +Add </button> : 
+                <button disabled className='button'>Added</button>}
             </div>
           })}
         </div>

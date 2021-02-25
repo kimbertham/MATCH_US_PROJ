@@ -47,7 +47,7 @@ class MatchConnectionsView(APIView): # gets the Matches
                 results.append(r)
         return Response (results, HTTP_200_OK)
 
-    def post(self,request, section, connection, partner):   
+    def post(self,request, section, connection, partner, amount):   
         Model = apps.get_model(section, section)
         check = Model.objects.filter(Q(user=partner) & Q(connection=connection) & Q(f_id=request.data['id'])).exists()
         return Response (check, HTTP_200_OK)

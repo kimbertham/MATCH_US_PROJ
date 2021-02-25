@@ -3,10 +3,11 @@ import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import WishlistSearch from './WishlistSearch'
 import Loader from '../Common/Loader'
+import WishListCard from './WishlistCard'
 
 class Wishlist extends React.Component{
 state = {
-  wishlist: []
+  wishlist: false
 }
 
 async componentDidMount() {
@@ -15,7 +16,6 @@ async componentDidMount() {
 
 getWishlist = async () => {
   const r = await axios.get(`/api/wishlist/${this.props.id}/`)
-  console.log(r)
   this.setState({ wishlist: r.data })
 }
 
@@ -23,30 +23,25 @@ render(){
   const search = this.props.match.path.includes('home')
   const { wishlist } = this.state
 
-  if (!wishlist.message && wishlist.length === 0) return <Loader/>
   return (
-    <div>
+    <div className='fh scroll'>
   
-
-      <h1>{this.props.name}&apos;s Wishlist </h1>
-      {search ?  <WishlistSearch getWishlist={this.getWishlist}/> : true}
-
-      <div className='flex wrap'>
-
-          
-        {wishlist.message ? wishlist.message :
-          wishlist.map(w => {
-            return <a href={w.link} key={w.link}>
-              <div className='wishlist-item center'>
-                <img src={w.image} className='wishlist-img'/>
-                <p>{w.name.slice(0,50)}</p>
-              </div>
-            </a>
-          })}
-      </div>
-        
-    
-
+      {!wishlist ? <Loader type='Puff'/>  :
+        <>
+          <div className='center'>
+            <h1 className='title'>{this.props.name}&apos;s Wishlist </h1>
+            {search ?  <WishlistSearch getWishlist={this.getWishlist}/> : null}
+          </div>
+          <div className='flex wrap center'>
+            {wishlist.length > 0 ?
+              wishlist.map((r,i) => {
+                return  <div  className='wishlist-item center' key={i}>
+                  <WishListCard r={r}/>
+                </div>
+              }) : 'No wishlist items'}
+          </div>
+        </>
+      }
     </div>
   )
 }

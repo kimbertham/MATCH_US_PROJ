@@ -21,6 +21,8 @@ login = async (e) => {
   try {
     const res = await axios.post('/api/login/', { ...this.state.data })
     window.localStorage.setItem('token', res.data.token)
+    this.props.history.push('/home')
+    window.location.reload()
   } catch (err) {
     this.setState({ invalid: true })
     setTimeout(() => this.setState({ invalid: false }), 1000)
@@ -46,19 +48,19 @@ register = async (e) => {
     const { form , data, invalid } = this.state
 
     return (
-      <div className='a-cont center fp'>
+      <div className='a-cont'>
         <div className='flex'>
-          <div className='a-logo-wrap relative center'>
+          <div className='a-logo-wrap'>
             <img 
               className='a-logo' alt='logo'
               src='https://i.imgur.com/VfFxGMN.jpg'/>
             <p>Match Us</p>
-            <p className='a-logo-sub absolute bottom'>
+            <p className='a-logo-sub'>
             Make every date the best date
             </p>
           </div>
       
-          <div className='a-form-cont center'>
+          <div className='a-form-cont'>
             {form ?
               <Login
                 change={this.handleChange}

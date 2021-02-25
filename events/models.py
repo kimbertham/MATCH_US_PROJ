@@ -20,13 +20,13 @@ class Events(models.Model):
         on_delete=models.CASCADE)
 
     TYPE_CHOICES = (
-        ('🏓 Sports', '🏓 Sports'),
-        ('💃 Music', '💃 Music'),
-        ('🍿 Film', '🍿 Film'),
-        ('♟️ Indoor', '♟️ Indoor'),
-        ('🎡 Outdoor', '🎡 Outdoor'),
-        ('🏕️ Travel', '🏕️ Travel'),
-        ('🍩 Food','🍩 Food')
+        ('🏓', '🏓'),
+        ('💃', '💃'),
+        ('🍿', '🍿'),
+        ('♟️', '♟️'),
+        ('🎡', '🎡'),
+        ('🏕', '🏕'),
+        ('🍩','🍩')
     )
     date_type = models.CharField(max_length=100, blank=True, choices=TYPE_CHOICES)
     

@@ -38,7 +38,7 @@ swipe = async (d) => {
 
 checkMatch = async (i) => {
   const { connection, section } = this.props
-  const r = (await axios.post(`/api/match/${section}/${connection.id}/${connection.partner.id}/all/`, { id: i })).data
+  const r = (await axios.post(`/api/match/${section}/${connection.id}/${connection.partner.id}/none/`, { id: i })).data
   if (r) {
     this.setState({ match: true })
     this.getMatches()
@@ -85,7 +85,7 @@ render(){
   if (!view) return <List section={section} results={results} changeView={this.changeView} swipeData={swipeData}/>
 
   return (
-    <div className='sw fh flex'>
+    <div className='fh flex'>
 
       <div className='swipe-matches'>
         <p>Matches</p>
@@ -121,7 +121,7 @@ render(){
               deleteMatches={this.deleteMatches}/> 
           </>
           : 
-          <Loader/> }
+          <Loader type='Bars'/> }
       </div>
 
     </div>

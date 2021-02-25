@@ -24,22 +24,19 @@ class WishlistView(APIView):
 class WishlistDetailsView(APIView):
 
     def post(self,request,pk):
-        r = requests.get(amazonURL, headers=amazon_headers, params={'query': request.data['keyword']}).json()['result'] [:20]
+        r = requests.request("GET", amazonURL, headers=amazon_headers, params={'domainCode':'co.uk','keyword':request.data['keyword'],'page':'1','sortBy':'relevanceblender'}).json()['searchProductDetails']
         return Response(r, HTTP_200_OK)
 
 
     def get(self, request, pk):
         r = Wishlist.objects.filter(user=pk).values_list('a_id', flat=True )
         results = []
-        if len(r) <= 0 :
+        if len(r) == 0 :
             results = {'message': 'No Wishlist Items'}
         for id in r:
-            req = requests.get(amazon_details, headers=amazon_headers, params={'asin': id}).json()
-            if req['message']:
-                results={'message': req['message']}
-            else: 
-                data={'name':req['result'][0]['title'], 'image': req['result'][0]['main_image'], 'link': req['result'][0]['url'] }
-                results.append(data)
+            req = requests.get(amazon_details, headers=amazon_headers, params={'url': f'https://www.amazon.co.uk/dp/{id}'}).json()
+            data={'productDescription':req['productTitle'], 'imgUrl': req['imageUrlList'][0] , 'price': req['price'], 'productRating' :req['productRating'], 'asin': id }
+            results.append(data)
         return Response(results, HTTP_200_OK)
     
 

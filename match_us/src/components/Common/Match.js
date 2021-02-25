@@ -12,7 +12,7 @@ const Match = ({ buttons, connection, r, clear , section }) => {
   if (!r) return null
   return (
     <div onClick={clear} className='sw absolute'>
-      <div className='fh center flex-grow match-modal'>
+      <div className='match-modal'>
         <div className='sw fh center'>
 
           <h1> It&apos;s a match!</h1>

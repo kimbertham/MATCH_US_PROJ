@@ -11,7 +11,7 @@ const Matches = ({ getDetail, matches,connection, section, changeView }) =>  {
     <>
   
       {matches.map((m, i ) => {
-        return <div onClick={getDetail} key={i} className='relative center pointer swipe-match-cont'> 
+        return <div onClick={getDetail} key={i} className='swipe-match-cont'> 
           <div className='flex' />
           <div className='swipe-match-icon' id={m.id} style={{ backgroundImage: `url(${m.image})` }}/>
           <p id={m.id}> {m.name.length > 20 ? `${m.name.slice(0,20)}...` : m.name }</p>

@@ -26,6 +26,7 @@ class Notes extends React.Component {
   getNotes = async () => {
     const { connection, match } = this.props
     const r = await axios.get(`/api/notes/${connection.id}/${match.params.box}/`, headers())
+    console.log(r)
     this.setState({ notes: r.data })
   }
 
@@ -53,7 +54,7 @@ class Notes extends React.Component {
     
     if (!notes) return null
     return (
-      <div className='fh center'>
+      <div className='container'>
 
         {enlarge ? <NotesModal note={enlarge} enlarge={this.enlarge}/>  : null }
         

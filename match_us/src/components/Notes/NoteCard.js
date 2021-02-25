@@ -1,6 +1,7 @@
 import React from 'react' 
 
 const NoteCard = ({  n, connection, deleteNote }) => {
+  
   return (
     <>
 
@@ -8,7 +9,7 @@ const NoteCard = ({  n, connection, deleteNote }) => {
         <p className='note-date'>{n.created_at.slice(0,10)}</p>
         <h2>{n.notes.length > 100  ? n.notes.substr(0, 100) + '...' : n.notes }</h2>
 
-        {n.sender === connection.user.id ?
+        {!connection ? null : n.reciever === connection.user.id ?
           <button className='button'
             onClick={()=>{
               deleteNote(n.id)

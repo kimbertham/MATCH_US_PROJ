@@ -9,8 +9,8 @@ import datetime
 
 
 from jwt_auth.models import User
-from .serializers import BasicConnectionsSeralizer, PopulatedConnectionsSerializer, PopulatedRequestsSerializer, ConnectionsSerializer, RequestsSerializer, EventsSerializer
-from .models import Connections,Requests
+from .serializers import BasicConnectionsSeralizer, PopulatedConnectionsSerializer, ConnectionsSerializer,PopulatedEventsSerializer
+from .models import Connections
 
 from activities.models import activities
 from notes.models import Notes
@@ -22,18 +22,6 @@ from food.serializers import FoodSerializer
 from movies.serializers import MovieSerializer
 from activities.serializers import ActivitiesSerializer
 
-class RequestsListView(APIView):
-
-    def post(self,request, pk):
-        user_to = User.objects.get(pk=pk)
-        user_from = User.objects.get(pk=request.user.id)
-        request = Requests.objects.get_or_create(user_from=user_from, user_to=user_to)
-        return Response(status=HTTP_201_CREATED)
-
-    def get(self, request, pk):
-        r= Requests.objects.filter(user_to=pk)
-        requests= PopulatedRequestsSerializer(r, many=True)
-        return Response(requests.data, status=HTTP_200_OK)
         
 class ConnectionsListView(APIView):   
 
@@ -52,6 +40,12 @@ class ConnectionsListView(APIView):
             return Response(connection.data, status=HTTP_201_CREATED)
         return Response(connection.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
+    def patch(self, request,pk):
+        connection = Connections.objects.get(pk=pk)
+        connection.request = False
+        connection.save()
+        return Response(status=HTTP_200_OK)
+
 class ConnectionsDetailView(APIView):
 
     def get(self, request, pk):
@@ -61,15 +55,15 @@ class ConnectionsDetailView(APIView):
 
 # get overview 
     def post(self,request,pk):
-        n = Notes.objects.filter(Q(connection=pk) & Q(read=True)).exclude(sender=request.user.id)[:2]
+        n = Notes.objects.filter(Q(reciever=request.user.id) & Q(read=True))[:2]
         f = food.objects.filter(Q(connection=pk) & Q(direction=True)).last()
         m = movies.objects.filter(Q(connection=pk) & Q(direction=True)).last()
         a = activities.objects.filter(Q(connection=pk) & Q(direction=True)).last()
-        e =Events.objects.filter(Q(connection=pk) & Q(request=False) & Q(time__gt=datetime.datetime.now().time())).reverse()[:3]
-        r =Events.objects.filter(Q(connection=pk) & Q(request=True) & Q(time__gt=datetime.datetime.now().time())).reverse()[:3]
+        e =Events.objects.filter(Q(connection=pk) & Q(request=False)).order_by('date')[:3]
+        r =Events.objects.filter(Q(connection=pk) & Q(request=True)).exclude(creator=request.user.id).order_by('date')[:3]
         return Response({
-        'events': EventsSerializer(e, many=True).data,
-        'req': EventsSerializer(r, many=True).data,
+        'events': PopulatedEventsSerializer(e, many=True).data,
+        'req': PopulatedEventsSerializer(r, many=True).data,
         'note': NotesSerializer(n, many=True).data, 
         'food':FoodSerializer(f).data , 
         'movie': MovieSerializer(m).data, 

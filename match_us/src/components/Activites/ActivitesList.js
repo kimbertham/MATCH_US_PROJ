@@ -15,7 +15,7 @@ const ActivitiesList = ({ connection }) =>{
         <p>Suggestions:</p>
         {typeList.map(t => {
           return <Link key={t} to={`/connection/${connection.id}/activity/${t}`}>
-            <div id={t} className='a-type pointer'>
+            <div id={t} className='a-type'>
               <p className='n-line'>{t.replace('_', ' ')}</p>
             </div>
           </Link>

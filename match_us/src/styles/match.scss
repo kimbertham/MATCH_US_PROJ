@@ -11,6 +11,7 @@
   background-color: rgba(15, 16, 16,0.75);
 
   .swipe-match-cont {
+    @extend .pointer, .center, .relative;
     max-width: 4vw;
     margin: 10px;
     font-size: 10px;
@@ -21,14 +22,15 @@
     height: 3vw;
     border-radius: 50%;
     background-size: contain;
-      }
+    }
   }
+  
   .matches-footer {
-    position: absolute;
-    bottom:0;
+    @extend .bottom;
     margin: 10px;
+
   .all-icon{
-  height:1.5vw;
+    height:1.5vw;
     margin: 5px;
     mix-blend-mode:color-dodge;
   }
@@ -37,9 +39,8 @@
 
 //swipe
 .swipeview{
-  @extend .flex-grow;
-  @extend .relative;
-  @extend .center;
+  @extend .relative, .center;
+  flex-grow: 1;
   z-index: 30;
 }
 
@@ -81,13 +82,13 @@
 
 // results
 .match-cont {
-  overflow: scroll;
-  top:0;
+  @extend .scroll, .wrap, .center;
   margin-top:3vh;
   height: 82vh;
   align-content: flex-start;
   
 .match-item {
+  @extend .center;
   margin: 5px;
   padding: 10px 5px;
   background-color: rgba(3, 47, 57, 0.4);
@@ -139,9 +140,11 @@
   }
 
 .d-m-text{
+  @extend .column;
   height: 70vh;
   width: 30vw;
   z-index: 1;
+  justify-content: flex-end;
 }
 
 
@@ -158,11 +161,15 @@
 
 .detail-buttons {
   margin: 5vh 0 ;
+  display:flex;
+  justify-content: flex-end;
 }
 
 //swipeMatch
 
 .match-modal {
+  @extend .fh, .center;
+  flex-grow: 1;
   background-color: rgba(0,0,0,0.9);
   overflow: hidden;
   color: white;
@@ -239,7 +246,7 @@ width: 8vw;
   }
 
   .a-type{
-    @extend .o-border;
+    @extend .o-border, .pointer;
     font-size: 4vh;
     color: rgb(4, 4, 4);
     & :hover{
