@@ -1,6 +1,7 @@
 @import 'main.scss';
 
-//matches 
+// ------matches------
+
 .swipe-matches {
   @extend .center;
   width: 7vw;
@@ -10,14 +11,14 @@
   justify-content: flex-start;
   background-color: rgba(15, 16, 16,0.75);
 
-  .swipe-match-cont {
+  .sm-cont {
     @extend .pointer, .center, .relative;
     max-width: 4vw;
     margin: 10px;
     font-size: 10px;
     text-align: center;
     
-  .swipe-match-icon {
+  .sm-icon {
     width: 3vw;
     height: 3vw;
     border-radius: 50%;
@@ -25,231 +26,163 @@
     }
   }
   
-  .matches-footer {
-    @extend .bottom;
+  .sm-footer {
+    @extend .bottom, .flex;
     margin: 10px;
 
-  .all-icon{
-    height:1.5vw;
-    margin: 5px;
-    mix-blend-mode:color-dodge;
+    img {
+      height:1.5vw;
+      margin: 5px;
+      mix-blend-mode: color-dodge;
+      }
   }
 }
-}
 
-//swipe
+// ------swipe------
+
 .swipeview{
-  @extend .relative, .center;
-  flex-grow: 1;
+  @extend .relative, .center, .fg;
   z-index: 30;
 }
 
 .swipe-layer1 {
-  background-color: rgba(255, 255, 255, 0.6);
-  transform: rotate(4deg);
   z-index:-1;
   margin-bottom: 2vh;
-  .swipe-card{
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 2px solid white;
-    padding:2vh;
-    transform: rotate(-4deg);
-    .swipe-img{
-        width:30vw;
-        height: 30vw;
-        background-size: cover;
-        background-position: center;
-    }
-  }
+  transform: rotate(4deg);
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
-.s-buttons {
-  margin-top: 2vh;
+.swipe-card {
+  padding:2vh;
+  border: 2px solid white;
+  transform: rotate(-4deg);
+  background-color: rgba(255, 255, 255, 0.8);
 
-  .s-button {
-    border-radius: 60%;
-    margin: 0 10px;
+  .swipe-img{
+    @extend .center, .cover;
+    width:30vw;
+    height: 30vw;
+    }
+}
+
+.s-button {
+  border-radius: 60%;
+  margin: 2vh 10px;
   }
 
-  .s-dir {
+.s-dir {
   width: 6vw;
   }
-  .s-opt{
+
+.s-opt{
   width: 4vw;
-  margin-bottom: 2vw;
+  margin-bottom: 3vw;
   }
+
+// ------results------
+
+.r-title{
+  text-align: center;
+  margin:1vw;
 }
 
-// results
-.match-cont {
+.r-cont {
   @extend .scroll, .wrap, .center;
-  margin-top:3vh;
-  height: 82vh;
+  padding: 2vh;
+  height: 85vh;
   align-content: flex-start;
   
-.match-item {
-  @extend .center;
-  margin: 5px;
-  padding: 10px 5px;
-  background-color: rgba(3, 47, 57, 0.4);
-  color:white;
 
-  h1{
+.r-item {
+  @extend .center;
+  width: 14vw;
+  margin: 5px;
+  padding:1vh;
+  background-color: rgba(3, 47, 57, 0.4);
+
+  h1 {
     font-size: 1vw;
-  }
-  .match-img{
+    }
+
+  .match-img {
     max-width:100%;
     max-height:100%;
+    }
+  }
+  .rg-item {
+    width: 14vw;
+    height: 25vh;
   }
 }
-}
 
-.m-filter{
-  margin:2vh;
-}
-
-.food-match-item {
-  width: 14vw;
-  height: 25vh;
-}
-.activities-match-item {
-  width: 14vw;
-  height: 25vh;
-}
-
-.movies-match-item {
-  width: 14vw;
-}
-
-//details 
+//------ details -------
 
 .details {
+  @extend .full;
   background-color: rgba(255, 255, 255, 0.9);
-}
 
-.details-bg{
-  height: 15vw;
-  opacity: 0.5;
-  background-position: center;
-}
-
-  .d-m-img{ 
-  height: 70vh;
-  margin:3vw;
-  z-index: 1;
+  .d-bg{
+    width: 100%;
+    height: 15vw;
+    opacity: 0.5;
+    background-position: center;
   }
 
-.d-m-text{
-  @extend .column;
-  height: 70vh;
-  width: 30vw;
-  z-index: 1;
-  justify-content: flex-end;
+  .text{
+    width: 40vw;
+    margin: 2vw;
+  }
+
+  .d-buttons {
+    margin: 5vh 0 ;
+    display:flex;
+    justify-content: flex-end;
+  }
 }
 
+.f-details {
+  @extend .center, .row;
+  padding: 2vw;
 
-.d-g-text{
-  width: 40vw;
-  margin: 2vw;
+  img {
+    height: 50vh;
+  }
 }
 
-.d-g-img{
-  width: 70vh;
-  margin: 2vw ;
+.m-details {
+  @extend .center, .row;
+
+  img{ 
+    height: 60vh;
+    margin-top: -5vh;
+    z-index: 1;
+  }
 }
 
+// ------swipeMatch------
 
-.detail-buttons {
-  margin: 5vh 0 ;
-  display:flex;
-  justify-content: flex-end;
-}
-
-//swipeMatch
-
-.match-modal {
-  @extend .fh, .center;
-  flex-grow: 1;
-  background-color: rgba(0,0,0,0.9);
-  overflow: hidden;
+.rm-modal {
+  @extend .fh, .fg, .center, .modal;
   color: white;
-  
-  .match-img {
+  background-color: rgba(0,0,0,0.9);
+
+  .rm-img {
     width: 10vw;
     height: 10vw;
     border-radius: 50%;
     background-size: contain;
   }
 
-  .match-p-img{
+  .rmp-img{
     width: 5vw;
     height: 5vw;
   }
 }
 
-//matchSearch 
-.match-search {
-position: absolute;
-right:0;
-margin:10px;
-z-index: 1000;
+// ------matchSearch------
+
+.m-search {
+  @extend .right, .flex;
+  margin:10px;
 }
 
-//listView 
-.list-cont{
-  width: 83vw;
-  height: 100vh;
-}
-
-.list-text{
-  width: 80vw;
-  margin: 1vw;
-}
-
-.list-field{
-margin: 3vw;
-padding: 1vh;
-border-bottom: 1px solid rgb(240, 101, 189);
-}
-
-.list-button {
-font-size: 2em;
-color: red;
-margin-right: 10px;
-}
-
-.m-list-img{
-width: 8vw;
-}
-
-.list-img-cont{
-  width: 10vw;
-  height: 10vw;
-
-.list-img {
-  max-width:100%;
-  max-height:100%;
-}
-
-}
-
-.list-icon{
-  width: 4vh;
-  mix-blend-mode: screen;
-  padding: 5px;
-}
-
-
-//activities {
-  .a-list {
-  width: 80vw;
-  }
-
-  .a-type{
-    @extend .o-border, .pointer;
-    font-size: 4vh;
-    color: rgb(4, 4, 4);
-    & :hover{
-      text-decoration: underline;
-    }
-  }

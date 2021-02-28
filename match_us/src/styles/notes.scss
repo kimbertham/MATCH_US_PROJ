@@ -1,45 +1,48 @@
 @import 'main.scss';
 
 .note{
-  margin: 10px;
+  @extend .relative, .center;
   width: 16vw;
   height: 15vw;
+  margin: 10px;
   padding: 20px;
   font-size: 2vh;
   z-index: 1;
 }
 
 .notes-cont{
+  @extend .scroll, .relative, .wrap, .center;
   margin: 2vw;
   height: 80vh;
-}
 
-.note-cont{
-margin: 1vw;
-display: flex;
-align-items: flex-end;
+  .n-cont{
+    margin: 1vw;
+    display: flex;
+    align-items: flex-end;
+  }
 }
 
 .note-date{
-@extend .bottom;
-right: 0;
-margin:10px;
+  @extend .bottom, .right;
+  margin:10px;
+}
+.n-delete {
+  @extend .right, .top;
 }
 
-
-#notes-modal {
-  z-index: 5;
-}
-
-#notes-pop {
+#n-pop {
   width: 40vw;
   height: 40vw;
 }
 
-//triangles
+.envelope{
+  @extend .absolute;
+  background-color:  rgb(167, 64, 64);
+  width: 20vw;
+  height: 16vh;
 
-.triangle-up {
-@extend .bottom;
+  .triangle-up {
+  @extend .bottom;
   width: 0;
   height: 0;
   border-left: 10vw solid transparent;
@@ -47,7 +50,7 @@ margin:10px;
   border-bottom: 14.62vh solid red;
   z-index: 3;
 }
-.triangle-up2 {
+  .triangle-up2 {
   position: absolute;
   width: 0;
   height: 0;
@@ -58,7 +61,7 @@ margin:10px;
   z-index: 3;
 }
 
-.triangle-top{
+  .triangle-top{
   position: absolute;
   width: 0;
   height: 0;
@@ -69,8 +72,8 @@ margin:10px;
   z-index: 0;
 }
 
-.triangle-left {
-@extend .bottom;
+  .triangle-left {
+  @extend .bottom;
   width: 0;
   height: 3vh;
   right:0;
@@ -81,7 +84,7 @@ margin:10px;
   
 }
 
-.triangle-right {
+  .triangle-right {
   @extend .bottom;
   width: 0;
   height: 3vh;
@@ -89,12 +92,5 @@ margin:10px;
   border-left: 13.29vh solid rgb(210, 52, 52);
   z-index: 1;
   border-bottom: 6.648vh solid transparent;
+  }
 }
-
-.envelope{
-  background-color:  rgb(167, 64, 64);
-  width: 20vw;
-  height: 16vh;
-
-}
-

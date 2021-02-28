@@ -50,14 +50,16 @@ render(){
   const { connection,connections } = this.props
   return (
     <>
-      <form className='event-form center' onSubmit= {this.handleSubmit}>
-        <div className='auth-head'>New Event</div>
+      <form className='e-form' onSubmit= {this.handleSubmit}>
+        <h1>New Event</h1>
+
+ 
         <div className='form-field'>            
           <label>Title:</label>   
           <input
             name="title"
             value={data.title}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange} className='e-input'/>
         </div>
     
         <div className='form-field'>   
@@ -69,7 +71,7 @@ render(){
               value={`${connection.partner.first_name}, ${connection.user.first_name}`}/>
             :
             <select 
-              onChange={this.handleChange}
+              onChange={this.handleChange} className='e-input'
               name='connection'
               value={data.connection}>
               <option selected hidden> --- </option>  
@@ -83,18 +85,18 @@ render(){
           <input 
             type='date'
             name="date"
-            className='n-line'
+            className='e-input'
             value={data.date}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange} />
         </div>
 
         <div className='form-field'> 
-          <label>Time:</label>     
+          Time:
           <input
             name="time"
             type='time'
             value={data.time}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange} className='e-input'/>
         </div>
 
         <EventLocations
@@ -108,28 +110,29 @@ render(){
           <textarea
             name='notes'
             value={data.notes}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange} className='e-input'/>
         </div>
 
         <div className='flex'>
           <label>🍩</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='🍩'/>
+          <input onChange={this.handleChange} className='e-input' type="radio" name='date_type' value='🍩'/>
           <label>🏓</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='🏓'/>
+          <input onChange={this.handleChange} className='e-input' type="radio" name='date_type' value='🏓'/>
           <label>💃</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='💃'/>
+          <input onChange={this.handleChange} className='e-input' type="radio" name='date_type' value='💃'/>
           <label>🍿</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='🍿'/>
+          <input onChange={this.handleChange} className='e-input' type="radio" name='date_type' value='🍿'/>
           <label>♟️</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='♟️'/>
+          <input onChange={this.handleChange} className='e-input' type="radio" name='date_type' value='♟️'/>
           <label>🎡</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='🎡'/>
+          <input onChange={this.handleChange} className='e-input' type="radio" name='date_type' value='🎡'/>
           <label>🏕️</label>
-          <input onChange={this.handleChange} type="radio" name='date_type' value='🏕️'/>
+          <input onChange={this.handleChange} className='e-input' type="radio" name='date_type' value='🏕️'/>
         </div>
+     
 
 
-        <button className='e-input auth-button'> New Event!</button>   
+        <button className='button'> New Event!</button>   
       </form>
     </>
   )

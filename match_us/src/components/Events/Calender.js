@@ -1,15 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import moment from 'moment'
-
+import { regex } from '../../Lib/com'
 
 const weekdays = moment.weekdaysShort()
 const months =  moment.monthsShort()
 
 
-const Calender = ({ date, changeMonth, events, setData, setReq, page, user }) => {
-  const emoji = ['\ud83c[\udf00-\udfff]','\ud83d[\udc00-\ude4f]','\ud83d[\ude80-\udeff]']
-  const regex = new RegExp(emoji.join('|'), 'g')
+const Calender = ({ date, changeMonth, events, setData, setReq, user }) => {
   const cMonth = (moment(date).format('MM'))
   const cYear = [Number(moment(date).format('YYYY'))]
   const blank = []
@@ -23,13 +21,13 @@ const Calender = ({ date, changeMonth, events, setData, setReq, page, user }) =>
 
   for (let d = 1; d <= moment(date).daysInMonth(); d++) {
     const date =  d.toString().length === 1 ? `${cYear}-${cMonth}-0${d}` : `${cYear}-${cMonth}-${d}`
-    const noEvent = <td onClick={setData} className='calender-day'  key={d} id={date}> {d} </td>
+    const noEvent = <td onClick={setData} className='calender-day' key={d} id={date}><p className='date'>{d}</p> </td>
 
     if (events.length > 0) {
       const e = events.filter(x=> x.date === date)
       e.length > 0 ? days.push(
         <td  onClick={setData} className='calender-day'  key={d}  id={date}>
-          {d}
+          <p className='date'>{d}</p>
           {e.map((x,i)=> {
             return <p className={`request ${x.request && x.creator === user.id ? 'green' : x.request ? 'purple' : 'date' }`}
               key={i}   onClick={ e =>{
@@ -48,6 +46,7 @@ const Calender = ({ date, changeMonth, events, setData, setReq, page, user }) =>
   const rows = []
   let c = []
 
+  
   total.forEach((row,i) => {
     if (i % 7 !== 0) {
       c.push(row)
@@ -59,25 +58,24 @@ const Calender = ({ date, changeMonth, events, setData, setReq, page, user }) =>
   })
 
   return (
-    
     <div>
       <div className='calender-header flex'>
         <button className='calender-button ' onClick={()=>{
           changeMonth('b')
         }}> Back</button>
-        <p> {months[cMonth - 1 ]} {cYear}</p>
+        <h2> {months[cMonth - 1 ]} {cYear}</h2>
 
         <button className='calender-button' onClick={()=>{
           changeMonth('f')
         }}> Next</button>
       </div>
 
-      <div className={`scroll ${page}-calender-cont`}>
+      <div className='calendar-cont'>
         <table className='calender'>
           <tbody>
-            <tr className='weekdays'>{weekdays.map((day,i) => <th key={i}>{day}</th>)}</tr>
+            <tr>{weekdays.map((day,i) => <th className='weekdays' key={i}>{day}</th>)}</tr>
             {rows.map((d, i) => 
-              <tr className='date' key={i} >{d}</tr>)}
+              <tr  key={i}> {d}</tr>)}
           </tbody>
         </table>
       </div>

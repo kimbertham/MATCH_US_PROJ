@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom'
 import { headers } from '../../Lib/auth'
 import Search from './Search'
 import Matches from './Matches'
-import Match from '../Common/Match'
+import Match from './MatchResult'
 import Details from './Details'
 import Swipe from './Swipe'
 import List from '../ListView/List'
@@ -85,7 +85,7 @@ render(){
   if (!view) return <List section={section} results={results} changeView={this.changeView} swipeData={swipeData}/>
 
   return (
-    <div className='fh flex'>
+    <div className='full flex'>
 
       <div className='swipe-matches'>
         <p>Matches</p>

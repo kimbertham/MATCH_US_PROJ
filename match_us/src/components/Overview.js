@@ -13,6 +13,7 @@ import activities from '../styles/assets/menu-icons/activities.jpg'
 import movies from '../styles/assets/menu-icons/movies.jpg'
 import wishlist from '../styles/assets/menu-icons/wishlist.jpg'
 import settings from '../styles/assets/menu-icons/settings.jpg'
+import background from '../styles/assets/background2.jpg'
 
 class  Overview extends React.Component {
   state= {
@@ -29,21 +30,23 @@ class  Overview extends React.Component {
   }
 
   render(){
+    
     const { user, connections } = this.props
     const { data } = this.state
-
-    console.log(data)
     if (!data) return null
+
     return (
-      <div className='overview'>
+      <div className='overview' style={{ backgroundImage: `url(${background})` }}>
           
         <div className='o-side'>
-          <h1 className='o-title'>{user.first_name}&apos;s Overview </h1>
-
-          <Events
-            connections={connections}
-            user={user}/>
-  
+          <h1 className='o-title'>
+            {user.first_name}&apos;s Overview
+          </h1>
+          <div className='o-calendar'>
+            <Events
+              connections={connections}
+              user={user}/>
+          </div>
           <div className='o-notes'>
             <h3>Recent Notes</h3>
             <div className='flex'>
@@ -54,59 +57,55 @@ class  Overview extends React.Component {
           </div> 
         </div>
           
-        <div className='overview-main'>
-          <div className='flex'>
+        <div className='o-main'>
 
-            <div>
-              <h3>My Recents Swipes</h3>
-              <div className='o-container'>
-                {data.movie.map(m => {
-                  return <div key={m.id} className='o-recent' >
-                    <img src={movies} alt='movies'/>
-                    <p>{m.name}</p>
-                  </div>
-                })}
-                {data.food.map(m => {
-                  return <div key={m.id} className='o-recent'>
-                    <img src={food} alt='food'/>
-                    <p>{m.name}</p>
-                  </div>
-                })}
-                {data.activity.map(m => {
-                  return  <div key={m.id} className='o-recent'>
-                    <img src={activities} alt='activities'/>
-                    <p>{m.name}</p>
-                  </div>
-                })}
-              </div>
-            </div>
-
-            <div>
-              <h3>Connection Requests</h3>
-              <div className='o-container'>
-              </div>
+          <div>
+            <h3>My Recents Swipes</h3>
+            <div className='o-container'>
+              {data.movie.map(m => {
+                return <div key={m.id} className='o-recent' >
+                  <img src={movies} alt='movies'/>
+                  <p>{m.name}</p>
+                </div>
+              })}
+              {data.food.map(m => {
+                return <div key={m.id} className='o-recent'>
+                  <img src={food} alt='food'/>
+                  <p>{m.name}</p>
+                </div>
+              })}
+              {data.activity.map(m => {
+                return  <div key={m.id} className='o-recent'>
+                  <img src={activities} alt='activities'/>
+                  <p>{m.name}</p>
+                </div>
+              })}
             </div>
           </div>
 
-          <div className='flex'>
+          <div>
+            <h3>Connection Requests</h3>
+            <div className='o-container'>
+            </div>
+          </div>
+
+          <div className='flex wrap'>
             <OverviewEvents events={data.events} req={data.req}/>
           </div>
   
-          <div className='flex'>
-            <Link to={'/home/wishlist'}>
-              <div className='o-button'>
-                <img src={wishlist} alt='food'/>
-                <h3>My Wishlist</h3></div>
-            </Link>
+          <Link to={'/home/wishlist'}>
             <div className='o-button'>
-              <img src={settings} alt='food'/>
-              <h3>Settings</h3>
-            </div>
-          </div>
+              <img src={wishlist} alt='food'/>
+              <h3>My Wishlist</h3></div>
+          </Link>
 
+          <div className='o-button'>
+            <img src={settings} alt='food'/>
+            <h3>Settings</h3>
+          </div>
+    
         </div>
       </div> 
-    
     )
   }
 }

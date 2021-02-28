@@ -4,8 +4,8 @@ import React from 'react'
 import axios from 'axios'
 import { headers } from '../../Lib/auth'
 import { withRouter } from 'react-router-dom'
-import Details from '../MatchView/Details'
-import Loader from './Loader'
+import Details from './Details'
+import Loader from '../Common/Loader'
 
 class MatchHome extends React.Component { 
   state = {
@@ -56,15 +56,15 @@ class MatchHome extends React.Component {
           : 
           <>
       
-            <h1 className='title'>
+            <h1 className='r-title'>
               {connection.partner.first_name} and {connection.user.first_name}&apos;s {section} matches
             </h1> 
             
-            <div className='match-cont'>
+            <div className='r-cont'>
               {matches.map(m => {
                 return <div  key={m.id} id={m.id} onClick={this.getDetail}
-                  className={`${section}-match-item match-item`}>
-                  <img className={'match-img'} src={m.image} />
+                  className={`r-item ${section === 'movies' ? null : 'rg-item' }`}>
+                  <img className='match-img' src={m.image} />
                   <h1 >{m.name.slice(0,28)}</h1>
                 </div>
               })}

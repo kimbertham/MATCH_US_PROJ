@@ -39,9 +39,9 @@ class WishlistSearch extends React.Component{
           <button>Search</button>
         </form>
 
-        <div className='wishlist-cont center flex wrap'>
+        <div className='w-cont'>
           {results.map((r,i)=>{
-            return <div  className='wishlist-item center' key={i}>
+            return <div  className='w-item' key={i}>
               <WishlistCard r={r}/>
 
               {!r.added ? 

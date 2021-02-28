@@ -6,11 +6,11 @@ import FoodFilter from '../FoodMatch/FoodFilter'
 const FoodSearch = ({ section, getResults }) => {
 
   return (
-    <div className=' match-search flex'>
-      <div> Filter </div>
-      <div className= 'inline'>
-        <section className='f-search'>
-
+    <div className='m-search'>
+      <h3> Filter </h3>
+      
+      <div>
+        <section>
           {section === 'movies' ?
             <MovieGenre 
               getResults={getResults}/>

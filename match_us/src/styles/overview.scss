@@ -2,64 +2,80 @@
 @import 'main.scss';
 
 .overview {
-  @extend .fh, .flex;
-  background-image: url('./assets/background2.jpg');
+  @extend .full, .flex;
   margin-left: -10px;
 }
 
-.o-side {
+.o-title{
+  margin: 2vh;
+  color: white;
+}
+
+.o-border{ 
+  padding: 3vh;
+  border-radius: 20px;
+  border: 2px outset rgb(240, 240, 240);
+}
+
+.o-side { 
+  height:94vh;
   width: 30vw;
   padding:3vh;
-  background:  rgba(3, 28, 27, 0.4);
+  background-color: rgba(15, 16, 16,0.5);
 
-  .o-title{
-    margin: 3vh;
-    color:rgb(204, 223, 223);
+  .o-calendar{
+    height: 51vh;
+    border-radius: 10px;
+    background-color: white;
+  
+    .calendar-cont {
+    height: 45vh;
+    }
+  
+    .calender-day{
+      width: 4vw;
+      height: 6vh;
+    }
+  
+    .request{
+      font-size: 1vh;
+    }
   }
 
   .o-notes{
     @extend .center;
-    margin: 5vh;
+    margin: 3vh;
+
     .note{
     width: 10vw;
     height: 11vw;
     }
   }
-
-  .overview-calender-cont{
-    height: 41vh;
-
-    .calender-day{
-      width: 4vw;
-      height: 6vh;
-    }
-
-    .request{
-      font-size: 1vh;
-    }
-  }
 }
 
-.overview-main{
-  width: 49vw;
+.o-main{
+  @extend .center, .fg, .wrap, .row;
   padding: 2vw;
 }
 
 .o-container {
-  @extend .scroll, .o-border;
-  height: 35vh;
+  @extend .scroll;
   width: 20vw;
+  height: 35vh;
   color:white;
+  margin: 1vh 0.5vw;
+  border-radius: 5px;
   border: 2px outset grey;
   background: rgba(32, 32, 33, 0.8);
+}
 
-  .o-field {
-    padding: 1vh;
-    align-items: center;
-    border-radius: 10px;
-    border-bottom:1px solid rgb(101, 101, 103);
-  }
-
+.o-field {
+  @extend .pointer;
+  padding: 1vh;
+  align-items: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom:1px solid rgb(101, 101, 103);
 }
 
 .o-button {
@@ -71,7 +87,6 @@
     width: 3vw;
     mix-blend-mode: screen;
   }
-
 }
 
 .o-recent {
@@ -82,24 +97,43 @@
     margin-right: 10px;
     mix-blend-mode:screen;
     }
-
-  }
+}
 
 .latest-matches{
-    padding: 1vh;
-    .ov {
-      width:  30vw;
-      margin: 1vh 2vw;
+  @extend .o-container;
+  width: 42vw;
+  height: 40vh;
+
+  .ov {
+      @extend .flex;
+      margin: 2vh;
+      color:white;
       align-items: center;
       border-radius: 10px;
-      background: rgba(24, 177, 161, 0.4);
+      background: rgba(32, 196, 180, 0.7);
     }
-    img{
-      width: 8vh;
-      margin: 10px;
-      mix-blend-mode: screen;
-    }
+
+  img{
+    width: 8vh;
+    margin: 10px;
+    mix-blend-mode: screen;
+  }
+}
+
+// CONNECTION OVERVIEW ------
+
+.con-over {
+  @extend .overview;
+
+  .o-side{
+    background: rgba(21, 48, 45, 0.3);
+    border-right: 2px solid white;
+    margin-left: -10px;
   }
 
-
+  .o-container {
+    background: rgba(185, 232, 229, 0.6);
+    border: 2px solid white;
+  }
+}
 

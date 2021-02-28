@@ -6,16 +6,16 @@ const ActivitiesList = ({ connection }) =>{
 
 
   return (
-    <div className='a-list center section'>
-      <div className='a-type'>
-        <p>Activities</p>
+    <div className='full scroll center'>
+
+      <div>
+        <h1 className='a-item'>Activities</h1>
       </div>
 
-      <div className='flex wrap'>
-        <p>Suggestions:</p>
+      <div className='a-list'>
         {typeList.map(t => {
           return <Link key={t} to={`/connection/${connection.id}/activity/${t}`}>
-            <div id={t} className='a-type'>
+            <div id={t} className='a-item'>
               <p className='n-line'>{t.replace('_', ' ')}</p>
             </div>
           </Link>

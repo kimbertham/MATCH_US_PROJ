@@ -1,10 +1,11 @@
 @import 'main.scss';
 
+
 .menu-cont {
   @extend .fh;
 
   width: 17vw;
-  z-index: 2;
+  z-index: 5;
   border-radius: 0 3% 0 0 ;
   background-color: rgb(34, 34, 34);
 

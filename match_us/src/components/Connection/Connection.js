@@ -10,7 +10,7 @@ import Movies from '../Movies/Movies'
 import ActivitiesList from '../Activites/ActivitesList'
 import Activities from '../Activites/Activites'
 import Food from '../FoodMatch/Food'
-import Results from '../Common/Results'
+import Results from '../MatchView/Results'
 import Randomiser from '../Randomiser/Randomiser'
 import Notes from '../Notes/Notes'
 import Wishlist from '../Wishlist/Wishlist'
@@ -46,7 +46,7 @@ class Connection extends React.Component {
       <div className=' fw fh flex'>
         <Menu connection={connection}/>
 
-        <div className='main fh'>
+        <div className='main'>
           <Switch>
 
             <Route path='/connection/:id/overview' render={() => 
@@ -70,9 +70,10 @@ class Connection extends React.Component {
             <Route path='/connection/:id/notes/:box' render={() => 
               <Notes connection={connection}/> }/>
                 
+ 
             <Route path='/connection/:id/events' render={() => 
               <Events user={connection.user} connection={connection}/> }/>
-
+              
             <Route path='/connection/:id/wishlist' render={() => 
               <Wishlist name={connection.partner.first_name} id={connection.partner.id}/> }/>
 

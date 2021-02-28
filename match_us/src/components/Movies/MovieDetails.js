@@ -5,15 +5,15 @@ import { withRouter, Link } from 'react-router-dom'
 const MovieDetails = ({ r, setData, delMatch, match }) => {
 
   return (
-    <div className='details sw fh'>
+    <div className='details'>
 
-      <div className='details-bg absolute sw'  
+      <div className='d-bg'  
         style={{ backgroundImage: `url(${poster}${r.poster_path})` }}/>
       
-      <div className='fh row center'>
+      <div className='m-details'>
 
-        <img alt='poster' className='d-m-img' src={`${poster}${r.poster_path}`}/>
-        <div className='d-m-text'>
+        <img alt='poster' src={`${poster}${r.poster_path}`}/>
+        <div className='text'>
           <h1>{r.title}</h1> <h3>{r.release_date}</h3> 
           <br/>
           <h2>{r.tagline} </h2>
@@ -26,7 +26,7 @@ const MovieDetails = ({ r, setData, delMatch, match }) => {
           <p> {r.genres ? r.genres.map(g=> `${g.name} | `) : null }</p>
           <Link to={r.homepage}>{r.homepage}</Link>
 
-          <div className='flex-end detail-buttons' onClick={e=>{
+          <div className='d-buttons' onClick={e=>{
             e.stopPropagation()
           }}>
             

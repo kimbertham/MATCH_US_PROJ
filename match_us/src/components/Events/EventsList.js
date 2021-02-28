@@ -10,7 +10,7 @@ const  EventList =  ({ events, setReq }) => {
 
       <h1 className='title'> Events</h1>
       {events.map(e => {
-        return <div key={e.id} className='e-l-card' id={e.id} onClick={() => {
+        return <div key={e.id} id={e.id} onClick={() => {
           setReq(e)
         }}>
           <EventsCard  e={e}/>

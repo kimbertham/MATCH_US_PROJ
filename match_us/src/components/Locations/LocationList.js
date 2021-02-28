@@ -2,7 +2,7 @@
 import React from 'react'
 import Loader from '../Common/Loader'
 const LocationList = ({ locations, selected,connection, listLocations, getDetail }) => {
-  console.log(locations.length)
+
   return (
     <>
       <h2>{connection.partner.first_name} & {connection.user.first_name}&apos;s Date Locations</h2>
@@ -14,7 +14,7 @@ const LocationList = ({ locations, selected,connection, listLocations, getDetail
           {locations.map((l,i) => {
             return <div key={i} ref={l => listLocations[i] = l} onClick={()=>{
               getDetail(l , i)
-            }} className={`l-list-item flex ${selected === i ? 'l-select' : null}`}>
+            }} className={`l-list-item ${selected === i ? 'l-select' : null}`}>
 
               <div className='center'>
                 <p className='absolute'>{i + 1}</p>

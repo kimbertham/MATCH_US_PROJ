@@ -59,8 +59,6 @@ const MatchSwipe = ({ r,  deleteMatches, showSearch ,swipe, getDetail, section }
           showSearch()
         }}/>
       </div>
-
- 
     </>
   )
 } 

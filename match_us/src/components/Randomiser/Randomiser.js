@@ -93,22 +93,26 @@ render() {
 
   if (loader) return  <Loader type='Bars'/>
 
-  if (event) return <div className='swipeview sw fh'>
-    <div className='modal' onClick={this.handleEvent}>
-      <div className='m-pop' onClick={e=>{
-        e.stopPropagation()
-      }}>
-        <NewEvent 
-          connection={connection} 
-          data={{ location: food.formatted_address, 
-            notes: ` ${food.name} & ${movie ? movie.title : activity.name}` }} 
-          closeModal={this.handleEvent}/> 
+  if (event) return (
+    <div className='swipeview'>
+      <div className='modal' onClick={this.handleEvent}>
+        <div onClick={e=>{
+          e.stopPropagation()
+        }} className='m-pop'>
+
+          <NewEvent 
+            connection={connection} 
+            closeModal={this.handleEvent}
+            data={{ location: food.formatted_address, 
+              notes: ` ${food.name} & ${movie ? movie.title : activity.name}` }} /> 
+
+        </div>
       </div>
     </div>
-  </div>
+  )
 
   return (
-    <div className='container scroll '>
+    <div className='full center scroll'>
 
       {!food ?  <div className={loader ? 'display-none' : 'column'}>
 
@@ -158,7 +162,7 @@ render() {
         
           {payer ? <div className='random'> <h1>Payer: {payer} </h1></div> : null}
             
-          <div className='right'>
+          <div>
             <button className='button' onClick={this.whoPays}>Who pays?</button>
             <button className='button' onClick={this.handleEvent}>Create Event</button>
             <br/>

@@ -5,18 +5,15 @@ import { withRouter, Link } from 'react-router-dom'
 const FoodDetails = ({ r, setData, match, delMatch }) => {
 
   return (
-    <div className='details sw fh scroll'>
-
-      <div className='details-bg cover sw' 
+    <div className='details'>
+      <div className='d-bg cover' 
         style={{ backgroundImage: `url(${r.photos ?
           `${GImages}${r.photos[0].photo_reference}` : null})` }}/>
-      
-      
-      <div className='center row'>
-    
-        {r.photos ? <img className='d-g-img' src={`${GImages}${r.photos[0].photo_reference}`}/> : null}
+            
+      <div className='f-details'>
+        {r.photos ? <img src={`${GImages}${r.photos[0].photo_reference}`}/> : null}
 
-        <div className='d-g-text'>
+        <div className='text'>
           <h1>{r.name}</h1>
           <small> {r.formatted_phone_number} {'£'.repeat( r.price_level)}</small>
           <Link to={r.website}>{r.website} </Link>
@@ -41,7 +38,7 @@ const FoodDetails = ({ r, setData, match, delMatch }) => {
             </>
             : null}
     
-          <div className='detail-buttons' onClick={e=>{
+          <div className='d-buttons' onClick={e=>{
             e.stopPropagation()
           }}>
 
@@ -59,7 +56,6 @@ const FoodDetails = ({ r, setData, match, delMatch }) => {
         </div>
       </div>
     </div>
-
   )
 }
 export default withRouter(FoodDetails)

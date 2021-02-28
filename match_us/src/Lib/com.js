@@ -42,6 +42,8 @@ export const typeList = [
   ,'Zoo'
 ]
 
+const emoji = ['\ud83c[\udf00-\udfff]','\ud83d[\udc00-\ude4f]','\ud83d[\ude80-\udeff]']
+export const regex = new RegExp(emoji.join('|'), 'g')
 
 export const getCoordinates = () => {
 

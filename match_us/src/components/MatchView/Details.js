@@ -38,7 +38,7 @@ render(){
           </div>
         </div>
         : 
-        <div onClick={getDetail} className='details modal column'>
+        <div onClick={getDetail} className='modal column'>
           {section === 'movies' ?
             <MovieDetails r={r} setData={this.setData} delMatch={this.delMatch}/>
             : 

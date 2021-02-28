@@ -7,10 +7,10 @@ const ActivityCard = ({ r, section,like, i }) => {
   const google = () => {
     return (
       <>
-        <div className='list-img-cont center'>
+        <div className='l-img-cont'>
           <img src={  r.photos ? `${GImages}${r.photos[0].photo_reference}` : 'https://bit.ly/2LG7Z7k'} className='list-img' alt='img'/>
         </div>
-        <div className='list-text'>
+        <div className='l-text'>
           <h1>{r.name}</h1>
           <h3>Rating: {r.rating}/5</h3>
           <h3>Address: {r.vicinity}</h3>
@@ -23,8 +23,8 @@ const ActivityCard = ({ r, section,like, i }) => {
   const movies = () => {
     return (
       <>
-        <img src={`${poster}${r.poster_path}` } alt='img' className='m-list-img'/>
-        <div className='list-text'>
+        <img src={`${poster}${r.poster_path}` } alt='img' className='lm-img'/>
+        <div className='l-text'>
           <h1> {r.title}</h1>
           <p>{r.vote_average}/10</p>
           <p>{r.release_date}</p>
@@ -35,10 +35,10 @@ const ActivityCard = ({ r, section,like, i }) => {
   }
 
   return (
-    <div className='list-field flex'>
+    <div className='l-field'>
       {section === 'movies' ? movies() : google()}
 
-      <p className='list-button' onClick={()=>{
+      <p className='l-button' onClick={()=>{
         like('True', i) 
       }}>{!r.like ? '♡' : '♥'}</p>
     </div>

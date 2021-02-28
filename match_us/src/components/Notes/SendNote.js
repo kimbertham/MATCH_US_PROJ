@@ -27,26 +27,26 @@ class SendNote extends React.Component {
     const { data } = this.state
     const { connection, sendNote } = this.props
     return (
-    
+
       <div className='modal' onClick={sendNote}>
-        <div className='m-pop' id='notes-pop'  style={{ backgroundColor: data.color }}  onClick={e=> e.stopPropagation()}>
+        <div className='m-pop' id='n-pop'  style={{ backgroundColor: data.color }}  onClick={e=> e.stopPropagation()}>
 
           <form className='event-form center' onSubmit= {this.handleSubmit}>
             <div className='auth-head'>New Love Note</div>
 
-            <div className='form-field'>    
+            <div>    
               <label>To:</label>          
               <input readOnly
                 value={connection.partner.first_name}/>
             </div>
 
-            <div className='form-field'> 
+            <div> 
               <label>From:</label>            
               <input readOnly
                 value={connection.user.first_name}/>
             </div>
 
-            <div className='form-field'>            
+            <div>            
               <label>Note:</label>   
               <textarea
                 name="notes"
@@ -54,7 +54,7 @@ class SendNote extends React.Component {
                 onChange={this.handleChange}/>
             </div>
 
-            <div className='form-field'>            
+            <div>            
               <input
                 name="color" 
                 value={data.color}

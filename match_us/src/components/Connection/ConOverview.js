@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -29,56 +30,60 @@ class ConOverview extends React.Component{
     if (!data) return null
 
     return (
-      <div className='container'>
-        <div className='flex'>
-          
-          <div>
-            <h1 className='o-border'>
-              {connection.user.first_name} & {connection.partner.first_name}&apos;s Overview
-            </h1>
+  
+      <div className='con-over flex'>
+        
+        <div className='o-side'>
+          <h2 className='o-title'>{connection.user.first_name} & {connection.partner.first_name}&apos;s Overview </h2>
 
-            <div className='o-border'>
-              <Link to={`/connection/${connection.id}/notes/inbox`}>
-                <h2> Notes</h2>
-                <div className='flex'>
-                  {data.note.map(n => <NoteCard key={n.id} n={n} connection={connection}/>)}
-                </div>
-              </Link>
-            </div>
- 
-
-            <div className='latest-matches o-border'>
-              <h2> Latest Matches:</h2>
-              <Link to={`/connection/${connection.id}/food/results`}>
-                <div className='ov flex'>
-                  <img src={food} alt='food'/>
-                  <p> {data.food.name}</p>
-                </div>
-              </Link>
-              <Link to={`/connection/${connection.id}/activities/results`}>
-                <div className='ov flex'>
-                  <img src={activities} alt='acti'/>
-                  <p> {data.activity.name}</p>
-                </div>
-              </Link>
-              <Link to={`/connection/${connection.id}/movies/results`}>
-                <div className='ov flex'>
-                  <img src={movies} alt='movies'/>
-                  <p>{data.movie.name}</p>
-                </div>
-              </Link>
-            </div>
-          </div>
-
-          <div className='o-border'>
+          <div className='o-calendar'>
             <Events
               user={connection.user}
               connection={connection}/>
-            <OverviewEvents events={data.events} req={data.req}/>
           </div>
+  
+          <div className='o-notes'>
+            <h3>Recent Notes</h3>
+            <div className='flex'>
+              {data.note.map(n => <NoteCard key={n.id} n={n} connection={connection}/>)}
+            </div>
+          </div>
+        </div> 
+        
+        <div className='o-main'>
+          <div className='o-border'>
+            
+            <div>
+              <OverviewEvents events={data.events} req={data.req}/>
+            </div>
 
+            <div>
+              <h2> Latest Matches:</h2>
+              <div className='latest-matches'>
+                <Link to={`/connection/${connection.id}/food/results`}>
+                  <div className='ov'>
+                    <img src={food} alt='food'/>
+                    <p> {data.food.name}</p>
+                  </div>
+                </Link>
+                <Link to={`/connection/${connection.id}/activities/results`}>
+                  <div className='ov'>
+                    <img src={activities} alt='acti'/>
+                    <p> {data.activity.name}</p>
+                  </div>
+                </Link>
+                <Link to={`/connection/${connection.id}/movies/results`}>
+                  <div className='ov'>
+                    <img src={movies} alt='movies'/>
+                    <p>{data.movie.name}</p>
+                  </div>
+                </Link>
+              </div>
+            </div>
+            
+          </div>
         </div>
-      </div>
+      </div> 
     )
   }
 }

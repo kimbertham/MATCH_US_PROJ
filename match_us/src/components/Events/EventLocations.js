@@ -36,11 +36,12 @@ class EventLocations extends React.Component {
           <label>Location:</label> 
           <input
             name='location'
+            className='e-input'
             value={location}
             onChange={ this.handlePlaces}/>
         </div>
 
-        < div className='events-location'>
+        <div className='events-location'>
           <div ref={r => this.l = r}>
             {locations.map(l => {
               return <div 

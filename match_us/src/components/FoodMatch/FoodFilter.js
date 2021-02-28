@@ -39,32 +39,32 @@ render() {
   return (
 
           
-    <form  onSubmit={this.setLocation} className='f-form'>
+    <form  onSubmit={this.setLocation}>
       <div className='flex'>
 
-        <div className='keyword-field'>
+        <div>
           <input 
             onChange={this.handleChange}
             name='keyword' 
             value={data.keyword}
-            className={`${errorC} form-input`}
+            className={errorC}
             placeholder='Search...'/>
         </div>
 
-        <div className='address-field'>
+        <div>
           <input 
             onChange={this.handleChange}
             name='address' 
             value={data.address}
-            className={`${errorC} form-input`}
+            className={errorC}
             placeholder='Location'/>
         </div>
           
-        <div className='radius-field'>
+        <div>
           <select 
             onChange={this.handleChange}
             name='rankby'
-            className={`${errorC} form-input`}
+            className={errorC}
             value={data.radius}>
             <option defaultValue value='10'> Sort by </option>  
             <option value='distance' >Distance</option>
