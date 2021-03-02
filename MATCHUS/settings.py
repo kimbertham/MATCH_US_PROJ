@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import django_heroku
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -60,11 +61,29 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'MATCHUS.urls'
 
+# TEMPLATES = [
+#     {
+#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+#         'DIRS': [os.path.join(BASE_DIR, 'match_us')],
+#         # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+#         'APP_DIRS': True,
+#         'OPTIONS': {
+#             'context_processors': [
+#                 'django.template.context_processors.debug',
+#                 'django.template.context_processors.request',
+#                 'django.contrib.auth.context_processors.auth',
+#                 'django.contrib.messages.context_processors.messages',
+#             ],
+#         },
+#     },
+# ]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'match_us')],
-        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'match_us')
+                ] 
+        ,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,7 +95,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 AUTH_USER_MODEL = 'jwt_auth.User'
 
@@ -93,6 +111,7 @@ REST_FRAMEWORK = {  # added this to get rest framework to use our custom authent
     ],
     'DATETIME_FORMAT': "%Y-%m-%dT%H:%M:%S.%fZ",
 }
+
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -143,4 +162,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# STATIC_URL = '/static/'
+
+ROOT_URLCONF = 'MATCHUS.urls' #check if you have this already, if not add it in
+
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'frontend', "build", "static"), 
+)
+
+django_heroku.settings(locals())

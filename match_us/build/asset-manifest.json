@@ -1,0 +1,42 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8d977ddc.chunk.css",
+    "main.js": "/static/js/main.6ee1f24e.chunk.js",
+    "main.js.map": "/static/js/main.6ee1f24e.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.2defa756.js",
+    "runtime-main.js.map": "/static/js/runtime-main.2defa756.js.map",
+    "static/js/2.0efdf536.chunk.js": "/static/js/2.0efdf536.chunk.js",
+    "static/js/2.0efdf536.chunk.js.map": "/static/js/2.0efdf536.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.8d977ddc.chunk.css.map": "/static/css/main.8d977ddc.chunk.css.map",
+    "static/js/2.0efdf536.chunk.js.LICENSE.txt": "/static/js/2.0efdf536.chunk.js.LICENSE.txt",
+    "static/media/activities.422b6de9.jpg": "/static/media/activities.422b6de9.jpg",
+    "static/media/all-icon.12084855.jpg": "/static/media/all-icon.12084855.jpg",
+    "static/media/arrow.72ffb2bb.jpg": "/static/media/arrow.72ffb2bb.jpg",
+    "static/media/auth.scss": "/static/media/background2.d26c16fc.jpg",
+    "static/media/wishlist.scss": "/static/media/bg-1.9a1b5396.jpg",
+    "static/media/calender.705df09a.jpg": "/static/media/calender.705df09a.jpg",
+    "static/media/cross.e1c54cdd.jpg": "/static/media/cross.e1c54cdd.jpg",
+    "static/media/filter.a7f92af9.jpg": "/static/media/filter.a7f92af9.jpg",
+    "static/media/food.228c76a9.jpg": "/static/media/food.228c76a9.jpg",
+    "static/media/friend.8350c81d.jpg": "/static/media/friend.8350c81d.jpg",
+    "static/media/heart.4b81b49f.jpg": "/static/media/heart.4b81b49f.jpg",
+    "static/media/location.8fba8c0f.jpg": "/static/media/location.8fba8c0f.jpg",
+    "static/media/logout.8811a8a5.jpg": "/static/media/logout.8811a8a5.jpg",
+    "static/media/movies.e205c847.jpg": "/static/media/movies.e205c847.jpg",
+    "static/media/notes.4f1393f6.jpg": "/static/media/notes.4f1393f6.jpg",
+    "static/media/overview.9b491c5f.jpg": "/static/media/overview.9b491c5f.jpg",
+    "static/media/random.a36b5135.jpg": "/static/media/random.a36b5135.jpg",
+    "static/media/restart.2cc2ceb2.jpg": "/static/media/restart.2cc2ceb2.jpg",
+    "static/media/sent.fac307cc.jpg": "/static/media/sent.fac307cc.jpg",
+    "static/media/settings.09be1ea4.jpg": "/static/media/settings.09be1ea4.jpg",
+    "static/media/view-icon.4632e92a.jpg": "/static/media/view-icon.4632e92a.jpg",
+    "static/media/wishlist.e883e3b0.jpg": "/static/media/wishlist.e883e3b0.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2defa756.js",
+    "static/js/2.0efdf536.chunk.js",
+    "static/css/main.8d977ddc.chunk.css",
+    "static/js/main.6ee1f24e.chunk.js"
+  ]
+}
