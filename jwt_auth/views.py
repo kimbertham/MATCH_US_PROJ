@@ -12,7 +12,6 @@ import jwt
 from django.db.models import Prefetch, prefetch_related_objects, Q
 from .serializers import UserSerializer, UserS
 from jwt_auth.models import User
-import datetime
 
 from connections.models import Connections
 from connections.serializers import EventsSerializer,ConnectionsSerializer, PopulatedEventsSerializer
@@ -51,7 +50,7 @@ class LoginView(APIView):
         user = self.get_user(username)
         if not user.check_password(password):
             raise PermissionDenied({'message': 'Invalid Credentails'})
-        dt = datetime.now() + timedelta(days=7)
+        dt = datetime.today() + timedelta(days=7)
         token = jwt.encode({'sub': user.id, 'exp': int(
             dt.strftime('%s'))}, settings.SECRET_KEY, algorithm='HS256')
         return Response({'token': token, 'message': f'Welcome back {user.username}'})
@@ -65,8 +64,8 @@ class ProfileView(APIView):
         # get overview 
     def post(self,request,pk):
         prefetch= Prefetch('connection', queryset=Connections.objects.filter(participants__id=pk))
-        e = Events.objects.filter(Q(connection__participants__id=pk) & Q(request=False) & Q(date__gte=datetime.datetime.today())).prefetch_related(prefetch).order_by('date')[:3]
-        r = Events.objects.filter(Q(connection__participants__id=pk)& Q(request=True) & Q(date__gte=datetime.datetime.today())).exclude(creator=pk).prefetch_related(prefetch).order_by('date')[:3]
+        e = Events.objects.filter(Q(connection__participants__id=pk) & Q(request=False) & Q(date__gte=datetime.today())).prefetch_related(prefetch).order_by('date')[:3]
+        r = Events.objects.filter(Q(connection__participants__id=pk)& Q(request=True) & Q(date__gte=datetime.today())).exclude(creator=pk).prefetch_related(prefetch).order_by('date')[:3]
         m = movies.objects.filter(Q(user=pk) & Q(direction=True)).order_by('-created_at')[:2]
         a = activities.objects.filter(Q(user=pk) & Q(direction=True)).order_by('-created_at')[:2]
         f= food.objects.filter(Q(user=pk) & Q(direction=True)).order_by('-created_at')[:2]
