@@ -164,12 +164,13 @@ USE_TZ = True
 
 # STATIC_URL = '/static/'
 
-ROOT_URLCONF = 'MATCHUS.urls' #check if you have this already, if not add it in
+ROOT_URLCONF = 'MATCHUS.urls'
+
 
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'frontend', "build", "static"), 
+    os.path.join(BASE_DIR, 'match_us', "build", "static"), 
 )
 
 django_heroku.settings(locals())
