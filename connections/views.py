@@ -7,7 +7,6 @@ from rest_framework.exceptions import NotFound,PermissionDenied
 from django.db.models import Q
 import datetime
 
-
 from jwt_auth.models import User
 from .serializers import BasicConnectionsSeralizer, PopulatedConnectionsSerializer, ConnectionsSerializer,PopulatedEventsSerializer
 from .models import Connections
@@ -65,8 +64,8 @@ class ConnectionsDetailView(APIView):
         f = food.objects.filter(Q(connection=pk) & Q(direction=True)).last()
         m = movies.objects.filter(Q(connection=pk) & Q(direction=True)).last()
         a = activities.objects.filter(Q(connection=pk) & Q(direction=True)).last()
-        e =Events.objects.filter(Q(connection=pk) & Q(request=False)).order_by('date')[:3]
-        r =Events.objects.filter(Q(connection=pk) & Q(request=True)).exclude(creator=request.user.id).order_by('date')[:3]
+        e =Events.objects.filter(Q(connection=pk) & Q(request=False)& Q(date__gte=datetime.datetime.today())).order_by('date')[:3]
+        r =Events.objects.filter(Q(connection=pk) & Q(request=True) & Q(date__gte=datetime.datetime.today())).exclude(creator=request.user.id).order_by('date')[:3]
         return Response({
         'events': PopulatedEventsSerializer(e, many=True).data,
         'req': PopulatedEventsSerializer(r, many=True).data,

@@ -18,8 +18,6 @@ state= {
   req: false
 }
 
-year = Number(moment(this.state.date).format('YYYY'))
-month =  Number(moment(this.state.date).format('MM'))
 homepage = location.pathname.includes('home') ? 'home' : 'con'
 eventsClass = location.pathname.includes('events') ? 'events' : 'overview'
 
@@ -44,10 +42,9 @@ changeMonth = (d) => {
 
 getEvents = async() => {
   const { connection, user } = this.props
-
   const data = this.homepage === 'home' ?
-    { month: this.month ,section: 'home' } :
-    { month: this.month , section: 'con', connection: connection.id }
+    { month: Number(moment(this.state.date).format('MM')) ,section: 'home' } :
+    { month: Number(moment(this.state.date).format('MM')) , section: 'con', connection: connection.id }
 
   const res = await axios.post(`/api/events/get/${user.id}/`, data, headers())
   this.setState({ events: res.data })

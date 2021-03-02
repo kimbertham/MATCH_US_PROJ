@@ -9,7 +9,6 @@ class Menu extends React.Component {
 
   render(){
     const { user, setCon, connections, connection, getCons } = this.props
-
     return (
 
       <div className='m-cont'>
@@ -25,6 +24,7 @@ class Menu extends React.Component {
             :
 
             <MenuCon
+              user={user}
               connection={connection}/>
           }
         </div>

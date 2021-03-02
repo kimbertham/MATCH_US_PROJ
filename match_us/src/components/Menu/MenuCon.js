@@ -13,7 +13,7 @@ import arrow from '../../styles/assets/menu-icons/arrow.jpg'
 
 
 
-const MenuCon = ({ connection, location }) =>  {
+const MenuCon = ({ connection, location , user }) =>  {
 
   const selected = (s) => {
   
@@ -25,6 +25,9 @@ const MenuCon = ({ connection, location }) =>  {
   }
 
   const { id } = connection
+
+  if (!connection || !user) return null 
+  
   return (
     <div className='m-con'>
 
@@ -36,7 +39,7 @@ const MenuCon = ({ connection, location }) =>  {
 
       <div className='m-profile'> 
         <div className='center wrap'>
-          <img src={connection.partner.profile_image} className='m-img' alt='profile-img'/>
+          <img src={user.profile_image} className='m-img' alt='profile-img'/>
           <img src={connection.partner.profile_image} className='m-img-large' alt='profile-img'/>
         </div>
         <h1>{connection.partner.first_name} {connection.partner.last_name}</h1>

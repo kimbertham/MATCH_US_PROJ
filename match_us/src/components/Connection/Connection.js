@@ -1,6 +1,6 @@
 import React from 'react' 
 import axios from 'axios'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 import { getUserId } from '../../Lib/auth'
 
 import Menu from '../Menu/Menu'
@@ -40,11 +40,12 @@ class Connection extends React.Component {
   render(){
   
     const { connection } = this.state
+    const { user } = this.props
     if (!connection) return null
     return (
 
       <div className=' fw fh flex'>
-        <Menu connection={connection}/>
+        <Menu connection={connection} user={user}/>
 
         <div className='main'>
           <Switch>
@@ -87,4 +88,4 @@ class Connection extends React.Component {
     )
   }
 }
-export default Connection
+export default withRouter(Connection)
