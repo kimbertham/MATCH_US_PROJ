@@ -2,10 +2,10 @@
 import React from 'react'
 import axios from 'axios'
 
-import { noPlaces } from '../../Lib/common'
-import { headers } from '../../Lib/auth'
-import { getCoordinates } from '../../Lib/com'
-import Match from '../MatchView/Match'
+import { noPlaces } from '../../../Lib/common'
+import { headers } from '../../../Lib/auth'
+import { getCoordinates } from '../../../Lib/com'
+import Match from '../Match'
 
 class getMovies extends React.Component {
 state = {

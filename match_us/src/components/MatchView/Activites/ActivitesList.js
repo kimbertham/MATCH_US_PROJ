@@ -1,5 +1,5 @@
 import React from 'react'
-import { typeList } from '../../Lib/com'
+import { typeList } from '../../../Lib/com'
 import { Link } from 'react-router-dom'
 
 const ActivitiesList = ({ connection }) =>{

@@ -1,11 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
-import { headers } from '../../Lib/auth'
-import { noPlaces } from '../../Lib/common'
-import { getCoordinates } from '../../Lib/com'
+import { headers } from '../../../Lib/auth'
+import { noPlaces } from '../../../Lib/common'
+import { getCoordinates } from '../../../Lib/com'
 
-import Match from '../MatchView/Match'
+import Match from '../Match'
 
 class Activities extends React.Component{
 state = {

@@ -16,7 +16,7 @@ const Calender = ({ date, changeMonth, events, setData, setReq, user }) => {
   if (!events) return null  
 
   for (let i = 0; i < moment(date).startOf('month').format('d') ; i++){
-    blank.push( <td className='empty'> {''}</td>)
+    blank.push( <td className='empty' key={i}> {''}</td>)
   }
 
   for (let d = 1; d <= moment(date).daysInMonth(); d++) {
@@ -26,7 +26,7 @@ const Calender = ({ date, changeMonth, events, setData, setReq, user }) => {
     if (events.length > 0) {
       const e = events.filter(x=> x.date === date)
       e.length > 0 ? days.push(
-        <td  onClick={setData} className='calender-day'  key={d}  id={date}>
+        <td  onClick={setData} className='calender-day'  id={date}>
           <p className='date'>{d}</p>
           {e.map((x,i)=> {
             return <p className={`request ${x.request && x.creator === user.id ? 'green' : x.request ? 'purple' : 'date' }`}
@@ -74,8 +74,8 @@ const Calender = ({ date, changeMonth, events, setData, setReq, user }) => {
         <table className='calender'>
           <tbody>
             <tr>{weekdays.map((day,i) => <th className='weekdays' key={i}>{day}</th>)}</tr>
-            {rows.map((d, i) => 
-              <tr  key={i}> {d}</tr>)}
+            {rows.map((d, key) => 
+              <tr  key={key}>{d}</tr>)}
           </tbody>
         </table>
       </div>

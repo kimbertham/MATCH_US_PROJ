@@ -2,8 +2,8 @@
 import React from 'react'
 import axios from 'axios'
 import { headers } from '../../Lib/auth'
-import MovieDetails from '../Movies/MovieDetails'
-import FoodDetails from '../FoodMatch/FoodDetails'
+import MovieDetails from './Movies/MovieDetails'
+import FoodDetails from './FoodMatch/FoodDetails'
 import NewEvent from '../Events/NewEvent'
 
 class Details extends React.Component {

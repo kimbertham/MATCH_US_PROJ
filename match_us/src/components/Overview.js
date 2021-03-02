@@ -14,6 +14,7 @@ import movies from '../styles/assets/menu-icons/movies.jpg'
 import wishlist from '../styles/assets/menu-icons/wishlist.jpg'
 import settings from '../styles/assets/menu-icons/settings.jpg'
 import background from '../styles/assets/background2.jpg'
+import ConnectCreate from './Connection/ConnectCreate'
 
 class  Overview extends React.Component {
   state= {
@@ -31,10 +32,10 @@ class  Overview extends React.Component {
 
   render(){
     
-    const { user, connections } = this.props
+    const { user, connections, getCons } = this.props
     const { data } = this.state
-    if (!data) return null
 
+    if (!data) return null
     return (
       <div className='overview' style={{ backgroundImage: `url(${background})` }}>
           
@@ -85,7 +86,12 @@ class  Overview extends React.Component {
 
           <div>
             <h3>Connection Requests</h3>
-            <div className='o-container'>
+            <div className='o-container relative'>
+              {connections.map(c => {
+                if (c.request !== user.id && c.request ){
+                  return <ConnectCreate c={c} getCons={getCons}/>
+                }              
+              })}
             </div>
           </div>
 
@@ -99,11 +105,12 @@ class  Overview extends React.Component {
               <h3>My Wishlist</h3></div>
           </Link>
 
-          <div className='o-button'>
-            <img src={settings} alt='food'/>
-            <h3>Settings</h3>
-          </div>
-    
+          <Link to={'/home/settings'}>
+            <div className='o-button'>
+              <img src={settings} alt='food'/>
+              <h3>Settings</h3>
+            </div>
+          </Link>
         </div>
       </div> 
     )

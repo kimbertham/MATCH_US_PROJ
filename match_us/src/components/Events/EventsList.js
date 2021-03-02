@@ -6,7 +6,7 @@ const  EventList =  ({ events, setReq }) => {
   if (!events) return null
 
   return (
-    <div className='events-list fh scroll'>
+    <div className='e-list'>
 
       <h1 className='title'> Events</h1>
       {events.map(e => {

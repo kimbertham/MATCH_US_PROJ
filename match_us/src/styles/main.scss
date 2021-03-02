@@ -153,6 +153,7 @@ right: 0;
 }
 
 .button { 
+  outline: none;
   margin: 2px;
   background: rgb(40, 40, 40);
   color: white;
@@ -194,4 +195,41 @@ padding:2vh;
   font-size: 20px;
 }
 
+.settings {
+  @extend .center;
+  padding: 2vw;
+  background: rgba(40, 40, 40, 0.3);
+  border-radius: 10px;
 
+  .s-img-cont{
+    width: 15vw;  
+    height: 15vw;
+    border-radius: 50%;
+  }
+
+  .s-img{
+    @extend .cover;
+    width: 100%;
+    height:100%;
+    border-radius: 50%;
+  }
+  .s-input{
+    width: 30vw;
+    height: 3vh;
+    border-radius: 10px;
+  }
+
+  .label{
+    font-size: 2em;
+  }
+  .s-field{
+    margin: 2px;
+  }
+}
+
+  .img-input {
+    width: 15vw;
+    border: 1px solid white;
+    padding: 1vw;
+    margin: 1vw;
+  }

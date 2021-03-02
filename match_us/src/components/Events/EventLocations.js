@@ -32,11 +32,11 @@ class EventLocations extends React.Component {
     const { location, handleLocation } = this.props
     return (
       <>
-        <div className='form-field'> 
+        <div> 
           <label>Location:</label> 
           <input
             name='location'
-            className='e-input'
+
             value={location}
             onChange={ this.handlePlaces}/>
         </div>

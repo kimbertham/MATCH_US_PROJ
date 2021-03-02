@@ -27,6 +27,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ('date_joined','email','first_name', 'id', 'last_name', 'profile_image', 'username', 'password','password_confirmation', )
 
 
+class UserS(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('date_joined','email','first_name', 'id', 'last_name', 'profile_image', 'username',)

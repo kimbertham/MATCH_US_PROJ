@@ -1,5 +1,5 @@
 import React from 'react'
-import { GImages } from '../../Lib/common'
+import { GImages } from '../../../Lib/common'
 import { withRouter, Link } from 'react-router-dom'
 
 const FoodDetails = ({ r, setData, match, delMatch }) => {

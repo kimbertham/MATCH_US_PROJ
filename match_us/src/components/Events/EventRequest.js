@@ -20,7 +20,7 @@ const EventRequest = ({ req, getEvents, closeModal, user }) => {
 
   return (
     <>
-      <div className='e-request column' key={req.id}>
+      <div className='column' key={req.id}>
         <h1>Date <span className={request}>request</span>!</h1> 
 
         <p>{req.title}</p>

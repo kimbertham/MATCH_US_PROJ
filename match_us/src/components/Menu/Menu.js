@@ -8,28 +8,24 @@ import { withRouter } from 'react-router-dom'
 class Menu extends React.Component {
 
   render(){
-    const { user, setCon, connections, connection } = this.props
-
-    let colour 
-    const pathname = this.props.location.pathname
+    const { user, setCon, connections, connection, getCons } = this.props
 
     return (
 
-      <div className='menu-cont relative'>
+      <div className='m-cont'>
     
         <div>
           {connections ? 
             <MenuUser 
               user={user}
               setCon={setCon}
-              connections={connections}
-              setColour={this.setColour}/> 
+              getCons={getCons}
+              connections={connections}/> 
             
             :
 
             <MenuCon
-              connection={connection}
-              setColour={this.setColour}/>
+              connection={connection}/>
           }
         </div>
 

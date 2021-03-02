@@ -10,8 +10,9 @@ from django.conf import settings
 from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY,HTTP_204_NO_CONTENT,HTTP_200_OK
 import jwt
 from django.db.models import Prefetch, prefetch_related_objects, Q
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserS
 from jwt_auth.models import User
+
 
 from connections.models import Connections
 from connections.serializers import EventsSerializer,ConnectionsSerializer, PopulatedEventsSerializer
@@ -60,6 +61,7 @@ class ProfileView(APIView):
         s_user = UserSerializer(User.objects.get(pk=pk))
         return Response( s_user.data, status=HTTP_200_OK)
 
+
         # get overview 
     def post(self,request,pk):
         prefetch= Prefetch('connection', queryset=Connections.objects.filter(participants__id=pk))
@@ -79,3 +81,24 @@ class ProfileView(APIView):
         'activity': ActivitiesSerializer(a, many=True).data,
         'requests': ConnectionsSerializer(req, many=True).data
         })
+
+    def patch(self, request, pk):
+        user = User.objects.get(pk=pk)
+        update_user = UserS(user, data=request.data)
+        if update_user.is_valid():
+            update_user.save()
+            return Response(update_user.data, status=HTTP_200_OK)
+        return Response(update_user.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+
+
+class ProfilesView(APIView):
+    def post(self,request):
+        cons = Connections.objects.filter(participants__id=request.user.id).values_list('id',flat=True)
+        ids = []
+        for id in cons:
+            c = Connections.objects.filter(id=id).values_list('participants', flat=True)
+            for c in c:
+                ids.append(c)
+        users = User.objects.filter(first_name__icontains=request.data['query']).exclude(id__in=ids).exclude(id=request.user.id)
+        s_users = UserSerializer(users, many=True)
+        return Response(s_users.data, status=HTTP_200_OK)

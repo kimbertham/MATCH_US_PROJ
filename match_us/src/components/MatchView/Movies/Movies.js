@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-import { headers } from '../../Lib/auth'
+import { headers } from '../../../Lib/auth'
 
-import Match from '../MatchView/Match'
+import Match from '../Match'
 
 
 class Movies extends React.Component {

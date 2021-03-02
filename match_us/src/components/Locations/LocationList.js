@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import Loader from '../Common/Loader'
+
 const LocationList = ({ locations, selected,connection, listLocations, getDetail }) => {
 
   return (

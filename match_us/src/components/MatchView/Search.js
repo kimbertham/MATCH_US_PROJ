@@ -1,7 +1,7 @@
 
 import React from 'react'
-import MovieGenre from '../Movies/MovieGenre'
-import FoodFilter from '../FoodMatch/FoodFilter'
+import MovieGenre from './Movies/MovieGenre'
+import FoodFilter from './FoodMatch/FoodFilter'
 
 const FoodSearch = ({ section, getResults }) => {
 

@@ -75,7 +75,7 @@ render(){
 
       {data || req ? 
         <div onClick={this.closeModal} className='modal'>
-          <div  className='m-pop c-modal'
+          <div  className='m-pop'
             onClick={e => e.stopPropagation()}>
             
             {req ? 

@@ -1,7 +1,7 @@
 
 import React from 'react'
 import axios from 'axios'
-import { geoURL } from '../../Lib/common'
+import { geoURL } from '../../../Lib/common'
 
 class  FoodSearch extends React.Component {
 state = {

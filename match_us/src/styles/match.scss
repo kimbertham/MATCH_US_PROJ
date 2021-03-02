@@ -184,5 +184,6 @@
 .m-search {
   @extend .right, .flex;
   margin:10px;
+  z-index: 50;
 }
 

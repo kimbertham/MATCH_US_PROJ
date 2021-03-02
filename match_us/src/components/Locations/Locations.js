@@ -33,7 +33,6 @@ getDetail = async (l, i) => {
     this.setState({ detail: null })
   } else {
     const r = (await axios.get(`/api/food/${l.id}/`)).data
-    console.log(l[i])
     this.setState({ detail: r, selected: i, center: this.state.locations[i] })
   }
 }

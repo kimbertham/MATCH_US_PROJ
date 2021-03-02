@@ -34,6 +34,7 @@ class ConnectionsListView(APIView):
         if not request.POST._mutable:
             request.POST._mutable = True
         request.data['participants'] = pk, request.user.id
+        request.data['request'] = request.user.id
         connection = ConnectionsSerializer(data=request.data)
         if connection.is_valid():
             connection.save()
@@ -42,10 +43,15 @@ class ConnectionsListView(APIView):
 
     def patch(self, request,pk):
         connection = Connections.objects.get(pk=pk)
-        connection.request = False
+        connection.request = None
         connection.save()
         return Response(status=HTTP_200_OK)
 
+    def delete(self,request ,pk):
+        connection = Connections.objects.get(pk=pk)
+        f.delete()
+        return Response(state=HTTP_204_NO_CONTENT)
+        
 class ConnectionsDetailView(APIView):
 
     def get(self, request, pk):

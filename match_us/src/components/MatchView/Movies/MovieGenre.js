@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { genreUrl } from '../../Lib/common'
+import { genreUrl } from '../../../Lib/common'
 
 class MovieGenre extends React.Component { 
   state = {

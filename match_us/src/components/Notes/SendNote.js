@@ -31,7 +31,7 @@ class SendNote extends React.Component {
       <div className='modal' onClick={sendNote}>
         <div className='m-pop' id='n-pop'  style={{ backgroundColor: data.color }}  onClick={e=> e.stopPropagation()}>
 
-          <form className='event-form center' onSubmit= {this.handleSubmit}>
+          <form onSubmit= {this.handleSubmit}>
             <div className='auth-head'>New Love Note</div>
 
             <div>    

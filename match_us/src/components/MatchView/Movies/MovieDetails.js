@@ -1,5 +1,5 @@
 import React from 'react'
-import { poster } from '../../Lib/common'
+import { poster } from '../../../Lib/common'
 import { withRouter, Link } from 'react-router-dom'
 
 const MovieDetails = ({ r, setData, delMatch, match }) => {
