@@ -52,7 +52,10 @@ class  Overview extends React.Component {
             <h3>Recent Notes</h3>
             <div className='flex'>
               {data.note.map(n=>{
-                return  <NoteCard key={n.id} n={n}/>
+                return  <Link key={n.id} 
+                  to={`/connection/${n.connection.id}/notes/inbox`}>
+                  <NoteCard n={n}/>
+                </Link>
               })}
             </div>
           </div> 

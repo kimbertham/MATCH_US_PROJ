@@ -27,7 +27,7 @@ const MenuCon = ({ connection, location , user }) =>  {
   const { id } = connection
 
   if (!connection || !user) return null 
-  
+
   return (
     <div className='m-con'>
 
@@ -38,10 +38,16 @@ const MenuCon = ({ connection, location , user }) =>  {
       </Link>
 
       <div className='m-profile'> 
-        <div className='center wrap'>
-          <img src={user.profile_image} className='m-img' alt='profile-img'/>
-          <img src={connection.partner.profile_image} className='m-img-large' alt='profile-img'/>
+      
+        <div className='img-wrap'>
+          <div className='m-img-cont'>
+            <div className='m-img' style={{   backgroundImage: `url(${user.profile_image})` }}/>
+          </div>
+          <div className='l-cont'>
+            <div className='p-img' style={{   backgroundImage: `url(${connection.partner.profile_image})` }}/>
+          </div>
         </div>
+
         <h1>{connection.partner.first_name} {connection.partner.last_name}</h1>
         <small>Connected since {connection.created_at.slice(0,4)}</small>
       </div>

@@ -45,7 +45,12 @@ class ConOverview extends React.Component{
           <div className='o-notes'>
             <h3>Recent Notes</h3>
             <div className='flex'>
-              {data.note.map(n => <NoteCard key={n.id} n={n} connection={connection}/>)}
+              {data.note.map(n => 
+                <Link key={n.id} 
+                  to={`/connection/${n.connection.id}/notes/inbox`}>
+                  <NoteCard n={n} connection={connection}/>
+                </Link>
+              )}
             </div>
           </div>
         </div> 

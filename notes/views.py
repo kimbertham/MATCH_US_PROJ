@@ -5,7 +5,7 @@ from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY
 from rest_framework.exceptions import NotFound,PermissionDenied
 from django.db.models import Q
 from .models import Notes
-from .serializers import NotesSerializer
+from .serializers import NotesSerializer, PopulatedNotesSerializer
 
 class NotesListView(APIView):
 
@@ -24,7 +24,7 @@ class NotesDetailsView(APIView):
             n = Notes.objects.filter(connection=pk).exclude(reciever=request.user.id)
         else:
             n = Notes.objects.filter(Q(connection=pk) & Q(reciever=request.user.id))
-        notes = NotesSerializer(n, many=True)
+        notes = PopulatedNotesSerializer(n, many=True)
         return Response(notes.data, HTTP_200_OK)
 
     def delete(self, request, pk, box):  

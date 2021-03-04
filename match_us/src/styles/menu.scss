@@ -47,21 +47,6 @@ h1{
   margin-bottom: 1vw;
 }
 
-.m-img{
-    width: 3vw;
-    height: 3vw;
-    border-radius: 50%;
-  }
-  
-.m-img-large{
-  width: 4vw;
-  height: 4vw;
-  border-radius: 50%;
-  margin-left: -10px;
-  border: 3px solid black;
-  }
-  
-
 .m-arrow{
   @extend .absolute, .right;
   width: 3vh;
@@ -70,31 +55,58 @@ h1{
   mix-blend-mode: color-dodge;
 }
 
-
 .logout-icon {
   @extend .m-arrow, .bottom;
   padding: 1vh ;
 }
 
+.img-wrap {
+  @extend .center, .wrap;
+  margin-bottom: 10px;
+}
+
+.m-img-cont {
+  width: 3vw;
+  height: 3vw;
+}
+
+.m-img{
+  @extend .cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.l-cont {
+  width: 4vw;
+  height: 4vw;
+  
+  .p-img {
+    @extend .m-img;
+    margin-left: -10px ;
+    border: 3px solid black;
+  }
+}
 
 .m-option {
   @extend .pointer, .flex;
-  align-items:center;
-  padding:0 10px ;
+  align-items: center;
 }
 
 .m-option-h {
   @extend .m-option;
-  * { margin: 10px; }
   border-radius: 20%;
+  padding: 1.5vh 3vh;
   border-bottom: 2px solid rgb(48, 47, 47);
-  
+
+  h1{
+    margin: 0 20px;
+  }
 }
 
-
 .s-form{
-  text-align: center;
   margin: 2vh 0;
+  text-align: center;
 
   .s-input {
     width: 65%;
@@ -107,8 +119,8 @@ h1{
 .s-result-cont {
   @extend .absolute;
   width: 100%;
-  padding: 2vh 0 5vh 0;
   margin-top: -2vh;
+  padding: 2vh 0 5vh 0;
   background-color: rgb(19, 19, 19);
 
   .s-result {
@@ -123,8 +135,8 @@ h1{
   }
 
   h3{
+    text-align: center;
     color:rgb(162, 18, 140);
-    text-align: center
   }
 
   .add-icon {

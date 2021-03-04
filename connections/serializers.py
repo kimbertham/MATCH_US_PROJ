@@ -5,7 +5,6 @@ from jwt_auth.models import User
 from jwt_auth.serializers import UserSerializer
 from .models import Connections
 from events.models import Events
-from notes.serializers import NotesSerializer
 
 
 class ConnectionsSerializer(serializers.ModelSerializer):

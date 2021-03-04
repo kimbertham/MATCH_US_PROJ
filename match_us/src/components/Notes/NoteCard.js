@@ -1,12 +1,18 @@
 import React from 'react' 
-
 const NoteCard = ({  n, connection, deleteNote }) => {
-  
+
   return (
     <>
-
       <div key={n.id} className='note' style={{ backgroundColor: n.color }}>
-        <p className='note-date'>{n.created_at.slice(0,10)}</p>
+
+        <small className='note-date'>
+          {n.connection.participants.map(x => 
+            x.id !== n.reciever ? `From ${x.first_name}` : null
+          )}
+          <br/>
+          {n.created_at.slice(0,10)}
+        </small>
+
         <h2>{n.notes.length > 100  ? n.notes.substr(0, 100) + '...' : n.notes }</h2>
 
         {!connection ? null : n.reciever !== connection.user.id ?

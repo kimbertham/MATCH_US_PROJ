@@ -16,7 +16,14 @@ const MenuUser = ({ user, connections,history, getCons }) => {
   return (
     <>
       <div className='m-profile'>
-        <img src={user.profile_image}  className='m-img-large' alt='profile-img'/>
+        
+        <div className='img-wrap'>
+          <div className='l-cont'>
+            <div  className='m-img' style={{  
+              backgroundImage: `url(${user.profile_image})` }}/>
+          </div>
+        </div>
+
         <h3> {user.first_name} {user.last_name}</h3>
         <p>@{user.username}</p>
       </div>
@@ -29,8 +36,12 @@ const MenuUser = ({ user, connections,history, getCons }) => {
           if (!c.request) { 
             return <Link  key={c.id} to={`/connection/${c.id}/overview`}>  
               <div className='m-option-h' id={c.id}>
-                <img alt='profile-img' className='m-img' 
-                  src={c.participants.profile_image} />
+
+                <div className='m-img-cont'>
+                  <div  className='m-img' style={{  
+                    backgroundImage: `url(${c.participants.profile_image})` }}/>
+                </div>
+
                 <h1>{c.participants.first_name} {c.participants.last_name}</h1>
               </div>
             </Link>

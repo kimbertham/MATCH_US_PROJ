@@ -1,7 +1,8 @@
 
 from django.shortcuts import render
 from rest_framework import serializers
-from jwt_auth.serializers import UserSerializer
+
+from connections.serializers import PopulatedConnectionsSerializer
 
 from .models import Notes
 
@@ -12,4 +13,4 @@ class NotesSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PopulatedNotesSerializer(NotesSerializer):
-    sender=UserSerializer()
+    connection = PopulatedConnectionsSerializer()

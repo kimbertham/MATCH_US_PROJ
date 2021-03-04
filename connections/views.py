@@ -16,7 +16,7 @@ from notes.models import Notes
 from events.models import Events
 from food.models import food
 from movies.models import movies
-from notes.serializers import NotesSerializer
+from notes.serializers import PopulatedNotesSerializer
 from food.serializers import FoodSerializer
 from movies.serializers import MovieSerializer
 from activities.serializers import ActivitiesSerializer
@@ -69,7 +69,7 @@ class ConnectionsDetailView(APIView):
         return Response({
         'events': PopulatedEventsSerializer(e, many=True).data,
         'req': PopulatedEventsSerializer(r, many=True).data,
-        'note': NotesSerializer(n, many=True).data, 
+        'note': PopulatedNotesSerializer(n, many=True).data, 
         'food':FoodSerializer(f).data , 
         'movie': MovieSerializer(m).data, 
         'activity': ActivitiesSerializer(a).data})

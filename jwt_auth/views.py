@@ -20,7 +20,7 @@ from notes.models import Notes
 from events.models import Events
 from food.models import food
 from movies.models import movies
-from notes.serializers import NotesSerializer
+from notes.serializers import PopulatedNotesSerializer
 from food.serializers import FoodSerializer
 from movies.serializers import MovieSerializer
 from activities.serializers import ActivitiesSerializer
@@ -74,7 +74,7 @@ class ProfileView(APIView):
         return Response({
         'events': PopulatedEventsSerializer(e, many=True).data,
         'req': PopulatedEventsSerializer(r, many=True).data,
-        'note': NotesSerializer(n,many=True).data, 
+        'note': PopulatedNotesSerializer(n,many=True).data, 
         'food':FoodSerializer(f, many=True).data , 
         'movie': MovieSerializer(m, many=True).data, 
         'activity': ActivitiesSerializer(a, many=True).data,
