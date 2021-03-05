@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import logout from '../../styles/assets/menu-icons/logout.jpg'
@@ -30,7 +31,7 @@ const MenuUser = ({ user, connections,history, getCons }) => {
         getCons={getCons} 
         connections={connections}/>
       
-      <div className='m-con'>
+      {/* <div className='m-con'>
         <h1>My Connections</h1>
         {connections.map(c => {
           if (!c.request) { 
@@ -46,7 +47,7 @@ const MenuUser = ({ user, connections,history, getCons }) => {
             </Link>
           }
         })}
-      </div>
+      </div> */}
 
       <img alt='profile-img' className='logout-icon' src={logout} onClick={handleLogout} />
     </>
