@@ -21,12 +21,12 @@ const Calender = ({ date, changeMonth, events, setData, setReq, user }) => {
 
   for (let d = 1; d <= moment(date).daysInMonth(); d++) {
     const date =  d.toString().length === 1 ? `${cYear}-${cMonth}-0${d}` : `${cYear}-${cMonth}-${d}`
-    const noEvent = <td onClick={setData} className='calender-day' id={date}><p className='date'>{d}</p> </td>
+    const noEvent = <td onClick={()=>setData(date)} className='calender-day'><p className='date'>{d}</p> </td>
 
     if (events.length > 0) {
       const e = events.filter(x=> x.date === date)
       e.length > 0 ? days.push(
-        <td  onClick={setData} className='calender-day'  id={date}>
+        <td  onClick={()=>setData(date)} className='calender-day'>
           <p className='date'>{d}</p>
           {e.map((x,i)=> {
             return <p className={`request ${x.request && x.creator === user.id ? 'green' : x.request ? 'purple' : 'date' }`}

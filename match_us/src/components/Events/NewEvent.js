@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
@@ -32,10 +31,15 @@ handleChange= async (e) =>{
 }
 
 handleSubmit = async (e) => {
-  e.preventDefault()
-  await axios.post('/api/events/', this.state.data, headers())
-  this.props.getEvents ? this.props.getEvents() : null
-  this.props.closeModal()
+  try {
+    e.preventDefault()
+    await axios.post('/api/events/', this.state.data, headers())
+    this.props.getEvents ? this.props.getEvents() : null
+    this.props.closeModal()
+  } catch (err) {
+    err.response.status === 422 ? 
+      this.handleError() : console.log(err)
+  }
 }
 
 handleLocation = (e) => {
@@ -43,9 +47,13 @@ handleLocation = (e) => {
   this.setState({ data })
 }
 
+handleError = () => {
+  this.setState({ error: true })
+  setTimeout(() => this.setState({ error: false }), 1500)
+}
 
 render(){
-  const { data } = this.state
+  const { data , error } = this.state
   const { connection,connections } = this.props
   return (
     <>
@@ -54,7 +62,7 @@ render(){
 
  
         <div>            
-          <label>Title:</label>   
+          <label><small>*</small>Title:</label>   
           <input
             name="title"
             value={data.title}
@@ -62,7 +70,7 @@ render(){
         </div>
     
         <div>   
-          <label className='label'>Daters: </label>
+          <label className='label'><small>*</small>Daters: </label>
           {connection ?
             <input
               readOnly
@@ -80,7 +88,7 @@ render(){
         </div>
         
         <div> 
-          <label>Date:</label>     
+          <label><small>*</small>Date:</label>     
           <input 
             type='date'
             name="date"
@@ -89,7 +97,7 @@ render(){
         </div>
 
         <div> 
-          Time:
+          <label><small>*</small>Time:</label>
           <input
             name="time"
             type='time'
@@ -127,9 +135,14 @@ render(){
           <label>🏕️</label>
           <input onChange={this.handleChange} type="radio" name='date_type' value='🏕️'/>
         </div>
+
+        <small className={error ? 'shake-text' : 'display-none'}> All fields marked with an * are required</small>
+
         <button className='button'> New Event!</button>   
       </form>
+
     </>
+
   )
 }
 }

@@ -23,6 +23,7 @@ class ActivitiesView(APIView):
 
 class ActivitiesRandomView(APIView):
     def post(self,request):
+        print('active')
         if not request.data['random']:
             id_list= activities.objects.filter(Q(user=request.user.id) & Q(direction=True) & Q(connection=request.data['connection'])).values_list('f_id', flat = True)
             matches = activities.objects.filter(Q(user=request.data['partner']) & Q(direction=True) & Q(connection=request.data['connection']) & Q(f_id__in=id_list)).values_list('f_id', flat = True)

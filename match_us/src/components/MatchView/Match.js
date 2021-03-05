@@ -77,12 +77,19 @@ changeView = () => {
   this.setState({ view: !this.state.view })
 }
 
+
 render(){
   const { detail, matches, search, match, view } = this.state
   const { connection, results, getResults, section, swipeData } = this.props
   const r = results[0]
 
-  if (!view) return <List section={section} results={results} changeView={this.changeView} swipeData={swipeData}/>
+  if (!view) return <List 
+    section={section} 
+    results={results} 
+    changeView={this.changeView}
+    swipeData={swipeData}/>
+
+  if (!r) return <Loader type='Bars'/>
 
   return (
     <div className='full flex'>
@@ -119,10 +126,8 @@ render(){
               showSearch={this.showSearch}
               getDetail={this.getDetail}
               deleteMatches={this.deleteMatches}/> 
-          </>
-          : 
-          <Loader type='Bars'/> }
-      </div>
+          </> : null}
+      </div> 
 
     </div>
   )

@@ -16,6 +16,7 @@ delMatch = async (id) =>{
   this.props.getDetail()
   this.props.getMatches()
 }
+
 setData = (i) => {
   this.setState({ data: i })
 }
@@ -31,6 +32,7 @@ render(){
   return (
     <>
       {data ?  
+
         <div className='modal' onClick={this.closeModal}>
           <div className='m-pop' onClick={e=>{
             e.stopPropagation()
@@ -39,11 +41,14 @@ render(){
         </div>
         : 
         <div onClick={getDetail} className='modal column'>
-          {section === 'movies' ?
-            <MovieDetails r={r} setData={this.setData} delMatch={this.delMatch}/>
-            : 
-            <FoodDetails r={r} setData={this.setData} delMatch={this.delMatch}/>}
-        </div>}
+          <div className='details'>
+            {section === 'movies' ?
+              <MovieDetails r={r} setData={this.setData} delMatch={this.delMatch}/>
+              : 
+              <FoodDetails r={r} setData={this.setData} delMatch={this.delMatch}/>}
+          </div>   
+        </div>
+      }
     </>
   )
 }

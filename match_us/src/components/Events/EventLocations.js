@@ -33,10 +33,9 @@ class EventLocations extends React.Component {
     return (
       <>
         <div> 
-          <label>Location:</label> 
+          <label><small>*</small>Location:</label> 
           <input
             name='location'
-
             value={location}
             onChange={ this.handlePlaces}/>
         </div>

@@ -5,8 +5,7 @@ import { withRouter, Link } from 'react-router-dom'
 const MovieDetails = ({ r, setData, delMatch, match }) => {
 
   return (
-    <div className='details'>
-
+    <>
       <div className='d-bg'  
         style={{ backgroundImage: `url(${poster}${r.poster_path})` }}/>
       
@@ -43,8 +42,7 @@ const MovieDetails = ({ r, setData, delMatch, match }) => {
           </div>
         </div>
       </div> 
-
-    </div>
+    </>
 
   )
 }

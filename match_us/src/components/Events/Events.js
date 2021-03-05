@@ -54,8 +54,8 @@ closeModal = () => {
   this.setState({ data: null, req: null })
 }
 
-setData = (e) => {
-  this.setState({ data: { date: e.target.id } })
+setData = (i) => {
+  this.setState({ data: { date: i } })
 }
 
 setReq = (r) => {

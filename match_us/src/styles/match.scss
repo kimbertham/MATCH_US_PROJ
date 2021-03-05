@@ -40,10 +40,6 @@
 
 // ------swipe------
 
-.swipeview{
-  @extend .relative, .center, .fg;
-  z-index: 30;
-}
 
 .swipe-layer1 {
   z-index:-1;
@@ -119,7 +115,7 @@
 
 .details {
   @extend .full;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.9) !important;
 
   .d-bg{
     width: 100%;

@@ -46,8 +46,8 @@ render() {
       {detail ? 
         <div className='swipeview'>
           <Details r={detail} getDetail={this.getDetail}/> 
-        </div>
-        : null}
+        </div> : null
+      }
 
       <div className='l-list' ref={l => this.list = l}>
         

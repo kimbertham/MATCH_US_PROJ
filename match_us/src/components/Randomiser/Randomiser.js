@@ -24,9 +24,11 @@ connection = this.props.connection
 getFood = async (data) => {
   const r = await axios.post('/api/food/random/', data, headers())
   this.setState({ food: r.data, loader: false })
+  console.log(r)
 }
 
 getActivity = async (d) => {
+  console.log('active')
   const activity = typeList[ Math.floor(Math.random() * 41) + 1] 
   const data = { 
     'partner': this.connection.partner.id, 
@@ -37,6 +39,7 @@ getActivity = async (d) => {
     'keyword': activity 
   }
   const r = (await axios.post('/api/activities/random/', data, headers())).data
+  console.log(r)
   this.setState({ activity: r },() => {
     this.getFood({
       'random': d,
@@ -50,11 +53,13 @@ getActivity = async (d) => {
 }
 
 getMovie = async (d) => {
+  console.log('movie')
   const data = { 
     'random': d, 
     'partner': this.connection.partner.id, 
     'connection': this.connection.id }
   const r = await axios.post('/api/movies/random/', data, headers()) 
+  console.log(r)
   this.setState({ movie: r.data })
   this.getFood({ 
     'random': d,

@@ -5,7 +5,7 @@ import { withRouter, Link } from 'react-router-dom'
 const FoodDetails = ({ r, setData, match, delMatch }) => {
 
   return (
-    <div className='details'>
+    <>
       <div className='d-bg cover' 
         style={{ backgroundImage: `url(${r.photos ?
           `${GImages}${r.photos[0].photo_reference}` : null})` }}/>
@@ -55,7 +55,7 @@ const FoodDetails = ({ r, setData, match, delMatch }) => {
 
         </div>
       </div>
-    </div>
+    </>
   )
 }
 export default withRouter(FoodDetails)
