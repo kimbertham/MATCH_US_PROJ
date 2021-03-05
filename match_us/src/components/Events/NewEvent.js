@@ -33,7 +33,8 @@ handleChange= async (e) =>{
 handleSubmit = async (e) => {
   try {
     e.preventDefault()
-    await axios.post('/api/events/', this.state.data, headers(), headers())
+    await axios.post('/api/events/', this.state.data, headers())
+    console.log(this.state.data)
     this.props.getEvents ? this.props.getEvents() : null
     this.props.closeModal()
   } catch (err) {

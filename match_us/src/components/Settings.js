@@ -41,7 +41,6 @@ class Settings extends React.Component {
   }
 
   deleteAccount = async (id) => {
-    console.log(id)
     await axios.delete(`/api/profile/${id}/`)
     this.props.history.push('/login')
   }
