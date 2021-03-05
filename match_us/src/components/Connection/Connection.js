@@ -38,13 +38,13 @@ class Connection extends React.Component {
   }
 
   render(){
-  
     const { connection } = this.state
     const { user } = this.props
     if (!connection) return null
     return (
 
-      <div className=' fw fh flex'>
+      <div className='flex'>
+
         <Menu connection={connection} user={user}/>
 
         <div className='main'>
@@ -71,13 +71,11 @@ class Connection extends React.Component {
             <Route path='/connection/:id/notes/:box' render={() => 
               <Notes connection={connection}/> }/>
                 
- 
             <Route path='/connection/:id/events' render={() => 
               <Events user={connection.user} connection={connection}/> }/>
               
             <Route path='/connection/:id/wishlist' render={() => 
               <Wishlist name={connection.partner.first_name} id={connection.partner.id}/> }/>
-
 
             <Route path='/connection/:id/locations' render={() => 
               <Locations connection={connection}/> }/>

@@ -23,7 +23,6 @@ class ActivitiesView(APIView):
 
 class ActivitiesRandomView(APIView):
     def post(self,request):
-        print('active')
         if not request.data['random']:
             id_list= activities.objects.filter(Q(user=request.user.id) & Q(direction=True) & Q(connection=request.data['connection'])).values_list('f_id', flat = True)
             matches = activities.objects.filter(Q(user=request.data['partner']) & Q(direction=True) & Q(connection=request.data['connection']) & Q(f_id__in=id_list)).values_list('f_id', flat = True)
@@ -42,7 +41,6 @@ class ActivitiesListView(APIView):
     def get(self, request, place_id):
         r = requests.get(gDetails, params={'place_id' : place_id}).json() 
         return Response(r['result'], HTTP_200_OK)
-
 
 class ActivitiesDetailsView(APIView):
 

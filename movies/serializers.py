@@ -4,8 +4,6 @@ from rest_framework import serializers
 from connections.serializers import ConnectionsSerializer
 from .models import movies
 
-
-
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = movies

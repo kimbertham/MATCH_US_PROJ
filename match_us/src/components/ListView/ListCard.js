@@ -10,6 +10,7 @@ const ActivityCard = ({ r, section,like, i }) => {
         <div className='l-img-cont'>
           <img src={  r.photos ? `${GImages}${r.photos[0].photo_reference}` : 'https://bit.ly/2LG7Z7k'} className='list-img' alt='img'/>
         </div>
+
         <div className='l-text'>
           <h1>{r.name}</h1>
           <h3>Rating: {r.rating}/5</h3>
@@ -24,6 +25,7 @@ const ActivityCard = ({ r, section,like, i }) => {
     return (
       <>
         <img src={`${poster}${r.poster_path}` } alt='img' className='lm-img'/>
+        
         <div className='l-text'>
           <h1> {r.title}</h1>
           <p>{r.vote_average}/10</p>

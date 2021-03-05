@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import all from '../../styles/assets/swipe-buttons/all-icon.jpg'
 import view from '../../styles/assets/swipe-buttons/view-icon.jpg'
 
-
 const Matches = ({ getDetail, matches,connection, section, changeView }) =>  {
 
   if (!matches) return null

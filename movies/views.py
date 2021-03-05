@@ -9,7 +9,6 @@ from .models import movies
 from lib.links import tmdb_base, tmdb_key, tmdb_details
 import random
 
-
 class MovieView(APIView):
 
     def post(self, request):

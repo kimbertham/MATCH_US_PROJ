@@ -25,21 +25,22 @@ const MovieDetails = ({ r, setData, delMatch, match }) => {
           <p> {r.genres ? r.genres.map(g=> `${g.name} | `) : null }</p>
           <Link to={r.homepage}>{r.homepage}</Link>
 
-          <div className='d-buttons' onClick={e=>{
-            e.stopPropagation()
-          }}>
-            
-            {match.path.includes('results') ? 
-              <>
-                <button className='button' onClick={()=> {
-                  setData( { notes: `${r.title}, ${r.release_date}`, date_type: '🍿 Film' })
-                }}> + Create Date</button> 
-                <button className='button' onClick={()=> {
-                  delMatch( r.id)
-                }}> Delete</button>
-              </> : null}
-        
-          </div>
+      
+          {match.path.includes('results') ? 
+            <div onClick={e=>{
+              e.stopPropagation()
+            }} className='d-buttons'>
+
+              <button className='button' onClick={()=> {
+                setData( { notes: `${r.title}, ${r.release_date}`, date_type: '🍿 Film' })
+              }}> + Create Date</button> 
+              <button className='button' onClick={()=> {
+                delMatch( r.id)
+              }}> Delete</button>
+            </div>
+          
+            : null}
+
         </div>
       </div> 
     </>

@@ -60,7 +60,6 @@ class ProfileView(APIView):
         s_user = UserSerializer(User.objects.get(pk=pk))
         return Response( s_user.data, status=HTTP_200_OK)
 
-
         # get overview 
     def post(self,request,pk):
         prefetch= Prefetch('connection', queryset=Connections.objects.filter(participants__id=pk))
@@ -88,7 +87,6 @@ class ProfileView(APIView):
             update_user.save()
             return Response(update_user.data, status=HTTP_200_OK)
         return Response(update_user.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
-
 
 class ProfilesView(APIView):
     def post(self,request):

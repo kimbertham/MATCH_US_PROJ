@@ -56,7 +56,6 @@
 }
 
 .auth-text{
-@extend .pointer, .italic;
-display:flex;
+@extend .pointer, .italic, .flex;
 justify-content: flex-end;
 }

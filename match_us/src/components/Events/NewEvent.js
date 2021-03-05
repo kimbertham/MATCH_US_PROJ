@@ -60,7 +60,6 @@ render(){
       <form className='center' onSubmit= {this.handleSubmit}>
         <h1>New Event</h1>
 
- 
         <div>            
           <label><small>*</small>Title:</label>   
           <input

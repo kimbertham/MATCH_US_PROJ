@@ -77,7 +77,6 @@ changeView = () => {
   this.setState({ view: !this.state.view })
 }
 
-
 render(){
   const { detail, matches, search, match, view } = this.state
   const { connection, results, getResults, section, swipeData } = this.props

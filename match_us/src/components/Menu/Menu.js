@@ -10,26 +10,22 @@ class Menu extends React.Component {
   render(){
     const { user, setCon, connections, connection, getCons } = this.props
     return (
-
       <div className='m-cont'>
-    
         <div>
+
           {connections ? 
             <MenuUser 
               user={user}
               setCon={setCon}
               getCons={getCons}
               connections={connections}/> 
-            
             :
-
             <MenuCon
               user={user}
               connection={connection}/>
           }
+          
         </div>
-
-
       </div>
     )
   }

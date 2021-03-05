@@ -22,6 +22,7 @@ const FoodDetails = ({ r, setData, match, delMatch }) => {
 
           <h3>Average Rating: {r.rating}/5 </h3>
           <p>Customer Reviews:</p>
+          
           {r.reviews ? r.reviews.slice(0,3).map((r,i) =>  {
             <>
               <p key={i}> <b>{r.author_name}</b>:  {r.rating}/5</p>
@@ -38,20 +39,20 @@ const FoodDetails = ({ r, setData, match, delMatch }) => {
             </>
             : null}
     
-          <div className='d-buttons' onClick={e=>{
-            e.stopPropagation()
-          }}>
+          {match.path.includes('results') ? 
+            <div onClick={e=>{
+              e.stopPropagation()
+            }} className='d-buttons'>
+          
+              <button  className='button' onClick={()=>{
+                setData( { location: r.formatted_address })
+              }}> + Create Date</button> 
+              <button  className='button' onClick={()=> {
+                delMatch(r.place_id)
+              }}> Delete</button>
 
-            {match.path.includes('results') ? 
-              <>
-                <button  className='button' onClick={()=>{
-                  setData( { location: r.formatted_address })
-                }}> + Create Date</button> 
-                <button  className='button' onClick={()=> {
-                  delMatch(r.place_id)
-                }}> Delete</button>
-              </> : null}
-          </div>
+            </div> 
+            : null}
 
         </div>
       </div>

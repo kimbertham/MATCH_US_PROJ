@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 const  Register = ({ change, submit, form, data })=> {
 
   if (!data) return null

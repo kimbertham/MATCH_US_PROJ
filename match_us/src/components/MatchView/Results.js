@@ -34,7 +34,6 @@ class MatchHome extends React.Component {
     this.setState({ matches: r.data })
   }
 
-
   render() {
     const { connection } = this.props
     const { matches, detail } = this.state
@@ -43,10 +42,10 @@ class MatchHome extends React.Component {
     if (!matches) return <Loader type='Circles'/>
 
     return (
-
       <>
+
         {detail ? 
-          <div className='fh swipeview' >
+          <div className='swipeview' >
             <Details r={detail}
               section={section}
               connection={connection}
@@ -55,7 +54,6 @@ class MatchHome extends React.Component {
           </div>
           : 
           <>
-      
             <h1 className='r-title'>
               {connection.partner.first_name} and {connection.user.first_name}&apos;s {section} matches
             </h1> 
@@ -71,6 +69,7 @@ class MatchHome extends React.Component {
             </div>
           </>
         }
+
       </>
     )
   }

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 const ActivitiesList = ({ connection }) =>{
 
-
   return (
     <div className='full scroll center'>
 

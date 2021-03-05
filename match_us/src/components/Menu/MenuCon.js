@@ -11,12 +11,9 @@ import calender from '../../styles/assets/menu-icons/calender.jpg'
 import overview from '../../styles/assets/menu-icons/overview.jpg'
 import arrow from '../../styles/assets/menu-icons/arrow.jpg'
 
-
-
 const MenuCon = ({ connection, location , user }) =>  {
 
   const selected = (s) => {
-  
     return location.pathname.includes(s) ? 'm-option selected' : 'm-option'
   }
 
@@ -25,7 +22,6 @@ const MenuCon = ({ connection, location , user }) =>  {
   }
 
   const { id } = connection
-
   if (!connection || !user) return null 
 
   return (
@@ -41,10 +37,10 @@ const MenuCon = ({ connection, location , user }) =>  {
       
         <div className='img-wrap'>
           <div className='m-img-cont'>
-            <div className='m-img' style={{   backgroundImage: `url(${user.profile_image})` }}/>
+            <div className='m-img' style={{ backgroundImage: `url(${user.profile_image})` }}/>
           </div>
           <div className='l-cont'>
-            <div className='p-img' style={{   backgroundImage: `url(${connection.partner.profile_image})` }}/>
+            <div className='p-img' style={{ backgroundImage: `url(${connection.partner.profile_image})` }}/>
           </div>
         </div>
 
@@ -53,7 +49,6 @@ const MenuCon = ({ connection, location , user }) =>  {
       </div>
 
       <div>
-
         <div className={selected('overview')}>
           <img src={overview} alt='food' className='m-icon'/>
           <Link to={`/connection/${id}/overview`}>

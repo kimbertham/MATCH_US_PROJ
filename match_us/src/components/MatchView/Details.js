@@ -39,7 +39,9 @@ render(){
           }}> <NewEvent data={data} connection={connection}/> 
           </div>
         </div>
+        
         : 
+
         <div onClick={getDetail} className='modal column'>
           <div className='details'>
             {section === 'movies' ?
@@ -48,6 +50,7 @@ render(){
               <FoodDetails r={r} setData={this.setData} delMatch={this.delMatch}/>}
           </div>   
         </div>
+
       }
     </>
   )

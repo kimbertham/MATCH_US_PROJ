@@ -55,7 +55,10 @@ class Notes extends React.Component {
     return (
       <div className='swipeview center'>
 
-        {enlarge ? <NotesModal note={enlarge} enlarge={this.enlarge}/>  : null }
+        {enlarge ? 
+          <NotesModal 
+            note={enlarge} 
+            enlarge={this.enlarge}/>  : null }
         
 
         {send ? 
@@ -70,11 +73,12 @@ class Notes extends React.Component {
         <button className='button' onClick={this.sendNote}>New Love Note</button>
 
         <div className='notes-cont'>
+
           {notes.map(n=>{
             return (
-              <div className='n-cont' key={n.id}  id={n.id} onClick={e=>{
+              <div onClick={e=>{
                 n.read ? this.enlarge(n) : this.readNote(e)
-              }}>
+              }} className='n-cont' key={n.id}  id={n.id}>
                 <NoteCard n={n}  
                   connection={connection} 
                   deleteNote={this.deleteNote} />
@@ -82,8 +86,8 @@ class Notes extends React.Component {
             )
           })}
         </div>
-      </div>
 
+      </div>
     )
   }
 }

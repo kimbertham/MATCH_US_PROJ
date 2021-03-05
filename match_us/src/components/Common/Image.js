@@ -39,7 +39,7 @@ class ImageUpload extends React.Component {
   
       <div> 
 
-        <input
+        <input 
           name='image'
           className='img-input'
           type="file"

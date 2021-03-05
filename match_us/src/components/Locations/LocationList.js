@@ -10,8 +10,7 @@ const LocationList = ({ locations, selected,connection, listLocations, getDetail
 
       {locations.length <= 0 ? 
         <Loader type='Hearts' /> 
-        :
-        <>
+        : <>
           {locations.map((l,i) => {
             return <div key={i} ref={l => listLocations[i] = l} onClick={()=>{
               getDetail(l , i)

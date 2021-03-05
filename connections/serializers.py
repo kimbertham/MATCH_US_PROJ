@@ -19,8 +19,6 @@ class PopulatedConnectionsSerializer(ConnectionsSerializer):
     participants = UserSerializer(many=True)
 
 
-
-
 class EventsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Events

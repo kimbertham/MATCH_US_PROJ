@@ -1,12 +1,9 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { GImages, fDefault, poster } from '../../Lib/common'
 import heart from '../../styles/assets/swipe-buttons/heart.jpg'
 import cross from '../../styles/assets/swipe-buttons/cross.jpg'
 import restart from '../../styles/assets/swipe-buttons/restart.jpg'
 import filter from '../../styles/assets/swipe-buttons/filter.jpg'
-
-
 
 const MatchSwipe = ({ r,  deleteMatches, showSearch ,swipe, getDetail, section }) => {
   if (!r) return null
@@ -37,8 +34,6 @@ const MatchSwipe = ({ r,  deleteMatches, showSearch ,swipe, getDetail, section }
 
   return (
     <>   
-
-
       <div className=' swipe-layer1'>
         <div className='swipe-card'>
           {section === 'movies' ? movieSwipe() : foodSwipe()}

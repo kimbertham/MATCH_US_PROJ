@@ -23,6 +23,7 @@ login = async (e) => {
     window.localStorage.setItem('token', res.data.token)
     this.props.history.push('/home')
     window.location.reload()
+
   } catch (err) {
     this.setState({ invalid: true })
     setTimeout(() => this.setState({ invalid: false }), 1000)
@@ -49,15 +50,13 @@ register = async (e) => {
 
     return (
       <div className='a-cont'>
+
         <div className='flex'>
           <div className='a-logo-wrap'>
-            <img 
-              className='a-logo' alt='logo'
+            <img className='a-logo' alt='logo'
               src='https://i.imgur.com/VfFxGMN.jpg'/>
             <p>Match Us</p>
-            <p className='a-logo-sub'>
-            Make every date the best date
-            </p>
+            <p className='a-logo-sub'> Make every date the best date </p>
           </div>
       
           <div className='a-form-cont'>
@@ -74,10 +73,12 @@ register = async (e) => {
                 form={this.handleForm}
                 data={data}/>
             }
+
             <p className={invalid ? 'shake-text' : 'display-none' }> 
-          Invalid! Please try again!
+              Invalid! Please try again!
             </p>
           </div>
+
         </div>
       </div>
     )

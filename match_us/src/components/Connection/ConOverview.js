@@ -31,10 +31,12 @@ class ConOverview extends React.Component{
 
     return (
   
-      <div className='con-over flex'>
+      <div className='con-over'>
         
         <div className='o-side'>
-          <h2 className='o-title'>{connection.user.first_name} & {connection.partner.first_name}&apos;s Overview </h2>
+          <h2 className='o-title'>
+            {connection.user.first_name} & {connection.partner.first_name}&apos;s Overview 
+          </h2>
 
           <div className='o-calendar'>
             <Events
@@ -88,6 +90,7 @@ class ConOverview extends React.Component{
             
           </div>
         </div>
+
       </div> 
     )
   }

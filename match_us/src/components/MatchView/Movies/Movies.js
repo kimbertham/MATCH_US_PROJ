@@ -57,7 +57,6 @@ render() {
         connection={this.props.connection}
         nextSwipe={this.nextSwipe}
         getResults={this.getResults}/>
-
     </>
   )
 }
