@@ -36,7 +36,7 @@ render(){
         <div className='modal' onClick={this.closeModal}>
           <div className='m-pop' onClick={e=>{
             e.stopPropagation()
-          }}> <NewEvent data={data} connection={connection}/> 
+          }}> <NewEvent data={data} closeModal={this.closeModal} connection={connection}/> 
           </div>
         </div>
         

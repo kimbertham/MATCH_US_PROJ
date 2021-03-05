@@ -15,6 +15,8 @@ class EventsView(APIView):
     def post(self,request):
         if not request.POST._mutable:
             request.POST._mutable = True
+        print(request.user.id)
+        print(request.data)
         request.data['creator'] = request.user.id
         event = EventsSerializer(data=request.data)
         if event.is_valid():
