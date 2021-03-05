@@ -1,5 +1,7 @@
 import React from 'react'
+import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
+
 import movies from '../../styles/assets/menu-icons/movies.jpg'
 import food from '../../styles/assets/menu-icons/food.jpg'
 import activities from '../../styles/assets/menu-icons/activities.jpg'
@@ -10,8 +12,11 @@ import wishlist from '../../styles/assets/menu-icons/wishlist.jpg'
 import calender from '../../styles/assets/menu-icons/calender.jpg'
 import overview from '../../styles/assets/menu-icons/overview.jpg'
 import arrow from '../../styles/assets/menu-icons/arrow.jpg'
+import unmatch from '../../styles/assets/menu-icons/unmatch.jpg'
 
-const MenuCon = ({ connection, location , user }) =>  {
+
+const MenuCon = ({ connection, location , user, history }) =>  {
+  const { id } = connection
 
   const selected = (s) => {
     return location.pathname.includes(s) ? 'm-option selected' : 'm-option'
@@ -21,7 +26,11 @@ const MenuCon = ({ connection, location , user }) =>  {
     return location.pathname.includes(s) ? 'm-open' : 'display-none'
   }
 
-  const { id } = connection
+  const handleUnmatch = async () => {
+    await axios.delete(`/api/connections/${id}/`)
+    history.push('/home')
+  }
+
   if (!connection || !user) return null 
 
   return (
@@ -129,6 +138,8 @@ const MenuCon = ({ connection, location , user }) =>  {
             <h1 id='calendar'> Calendar </h1>
           </div>
         </Link>
+
+        <img src={unmatch} alt='unmatch' className='unmatch' onClick={handleUnmatch}/>
 
       </div>
     </div>

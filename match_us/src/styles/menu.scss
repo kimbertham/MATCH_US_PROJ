@@ -150,3 +150,9 @@ h1{
     border: 1px solid rgb(72, 72, 72);
   }
 }
+
+.unmatch {
+  @extend .logout-icon;
+  width: 2.5vw;
+}
+

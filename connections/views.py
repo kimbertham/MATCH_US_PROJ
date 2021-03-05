@@ -48,8 +48,8 @@ class ConnectionsListView(APIView):
 
     def delete(self,request ,pk):
         connection = Connections.objects.get(pk=pk)
-        f.delete()
-        return Response(state=HTTP_204_NO_CONTENT)
+        connection.delete()
+        return Response(status=HTTP_204_NO_CONTENT)
         
 class ConnectionsDetailView(APIView):
 
