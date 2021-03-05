@@ -33,10 +33,10 @@ const ConnectCreate = ({ c , getCons }) => {
 
       <div className='req-buttons'>
         <button className='button' onClick={()=>{
-          request(c.id, true)
+          request(c.partner.id, true)
         }}> ✓ </button>
         <button className='button' onClikc={()=>{
-          request(c.id, false)        
+          request(c.parnter.id, false)        
         }} >✗</button>
       </div>
 

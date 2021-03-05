@@ -80,6 +80,11 @@ class ProfileView(APIView):
         'requests': ConnectionsSerializer(req, many=True).data
         })
 
+    def delete(self, request, pk):
+        user = User.objects.get(pk=pk)
+        user.delete()
+        return Response(status=HTTP_204_NO_CONTENT)
+
     def patch(self, request, pk):
         user = User.objects.get(pk=pk)
         update_user = UserS(user, data=request.data)

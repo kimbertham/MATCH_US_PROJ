@@ -40,6 +40,12 @@ class Settings extends React.Component {
     }
   }
 
+  deleteAccount = async (id) => {
+    console.log(id)
+    await axios.delete(`/api/profile/${id}/`)
+    this.props.history.push('/login')
+  }
+
   handleImage = (img) => {
     const data = { ...this.state.data, profile_image: img }
     this.setState({ data })
@@ -48,6 +54,7 @@ class Settings extends React.Component {
 
   render() {
     const { data } = this.state
+    const { user } = this.props
     return (
       <div className='settings'>
 
@@ -103,7 +110,10 @@ class Settings extends React.Component {
               onChange={this.handleChange}/>
           </div>
 
-          <button className='button'> Save! </button>
+          <div className='flex'>
+            <button className='button'> Save! </button>
+            <button className='button' onClick={()=>this.deleteAccount(user.id)}> Delete Account</button>
+          </div>
         </form>
       </div>
     )

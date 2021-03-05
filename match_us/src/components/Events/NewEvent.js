@@ -55,6 +55,7 @@ handleError = () => {
 render(){
   const { data , error } = this.state
   const { connection,connections } = this.props
+  console.log(connection)
   return (
     <>
       <form className='center' onSubmit= {this.handleSubmit}>

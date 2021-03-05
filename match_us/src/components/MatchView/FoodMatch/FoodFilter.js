@@ -21,7 +21,6 @@ handleChange = (e) => {
 
 setLocation = async (e) => {
   e.preventDefault()
-  await this.props.clearResults()
   if (Object.values(this.state.data).some(o => o === '')) {
     this.setState({ errors: true })
   } else {
