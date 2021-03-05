@@ -5,12 +5,16 @@ const ConnectCreate = ({ c , getCons }) => {
 
   const request = async (id, dir) => {
     if (dir) {
-      await  axios.patch(`/api/connections/${id}/`)
+      await  axios.patch(`/api/connections/${id}/`, { request: null })
     } else {
       await axios.delete(`/api/connections/${id}/`)
     }
     getCons()
   } 
+
+  console.log(c)
+
+  if (!c.participants) return null
 
   return (
     <div className='req-item'>
@@ -33,10 +37,10 @@ const ConnectCreate = ({ c , getCons }) => {
 
       <div className='req-buttons'>
         <button className='button' onClick={()=>{
-          request(c.partner.id, true)
+          request(c.id, true)
         }}> ✓ </button>
-        <button className='button' onClikc={()=>{
-          request(c.parnter.id, false)        
+        <button className='button' onClick={()=>{
+          request(c.id, false)        
         }} >✗</button>
       </div>
 

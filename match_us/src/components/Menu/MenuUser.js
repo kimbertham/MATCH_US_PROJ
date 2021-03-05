@@ -12,7 +12,8 @@ const MenuUser = ({ user, connections,history, getCons }) => {
     history.push('/login')
     window.location.reload()
   }
-
+  
+  if (!user) return null
   return (
     <>
       <div className='m-profile'>
