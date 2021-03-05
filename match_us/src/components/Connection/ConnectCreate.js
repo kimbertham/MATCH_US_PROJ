@@ -16,7 +16,13 @@ const ConnectCreate = ({ c , getCons }) => {
     <div className='req-item'>
 
       <div className='flex'>
-        <img src={c.participants.profile_image} alt='profile-img' className='m-img'/>
+        
+        <div className='img-wrap'>
+          <div className='l-cont'>
+            <div  className='m-img' style={{ backgroundImage: `url(${c.participants.profile_image})` }}/>
+          </div>
+        </div>
+
         <div>
           <h3>{c.participants.first_name} {c.participants.last_name}  
             <span className='req-span'> @{c.participants.username}</span>

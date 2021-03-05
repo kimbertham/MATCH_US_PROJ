@@ -62,7 +62,10 @@ class SidebarSearch extends React.Component {
             {results.map((u,i) => {
               return (
                 <div key={u.id} className='s-result'>
-                  <img src={u.profile_image} alt='pp-img' className='m-img'/>
+                  <div className='m-img-cont'>
+                    <div  className='m-img' style={{  
+                      backgroundImage: `url(${u.profile_image})` }}/>
+                  </div>
                   <p> {u.first_name} {u.last_name}</p>
 
                   {u.img ?  <img src={sent} alt='add' className='add-icon'/> :

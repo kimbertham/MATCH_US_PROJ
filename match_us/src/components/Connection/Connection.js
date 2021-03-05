@@ -75,7 +75,7 @@ class Connection extends React.Component {
               <Events user={connection.user} connection={connection}/> }/>
               
             <Route path='/connection/:id/wishlist' render={() => 
-              <Wishlist name={connection.partner.first_name} id={connection.partner.id}/> }/>
+              <Wishlist user={connection.partner}/> }/>
 
             <Route path='/connection/:id/locations' render={() => 
               <Locations connection={connection}/> }/>

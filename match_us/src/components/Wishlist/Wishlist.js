@@ -15,34 +15,34 @@ async componentDidMount() {
 }
 
 getWishlist = async () => {
-  const r = await axios.get(`/api/wishlist/${this.props.id}/`)
+  const r = await axios.get(`/api/wishlist/${this.props.user.id}/`)
   this.setState({ wishlist: r.data })
 }
 
 render(){
-  const search = this.props.match.path.includes('home')
+  const { user,match } = this.props
+  const home = match.path.includes('home')
   const { wishlist } = this.state
+
+  if (!wishlist) return <Loader type='Puff'/>
 
   return (
     <div className='fh scroll'>
   
-      {!wishlist ? <Loader type='Puff'/>  : <>
+      <div className='center'>
+        <h1 className='r-title'>{user.first_name}&apos;s Wishlist </h1>
+        {home ? <WishlistSearch getWishlist={this.getWishlist}/> : null}
+      </div>
 
-        <div className='center'>
-          <h1 className='r-title'>{this.props.name}&apos;s Wishlist </h1>
-          {search ?  <WishlistSearch getWishlist={this.getWishlist}/> : null}
-        </div>
+      <div className='flex wrap center'>
+        {wishlist.length > 0 ?
+          wishlist.map((r,i) => {
+            return  <div  className='w-item' key={i}>
+              <WishListCard r={r} home={home} deleteWish={this.deleteWish}/>
+            </div>
+          }) : 'No wishlist items'}
+      </div>
 
-        <div className='flex wrap center'>
-          {wishlist.length > 0 ?
-            wishlist.map((r,i) => {
-              return  <div  className='w-item' key={i}>
-                <WishListCard r={r}/>
-              </div>
-            }) : 'No wishlist items'}
-        </div>
-      </>
-      }
     </div>
   )
 }

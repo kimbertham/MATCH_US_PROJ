@@ -1,9 +1,7 @@
 import React from 'react'
 
-
-
 const  Login = ({ change, submit, form, data }) => {
- 
+
   if (!data) return null
   return (
 
@@ -17,7 +15,7 @@ const  Login = ({ change, submit, form, data }) => {
           className='auth-input'
           name="username"
           onChange={change}
-          value={data.username}/>
+          value={data.username || ''}/>
       </div>
 
       <div className='form-field'> 
@@ -28,7 +26,7 @@ const  Login = ({ change, submit, form, data }) => {
           type='password'
           name="password"
           onChange={change}
-          value={data.password}/>
+          value={data.password || ''}/>
       </div>  
 
       <div 

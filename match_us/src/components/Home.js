@@ -25,8 +25,7 @@ const Home = ({ user, connections, getCons, getUser })=> {
         <Switch>
           <Route path='/home/wishlist' render={() => 
             <Wishlist  
-              name={user.first_name} 
-              id={user.id}/> }/>
+              user={user}/> }/>
 
           <Route path='/home/settings' render={() => 
             <Settings 

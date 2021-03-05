@@ -7,7 +7,12 @@ import { withRouter } from 'react-router-dom'
 
 class Settings extends React.Component {
   state = {
-    data: {}
+    data: {
+      first_name: '',
+      last_name: '',
+      username: '',
+      email: ''
+    }
   }
 
   async componentDidMount() {
@@ -43,8 +48,6 @@ class Settings extends React.Component {
 
   render() {
     const { data } = this.state
-    console.log(this.props)
-
     return (
       <div className='settings'>
 
@@ -84,7 +87,7 @@ class Settings extends React.Component {
           <div className='s-field'>            
             <label className='label'>Username: </label>
             <br/>
-            <input name="tagline"
+            <input name="username"
               className='s-input'
               value={data.username}
               onChange={this.handleChange}/>
@@ -94,7 +97,7 @@ class Settings extends React.Component {
           <div className='s-field'>            
             <label className='label'>Email: </label>
             <br/>
-            <input name="career"
+            <input name="email"
               className='s-input'
               value={data.email}
               onChange={this.handleChange}/>

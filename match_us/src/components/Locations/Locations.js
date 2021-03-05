@@ -20,6 +20,7 @@ listLocations = []
 
 async componentDidMount(){
   const r = await axios.get(`/api/locations/${this.props.connection.id}/`)
+  console.log(r.data)
   this.setState({ locations: r.data, center: r.data[0] })
 }
 
@@ -40,6 +41,7 @@ getDetail = async (l, i) => {
 render() {
   const {  connection, google } = this.props
   const { locations,center,selected, detail } = this.state
+
   return (
     <div className='flex'>
 

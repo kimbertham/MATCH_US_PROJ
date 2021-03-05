@@ -19,14 +19,12 @@ class WishlistView(APIView):
             m.save()
             return Response( m.data, HTTP_200_OK)
         return Response(m.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
-
         
 class WishlistDetailsView(APIView):
 
     def post(self,request,pk):
         r = requests.request("GET", amazonURL, headers=amazon_headers, params={'domainCode':'co.uk','keyword':request.data['keyword'],'page':'1','sortBy':'relevanceblender'}).json()['searchProductDetails']
         return Response(r, HTTP_200_OK)
-
 
     def get(self, request, pk):
         r = Wishlist.objects.filter(user=pk).values_list('a_id', flat=True )
@@ -38,6 +36,7 @@ class WishlistDetailsView(APIView):
             data={'productDescription':req['productTitle'], 'imgUrl': req['imageUrlList'][0] , 'price': req['price'], 'productRating' :req['productRating'], 'asin': id }
             results.append(data)
         return Response(results, HTTP_200_OK)
+
     
 
 

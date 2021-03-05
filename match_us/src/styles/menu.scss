@@ -124,13 +124,14 @@ h1{
   background-color: rgb(19, 19, 19);
 
   .s-result {
-  @extend .m-option-h;
+  @extend .m-option-h,;
   cursor: auto;
-  padding: 5px 2px;
+  padding: 2vh;
   border-bottom: 1px solid rgb(162, 18, 140);
 
     p {
     max-width: 50%;
+    margin-left: 10px;
     }
   }
 
