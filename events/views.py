@@ -13,15 +13,14 @@ from .models import Events
 
 class EventsView(APIView):
     def post(self,request):
-        print(request.data)
         if not request.POST._mutable:
             request.POST._mutable = True
-            request.data['creator'] = request.user.id
-            event = EventsSerializer(data=request.data)
-            if event.is_valid():
-                event.save()
-                return Response(event.data, status=HTTP_201_CREATED)
-            return Response(event.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+        request.data['creator'] = request.user.id
+        event = EventsSerializer(data=request.data)
+        if event.is_valid():
+            event.save()
+            return Response(event.data, status=HTTP_201_CREATED)
+        return Response(event.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 class EventsListView(APIView):
     def delete(self, request, pk):

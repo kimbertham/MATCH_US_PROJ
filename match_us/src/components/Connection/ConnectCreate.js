@@ -12,8 +12,6 @@ const ConnectCreate = ({ c , getCons }) => {
     getCons()
   } 
 
-  console.log(c)
-
   if (!c.participants) return null
 
   return (

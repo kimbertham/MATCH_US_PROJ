@@ -87,7 +87,6 @@ class ProfileView(APIView):
 
     def patch(self, request, pk):
         user = User.objects.get(pk=pk)
-        print(request.data)
         update_user = UserS(user, data=request.data)
         if update_user.is_valid():
             update_user.save()

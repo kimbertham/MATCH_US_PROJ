@@ -33,7 +33,7 @@ handleChange= async (e) =>{
 handleSubmit = async (e) => {
   try {
     e.preventDefault()
-    await axios.post('/api/events/', this.state.data, headers())
+    await axios.post('/api/events/', this.state.data, headers(), headers())
     this.props.getEvents ? this.props.getEvents() : null
     this.props.closeModal()
   } catch (err) {
@@ -55,7 +55,7 @@ handleError = () => {
 render(){
   const { data , error } = this.state
   const { connection,connections } = this.props
-  console.log(connection)
+
   return (
     <>
       <form className='center' onSubmit= {this.handleSubmit}>
