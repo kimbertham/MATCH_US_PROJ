@@ -71,6 +71,7 @@ getMovie = async (d) => {
 getLocation = async () => {
   const p = await getCoordinates()
   return `${p.coords.latitude}, ${p.coords.longitude}`
+
 }
 
 getRandom = (d) => {
@@ -129,7 +130,7 @@ render() {
         <div className='random-results'>
           <div className='random'>
             <div className='flex'>
-              <img src={foodIcon} alt='food' className='random-icon'/>
+              <div><img src={foodIcon} alt='food' className='random-icon'/></div>
               <h2 className='r-title'>Date Meal</h2>
             </div>
             <h2>{food.message || food.name}</h2>
@@ -141,7 +142,7 @@ render() {
           {activity ?
             <div className='random'>
               <div className='flex'>
-                <img src={activityIcon} alt='activity' className='random-icon'/>
+                <div><img src={activityIcon} alt='activity' className='random-icon'/></div>
                 <h2 className='r-title'>Date Activity</h2>
               </div>
               <h2>{activity.message || activity.name}</h2>

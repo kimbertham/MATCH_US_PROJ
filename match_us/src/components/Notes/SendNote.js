@@ -4,10 +4,9 @@ import { headers } from '../../Lib/auth'
 
 class SendNote extends React.Component {
   state={
-
     data: {
       notes: '',
-      color: '#ffa3f7cc' }
+      color: 'rgba(255, 163, 247, 0.8)' }
   }
 
   handleChange= async (e) =>{
