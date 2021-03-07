@@ -46,7 +46,6 @@ const emoji = ['\ud83c[\udf00-\udfff]','\ud83d[\udc00-\ude4f]','\ud83d[\ude80-\u
 export const regex = new RegExp(emoji.join('|'), 'g')
 
 export const getCoordinates = () => {
-
   return new Promise(function(resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject)
   }

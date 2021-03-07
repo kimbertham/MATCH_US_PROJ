@@ -15,7 +15,7 @@ import arrow from '../../styles/assets/menu-icons/arrow.jpg'
 import unmatch from '../../styles/assets/menu-icons/unmatch.jpg'
 
 
-const MenuCon = ({ connection, location , user, history }) =>  {
+const MenuCon = ({ connection, location , user, history, getCons }) =>  {
   const { id } = connection
 
   const selected = (s) => {
@@ -29,7 +29,9 @@ const MenuCon = ({ connection, location , user, history }) =>  {
   const handleUnmatch = async () => {
     await axios.delete(`/api/connections/${id}/`)
     history.push('/home')
+    getCons()
   }
+
 
   if (!connection || !user) return null 
 

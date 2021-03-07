@@ -1,34 +1,31 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 
 import MenuUser from './MenuUser'
 import MenuCon from './MenuCon'
 import { withRouter } from 'react-router-dom'
 
-class Menu extends React.Component {
+const Menu = ( { user, setCon, connections, connection, getCons }) => {
 
-  render(){
-    const { user, setCon, connections, connection, getCons } = this.props
-    return (
-      <div className='m-cont'>
-        <div>
+  return (
+    <div className='m-cont'>
+      <div>
 
-          {connections ? 
-            <MenuUser 
-              user={user}
-              setCon={setCon}
-              getCons={getCons}
-              connections={connections}/> 
-            :
-            <MenuCon
-              user={user}
-              connection={connection}/>
-          }
+        {connections ? 
+          <MenuUser 
+            user={user}
+            setCon={setCon}
+            getCons={getCons}
+            connections={connections}/> 
+          :
+          <MenuCon
+            getCons={getCons}
+            user={user}
+            connection={connection}/>
+        }
           
-        </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default withRouter(Menu)

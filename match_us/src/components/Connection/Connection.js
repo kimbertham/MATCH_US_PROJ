@@ -39,13 +39,13 @@ class Connection extends React.Component {
 
   render(){
     const { connection } = this.state
-    const { user } = this.props
+    const { user, getCons } = this.props
     if (!connection) return null
     return (
 
       <div className='flex'>
 
-        <Menu connection={connection} user={user}/>
+        <Menu connection={connection} user={user} getCons={getCons}/>
 
         <div className='main'>
           <Switch>

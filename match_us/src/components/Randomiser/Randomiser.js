@@ -37,12 +37,13 @@ getActivity = async (d) => {
     'keyword': activity 
   }
   const r = (await axios.post('/api/activities/random/', data, headers())).data
-  this.setState({ activity: r },() => {
+  this.setState({ activity: r }, async () => {
     this.getFood({
       'random': d,
       'partner': this.connection.partner.id, 
       'connection': this.connection.id ,
-      'location': `${r.geometry.location.lat}, ${r.geometry.location.lng}`, 
+      'location': r.geometry ? 
+        `${r.geometry.location.lat}, ${r.geometry.location.lng}` : await this.getLocation(),
       'rankby': 'distance',
       'keyword': ['restaurant', 'food'] 
     })
@@ -55,14 +56,15 @@ getMovie = async (d) => {
     'partner': this.connection.partner.id, 
     'connection': this.connection.id }
   const r = await axios.post('/api/movies/random/', data, headers()) 
-  this.setState({ movie: r.data })
-  this.getFood({ 
-    'random': d,
-    'partner': this.connection.partner.id, 
-    'connection': this.connection.id,
-    'location': await this.getLocation(), 
-    'rankby': 'distance',
-    'keyword': ['meal_takeaway', 'meal_delivery'] 
+  this.setState({ movie: r.data }, async () => {
+    this.getFood({ 
+      'random': d,
+      'partner': this.connection.partner.id, 
+      'connection': this.connection.id,
+      'location': await this.getLocation(), 
+      'rankby': 'distance',
+      'keyword': ['meal_takeaway', 'meal_delivery'] 
+    })
   })
 }
 
@@ -73,7 +75,7 @@ getLocation = async () => {
 
 getRandom = (d) => {
   const action = Math.floor(Math.random() * 2)  
-  action === 1 ? this.getMovie(d) : this.getActivity(d)
+  action === 1 ? this.getActivity(d) : this.getActivity(d)
   this.setState({ loader: true, food: false, payer: false })
 }
 

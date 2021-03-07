@@ -86,7 +86,7 @@
   @extend .o-container, .center, .row;
   height:10vh;
   background: rgba(3, 65, 87, 0.7);
-
+  overflow: none;
   img {
     width: 3vw;
     mix-blend-mode: screen;

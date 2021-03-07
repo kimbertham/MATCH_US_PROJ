@@ -44,14 +44,15 @@ class App extends React.Component {
 
             <Route path='/home' render={() => 
               <Home 
-                connections={connections} 
                 user={user} 
+                connections={connections} 
                 getCons={this.getCons} 
                 getUser={this.getUser}/> }/>
 
             <Route path='/connection/:id' render={() => 
               <Connection 
-                user={user}/> }/>
+                user={user}
+                getCons={this.getCons}/> }/>
                 
           </Switch>
         </BrowserRouter>

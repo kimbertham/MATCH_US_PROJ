@@ -32,7 +32,7 @@ class MovieRandomView(APIView):
             r = requests.get(f'{tmdb_details}{choice}' , params={'api_key': tmdb_key}).json()
             return Response(r, HTTP_200_OK)
         else:
-            m = requests.get(tmdb_base, params= {'page': {random.randint(0,5) }}).json()
+            m = requests.get(tmdb_base, params= {'page': {random.randint(1,5) }}).json()
             return Response(m['results'][random.randint(0,18)], HTTP_200_OK )
 
 class MovieDetailsView(APIView):
