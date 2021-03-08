@@ -60,12 +60,12 @@ class ConnectionsDetailView(APIView):
 
 # get overview 
     def post(self,request,pk):
-        n = Notes.objects.filter(Q(reciever=request.user.id) & Q(read=True))[:2]
+        n = Notes.objects.filter(Q(reciever=request.user.id) & Q(connection=pk) & Q(read=True))[:2]
         f = food.objects.filter(Q(connection=pk) & Q(direction=True)).last()
         m = movies.objects.filter(Q(connection=pk) & Q(direction=True)).last()
         a = activities.objects.filter(Q(connection=pk) & Q(direction=True)).last()
-        e =Events.objects.filter(Q(connection=pk) & Q(request=False)& Q(date__gte=datetime.datetime.today())).order_by('date')[:3]
-        r =Events.objects.filter(Q(connection=pk) & Q(request=True) & Q(date__gte=datetime.datetime.today())).exclude(creator=request.user.id).order_by('date')[:3]
+        e = Events.objects.filter(Q(connection=pk) & Q(request=False)& Q(date__gte=datetime.datetime.today())).order_by('date')[:3]
+        r = Events.objects.filter(Q(connection=pk) & Q(request=True) & Q(date__gte=datetime.datetime.today())).exclude(creator=request.user.id).order_by('date')[:3]
         return Response({
         'events': PopulatedEventsSerializer(e, many=True).data,
         'req': PopulatedEventsSerializer(r, many=True).data,

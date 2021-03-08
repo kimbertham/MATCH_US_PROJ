@@ -10,7 +10,6 @@
 }
 
 .list-item {
-  @extend .scroll;
   width: 100%;
 }
 
@@ -48,9 +47,7 @@
   }
   
 
-
 // -- activities list -- 
-
 .a-list {
   @extend .wrap, .center;
   padding: 1vw;

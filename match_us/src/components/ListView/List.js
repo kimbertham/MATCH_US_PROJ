@@ -61,9 +61,9 @@ class List extends React.Component {
               <ListCard r={r} i={i}
                 section={section}
                 like={this.like}/> 
-            </div>
-              
+            </div> 
           ))}
+
         </div>
       </div>
     )

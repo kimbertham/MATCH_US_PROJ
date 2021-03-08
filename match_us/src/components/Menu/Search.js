@@ -45,7 +45,7 @@ class SidebarSearch extends React.Component {
           <input name="query"
             autoComplete='off'
             className='s-input'
-            placeholder='Search for users...'
+            placeholder='Search for new users...'
             onChange={this.handleChange}
             value={query}/>
 

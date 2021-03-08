@@ -8,8 +8,9 @@ const Loading = ({ type }) => {
     <div className='center fh'>
 
       <Loader
+        className='loader'
         type={type}
-        color="#f20cd766"
+        color='rgb(244, 11, 216)'
         height={200}
         width={90}/>
 

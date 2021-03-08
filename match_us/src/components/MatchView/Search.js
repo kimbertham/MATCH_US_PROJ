@@ -3,11 +3,10 @@ import React from 'react'
 import MovieGenre from './Movies/MovieGenre'
 import FoodFilter from './FoodMatch/FoodFilter'
 
-const FoodSearch = ({ section, getResults }) => {
+const FoodSearch = ({ section, getResults, handleLoader }) => {
 
   return (
     <div className='m-search'>
-      <h3> Filter </h3>
       
       <div>
         <section>
@@ -16,6 +15,7 @@ const FoodSearch = ({ section, getResults }) => {
               getResults={getResults}/>
             :
             <FoodFilter 
+              handleLoader={handleLoader}
               getResults={getResults}/>
           }
         </section>
