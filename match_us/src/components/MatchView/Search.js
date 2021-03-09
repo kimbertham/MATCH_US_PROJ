@@ -8,7 +8,7 @@ const FoodSearch = ({ section, getResults, handleLoader }) => {
   return (
     <div className='m-search'>
       
-      <div>
+      <div className='search'>
         <section>
           {section === 'movies' ?
             <MovieGenre 
@@ -21,6 +21,7 @@ const FoodSearch = ({ section, getResults, handleLoader }) => {
         </section>
       </div>
     </div>
+
   )
 }
 

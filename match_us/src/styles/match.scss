@@ -39,7 +39,10 @@
 }
 
 // ------swipe------
-
+.swipe-cont {
+  @extend .center;
+  margin-top: 4vh;
+}
 
 .swipe-layer1 {
   z-index:-1;
@@ -182,4 +185,3 @@
   margin:8px;
   z-index: 50;
 }
-

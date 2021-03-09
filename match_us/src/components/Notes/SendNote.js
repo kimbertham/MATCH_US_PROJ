@@ -6,7 +6,7 @@ class SendNote extends React.Component {
   state={
     data: {
       notes: '',
-      color: 'rgba(255, 163, 247, 0.8)' }
+      color: '#ffa3f7' }
   }
 
   handleChange= async (e) =>{

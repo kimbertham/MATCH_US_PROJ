@@ -10,7 +10,7 @@ const Loading = ({ type }) => {
       <Loader
         className='loader'
         type={type}
-        color='rgb(244, 11, 216)'
+        color='#f40bd8'
         height={200}
         width={90}/>
 

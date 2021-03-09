@@ -49,16 +49,13 @@ render() {
           height={30}
           width={50}/> 
         :
-
         <>
           <form  onSubmit={e => {
             e.preventDefault(), this.setLocation()
           }}>
 
             <div className='flex'>
-
               <h3 className> Filter: &nbsp;  </h3>
-
               <div>
                 <input 
                   onChange={this.handleChange}
@@ -72,7 +69,7 @@ render() {
                   onChange={this.handleChange}
                   name='address' 
                   value={data.address}
-                  placeholder='Location'/>
+                  placeholder='Location...'/>
               </div>
           
               <div>

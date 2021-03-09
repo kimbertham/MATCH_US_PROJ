@@ -33,7 +33,7 @@ const MatchSwipe = ({ r,  deleteMatches, showSearch ,swipe, getDetail, section }
   }
 
   return (
-    <>   
+    <div className='swipe-cont fh center'>
       <div className=' swipe-layer1'>
         <div className='swipe-card'>
           {section === 'movies' ? movieSwipe() : foodSwipe()}
@@ -54,7 +54,7 @@ const MatchSwipe = ({ r,  deleteMatches, showSearch ,swipe, getDetail, section }
           showSearch()
         }}/>
       </div>
-    </>
+    </div>
   )
 } 
 

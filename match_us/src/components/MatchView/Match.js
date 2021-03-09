@@ -17,8 +17,7 @@ state = {
   detail: null,
   match: false,
   search: false, 
-  view: true,
-  loader: false
+  view: true
 }
 
 async componentDidMount() {
@@ -78,12 +77,8 @@ changeView = () => {
   this.setState({ view: !this.state.view })
 }
 
-handleLoader = () => {
-  this.setState({ loader: !this.state.loader })
-}
-
 render(){
-  const { detail, matches, search, match, view, loader } = this.state
+  const { detail, matches, search, match, view } = this.state
   const { connection, results, getResults, section, swipeData } = this.props
   const r = results[0]
 
@@ -93,7 +88,7 @@ render(){
     changeView={this.changeView}
     swipeData={swipeData}/>
 
-  if (!r || loader) return <Loader type='Bars'/>
+  if (!r) return <Loader type='Bars'/>
 
   return (
     <div className='full flex'>
@@ -110,7 +105,6 @@ render(){
   
       {search ? <Search 
         section={section}
-        handleLoader={this.handleLoader}
         getResults={getResults}/> : null}
 
       <div className='swipeview'>
