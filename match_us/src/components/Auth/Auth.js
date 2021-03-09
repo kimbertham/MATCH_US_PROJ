@@ -6,7 +6,10 @@ import Login from './Login'
 
 class Auth extends React.Component {
   state = {
-    data: {},
+    data: {
+      username: 'DemoAccount',
+      password: 'pass'
+    },
     form: true,
     invalid: false
   }
