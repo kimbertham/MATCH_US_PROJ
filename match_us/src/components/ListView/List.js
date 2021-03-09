@@ -47,25 +47,28 @@ class List extends React.Component {
       <div className='full scroll'>
         <img src={view} className='list-icon' alt='list-view' onClick={changeView}/>
   
-        <div className='swipeview'>
-          {modal ? 
-            <div className='modal' onClick={this.modal}>
+        {modal ? 
+          <div className='fg'>
+            <div className='modal fixed' onClick={this.modal}>
               <div className='m-pop'>
                 <p>{error}</p>
               </div>
-            </div> : null}
-
-          <h1 className='title'> Results</h1>
-          {results.map((r,i) => ( 
-            <div className='list-item' key={i}>
-              <ListCard r={r} i={i}
-                section={section}
-                like={this.like}/> 
             </div> 
-          ))}
+          </div> : null}
 
-        </div>
+        <h1 className='title'> Results</h1>
+        {results.map((r,i) => ( 
+          <div className='list-item' key={i}>
+            <ListCard r={r} i={i}
+              section={section}
+              like={this.like}/> 
+          </div> 
+        ))}
+
+  
       </div>
+
+
     )
   }
 }

@@ -23,6 +23,7 @@ urlpatterns = [
     path('api/movies/', include('movies.urls')),
     path('api/match/', include('match.urls')),
     path('api/notes/', include('notes.urls')),
+    path('api/overviews/', include('overviews.urls')),
     path('api/locations/', include('locations.urls')),
     path('api/wishlist/', include('wishlist.urls')),
     path('api/activities/', include('activities.urls')),

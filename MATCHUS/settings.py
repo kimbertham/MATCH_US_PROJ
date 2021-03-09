@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'activities',
     'notes',
     'wishlist',
-    'locations'
+    'locations',
+    'overviews'
 ]
 
 

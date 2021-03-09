@@ -2,11 +2,13 @@ import React from 'react'
 import axios from 'axios'
 import { headers } from '../../Lib/auth'
 import WishlistCard from './WishlistCard'
+import Loader from 'react-loader-spinner'
 
 class WishlistSearch extends React.Component{
   state = {
     keyword: '',
-    results: []
+    results: [],
+    loader: false
   }
 
   handleChange = (e) => {
@@ -15,8 +17,9 @@ class WishlistSearch extends React.Component{
 
   handleSubmit = async (e) => {
     e.preventDefault()
+    this.handleLoader()
     const r = await axios.post('/api/wishlist/0/', { keyword: this.state.keyword } )
-    this.setState({ results: r.data })
+    this.setState({ results: r.data }, () => this.handleLoader())
   }
 
   addWishlist = async (id, i) => {
@@ -25,19 +28,32 @@ class WishlistSearch extends React.Component{
     this.setState({ results })
   }
 
+  handleLoader = () => {
+    this.setState({ loader: !this.state.loader })
+  }
+
   render(){
-    const { keyword, results  } = this.state
+    const { keyword, results, loader  } = this.state
     return (
       <>
-
-        <form onSubmit={this.handleSubmit}>
-          <label>Add Items: </label>            
-          <input
-            name='keyword'
-            value={keyword}
-            onChange={this.handleChange}/>
-          <button>Search</button>
-        </form>
+      
+        {!loader ? 
+          <form onSubmit={this.handleSubmit}>
+            <label>Add Items: </label>            
+            <input
+              name='keyword'
+              value={keyword}
+              onChange={this.handleChange}/>
+            <button>Search</button>
+          </form>
+          :
+          <Loader
+            type='ThreeDots'
+            color="#f20cd766"
+            height={30}
+            width={50}/> 
+        }
+    
 
         <div className='w-cont'>
           {results.map((r,i)=>{

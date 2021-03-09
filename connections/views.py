@@ -3,25 +3,11 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY, HTTP_200_OK,HTTP_204_NO_CONTENT
-from rest_framework.exceptions import NotFound,PermissionDenied
-from django.db.models import Q
-import datetime
 
 from jwt_auth.models import User
-from .serializers import BasicConnectionsSeralizer, PopulatedConnectionsSerializer, ConnectionsSerializer,PopulatedEventsSerializer
+from .serializers import BasicConnectionsSeralizer, PopulatedConnectionsSerializer, ConnectionsSerializer
 from .models import Connections
 
-from activities.models import activities
-from notes.models import Notes
-from events.models import Events
-from food.models import food
-from movies.models import movies
-from notes.serializers import PopulatedNotesSerializer
-from food.serializers import FoodSerializer
-from movies.serializers import MovieSerializer
-from activities.serializers import ActivitiesSerializer
-
-        
 class ConnectionsListView(APIView):   
 
     def get(self, request, pk):
@@ -57,19 +43,3 @@ class ConnectionsDetailView(APIView):
         con= Connections.objects.get(pk=pk)
         c= PopulatedConnectionsSerializer(con)
         return Response(c.data, status=HTTP_200_OK)
-
-# get overview 
-    def post(self,request,pk):
-        n = Notes.objects.filter(Q(reciever=request.user.id) & Q(connection=pk) & Q(read=True))[:2]
-        f = food.objects.filter(Q(connection=pk) & Q(direction=True)).last()
-        m = movies.objects.filter(Q(connection=pk) & Q(direction=True)).last()
-        a = activities.objects.filter(Q(connection=pk) & Q(direction=True)).last()
-        e = Events.objects.filter(Q(connection=pk) & Q(request=False)& Q(date__gte=datetime.datetime.today())).order_by('date')[:3]
-        r = Events.objects.filter(Q(connection=pk) & Q(request=True) & Q(date__gte=datetime.datetime.today())).exclude(creator=request.user.id).order_by('date')[:3]
-        return Response({
-        'events': PopulatedEventsSerializer(e, many=True).data,
-        'req': PopulatedEventsSerializer(r, many=True).data,
-        'note': PopulatedNotesSerializer(n, many=True).data, 
-        'food':FoodSerializer(f).data , 
-        'movie': MovieSerializer(m).data, 
-        'activity': ActivitiesSerializer(a).data})

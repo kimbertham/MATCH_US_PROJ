@@ -7,7 +7,7 @@ import WishListCard from './WishlistCard'
 
 class Wishlist extends React.Component{
 state = {
-  wishlist: false
+  wishlist: false 
 }
 
 async componentDidMount() {
@@ -19,28 +19,34 @@ getWishlist = async () => {
   this.setState({ wishlist: r.data })
 }
 
+handleLoader = () => {
+  this.setState({ loader: !this.state.loader })
+}
+
+
 render(){
   const { user,match } = this.props
   const home = match.path.includes('home')
   const { wishlist } = this.state
-
-  if (!wishlist) return <Loader type='Puff'/>
-
+  if (!wishlist) return <Loader type='Puff'/> 
   return (
-    <div className='fh scroll'>
-  
-      <div className='center'>
-        <h1 className='r-title'>{user.first_name}&apos;s Wishlist </h1>
-        {home ? <WishlistSearch getWishlist={this.getWishlist}/> : null}
-      </div>
 
-      <div className='flex wrap center'>
-        {wishlist.length > 0 ?
-          wishlist.map((r,i) => {
-            return  <div  className='w-item' key={i}>
-              <WishListCard r={r} home={home} deleteWish={this.deleteWish}/>
-            </div>
-          }) : 'No wishlist items'}
+    <div>
+
+      <div className='fh scroll'>
+        <div className='center'>
+          <h1 className='r-title'>{user.first_name}&apos;s Wishlist </h1>
+          {home ? <WishlistSearch handleLoader={this.handleLoader} getWishlist={this.getWishlist}/> : null}
+        </div>
+
+        <div className='flex wrap center'>
+          {wishlist.length > 0 ?
+            wishlist.map((r,i) => {
+              return  <div  className='w-item' key={i}>
+                <WishListCard r={r} home={home} deleteWish={this.deleteWish}/>
+              </div>
+            }) : 'No wishlist items'}
+        </div>
       </div>
 
     </div>

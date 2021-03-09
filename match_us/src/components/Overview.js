@@ -26,7 +26,7 @@ class  Overview extends React.Component {
   }
 
   getData = async () => {
-    const r = await axios.post(`/api/profile/${this.props.user.id}/`, headers())
+    const r = await axios.post(`/api/overviews/${this.props.user.id}/ov/`, headers())
     this.setState({ data: r.data })
   }
 

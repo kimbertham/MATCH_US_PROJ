@@ -31,9 +31,13 @@ getMatches = async () => {
 } 
 
 swipe = async (d) => {
-  const data = this.props.swipeData(d, 0)
-  const r = (await  axios.post(`/api/${this.props.section}/`, data, headers())).data
-  await d === 'True' ? this.checkMatch(r.f_id) : this.props.nextSwipe()
+  try {
+    const data = this.props.swipeData(d, 0)
+    const r = (await  axios.post(`/api/${this.props.section}/`, data, headers())).data
+    await d === 'True' ? this.checkMatch(r.f_id) : this.props.nextSwipe()
+  } catch (err) {
+    err.response.status === 422 ? this.props.nextSwipe() : null
+  }
 }
 
 checkMatch = async (i) => {

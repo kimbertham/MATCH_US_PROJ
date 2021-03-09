@@ -17,7 +17,7 @@ class ConOverview extends React.Component{
 
   async componentDidMount(){
     const { connection } = this.props
-    const r =  (await axios.post(`/api/connection-full/${connection.id}/`,
+    const r =  (await axios.post(`/api/overviews/${connection.id}/con/`,
       { partner: connection.partner.id }, 
       headers())).data
     this.setState({ data: r })
