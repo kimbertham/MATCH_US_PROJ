@@ -1,7 +1,7 @@
 <h1> MATCH US </h1>
 <p> Link: https://match-uss.herokuapp.com/login</p>
 
-  <img src='https://i.imgur.com/KSKRaoP.png' width='500' alt='match'/>
+  <img src='https://i.imgur.com/KSKRaoP.png' alt='match'/>
 
 <h2> Overview </h2>
 <p> A website design for daters to better keep track of their upcoming dates and be matched with new dates ideas. Takes the same ideas as tinder and similar apps where in user either swipe yes or no to certain topics and will be only be shown results when both swipe yes. Users will be able to choose from a range of activities, restaurants and movie options to swipe from. With these matches users can use the randomiser section to come up with date plans, or be shown completely random date plans unrelated to their current matches. Also has calendar, wishlist, love notes and location sections. 
@@ -34,7 +34,6 @@ class Connections(models.Model):
 <p float='left'>
   <img src='https://i.imgur.com/PbxfVyR.png' width='500' alt='match'/>
     <img src='https://i.imgur.com/rSL37dq.jpg' width='500' alt='match'/>
-    <img src='https://i.imgur.com/lWpk0ZK.png' width='500' alt='match'/>
   </p>
   
 <p> I decided to use the google places API to find results for the restaurants and activities matching as it provided a lot of 'types' already stored and I could simply present this as an array for the user to choose from instead of manually finding activities that would provide search results. The movies information is provided using the TMdb API. These requests are made in the backend and in a shared get function. In the front end, all model specific details are contained within their own section components as working with two different APIs would result in different return responses, relevant details are then passed as props into a main match component that holds all the shared functions for swiping, check for matches and deleting matches. </p>
@@ -55,6 +54,8 @@ swipe = async (d) => {
   }
 }
 ```
+
+<img src='https://i.imgur.com/lWpk0ZK.png' width='500' alt='match'/>
 
 <p> The randomiser creates date plans for users by generating random numbers and taking this index result from their match results or from the request results. Random numbers are also used to choose between the daters to decide who pays for the date. </p>
 
