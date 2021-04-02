@@ -1,9 +1,11 @@
 <h1> MATCH US </h1>
 <p> Link: https://match-uss.herokuapp.com/login</p>
 
-  <img src='https://i.imgur.com/KSKRaoP.png' alt='match'/>
 
 <h2> Overview </h2>
+
+  <img src='https://i.imgur.com/KSKRaoP.png' alt='match'/>
+
 <p> A website design for daters to better keep track of their upcoming dates and be matched with new dates ideas. Takes the same ideas as tinder and similar apps where in user either swipe yes or no to certain topics and will be only be shown results when both swipe yes. Users will be able to choose from a range of activities, restaurants and movie options to swipe from. With these matches users can use the randomiser section to come up with date plans, or be shown completely random date plans unrelated to their current matches. Also has calendar, wishlist, love notes and location sections. 
   
 <h2> Tehcnologies </h2>
