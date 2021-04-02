@@ -17,14 +17,23 @@
 
 <h2> Process </h2>
 <h4> Connections </h4> 
-<p> Each profile will be able to makes multiple connections, all with each section of the dating website. I intially planned create one generic swiping section for each user then compare each of their individual swipes for matches, however instead opted to create separate connections so users can swipe multiple times to the same places depending on if they may want to do some activities with some but not with others. </p>
+<p> Each profile will be able to makes multiple connections, all with each section of the dating website. I initially planned create one generic swiping section for each user then compare each of their individual swipes for matches, however instead opted to create separate connections so users can swipe multiple times to the same places depending on if they may want to do some activities with some but not with others.</p>
+
+```
+class Connections(models.Model):
+
+    participants = models.ManyToManyField(User, related_name='connections')
+    created_at = models.DateTimeField(auto_now_add=True)
+    request = models.IntegerField( blank=True, null=True)
+```
 
 <h4> Matching and randomiser </h4> 
-<p> I decided to use the google places api to find results for the restaurants and activities matching as it provided a lot of 'types' already stored and I could simply present this as an array for the user to choose from instead of manually finding activities that would provide search results. The movies information is provided using the TMdb api. These requests are made in the backend and in a shared get function. In the front end, all model specific details are contained within their own section compenents as working with two different apis would result in different return responses, relevant details are then passed as props into a main match component that holds all the shared functions for swiping, check for matches and deleteing matches. </p>
+<p> I decided to use the google places API to find results for the restaurants and activities matching as it provided a lot of 'types' already stored and I could simply present this as an array for the user to choose from instead of manually finding activities that would provide search results. The movies information is provided using the TMdb API. These requests are made in the backend and in a shared get function. In the front end, all model specific details are contained within their own section components as working with two different APIs would result in different return responses, relevant details are then passed as props into a main match component that holds all the shared functions for swiping, check for matches and deleting matches. </p>
   
- <p> Once the user makes a choice between yes or no, the name and direction of the swipe are sent through a post request and created in their own models. The matches are presented on a different component and found by filtering for only yes direction results, It was important to also store the no direction swipes to ensure the user is only shown results they have not swiped on before. </p>
+ <p> Once the user makes a choice between yes or no, the name and direction of the swipe are sent through a post request and created in their own models. The matches are presented on a different component and found by filtering for only yes direction results, it was important to also store the no direction swipes to ensure the user is only shown results they have not swiped on before. </p>
   
- <p>I added a restart option which would clear all the swipes made by the user's ID in that particular connection, their swipes for the same places in other connections would still remain. I also added filter options which would filter movies by genre, altering the request URL for TMdb and filter Google places results  for keyword and locations specification, sending these as parameters in the backend requests.</p>
+ <p>I added a restart option which would clear all the swipes made by the user's ID in that particular connection, their swipes for the same places in other connections would still remain. I also added filter options which would filter movies by genre, altering the request URL for TMdb and filter Google places results for keyword and locations specification, sending these as parameters in the backend requests. </p>
+
 
 ```
 swipe = async (d) => {
@@ -67,7 +76,9 @@ class ActivitiesRandomView(APIView):
 }
   ```
 <h4> Calendar and events </h4>
-<p> The calendar is made using a grid system that pushes in the correct number of cells and dates provided by moment. Events are created using a form and displayed on the calendar as either pending response, accepted or for the user to answer themselves. The events model has an initial value of false in a boolean request field, this will be changed to true through a patch request if the user chooses to accept the invite or a delete request will be sent if the user decideds to decline. The create a date form is used throughout the website and is made reusable by setting props as state in the componentDidMount function, allowing certain sections to be preloaded into the form depending on the sections, e.g. dates from calender or addresses from swipe matches. 
+<p> The calendar is made using a grid system that pushes in the correct number of cells and dates provided by moment. Events are created using a form and displayed on the calendar as either pending response, accepted or for the user to answer themselves. The events model has an initial value of false in a boolean request field, this will be changed to true through a patch request if the user chooses to accept the invite or a delete request will be sent if the user decides to decline. The create a date form is used throughout the website and is made reusable by setting props as state in the componentDidMount function, allowing certain sections to be preloaded into the form depending on the sections, e.g., dates from calendar or addresses from swipe matches.
+![image](https://user-images.githubusercontent.com/61989539/113461798-080a0d80-9416-11eb-91ab-861cb14aed98.png)
+
   
   ```
   const accept = async () => {
@@ -95,3 +106,35 @@ class ActivitiesRandomView(APIView):
   })
 }
   ```
+ 
+<h2> Wins/Blockers </h2>
+<h4> Wins </h4>
+<ul>
+  <li><p> I found this project had a lot of connected sections that worked with each other to supply the user with data, while i usually struggle sorting through these types interactions in a way that ensures all sides remain functional, I was able to better premeditate what issue may arise and plan ahead so avoid these in my planning.
+    </p></li>
+      <li><p>
+My understanding of Django improved a lot in this project due to having to be much more specific in my results when working with different sections. I feel like I spent a lot of time searching through documentation and finding new ways to alter querysets and as a result I also gained a lot more practice in Python too. 
+ </p></li>
+  </ul>
+  
+  <h4> Blockers </h4>
+  <ul>
+  <li><p>
+    Working with different API responses proved to be difficult at times when trying to create reusable components, such as in details pages, or functions that required specific information to each. This was solved using a lot of if else statements but in some instances may have been better to just have written out again separately for each. 
+    </p></li>
+    <li><p>
+    Creating the homepage was quite difficult as it takes in such a wide range of data and creating backend requests that could provide this in a way that wasn’t sending irrelevant data or bloat was a little tricky. 
+    </p></li>
+  </ul>
+  
+  </ul>
+
+<h2> Bugs and future work </h2>
+<ul>
+  <li><p>
+    <p> The wishlist takes quite some time to come up with results as I decided to pull separate requests for each item that gets added to the users list. I added a loading spinner to ensure the user knows to wait for results and the website is still functioning but it could possibly be worth looking for alternative methods or APIs to solve this issue. 
+  </ul>
+
+<h2> Experience and key takeaways </h2>
+<p> Match us was a fun project for me and gave me a lot of opportunity to polish my skills in react and Django. I feel it’s helped me be more conscious of my organisation and has made me much more comfortable with solo work. While usually I find it difficult to wrap up the smaller details of a project, I've learnt to do these tasks as soon as they appear instead of putting them off till the end and overall, I'm pleased with the outcome of this project.
+
