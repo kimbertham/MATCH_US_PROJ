@@ -20,7 +20,11 @@
 <p> Each profile will be able to makes multiple connections, all with each section of the dating website. I intially planned create one generic swiping section for each user then compare each of their individual swipes for matches, however instead opted to create separate connections so users can swipe multiple times to the same places depending on if they may want to do some activities with some but not with others. </p>
 
 <h4> Matching and randomiser </h4> 
-<p> I decided to use the google places api to find results for the restaurants and activities matching as it provided a lot of 'types' already stored and I could simply present this as an array for the user to choose from instead of manually finding activities that would provide search results. The movies information is provided using the TMdb api. These requests are mad in the backend and in a shared get function that sends the information to the frontend. Once the user makes a choice between yes or no, the name of the swipe to seperate models along with the direction of the swipe. The matches are presented on a different component and found by filtering for only yes direction results. It was important to also store the no direction results to ensure when the user returns to the page they are only shown results they have no yet swipe on yet. I added a restart option which woud clear all the swipes made by the users id in that particular connection, so their swipes for the same places in other connectison still remain.  I also added filter options which would filter movies by genre, altering the request url for TMdb. The filter option for the goole places results allow for key world and locations specification and sends these as parameters in the requests. In the fron end, all model specific details are contained within their own section compenents that are then passed as props into a main match component that holds all the shared functions needed to swipe and check for matvches.</p>
+<p> I decided to use the google places api to find results for the restaurants and activities matching as it provided a lot of 'types' already stored and I could simply present this as an array for the user to choose from instead of manually finding activities that would provide search results. The movies information is provided using the TMdb api. These requests are made in the backend and in a shared get function. In the front end, all model specific details are contained within their own section compenents as working with two different apis would result in different return responses, relevant details are then passed as props into a main match component that holds all the shared functions for swiping, check for matches and deleteing matches. </p>
+  
+ <p> Once the user makes a choice between yes or no, the name and direction of the swipe are sent through a post request and created in their own models. The matches are presented on a different component and found by filtering for only yes direction results, It was important to also store the no direction swipes to ensure the user is only shown results they have not swiped on before. </p>
+  
+ <p>I added a restart option which would clear all the swipes made by the user's ID in that particular connection, their swipes for the same places in other connections would still remain. I also added filter options which would filter movies by genre, altering the request URL for TMdb and filter Google places results  for keyword and locations specification, sending these as parameters in the backend requests.</p>
 
 ```
 swipe = async (d) => {
@@ -34,7 +38,7 @@ swipe = async (d) => {
 }
 ```
 
-<p> The randomiser creates date plans for users by generating random numbers and choosing from their match results or from the request results. Random numbers are also used to choose between the daters to decide who pays for the date. </p>
+<p> The randomiser creates date plans for users by generating random numbers and taking this index result from their match results or from the request results. Random numbers are also used to choose between the daters to decide who pays for the date. </p>
 
 ```
 class ActivitiesRandomView(APIView):
@@ -63,7 +67,19 @@ class ActivitiesRandomView(APIView):
 }
   ```
 <h4> Calendar and events </h4>
-<p> The calendar is made using a grid system that pushed in the correct number of cells and dates provided by moment. Events are then created from a form that appears when click on these days and displayed on the calendar as either pending response, accepted or for the user to answer themselves. The events model has an initial value of false in a boolean request field, this will be changed to true through a patch request if the user chooses to accept the invite or a delete request will be sent if the user decideds to decline. The create a date form is used throughout the website and is made reusable by setting props as state in the componentDidMount function, allowing certain sections to be preloaded into the form depending on the sections, e.g. dates from calender or addresses from swipe matches. 
+<p> The calendar is made using a grid system that pushes in the correct number of cells and dates provided by moment. Events are created using a form and displayed on the calendar as either pending response, accepted or for the user to answer themselves. The events model has an initial value of false in a boolean request field, this will be changed to true through a patch request if the user chooses to accept the invite or a delete request will be sent if the user decideds to decline. The create a date form is used throughout the website and is made reusable by setting props as state in the componentDidMount function, allowing certain sections to be preloaded into the form depending on the sections, e.g. dates from calender or addresses from swipe matches. 
+  
+  ```
+  const accept = async () => {
+    const data = { ...req, connection: req.connection.id, request: 'False' }
+    await axios.put(`/api/events/${req.id}/`, data)
+  }
+  
+  const decline = async () => {
+    await axios.delete(`/api/events/${req.id}/`)
+  }
+
+```
   
   ```
   <button  className='button' onClick={()=>{
