@@ -62,5 +62,20 @@ class ActivitiesRandomView(APIView):
   this.list.scrollTop = this.listLocations[i].offsetTop - 200 
 }
   ```
-<h4> Calendar </h4>
-
+<h4> Calendar and events </h4>
+<p> The calendar is made using a grid system that pushed in the correct number of cells and dates provided by moment. Events are then created from a form that appears when click on these days and displayed on the calendar as either pending response, accepted or for the user to answer themselves. The events model has an initial value of false in a boolean request field, this will be changed to true through a patch request if the user chooses to accept the invite or a delete request will be sent if the user decideds to decline. The create a date form is used throughout the website and is made reusable by setting props as state in the componentDidMount function, allowing certain sections to be preloaded into the form depending on the sections, e.g. dates from calender or addresses from swipe matches. 
+  
+  ```
+  <button  className='button' onClick={()=>{
+     setData({ location: r.formatted_address }}}> 
+      <p> + Create Date </p>
+   </button> 
+  
+  componentDidMount() {
+  this.setState({ data: 
+    { ...this.state.data,
+      ...this.props.data, 
+      connection: this.props.connection ? this.props.connection.id : null } 
+  })
+}
+  ```
