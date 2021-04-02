@@ -1,6 +1,8 @@
 <h1> MATCH US </h1>
 <p> Link: https://match-uss.herokuapp.com/login</p>
 
+  <img src='https://i.imgur.com/KSKRaoP.png' width='500' alt='match'/>
+
 <h2> Overview </h2>
 <p> A website design for daters to better keep track of their upcoming dates and be matched with new dates ideas. Takes the same ideas as tinder and similar apps where in user either swipe yes or no to certain topics and will be only be shown results when both swipe yes. Users will be able to choose from a range of activities, restaurants and movie options to swipe from. With these matches users can use the randomiser section to come up with date plans, or be shown completely random date plans unrelated to their current matches. Also has calendar, wishlist, love notes and location sections. 
   
@@ -16,6 +18,7 @@
 </ul>
 
 <h2> Process </h2>
+
 <h4> Connections </h4> 
 <p> Each profile will be able to makes multiple connections, all with each section of the dating website. I initially planned create one generic swiping section for each user then compare each of their individual swipes for matches, however instead opted to create separate connections so users can swipe multiple times to the same places depending on if they may want to do some activities with some but not with others.</p>
 
@@ -28,6 +31,12 @@ class Connections(models.Model):
 ```
 
 <h4> Matching and randomiser </h4> 
+<p float='left'>
+  <img src='https://i.imgur.com/PbxfVyR.png' width='500' alt='match'/>
+    <img src='https://i.imgur.com/rSL37dq.jpg' width='500' alt='match'/>
+    <img src='https://i.imgur.com/lWpk0ZK.png' width='500' alt='match'/>
+  </p>
+  
 <p> I decided to use the google places API to find results for the restaurants and activities matching as it provided a lot of 'types' already stored and I could simply present this as an array for the user to choose from instead of manually finding activities that would provide search results. The movies information is provided using the TMdb API. These requests are made in the backend and in a shared get function. In the front end, all model specific details are contained within their own section components as working with two different APIs would result in different return responses, relevant details are then passed as props into a main match component that holds all the shared functions for swiping, check for matches and deleting matches. </p>
   
  <p> Once the user makes a choice between yes or no, the name and direction of the swipe are sent through a post request and created in their own models. The matches are presented on a different component and found by filtering for only yes direction results, it was important to also store the no direction swipes to ensure the user is only shown results they have not swiped on before. </p>
@@ -67,6 +76,8 @@ class ActivitiesRandomView(APIView):
  ```
  
  <h4> Locations </h4> 
+     <img src='https://i.imgur.com/AS1IZ8c.png' width='500' alt='match'/>
+
  <p> Date locations are presented on a map created using mapbox. I connected the list view and icons on the map using refs and classes that change the style of selected locations. 
   
   ```
@@ -76,6 +87,13 @@ class ActivitiesRandomView(APIView):
 }
   ```
 <h4> Calendar and events </h4>
+
+<p float='left'>
+    <img src='https://i.imgur.com/fWqo8Nj.png' width='500' alt='match'/>
+    <img src='https://i.imgur.com/WGo2EbT.png' width='500' alt='match'/>
+  </p>
+  
+  
 <p> The calendar is made using a grid system that pushes in the correct number of cells and dates provided by moment. Events are created using a form and displayed on the calendar as either pending response, accepted or for the user to answer themselves. The events model has an initial value of false in a boolean request field, this will be changed to true through a patch request if the user chooses to accept the invite or a delete request will be sent if the user decides to decline. The create a date form is used throughout the website and is made reusable by setting props as state in the componentDidMount function, allowing certain sections to be preloaded into the form depending on the sections, e.g., dates from calendar or addresses from swipe matches.
 ![image](https://user-images.githubusercontent.com/61989539/113461798-080a0d80-9416-11eb-91ab-861cb14aed98.png)
 
