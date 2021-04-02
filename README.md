@@ -32,8 +32,8 @@ class Connections(models.Model):
 
 <h4> Matching and randomiser </h4> 
 <p float='left'>
-  <img src='https://i.imgur.com/PbxfVyR.png' width='500' alt='match'/>
-    <img src='https://i.imgur.com/rSL37dq.jpg' width='500' alt='match'/>
+  <img src='https://i.imgur.com/PbxfVyR.png' width='400' alt='match'/>
+    <img src='https://i.imgur.com/rSL37dq.jpg' width='400' alt='match'/>
   </p>
   
 <p> I decided to use the google places API to find results for the restaurants and activities matching as it provided a lot of 'types' already stored and I could simply present this as an array for the user to choose from instead of manually finding activities that would provide search results. The movies information is provided using the TMdb API. These requests are made in the backend and in a shared get function. In the front end, all model specific details are contained within their own section components as working with two different APIs would result in different return responses, relevant details are then passed as props into a main match component that holds all the shared functions for swiping, check for matches and deleting matches. </p>
@@ -90,8 +90,8 @@ class ActivitiesRandomView(APIView):
 <h4> Calendar and events </h4>
 
 <p float='left'>
-    <img src='https://i.imgur.com/fWqo8Nj.png' width='500' alt='match'/>
-    <img src='https://i.imgur.com/WGo2EbT.png' width='500' alt='match'/>
+    <img src='https://i.imgur.com/fWqo8Nj.png' width='400' alt='match'/>
+    <img src='https://i.imgur.com/WGo2EbT.png' width='400' alt='match'/>
   </p>
   
   
