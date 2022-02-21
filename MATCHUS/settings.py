@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'wishlist',
     'locations',
     'overviews'
+
 ]
 
 

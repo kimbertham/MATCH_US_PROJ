@@ -32,10 +32,8 @@ class ActivitiesRandomView(APIView):
             req = requests.get(gDetails, params={'place_id': choice}).json()
         else :
             r = requests.get(nearby,params=request.data).json()
-            print(r)
             choice = r['results'][random.randint(0,len(r['results']) - 1)]
             req = requests.get(gDetails, params={'place_id': choice['place_id']}).json()
-            print(req['result'])
         return Response(req['result'], HTTP_200_OK)
 
 class ActivitiesListView(APIView):

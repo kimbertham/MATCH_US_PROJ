@@ -8,6 +8,5 @@ class Connections(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     request = models.IntegerField( blank=True, null=True)
 
-
     def __str__(self):
         return f' {self.participants}'

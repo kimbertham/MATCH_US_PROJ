@@ -20,24 +20,24 @@ class Settings extends React.Component {
   }
 
   handleChange = event => {
-    try {
-      const data = { ...this.state.data, [event.target.name]: event.target.value }
-      this.setState({ data })
-    } catch (err) {
-      console.log(err)
-    }
+    // try {
+    const data = { ...this.state.data, [event.target.name]: event.target.value }
+    this.setState({ data })
+    // } catch (err) {
+    //   console.log(err)
+    // }
   }
 
   handleSubmit = async event => {
     event.preventDefault()
-    try {
-      await axios.patch(`/api/profile/${this.props.user.id}/`, 
-        this.state.data , headers())
-      this.props.getUser()
-      this.props.history.push('/home')
-    } catch (err) {
-      console.log(err)
-    }
+    // try {
+    await axios.patch(`/api/profile/${this.props.user.id}/`, 
+      this.state.data , headers())
+    this.props.getUser()
+    this.props.history.push('/home')
+    // } catch (err) {
+    //   console.log(err)
+    // }
   }
 
   deleteAccount = async (id) => {

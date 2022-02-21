@@ -19,10 +19,10 @@ state= {
 
 componentDidMount() {
   this.setState({ data: 
-    { ...this.state.data, 
+    { ...this.state.data,
       ...this.props.data, 
-      connection: this.props.connection 
-        ? this.props.connection.id : null } })
+      connection: this.props.connection ? this.props.connection.id : null } 
+  })
 }
 
 handleChange= async (e) =>{
@@ -34,12 +34,11 @@ handleSubmit = async (e) => {
   try {
     e.preventDefault()
     await axios.post('/api/events/', this.state.data, headers())
-    console.log(this.state.data)
     this.props.getEvents ? this.props.getEvents() : null
     this.props.closeModal()
   } catch (err) {
     err.response.status === 422 ? 
-      this.handleError() : console.log(err)
+      this.handleError() : null
   }
 }
 
@@ -52,6 +51,8 @@ handleError = () => {
   this.setState({ error: true })
   setTimeout(() => this.setState({ error: false }), 1500)
 }
+
+
 
 render(){
   const { data , error } = this.state

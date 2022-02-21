@@ -42,8 +42,11 @@ class MatchConnectionsView(APIView): # gets the Matches
                 results.append(r)
             else :
                 req = requests.get(place_id, params={'place_id': id}).json()['result']
+                print(req)
+                print('test')
                 image = str(GImages) +  str(req['photos'][0]['photo_reference']) if 'photos' in req else None
                 r = { 'name' : req['name'], 'image': image , 'id': req['place_id']}
+                # print(r)
                 results.append(r)
         return Response (results, HTTP_200_OK)
 

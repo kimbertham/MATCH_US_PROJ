@@ -33,16 +33,17 @@ const MenuUser = ({ user, connections,history, getCons }) => {
       
       <div className='m-con'>
         <h1>My Connections</h1>
-        {connections.map(c => {
+        {connections.length <= 1 && connections.map(c => {
           if (!c.request) { 
+            const friend = c.participants.filter(f => f.id !== user.id)[0]
             return <Link
-              key={c.id} to={`/connection/${c.id}/overview`}>  
-              <div className='m-option-h' id={c.id}>
+              key={friend.id} to={`/connection/${c.id}/overview`}>  
+              <div className='m-option-h' id={friend.id}>
                 <div className='m-img-cont'>
                   <div  className='m-img' style={{  
-                    backgroundImage: `url(${c.participants.profile_image})` }}/>
+                    backgroundImage: `url(${friend.profile_image})` }}/>
                 </div>
-                <h1>{c.participants.first_name} {c.participants.last_name}</h1>
+                <h1>{friend.first_name} {friend.last_name}</h1>
               </div>
             </Link>
           }

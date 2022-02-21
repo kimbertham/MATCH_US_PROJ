@@ -28,6 +28,7 @@ render(){
   const { user,match } = this.props
   const home = match.path.includes('home')
   const { wishlist } = this.state
+
   if (!wishlist) return <Loader type='Puff'/> 
   return (
 

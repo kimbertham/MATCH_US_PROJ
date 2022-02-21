@@ -29,13 +29,13 @@ const Calender = ({ date, changeMonth, events, setData, setReq, user }) => {
         days.push(
           <td  key={e.id} onClick={()=>setData(date)} className='calender-day'>
             <p className='date'>{d}</p>
-            {e.map((x,i)=> {
-              return <p  key={i}   onClick={ e =>{
+            {e.map((x,i)=>  
+              <p  key={i}   onClick={ e =>{
                 e.stopPropagation(), setReq(x)
               }}className={`request ${x.request && x.creator === user.id ? 'green' : x.request ? 'purple' : 'date' }`}>
                 {x.date_type.match(regex)} {x.title}
               </p>
-            })}
+            )}
           </td> 
         ) 
       } else {

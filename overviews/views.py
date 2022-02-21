@@ -6,7 +6,7 @@ from rest_framework.status import HTTP_201_CREATED,HTTP_422_UNPROCESSABLE_ENTITY
 from django.db.models import Prefetch, prefetch_related_objects, Q
 
 from connections.models import Connections
-from connections.serializers import EventsSerializer,ConnectionsSerializer, PopulatedEventsSerializer
+from connections.serializers import EventsSerializer,PopulatedConnectionsSerializer, PopulatedEventsSerializer
 from activities.models import activities
 from notes.models import Notes
 from events.models import Events
@@ -42,7 +42,6 @@ class Overview(APIView):
             a = activities.objects.filter(Q(user=pk) & Q(direction=True)).order_by('-created_at')[:2]
             f= food.objects.filter(Q(user=pk) & Q(direction=True)).order_by('-created_at')[:2]
             n = Notes.objects.filter(Q(reciever=pk) & Q(read=True)).order_by('-created_at')[:2]
-            req = Connections.objects.filter(Q(participants__id=pk) & Q(request=True))
             return Response({
             'events': PopulatedEventsSerializer(e, many=True).data,
             'req': PopulatedEventsSerializer(r, many=True).data,
@@ -50,5 +49,4 @@ class Overview(APIView):
             'food':FoodSerializer(f, many=True).data , 
             'movie': MovieSerializer(m, many=True).data, 
             'activity': ActivitiesSerializer(a, many=True).data,
-            'requests': ConnectionsSerializer(req, many=True).data
             })

@@ -25,6 +25,7 @@ getResults = async (d) => {
     data = { location: '51.509865, -0.118092', rankby: 'distance', keyword: 'food' }
   }
   const r = ( await axios.post(`/api/food/${this.props.connection.id}/`, data , headers())).data
+  console.log(r)
   r.length <= 1 ?  r.push(noPlaces)  : null
 
   this.setState({ results: r })

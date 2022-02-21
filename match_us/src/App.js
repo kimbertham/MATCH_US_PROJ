@@ -6,6 +6,7 @@ import { getUserId } from './Lib/auth'
 import Auth from './components/Auth/Auth'
 import Home from './components/Home.js'
 import Connection from './components/Connection/Connection'
+// import Test from './components/Test'
 
 const userId = getUserId()
 
@@ -27,7 +28,8 @@ class App extends React.Component {
 
   getCons =  async () => {
     const c = await axios.get(`/api/connections/${userId}/`)
-    c.data.map(c => c.participants = c.participants.find(u => u.id !== userId))
+    c[1] ?
+      c.data.map(c => c.participants = c.participants.find(u => u.id !== userId)) : null
     this.setState({ connections: c.data })
   }
 

@@ -30,11 +30,13 @@ class  Overview extends React.Component {
     this.setState({ data: r.data })
   }
 
+
+
   render(){
     
     const { user, connections, getCons } = this.props
     const { data } = this.state
-
+  
     if (!data) return null
     return (
       <div className='overview' style={{ backgroundImage: `url(${background})` }}>
@@ -91,10 +93,12 @@ class  Overview extends React.Component {
             <h3>Connection Requests</h3>
             <div className='o-container relative'>
               {connections.map(c => {
-                if (c.request !== user.id && c.request ){
-                  return <ConnectCreate key={c.id} c={c} getCons={getCons}/>
+                if (user.id !== c.request && c.request ){
+                  const request = c.participants.filter(p => p.id !== user.id)[0]
+                  return <ConnectCreate key={c.id} c={request} id={c.id} getCons={getCons}/>
                 }              
-              })}
+              })
+              }
             </div>
           </div>
 

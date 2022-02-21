@@ -20,6 +20,7 @@ class LocationGeoView(APIView):
         for event in addr:
             location = event['location']
             r = requests.get(f'{geoCo}{location}', {'key': GKey}).json()['results']
+            print(f'{geoCo}{location}')
             if not len(r) <= 0:
                 results.append({ 'title': event['title'], 'address': r[0]['formatted_address'], 'id':r[0]['place_id'], 'lat': r[0]['geometry']['location']['lat'], 'lng': r[0]['geometry']['location']['lng']})
         if len(results) <= 0 :
