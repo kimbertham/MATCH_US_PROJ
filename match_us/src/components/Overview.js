@@ -92,7 +92,7 @@ class  Overview extends React.Component {
           <div>
             <h3>Connection Requests</h3>
             <div className='o-container relative'>
-              {connections.map(c => {
+              {connections.length > 0 && connections.map(c => {
                 if (user.id !== c.request && c.request ){
                   const request = c.participants.filter(p => p.id !== user.id)[0]
                   return <ConnectCreate key={c.id} c={request} id={c.id} getCons={getCons}/>
