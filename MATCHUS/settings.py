@@ -26,10 +26,9 @@ SECRET_KEY = 'yuf0^urrkj9j1)7obvdl_+_ao8kl%x==_+uyh&ko4@pw!h_40d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS=['*']
+ALLOWED_HOSTS=[]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
@@ -134,12 +133,15 @@ REST_FRAMEWORK = {  # added this to get rest framework to use our custom authent
 #     }
 # }
 
-DATABASES = {
-    'default': dj_database_url.config(
-        # Feel free to alter this value to suit your needs.
-        default='postgres://matchusdb_user:5RiG9Rs4d5drha01JI2Cnf367dEWIsta@dpg-cjiclpb37aks73dd1fvg-a/matchusdb'
-    )
-}
+DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
+
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Feel free to alter this value to suit your needs.
+#         default='postgres://matchusdb_user:5RiG9Rs4d5drha01JI2Cnf367dEWIsta@dpg-cjiclpb37aks73dd1fvg-a/matchusdb'
+#     )
+# }
 
 
 # Password validation
