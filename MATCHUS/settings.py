@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import django_heroku
 import os
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -126,6 +128,14 @@ REST_FRAMEWORK = {  # added this to get rest framework to use our custom authent
 #         'PORT': 5432
 #     }
 # }
+
+DATABASES = {
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default='postgres://matchusdb_user:5RiG9Rs4d5drha01JI2Cnf367dEWIsta@dpg-cjiclpb37aks73dd1fvg-a/matchusdb',
+        conn_max_age=600
+    )
+}
 
 
 # Password validation
