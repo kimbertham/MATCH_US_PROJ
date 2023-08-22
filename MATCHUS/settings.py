@@ -89,7 +89,7 @@ ROOT_URLCONF = 'MATCHUS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'match_us')
+        'DIRS': [os.path.join(BASE_DIR, 'match_usss')
                 ] 
         ,
         'APP_DIRS': True,
@@ -133,7 +133,7 @@ REST_FRAMEWORK = {  # added this to get rest framework to use our custom authent
 #     }
 # }
 
-DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
+DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL',))}
 
 
 # DATABASES = {
