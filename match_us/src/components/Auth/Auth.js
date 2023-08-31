@@ -8,7 +8,7 @@ class Auth extends React.Component {
   state = {
     data: {
       username: 'DemoAccount',
-      password: 'pass'
+      password: '123'
     },
     form: true,
     invalid: false

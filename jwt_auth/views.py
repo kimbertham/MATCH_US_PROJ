@@ -37,6 +37,7 @@ class LoginView(APIView):
         user = self.get_user(username)
         if not user.check_password(password):
             raise PermissionDenied({'message': 'Invalid Credentails'})
+
         dt = datetime.today() + timedelta(days=7)
         token = jwt.encode({'sub': user.id, 'exp': int(
             dt.strftime('%s'))}, settings.SECRET_KEY, algorithm='HS256')
