@@ -30,6 +30,7 @@ login = async (e) => {
   } catch (err) {
     this.setState({ invalid: true })
     setTimeout(() => this.setState({ invalid: false }), 1000)
+    console.log(err)
   }
 }
 
@@ -41,6 +42,7 @@ register = async (e) => {
   } catch (err) {
     this.setState({ invalid: true })
     setTimeout(() => this.setState({ invalid: false }), 1000)
+    console.log(err)
   }
 }
 
