@@ -69,29 +69,27 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'MATCHUS.urls'
 
-# TEMPLATES = [
-#     {
-#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-#         'DIRS': [os.path.join(BASE_DIR, 'match_us')],
-#         # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
-#         'APP_DIRS': True,
-#         'OPTIONS': {
-#             'context_processors': [
-#                 'django.template.context_processors.debug',
-#                 'django.template.context_processors.request',
-#                 'django.contrib.auth.context_processors.auth',
-#                 'django.contrib.messages.context_processors.messages',
-#             ],
-#         },
-#     },
-# ]
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'match_us')],
+        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'match_usss')
-                ] 
-        ,
+        # 'DIRS': [os.path.join(BASE_DIR, 'match_usss')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -191,4 +189,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'match_us', "build", "static"), 
 )
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
