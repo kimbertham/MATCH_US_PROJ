@@ -108,24 +108,16 @@ REST_FRAMEWORK = {  # added this to get rest framework to use our custom authent
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = { # added this to use postgres as the databse instead of the default sqlite. do this before running the initali migrations or you will need to do it again
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'match_us_db',
-        'HOST': 'localhost',
-        'PORT': 5432
-    }
-}
-
-# DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL',))}
-
-
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         # Feel free to alter this value to suit your needs.
-#         default='postgres://matchusdb_user:5RiG9Rs4d5drha01JI2Cnf367dEWIsta@dpg-cjiclpb37aks73dd1fvg-a/matchusdb'
-#     )
+# DATABASES = { # added this to use postgres as the databse instead of the default sqlite. do this before running the initali migrations or you will need to do it again
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'match_us_db',
+#         'HOST': 'localhost',
+#         'PORT': 5432
+#     }
 # }
+
+DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL',))}
 
 
 # Password validation
