@@ -26,7 +26,7 @@ SECRET_KEY = 'yuf0^urrkj9j1)7obvdl_+_ao8kl%x==_+uyh&ko4@pw!h_40d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS=[]
+ALLOWED_HOSTS=['*']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -86,21 +86,7 @@ TEMPLATES = [
     },
 ]
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 'DIRS': [os.path.join(BASE_DIR, 'match_usss')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
+
 
 AUTH_USER_MODEL = 'jwt_auth.User'
 
@@ -122,16 +108,16 @@ REST_FRAMEWORK = {  # added this to get rest framework to use our custom authent
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = { # added this to use postgres as the databse instead of the default sqlite. do this before running the initali migrations or you will need to do it again
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'match_us_db',
-#         'HOST': 'localhost',
-#         'PORT': 5432
-#     }
-# }
+DATABASES = { # added this to use postgres as the databse instead of the default sqlite. do this before running the initali migrations or you will need to do it again
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'match_us_db',
+        'HOST': 'localhost',
+        'PORT': 5432
+    }
+}
 
-DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL',))}
+# DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL',))}
 
 
 # DATABASES = {
