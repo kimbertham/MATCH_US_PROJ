@@ -1,16 +1,27 @@
-import React from 'react' 
-
+import React, { useEffect, useState } from 'react' 
 import { Switch, Route } from 'react-router-dom'
-
+import axios from 'axios'
 import Menu from './Menu/Menu.js'
 import Overview from './Overview'
 import Wishlist from './Wishlist/Wishlist'
 import Settings from './Settings'
+import { getUserId } from '../Lib/auth'
 
-const Home = ({ user, connections, getCons, getUser })=> {
+
+const userId = getUserId()
+
+
+const Home = ({ user, getCons, getUser })=> {
+  const [connections, setConnections] = useState([])
+
+  useEffect(() => getCons(), [])
+
+  getCons =  async () => {
+    const c = await axios.get(`/api/connections/${userId}/`)
+    c.data.length > 0 && setConnections(c.data)
+  }
 
   if (!user || !connections) return null
-
   return (
     <div className='flex'>
 

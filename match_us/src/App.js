@@ -18,21 +18,12 @@ class App extends React.Component {
 
   async componentDidMount() {
     this.getUser()
-    this.getCons()
   }
 
   getUser = async () => {
     const res = await axios.get(`/api/profile/${userId}/`)
     this.setState({ user: res.data })
   }
-
-  getCons =  async () => {
-    const c = await axios.get(`/api/connections/${userId}/`)
-    c[1] ?
-      c.data.map(c => c.participants = c.participants.find(u => u.id !== userId)) : null
-    this.setState({ connections: c.data })
-  }
-
 
   render() {
     const { user, connections } = this.state

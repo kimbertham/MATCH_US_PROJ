@@ -31,7 +31,6 @@ class  Overview extends React.Component {
   }
 
 
-
   render(){
     
     const { user, connections, getCons } = this.props

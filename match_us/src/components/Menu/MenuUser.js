@@ -33,7 +33,7 @@ const MenuUser = ({ user, connections,history, getCons }) => {
       
       <div className='m-con'>
         <h1>My Connections</h1>
-        {connections.length > 0 && connections.map(c => {
+        {connections.map(c => {
           if (c.request === null) { 
             const friend = c.participants.filter(f => f.id !== user.id)[0]
             return <Link
